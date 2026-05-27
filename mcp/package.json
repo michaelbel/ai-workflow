@@ -1,5 +1,5 @@
 {
-  "name": "@michalbel/ai-workflow-mcp",
+  "name": "@michaelbel/ai-workflow-mcp",
   "version": "1.0.0",
   "description": "MCP server for ai-workflow rules and skills",
   "type": "module",

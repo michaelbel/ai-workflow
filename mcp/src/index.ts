@@ -10,7 +10,7 @@ const REPO = "ai-workflow";
 const BRANCH = "main";
 
 const server = new McpServer({
-  name: "@michalbel/ai-workflow-mcp",
+  name: "@michaelbel/ai-workflow-mcp",
   version: "1.0.0",
 });
 

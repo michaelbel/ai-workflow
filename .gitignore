@@ -1,7 +1,3 @@
 .claude
-.gradle
 .idea
 !.idea/icon.svg
-.kotlin
-build
-local.properties

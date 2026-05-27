@@ -1,38 +1,35 @@
 AI Workflow
 =
 
-A shared repository for AI agent rules, skills, and MCP server.
+[![npm](https://img.shields.io/npm/v/@michaelbel/ai-workflow-mcp?style=for-the-badge&logo=npm&labelColor=3F464F)](https://www.npmjs.com/package/@michaelbel/ai-workflow-mcp)
+[![workflow-status](https://img.shields.io/github/actions/workflow/status/michaelbel/ai-workflow/ci.yml?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/ai-workflow/actions)
+[![last-commit](https://img.shields.io/github/last-commit/michaelbel/ai-workflow?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/ai-workflow/commits)
 
-## MCP Server
+Общий репозиторий с правилами, скиллами и MCP-сервером для AI-агентов.
 
-Provides rules and skills to Claude Code agents in any project.
+## MCP-сервер
 
-Add to `~/.claude/settings.json`:
+Предоставляет правила и скиллы агентам Claude Code в любом проекте. Данные всегда актуальны — сервер читает напрямую с GitHub.
 
-```json
-{
-  "mcpServers": {
-    "ai-workflow": {
-      "command": "npx",
-      "args": ["-y", "@michaelbel/ai-workflow-mcp"]
-    }
-  }
-}
+Подключить глобально:
+
+```bash
+claude mcp add --global ai-workflow npx -- -y @michaelbel/ai-workflow-mcp
 ```
 
-### Tools
+### Инструменты
 
-| Tool | Description |
+| Инструмент | Описание |
 |---|---|
-| `list` | List all available rules and skills |
-| `get_rule` | Get the content of a rule |
-| `get_skill` | Get the instructions for a skill |
-| `run_skill` | Run a skill's associated shell command |
+| `list` | Список всех доступных правил и скиллов |
+| `get_rule` | Получить содержимое правила |
+| `get_skill` | Получить инструкции скилла |
+| `run_skill` | Запустить команду из frontmatter скилла |
 
-## Rules
+## Правила
 
-Stored in `rules/`. Referenced via `@`-imports in `CLAUDE.md`.
+Хранятся в `rules/`. Подключаются через `@`-импорты в `CLAUDE.md`.
 
-## Skills
+## Скиллы
 
-Stored in `skills/`. Each skill is a `.md` file with optional `command:` in frontmatter for `run_skill`.
+Хранятся в `skills/`. Каждый скилл — файл `.md` с опциональным полем `command:` во frontmatter для `run_skill`.

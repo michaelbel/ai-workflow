@@ -9,10 +9,21 @@ const OWNER = "michaelbel";
 const REPO = "ai-workflow";
 const BRANCH = "main";
 
-const server = new McpServer({
-  name: "@michaelbel/ai-workflow-mcp",
-  version: "1.0.0",
-});
+const SERVER_INSTRUCTIONS = [
+  "Use this server as the source of truth for ai-workflow rules and skills.",
+  "Before any git commit, call get_rule with name 'git/GIT_RULES' and apply the returned rules.",
+  "Before deleting files, call get_rule with name 'project/FILESYSTEM_RULES' and apply the returned rules.",
+].join("\n");
+
+const server = new McpServer(
+  {
+    name: "@michaelbel/ai-workflow-mcp",
+    version: "1.0.0",
+  },
+  {
+    instructions: SERVER_INSTRUCTIONS,
+  }
+);
 
 // ─── list ────────────────────────────────────────────────────────────────────
 

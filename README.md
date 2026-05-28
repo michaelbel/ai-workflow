@@ -10,6 +10,8 @@ AI Workflow
 
 Предоставляет правила и скиллы агентам Claude Code в любом проекте. Данные всегда актуальны — сервер читает напрямую с GitHub.
 
+Сервер также передает MCP server instructions: перед git commit агент должен загрузить `git/GIT_RULES`, а перед удалением файлов — `project/FILESYSTEM_RULES`.
+
 Подключить глобально:
 
 ```bash

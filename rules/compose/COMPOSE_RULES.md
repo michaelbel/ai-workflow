@@ -1,5 +1,6 @@
 # Compose Rules
 
+- When creating a composable function, always create a preview for it.
 - Do not introduce local abstractions, helper models, or extracted functions only to eliminate small UI duplication; prefer straightforward duplicated code until there is clear repeated behavior worth abstracting.
 - For composable calls with named arguments, prefer multiline formatting over single-line calls; for example, write `Row(` on one line and place `verticalAlignment = ...` on the following line instead of `Row(verticalAlignment = ...)`. Do not write `Box(modifier = Modifier.fillMaxSize()) {`; write `Box(` with `modifier = Modifier.fillMaxSize()` on the next line instead.
 - Add new colors through `MaterialTheme.colorScheme`; do not use raw `Color` constants for theme colors inside components.
@@ -11,6 +12,7 @@
 - When padding is symmetric, use `all`, `horizontal`, or `vertical` instead of repeating equal values for opposite sides.
 - Use `PaddingValues()` instead of `PaddingValues(0.dp)` — all dimensions default to `0.dp`.
 - For `Modifier.offset(...)` backed by state, use the lambda overload: `Modifier.offset { ... }`.
+- For `floatingActionButton`, place the button directly in the slot and apply padding to the button modifier; do not wrap it in `Box` only to add full-width, navigation bar padding, or horizontal padding.
 - Use `Modifier.size(width = ..., height = ...)` instead of chaining `Modifier.width(...).height(...)`.
 - In Compose containers, separate sibling composable calls with a blank line.
 - In a `constrainAs` block, order constraint assignments as: `width`, `height`, `start`, `top`, `end`, `bottom`.

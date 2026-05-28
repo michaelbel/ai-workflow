@@ -6,8 +6,21 @@
 - Use `MaterialTheme.colorScheme` for component colors.
 - Use `MaterialTheme.typography` for component text styles; do not instantiate `TextStyle` directly inside components.
 - For composable function calls, order arguments the same way as they are declared in the SDK/component signature.
-- For `padding(...)`, order named parameters the same way as in the method signature: `start`, `top`, `end`, `bottom`.
+- For `padding(...)` and `PaddingValues(...)`, order named parameters following the method signature: `start`, `top`, `end`, `bottom`; or when using shorthand, `horizontal`, `vertical`.
+- Omit named `padding(...)` or `PaddingValues(...)` arguments that are `0.dp`; unspecified padding dimensions default to `0.dp`.
+- When padding is symmetric, use `all`, `horizontal`, or `vertical` instead of repeating equal values for opposite sides.
+- Use `PaddingValues()` instead of `PaddingValues(0.dp)` — all dimensions default to `0.dp`.
 - For `Modifier.offset(...)` backed by state, use the lambda overload: `Modifier.offset { ... }`.
+- Use `Modifier.size(width = ..., height = ...)` instead of chaining `Modifier.width(...).height(...)`.
 - In Compose containers, separate sibling composable calls with a blank line.
+- In a `constrainAs` block, order constraint assignments as: `width`, `height`, `start`, `top`, `end`, `bottom`.
+- When a composable is positioned via `constrainAs`, declare its size inside the `constrainAs` block using the `Dimension` API (`Dimension.value(...)`, `Dimension.fillToConstraints`, `Dimension.wrapContent`) instead of size modifiers in the outer modifier chain.
+- Name ConstraintLayout refs created via `createRef` or `createRefs` with a `Ref` postfix; for example, `val buttonRef = createRef()`.
+- When all items in a `LazyColumn` share the same horizontal padding, or all `LazyRow` items share the same vertical padding, move it to the list's `contentPadding` argument instead.
+- Call `currentSnackbarData?.dismiss()` outside `scope.launch` — `dismiss()` is synchronous and does not need a coroutine scope.
+- In a `Text` composable, pass `textAlign` inside the `style` argument rather than as a separate `textAlign` argument.
+- Replace equal-sized `Spacer` elements between `Row` or `Column` children with `horizontalArrangement = Arrangement.spacedBy(...)` or `verticalArrangement = Arrangement.spacedBy(...)`.
+- When the first and last children of a `Row` or `Column` have the same edge padding, move it to the parent container using `padding(horizontal = ...)` or `padding(vertical = ...)`.
+- In vector icon files, use named parameters for all boolean arguments.
 - For each shared UI component, create a separate file; do not declare multiple component composables in one file.
 - Create new shared UI components in `shared/ui/components`; when needed, group them into dedicated subfolders there.

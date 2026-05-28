@@ -11,6 +11,8 @@
 @rules/compose/PREVIEW_RULES.md
 @rules/compose/SCAFFOLD_RULES.md
 @rules/compose/DIALOG_RULES.md
+@rules/compose/SHIMMER_RULES.md
+@rules/compose/TYPOGRAPHY_RULES.md
 @rules/kmp/KMP_RULES.md
 @rules/android/ROOM_RULES.md
 @rules/android/MVI_RULES.md

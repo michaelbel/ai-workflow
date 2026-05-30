@@ -18,8 +18,10 @@ One file per bottom sheet.
 package {package}
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -35,17 +37,6 @@ fun {Feature}BottomSheet(
     state: {Feature}BottomSheetModel,
     dispatch: ({Feature}Intent) -> Unit
 ) {
-    {Feature}BottomSheetContent(
-        state = state,
-        dispatch = dispatch
-    )
-}
-
-@Composable
-private fun {Feature}BottomSheetContent(
-    state: {Feature}BottomSheetModel,
-    dispatch: ({Feature}Intent) -> Unit
-) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     ModalBottomSheet(
@@ -54,8 +45,25 @@ private fun {Feature}BottomSheetContent(
         containerColor = Color.White,
         dragHandle = { SharedDragHandle() }
     ) {
+        {Feature}BottomSheetContent(
+            state = state,
+            dispatch = dispatch
+        )
+    }
+}
+
+@Composable
+private fun {Feature}BottomSheetContent(
+    state: {Feature}BottomSheetModel,
+    dispatch: ({Feature}Intent) -> Unit
+) {
+    Scaffold(
+        containerColor = Color.White
+    ) { paddingValues ->
         ConstraintLayout(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(paddingValues)
         ) {
             val (titleRef, closeIconRef, contentRef, buttonRef) = createRefs()
 
@@ -123,6 +131,7 @@ private class {Feature}BottomSheetModelProvider: PreviewParameterProvider<{Featu
 Rules:
 - Always use `skipPartiallyExpanded = true`.
 - `containerColor = Color.White`, `dragHandle = { SharedDragHandle() }`.
+- Create `ModalBottomSheet` in `{Feature}BottomSheet`; place the sheet body in `Scaffold` inside `{Feature}BottomSheetContent`.
 - Layout inside the sheet uses `ConstraintLayout`; all refs use the `Ref` postfix.
 - Close button dispatches a Dismiss intent; it is placed at `top.linkTo(parent.top)`, `end.linkTo(parent.end, 4.dp)`.
 - The public composable delegates to a private `*Content` composable; the preview targets the `*Content` function.

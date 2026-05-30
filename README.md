@@ -12,10 +12,18 @@ AI Workflow
 
 Сервер также передает MCP server instructions: перед git commit агент должен загрузить `git/GIT_RULES`, а перед удалением файлов — `project/FILESYSTEM_RULES`.
 
-Подключить глобально:
+**Claude Code** — подключить глобально:
 
 ```bash
 claude mcp add --global ai-workflow npx -- -y @michaelbel/ai-workflow-mcp
+```
+
+**Codex** — добавить в `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.ai-workflow]
+command = "npx"
+args = ["-y", "@michaelbel/ai-workflow-mcp"]
 ```
 
 ### Инструменты

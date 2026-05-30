@@ -1,10 +1,12 @@
 # Compose Rules
 
 - When creating a composable function, always create a preview for it.
-- Do not introduce local abstractions, helper models, or extracted functions only to eliminate small UI duplication; prefer straightforward duplicated code until there is clear repeated behavior worth abstracting.
+- Do not introduce local abstractions, helper variables, helper models, or extracted functions only to eliminate small UI duplication; prefer straightforward duplicated code until there is clear repeated behavior worth abstracting.
 - For composable calls with named arguments, prefer multiline formatting over single-line calls; for example, write `Row(` on one line and place `verticalAlignment = ...` on the following line instead of `Row(verticalAlignment = ...)`. Do not write `Box(modifier = Modifier.fillMaxSize()) {`; write `Box(` with `modifier = Modifier.fillMaxSize()` on the next line instead.
 - Add new colors through `MaterialTheme.colorScheme`; do not use raw `Color` constants for theme colors inside components.
 - Use `MaterialTheme.colorScheme` for component colors.
+- Declare shape values inline at the call site, for example `RoundedCornerShape(8.dp)`; do not extract simple shapes into `private val` variables.
+- Add new UI colors to the UI kit Colors file and expose them through `MaterialTheme.colorScheme`; do not create local `private val ... = Color(...)` constants in feature or component files.
 - Use `MaterialTheme.typography` for component text styles; do not instantiate `TextStyle` directly inside components.
 - For composable function calls, order arguments the same way as they are declared in the SDK/component signature.
 - For `padding(...)` and `PaddingValues(...)`, order named parameters following the method signature: `start`, `top`, `end`, `bottom`; or when using shorthand, `horizontal`, `vertical`.
@@ -15,6 +17,7 @@
 - For `floatingActionButton`, place the button directly in the slot and apply padding to the button modifier; do not wrap it in `Box` only to add full-width, navigation bar padding, or horizontal padding.
 - Use `Modifier.size(width = ..., height = ...)` instead of chaining `Modifier.width(...).height(...)`.
 - In Compose containers, separate sibling composable calls with a blank line.
+- Inside containers such as `Column`, `Row`, `Box`, `ConstraintLayout`, add a blank line between adjacent child composables; do not write `Text(...)` immediately followed by another `Text(...)` or component call without an empty line.
 - In a `constrainAs` block, order constraint assignments as: `width`, `height`, `start`, `top`, `end`, `bottom`.
 - When a composable is positioned via `constrainAs`, declare its size inside the `constrainAs` block using the `Dimension` API (`Dimension.value(...)`, `Dimension.fillToConstraints`, `Dimension.wrapContent`) instead of size modifiers in the outer modifier chain.
 - Name ConstraintLayout refs created via `createRef` or `createRefs` with a `Ref` postfix; for example, `val buttonRef = createRef()`.

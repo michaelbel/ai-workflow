@@ -55,8 +55,10 @@ private class {Component}StateProvider: PreviewParameterProvider<{Component}Stat
 
 Rules:
 - State is a `data class` named `{Component}State`; it holds all data and callbacks the component needs.
+- If the component needs more than one data or callback field, those fields must be placed in `{Component}State` in the same file instead of being passed as separate composable parameters.
 - The component composable takes `state` as the first parameter, `modifier` as the second with a default of `Modifier`.
 - The preview calls the component directly — never the ViewModel or screen.
 - Use `@PreviewWrapper(ThemeWrapper::class) @FontScalePreviews` for previews.
-- Use `PreviewParameterProvider` when the component has meaningful visual states to compare; omit it for trivial single-state components.
+- Create only one preview function per component file and represent all preview variants through `PreviewParameterProvider`.
+- Create a private `{Component}StateProvider: PreviewParameterProvider<{Component}State>` in the same file whenever `{Component}State` is used.
 - Each component lives in its own file; do not declare multiple components in one file.

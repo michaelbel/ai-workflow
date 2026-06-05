@@ -3,7 +3,7 @@ name: Publish MCP to npm
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
 
 jobs:
   publish:

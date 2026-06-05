@@ -1,4 +1,4 @@
-# Project Domain Rules
+# Domain Rules
 
 - Repositories are declared as interfaces in `shared/domain/repository` and implemented in `shared/domain/repository/impl`.
 - Repository implementations receive `NetworkService`, DAO, and DataStore dependencies through constructor injection.

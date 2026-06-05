@@ -5,6 +5,7 @@
 - When a component composable needs more than one data or callback field, move those fields into a `{Component}State` data class declared in the same file and pass it through a `state` parameter instead of separate parameters.
 - Composable screens and components must not contain business logic, branching decision functions, or `if`/`else` that decides domain behavior; move that logic to the ViewModel and render prepared UI state instead.
 - Do not introduce local abstractions, helper variables, helper models, or extracted functions only to eliminate small UI duplication; prefer straightforward duplicated code until there is clear repeated behavior worth abstracting.
+- Use the project's `Shared*` component wrapper instead of a direct framework component when such a wrapper exists in the project.
 - For composable calls with named arguments, prefer multiline formatting over single-line calls; for example, write `Row(` on one line and place `verticalAlignment = ...` on the following line instead of `Row(verticalAlignment = ...)`. Do not write `Box(modifier = Modifier.fillMaxSize()) {`; write `Box(` with `modifier = Modifier.fillMaxSize()` on the next line instead.
 - Add new colors through `MaterialTheme.colorScheme`; do not use raw `Color` constants for theme colors inside components.
 - Use `MaterialTheme.colorScheme` for component colors.

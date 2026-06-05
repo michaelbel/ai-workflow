@@ -13,9 +13,8 @@
 @rules/compose/DIALOG_RULES.md
 @rules/compose/SHIMMER_RULES.md
 @rules/compose/TYPOGRAPHY_RULES.md
-@rules/compose/PROJECT_COMPOSE_SCREEN_RULES.md
-@rules/compose/PROJECT_BOTTOM_SHEET_RULES.md
-@rules/compose/PROJECT_PREVIEW_RULES.md
+@rules/compose/COMPOSE_SCREEN_RULES.md
+@rules/compose/BOTTOM_SHEET_RULES.md
 @rules/kmp/KMP_RULES.md
 @rules/android/ROOM_RULES.md
 @rules/android/MVI_RULES.md
@@ -24,7 +23,4 @@
 @rules/android/REPOSITORY_RULES.md
 @rules/android/NAVIGATION_RULES.md
 @rules/android/RESOURCE_RULES.md
-@rules/android/PROJECT_MVI_RULES.md
-@rules/android/PROJECT_NAVIGATION_RULES.md
-@rules/android/PROJECT_RESOURCE_RULES.md
-@rules/android/PROJECT_DOMAIN_RULES.md
+@rules/android/DOMAIN_RULES.md

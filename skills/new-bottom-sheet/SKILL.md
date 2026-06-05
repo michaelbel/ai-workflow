@@ -4,9 +4,9 @@ name: new-bottom-sheet
 
 # New Bottom Sheet
 
-Creates a Compose `ModalBottomSheet`. Replace `{Feature}` with the sheet purpose (e.g. `Pin`, `Loyalty`) and `{package}` with the target package.
+Creates a project Compose bottom sheet. Replace `{Feature}` with the sheet purpose, `{feature}` with the lower camel-case name, and `{package}` with the target package.
 
-One file per bottom sheet.
+Use this skill for feature bottom sheets under `features/{feature}_sheet`.
 
 ---
 
@@ -17,94 +17,98 @@ One file per bottom sheet.
 
 package {package}
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.tooling.preview.PreviewWrapper
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
+import androidx.compose.ui.unit.dp
+import ru.mercury.courier.shared.ui.components.SharedLazyColumn
+import ru.mercury.courier.shared.ui.components.SharedModalBottomSheet
+import ru.mercury.courier.shared.ui.components.system.CourierFixedText
+import ru.mercury.courier.shared.ui.preview.wrapper.ThemeWrapper
+import ru.mercury.courier.shared.ui.theme.CourierStrings
+import ru.mercury.courier.shared.ui.theme.medium16
 
 @Composable
 fun {Feature}BottomSheet(
-    state: {Feature}BottomSheetModel,
-    dispatch: ({Feature}Intent) -> Unit
+    state: {Feature}SheetModel,
+    dispatch: ({Feature}SheetIntent) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-    ModalBottomSheet(
-        onDismissRequest = { dispatch({Feature}Intent.Dismiss) },
-        sheetState = sheetState,
-        containerColor = Color.White,
-        dragHandle = { SharedDragHandle() }
+    SharedModalBottomSheet(
+        onDismissRequest = { dispatch({Feature}SheetIntent.DismissClick) },
+        sheetState = sheetState
     ) {
-        {Feature}BottomSheetContent(
-            state = state,
-            dispatch = dispatch
-        )
-    }
-}
-
-@Composable
-private fun {Feature}BottomSheetContent(
-    state: {Feature}BottomSheetModel,
-    dispatch: ({Feature}Intent) -> Unit
-) {
-    Scaffold(
-        containerColor = Color.White
-    ) { paddingValues ->
-        ConstraintLayout(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(paddingValues)
+        SharedLazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(
+                start = 16.dp,
+                top = 44.dp,
+                end = 16.dp,
+                bottom = 16.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val (titleRef, closeIconRef, contentRef, buttonRef) = createRefs()
-
-            CourierFixedText(
-                text = stringResource(Strings.{Feature}Title),
-                modifier = Modifier.constrainAs(titleRef) {
-                    width = Dimension.fillToConstraints
-                    height = Dimension.wrapContent
-                    start.linkTo(parent.start, 16.dp)
-                    top.linkTo(closeIconRef.top)
-                    end.linkTo(closeIconRef.start, 8.dp)
-                    bottom.linkTo(closeIconRef.bottom)
-                }
-            )
-
-            IconButton(
-                onClick = { dispatch({Feature}Intent.Dismiss) },
-                modifier = Modifier.constrainAs(closeIconRef) {
-                    width = Dimension.wrapContent
-                    height = Dimension.wrapContent
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end, 4.dp)
-                }
-            ) {
-                Icon(
-                    imageVector = Close24,
-                    contentDescription = null
+            item {
+                {Feature}Card(
+                    state = {Feature}CardState(
+                        model = state.item,
+                        onClick = { dispatch({Feature}SheetIntent.ItemClick) }
+                    )
                 )
             }
 
-            CourierButton(
-                onClick = { dispatch({Feature}Intent.Confirm) },
-                text = stringResource(Strings.{Feature}Confirm),
-                modifier = Modifier.constrainAs(buttonRef) {
-                    width = Dimension.fillToConstraints
-                    height = Dimension.wrapContent
-                    start.linkTo(parent.start, 16.dp)
-                    end.linkTo(parent.end, 16.dp)
-                    bottom.linkTo(parent.bottom, 16.dp)
+            item {
+                Spacer(
+                    modifier = Modifier.height(0.dp)
+                )
+            }
+
+            if (state.showSecondaryAction) {
+                item {
+                    {Feature}SecondaryButton(
+                        onClick = { dispatch({Feature}SheetIntent.SecondaryActionClick) }
+                    )
                 }
-            )
+            }
+
+            if (state.showPrimaryAction) {
+                item {
+                    Button(
+                        onClick = { dispatch({Feature}SheetIntent.PrimaryActionClick) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(56.dp),
+                        shape = RoundedCornerShape(8.dp)
+                    ) {
+                        CourierFixedText(
+                            text = stringResource(CourierStrings.{Feature}PrimaryAction),
+                            style = MaterialTheme.typography.medium16.copy(
+                                textAlign = TextAlign.Center
+                            )
+                        )
+                    }
+                }
+            }
         }
     }
 }
@@ -112,26 +116,48 @@ private fun {Feature}BottomSheetContent(
 @PreviewWrapper(ThemeWrapper::class)
 @Preview
 @Composable
-private fun {Feature}BottomSheetContentPreview(
-    @PreviewParameter({Feature}BottomSheetModelProvider::class) state: {Feature}BottomSheetModel
+private fun {Feature}BottomSheetPreview(
+    @PreviewParameter({Feature}SheetModelPreviewParameterProvider::class) state: {Feature}SheetModel
 ) {
-    {Feature}BottomSheetContent(
-        state = state,
-        dispatch = {}
-    )
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        {Feature}BottomSheet(
+            state = state,
+            dispatch = {}
+        )
+    }
 }
 
-private class {Feature}BottomSheetModelProvider: PreviewParameterProvider<{Feature}BottomSheetModel> {
-    override val values: Sequence<{Feature}BottomSheetModel> = sequenceOf(
-        {Feature}BottomSheetModel()
-    )
+private class {Feature}SheetModelPreviewParameterProvider: PreviewParameterProvider<{Feature}SheetModel> {
+    override val values: Sequence<{Feature}SheetModel>
+        get() {
+            val item = {Feature}ItemModel(
+                id = "sample-id",
+                title = "Sample item",
+                subtitle = "Sample details"
+            )
+
+            return sequenceOf(
+                {Feature}SheetModel(
+                    item = item,
+                    showPrimaryAction = true,
+                    showSecondaryAction = false
+                ),
+                {Feature}SheetModel(
+                    item = item,
+                    showPrimaryAction = false,
+                    showSecondaryAction = true
+                )
+            )
+        }
 }
 ```
 
 Rules:
-- Always use `skipPartiallyExpanded = true`.
-- `containerColor = Color.White`, `dragHandle = { SharedDragHandle() }`.
-- Create `ModalBottomSheet` in `{Feature}BottomSheet`; place the sheet body in `Scaffold` inside `{Feature}BottomSheetContent`.
-- Layout inside the sheet uses `ConstraintLayout`; all refs use the `Ref` postfix.
-- Close button dispatches a Dismiss intent; it is placed at `top.linkTo(parent.top)`, `end.linkTo(parent.end, 4.dp)`.
-- The public composable delegates to a private `*Content` composable; the preview targets the `*Content` function.
+- Use file-level `@file:OptIn(ExperimentalMaterial3Api::class)`.
+- Use `rememberModalBottomSheetState(skipPartiallyExpanded = true)`.
+- Follow Compose Rules: use the project's `Shared*` wrapper, such as `SharedModalBottomSheet`, when it exists in the project.
+- Preview the composable that renders the bottom sheet itself, not a separate private content-only composable.
+- Wrap bottom sheet previews in `Box(modifier = Modifier.fillMaxSize())`; otherwise the preview may not render.
+- Use anonymized sample preview data such as `sample-id`, `Sample item`, and `Sample details`.

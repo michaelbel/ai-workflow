@@ -24,3 +24,4 @@
 @rules/android/NAVIGATION_RULES.md
 @rules/android/RESOURCE_RULES.md
 @rules/android/DOMAIN_RULES.md
+@rules/android/NETWORK_RULES.md

@@ -13,3 +13,5 @@
 - `Intent`, `Model`, and `Event` types implement the project's shared MVI marker interfaces.
 - For screen models backed by local collections, avoid storing or updating `isLoading` when loading can be derived from the collection state; treat the screen as loading when the backing collection is empty.
 - For screen data backed by Room and refreshed from network, use separate `Collect...` and `Load...` intents: `Collect...` reads Room data, `Load...` performs the network request and saves the result to Room.
+- ViewModels inject concrete `UseCase` / `FlowUseCase` classes needed by the screen; do not inject repositories, interactors, or aggregate domain facades.
+- Call one-shot use cases inside `launch { ... }` with `.getOrThrow()` and handle thrown exceptions in the ViewModel `catch` function.

@@ -1,0 +1,21 @@
+# UseCase Rules
+
+- Put Room, Ktor, DataStore, and business operations in concrete `UseCase` / `FlowUseCase` classes under `shared/domain/usecase`; do not create Repository or Interactor layers for new work.
+- Use `UseCase<P, R>` for one-shot suspend operations and `FlowUseCase<P, R>` for observable streams.
+- Inject concrete data dependencies directly into the use case constructor: `NetworkService`, `AppDatabase`, DAO classes, DataStore classes, analytics helpers, or other use cases when composing operations.
+- Inject `SharedDispatchers` as a non-`private` constructor parameter and pass `dispatchers.io` for Room/Ktor work or `dispatchers.immediate` only for CPU-light immediate work.
+- Do not wrap `execute` in `withContext` or `flowOn`; the base `UseCase` / `FlowUseCase` class owns dispatcher switching.
+- `UseCase.execute` returns the raw domain result `R` and throws domain-specific exceptions on failures; it must not return `Result`, `Result.success`, or `Result.failure`.
+- Call other `UseCase` instances from `execute` with `.getOrThrow()` so failures propagate into the parent `UseCase` result.
+- Call `UseCase` instances from ViewModels inside `launch { ... }` and finish each call with `.getOrThrow()`; handle thrown domain, Room, and network exceptions in the ViewModel `catch` function.
+- `FlowUseCase.execute` returns `Flow<R>` directly, is not `suspend`, and must not wrap values in `Result`.
+- For no input parameters, use `Unit` as the parameter type and keep `execute(params: Unit)`.
+- For exactly one input parameter, use the domain type as `P`, rename the override parameter to a semantic name, and add `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`.
+- For two or more input parameters, define a nested `data class Params(...)` inside the use case and use `UseCase<FeatureUseCase.Params, R>` or `FlowUseCase<FeatureFlowUseCase.Params, R>`; do not use `Pair`, `Triple`, maps, or multiple `invoke` arguments.
+- In network use cases, create `val request = ...` inside the `request` lambda before calling `networkService`; never inline request construction in `networkService` arguments.
+- Use `handleResponse` for network calls processed by callbacks; throw a domain-specific exception in `onFailure`.
+- Use `handleResponseResult(...).getOrThrow()` when a network response should be consumed as a value inside `execute`.
+- Wrap multiple related Room writes in `AppDatabase.withTransaction`.
+- Keep mapping logic in mapper KTX files; use cases may orchestrate mapped values but should not grow inline mapper code.
+- New use cases are concrete `@Inject constructor` classes and usually do not need Hilt `@Binds` modules.
+- ViewModels inject the specific use cases they need, not repositories, interactors, or aggregate facades.

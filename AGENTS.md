@@ -19,8 +19,7 @@
 @rules/android/ROOM_RULES.md
 @rules/android/MVI_RULES.md
 @rules/android/ARCHITECTURE_RULES.md
-@rules/android/INTERACTOR_RULES.md
-@rules/android/REPOSITORY_RULES.md
+@rules/android/USECASE_RULES.md
 @rules/android/NAVIGATION_RULES.md
 @rules/android/RESOURCE_RULES.md
 @rules/android/DOMAIN_RULES.md

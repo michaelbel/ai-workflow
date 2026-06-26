@@ -13,6 +13,7 @@
 - Declare shape values inline at the call site, for example `RoundedCornerShape(8.dp)`; do not extract simple shapes into `private val` variables.
 - Add new UI colors to the UI kit Colors file and expose them through `MaterialTheme.colorScheme`; do not create local `private val ... = Color(...)` constants in feature or component files.
 - Use `MaterialTheme.typography` for component text styles; do not instantiate `TextStyle` directly inside components.
+- In Material top app bars (`TopAppBar`, `CenterAlignedTopAppBar`, `LargeTopAppBar`, and similar), set container, navigation icon, title/subtitle, and action icon colors through the `colors` parameter with `TopAppBarDefaults.*topAppBarColors(...)` whenever the API exposes those colors; do not hardcode `Icon` or `Text` colors inside app bar slots when they can inherit from `colors`.
 - For composable function calls, order arguments the same way as they are declared in the SDK/component signature.
 - For `padding(...)` and `PaddingValues(...)`, order named parameters following the method signature: `start`, `top`, `end`, `bottom`; or when using shorthand, `horizontal`, `vertical`.
 - Omit named `padding(...)` or `PaddingValues(...)` arguments that are `0.dp`; unspecified padding dimensions default to `0.dp`.

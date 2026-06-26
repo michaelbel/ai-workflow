@@ -1,7 +1,7 @@
 # Domain Rules
 
-- Repositories are declared as interfaces in `shared/domain/repository` and implemented in `shared/domain/repository/impl`.
-- Repository implementations receive `NetworkService`, DAO, and DataStore dependencies through constructor injection.
-- Network responses in repositories are handled through `handleResponse` or `handleResponseResult`; mapping logic lives in `shared/domain/mapper/*Ktx.kt`.
-- Interactor implementations receive the project's dispatcher abstraction and wrap suspend repository calls in `withContext(dispatchers.io)`.
-- Add new repository and interactor implementations to their Hilt `@Binds` modules.
+- Domain operations live in concrete `UseCase` and `FlowUseCase` classes under `shared/domain/usecase`.
+- Room, Ktor, DataStore, and business logic dependencies are injected directly into the use case constructor.
+- Network responses in use cases are handled through `handleResponse` or `handleResponseResult(...).getOrThrow()`; mapping logic lives in `shared/domain/mapper/*Ktx.kt`.
+- The base `UseCase` / `FlowUseCase` class owns dispatcher switching; do not add `withContext` or `flowOn` inside implementations.
+- ViewModels inject specific use cases and call one-shot use cases with `.getOrThrow()` inside `launch { ... }`.

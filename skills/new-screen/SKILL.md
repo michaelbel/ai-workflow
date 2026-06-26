@@ -82,12 +82,12 @@ import kotlinx.coroutines.launch
 import ru.mercury.courier.features.{feature}.event.{Feature}Event
 import ru.mercury.courier.features.{feature}.intent.{Feature}Intent
 import ru.mercury.courier.features.{feature}.model.{Feature}Model
-import ru.mercury.courier.shared.domain.Interactor
+import ru.mercury.courier.shared.domain.usecase.Load{Feature}UseCase
 import ru.mercury.courier.shared.mvi.CourierViewModel
 
 @HiltViewModel
 class {Feature}ViewModel @Inject constructor(
-    private val interactor: Interactor
+    private val load{Feature}UseCase: Load{Feature}UseCase
 ): CourierViewModel<{Feature}Intent, {Feature}Model, {Feature}Event>({Feature}Model()) {
 
     init {
@@ -102,6 +102,7 @@ class {Feature}ViewModel @Inject constructor(
 
     private fun loadData() {
         viewModelScope.launch {
+            load{Feature}UseCase(Unit).getOrThrow()
             reduce { it.copy(isLoading = false) }
         }
     }
@@ -115,6 +116,8 @@ Rules:
 - `dispatch` must be a `when` over all intent branches with no `else`.
 - Send one-time events with `send(...)`.
 - Private handler functions use `viewModelScope.launch { }` for async work.
+- Inject concrete `UseCase` / `FlowUseCase` classes needed by the screen; do not inject repositories, interactors, or aggregate facades.
+- Call one-shot use cases with `.getOrThrow()` and handle thrown exceptions in the ViewModel `catch` function.
 
 ---
 

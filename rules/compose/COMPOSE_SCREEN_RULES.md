@@ -6,5 +6,6 @@
 - Collect state with `collectAsStateWithLifecycle()`.
 - Observe one-time events with `ObserveAsEvents`.
 - Snackbars use `SnackbarHostState`; dismiss `currentSnackbarData` before showing a new snackbar.
+- Use `SnackbarMessage` for regular informational messages and `SnackbarErrorMessage` for error messages.
 - Declare simple shapes inline, for example `RoundedCornerShape(8.dp)`, instead of extracting them into feature-level `private val` variables.
 - Add new colors to the project UI kit colors and consume them through `MaterialTheme.colorScheme`; do not keep raw `Color(0x...)` constants in feature files.

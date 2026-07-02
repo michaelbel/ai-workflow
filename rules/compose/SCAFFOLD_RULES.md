@@ -1,6 +1,7 @@
 # Scaffold Rules
 
 - Snackbars for regular messages go inside `Scaffold`'s `snackbarHost`; snackbars that must appear above the status bar (top error banners) go outside `Scaffold` in a wrapping `Box`, aligned to `Alignment.TopCenter` with `Modifier.statusBarsPadding()`.
+- Render regular snackbar content with `SnackbarMessage`; render error snackbar content with `SnackbarErrorMessage`.
 - When two snackbars coexist inside `snackbarHost`, wrap them in a `Box` and use separate `SnackbarHostState` instances with different `containerColor` values.
 - FAB always uses `floatingActionButtonPosition = FabPosition.Center`; apply horizontal padding via `Modifier.padding(horizontal = 16.dp)` on the button itself.
 - When a screen needs a static action button pinned to the bottom, place it in `Scaffold`'s `floatingActionButton` slot, not in `bottomBar`.

@@ -3,7 +3,8 @@
 - Feature screens live under `features/{feature}` and are split into `{Feature}Screen.kt`, `{Feature}ViewModel.kt`, `model/{Feature}Model.kt`, `intent/{Feature}Intent.kt`, optional `event/{Feature}Event.kt`, and optional `navigation/{Feature}Route.kt`.
 - Every new feature screen must include `{Feature}ViewModel.kt`, `model/{Feature}Model.kt`, and `intent/{Feature}Intent.kt` from the start, even when the initial screen state and intents are minimal.
 - `ViewModel` classes use `@HiltViewModel`, constructor injection, and extend the project's shared MVI ViewModel base.
-- Do not place classes or constants inside MVI classes; declare them at file level or in dedicated files/packages.
+- Do not place constants or extension functions in MVI `ViewModel`, `Screen`, `Intent`, `Model`, `Event`, or `Route` files/classes; move them to dedicated non-MVI files/packages.
+- Do not place helper classes inside MVI classes; declare them at file level or in dedicated files/packages.
 - Do not create or store variables in ViewModel classes; keep them in Model classes.
 - Place business logic, branching, and decision functions in the ViewModel; composable screens and components must receive already prepared UI state and dispatch intents only.
 - `ViewModel` classes contain screen business logic, including `if`/`else`, `when`, and helper functions that choose what should happen; screens and components only render state and dispatch intents.

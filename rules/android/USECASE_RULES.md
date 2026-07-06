@@ -15,6 +15,7 @@
 - For two or more input parameters, define a nested `data class Params(...)` inside the use case and use `UseCase<FeatureUseCase.Params, R>` or `FlowUseCase<FeatureFlowUseCase.Params, R>`; do not use `Pair`, `Triple`, maps, or multiple `invoke` arguments.
 - Name network use cases after the network request path in PascalCase plus `UseCase`; for example, `ktorHttpClient.get("items/details")` must be `ItemsDetailsUseCase`.
 - Name custom network exceptions after the network request path in PascalCase plus `Exception`; for example, `ktorHttpClient.get("items/details")` must use `ItemsDetailsException`.
+- Declare custom network exception `data class` types inside the network use case that throws them.
 - In network use cases, create `val request = ...` inside the `request` lambda before calling `networkService`; never inline request construction in `networkService` arguments.
 - Use `handleResponse` for network calls processed by callbacks; throw a domain-specific exception in `onFailure`.
 - Use `handleResponseResult(...).getOrThrow()` when a network response should be consumed as a value inside `execute`.

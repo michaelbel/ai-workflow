@@ -7,6 +7,7 @@
 - Do not place helper classes inside MVI classes; declare them at file level or in dedicated files/packages.
 - Do not create or store variables in ViewModel classes; keep them in Model classes.
 - For data backed by Room, store and pass the Room `Entity` class directly in feature `Model` classes and composable components; do not map it to a UI model or another intermediate class.
+- In feature `Model` classes, name Room entity properties after the entity shape: use `...Entity` for a single entity and `...Entities` for a list of entities.
 - Place business logic, branching, and decision functions in the ViewModel; composable screens and components must receive already prepared UI state and dispatch intents only.
 - `ViewModel` classes contain screen business logic, including `if`/`else`, `when`, and helper functions that choose what should happen; screens and components only render state and dispatch intents.
 - When creating a new screen, always create its ViewModel, Model, and Intent files immediately; do not create standalone screen composables without the matching MVI classes.
@@ -14,6 +15,12 @@
 - One-time actions use `send({Feature}Event...)` from the ViewModel and `ObserveAsEvents` in the screen.
 - `Intent`, `Model`, and `Event` types implement the project's shared MVI marker interfaces.
 - For screen models backed by local collections, avoid storing or updating `isLoading` when loading can be derived from the collection state; treat the screen as loading when the backing collection is empty.
+- Do not store mutable boolean loading state for network requests; store a nullable `Job` for each request in the `Model` and expose loading as a computed property, for example `val isLoading: Boolean get() = requestJob?.isActive == true`.
+- When launching a network request from a ViewModel, assign the launched `Job` into the `Model`, use `invokeOnCompletion` to reset that job to `null`, and do not set loading with `try/finally` boolean updates.
 - For screen data backed by Room and refreshed from network, use separate `Collect...` and `Load...` intents: `Collect...` reads Room data, `Load...` performs the network request and saves the result to Room.
+- When collecting Room entity data from a `FlowUseCase`, name the `collectLatest` lambda parameter `entity` for a single entity or `entities` for a list of entities.
 - ViewModels inject concrete `UseCase` / `FlowUseCase` classes needed by the screen; do not inject repositories, interactors, or aggregate domain facades.
 - Call one-shot use cases inside `launch { ... }` with `.getOrThrow()` and handle thrown exceptions in the ViewModel `catch` function.
+- In ViewModel `catch`, handle the feature's specific network exception before broader exceptions: reset the related request `Job` to `null` and send a `SnackbarErrorMessage` with `throwable.message`.
+- In ViewModel `catch`, handle broader `ClientException` values by sending `SnackbarErrorMessage(throwable.message)`, handle `RoomException` and `RoomSQLiteException` by sending `SnackbarErrorMessage(throwable.message.orEmpty())`, and delegate unknown errors to `super.catch(throwable)`.
+- Import nested use case exceptions directly in ViewModels, for example `import shared.domain.usecase.ItemsDetailsUseCase.ItemsDetailsException`.

@@ -31,6 +31,7 @@
 - Call `currentSnackbarData?.dismiss()` outside `scope.launch` — `dismiss()` is synchronous and does not need a coroutine scope.
 - In a `Text` composable, pass `textAlign` inside the `style` argument rather than as a separate `textAlign` argument.
 - Replace equal-sized `Spacer` elements between `Row` or `Column` children with `horizontalArrangement = Arrangement.spacedBy(...)` or `verticalArrangement = Arrangement.spacedBy(...)`.
+- When a centered `Column` needs uniform spacing between children, use `verticalArrangement = Arrangement.spacedBy(..., Alignment.CenterVertically)` instead of adding top padding to individual children.
 - When the first and last children of a `Row` or `Column` have the same edge padding, move it to the parent container using `padding(horizontal = ...)` or `padding(vertical = ...)`.
 - In vector icon files, use named parameters for all boolean arguments.
 - For each shared UI component, create a separate file; do not declare multiple component composables in one file.

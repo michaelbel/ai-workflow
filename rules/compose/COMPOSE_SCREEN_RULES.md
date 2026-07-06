@@ -3,6 +3,7 @@
 - Public `{Feature}Screen(viewModel = hiltViewModel())` collects state, creates remembered event helpers, observes events, and delegates UI to private `{Feature}ScreenContent`.
 - `*ScreenContent` receives `state`, `dispatch`, and any remembered UI helpers needed for previews.
 - `*ScreenContent` and child components must not contain business logic or domain decisions; expose derived UI flags/text/actions from the ViewModel model and render them directly.
+- Keep screen state branches such as loading, content, error, and empty inline in the `when` block inside `*ScreenContent`; do not extract them into separate `Loading`, `Content`, `Error`, or `Empty` composables/functions unless they are reused real components.
 - Collect state with `collectAsStateWithLifecycle()`.
 - Observe one-time events with `ObserveAsEvents`.
 - Snackbars use `SnackbarHostState`; dismiss `currentSnackbarData` before showing a new snackbar.

@@ -9,6 +9,7 @@
 - Call other `UseCase` instances from `execute` with `.getOrThrow()` so failures propagate into the parent `UseCase` result.
 - Call `UseCase` instances from ViewModels inside `launch { ... }` and finish each call with `.getOrThrow()`; handle thrown domain, Room, and network exceptions in the ViewModel `catch` function.
 - `FlowUseCase.execute` returns `Flow<R>` directly, is not `suspend`, and must not wrap values in `Result`.
+- Name `FlowUseCase` classes after the value type they return plus `FlowUseCase`; for example, `Flow<List<ItemEntity>>` must be `ItemEntitiesFlowUseCase`, and `Flow<ItemEntity>` must be `ItemEntityFlowUseCase`.
 - For no input parameters, use `Unit` as the parameter type and keep `execute(params: Unit)`.
 - For exactly one input parameter, use the domain type as `P`, rename the override parameter to a semantic name, and add `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`.
 - For two or more input parameters, define a nested `data class Params(...)` inside the use case and use `UseCase<FeatureUseCase.Params, R>` or `FlowUseCase<FeatureFlowUseCase.Params, R>`; do not use `Pair`, `Triple`, maps, or multiple `invoke` arguments.

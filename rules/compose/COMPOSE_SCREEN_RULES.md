@@ -8,5 +8,6 @@
 - Observe one-time events with `ObserveAsEvents`.
 - Snackbars use `SnackbarHostState`; dismiss `currentSnackbarData` before showing a new snackbar.
 - Use `SnackbarMessage` for regular informational messages and `SnackbarErrorMessage` for error messages.
+- Render dialogs and bottom sheets from an explicit `is...Visible` property in the screen `Model`; do not use nullable payload checks as the visibility condition. Pass nullable payload data to the dialog/sheet model separately.
 - Declare simple shapes inline, for example `RoundedCornerShape(8.dp)`, instead of extracting them into feature-level `private val` variables.
 - Add new colors to the project UI kit colors and consume them through `MaterialTheme.colorScheme`; do not keep raw `Color(0x...)` constants in feature files.

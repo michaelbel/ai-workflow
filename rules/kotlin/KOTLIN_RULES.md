@@ -3,7 +3,7 @@
 - Prefer `when` instead of `if / else if` chains when expressing branching logic.
 - When returning one of two branches, prefer `return when { ... }` over `return if (...) ... else ...`.
 - In `when` branches, use the single-line form without braces only when the whole branch fits on one line: `condition -> statement`; if the branch body is multiline, wrap it in braces even when it contains only one statement.
-- In `when` branches, do not put multiline calls directly after `->`; write `condition -> { launch { send(Event.Message(message)) } }`, not `condition -> launch { ... }` split across lines.
+- In `when` branches, do not put `launch` directly after `->`; wrap the branch body in braces and call `launch { ... }` inside the branch block, even when `launch` is the only statement.
 - In `sealed interface` and `sealed class`, declare all `data object` entries before any `data class` entries.
 - In `sealed interface`, keep short `data class` declarations with parameters on a single line: `data class Example(val param: Int) : ExampleInterface`.
 - If a `sealed class` has no constructor parameters and all its members are `object` or `data object`, use a `sealed interface` instead.

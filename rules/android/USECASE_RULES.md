@@ -11,12 +11,13 @@
 - `FlowUseCase.execute` returns `Flow<R>` directly, is not `suspend`, and must not wrap values in `Result`.
 - Name `FlowUseCase` classes after the value type they return plus `FlowUseCase`; for example, `Flow<List<ItemEntity>>` must be `ItemEntitiesFlowUseCase`, and `Flow<ItemEntity>` must be `ItemEntityFlowUseCase`.
 - For no input parameters, use `Unit` as the parameter type and keep `execute(params: Unit)`.
-- For exactly one input parameter, use the domain type as `P`, rename the override parameter to a semantic name, and add `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`.
+- For exactly one input parameter, use the domain type as `P`, rename the override parameter to a semantic name, and add `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`; do not create a single-field `Params` data class, even when the field is nullable or has a default value.
 - For two or more input parameters, define a nested `data class Params(...)` inside the use case and use `UseCase<FeatureUseCase.Params, R>` or `FlowUseCase<FeatureFlowUseCase.Params, R>`; do not use `Pair`, `Triple`, maps, or multiple `invoke` arguments.
-- Name network use cases after the network request path in PascalCase plus `UseCase`; for example, `ktorHttpClient.get("items/details")` must be `ItemsDetailsUseCase`.
-- Name custom network exceptions after the network request path in PascalCase plus `Exception`; for example, `ktorHttpClient.get("items/details")` must use `ItemsDetailsException`.
+- A `FlowUseCase` must wrap one DAO flow method; if different filters require different DAO flow methods, create separate `FlowUseCase` classes instead of branching between DAO calls inside one use case.
+- Name network use cases after the network request path or network service method in PascalCase plus `UseCase`; for example, `ktorHttpClient.get("items/details")` must be `ItemsDetailsUseCase`, and `networkService.catalogBrandsFavorites(...)` must be `CatalogBrandsFavoritesUseCase`. Do not use intent-style names such as `Load...UseCase` for direct network sync calls.
+- Name custom network exceptions after the same request path or network service method in PascalCase plus `Exception`; for example, `ktorHttpClient.get("items/details")` must use `ItemsDetailsException`, and `networkService.catalogBrandsFavorites(...)` must use `CatalogBrandsFavoritesException`.
 - Declare custom network exception `data class` types inside the network use case that throws them.
-- In network use cases, create `val request = ...` inside the `request` lambda before calling `networkService`; never inline request construction in `networkService` arguments.
+- In network use cases, create `val request = ...` inside the `request = { ... }` lambda immediately before calling `networkService`; never build the request outside that lambda or inline request construction in `networkService` arguments.
 - Use `handleResponse` for network calls processed by callbacks; throw a domain-specific exception in `onFailure`.
 - Use `handleResponseResult(...).getOrThrow()` when a network response should be consumed as a value inside `execute`.
 - Wrap multiple related Room writes in `AppDatabase.withTransaction`.

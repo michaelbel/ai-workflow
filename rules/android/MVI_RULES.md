@@ -8,6 +8,7 @@
 - Do not create or store variables in ViewModel classes; keep them in Model classes.
 - For data backed by Room, store and pass the Room `Entity` class directly in feature `Model` classes and composable components; do not map it to a UI model or another intermediate class.
 - In feature `Model` classes, name Room entity properties after the entity shape: use `...Entity` for a single entity and `...Entities` for a list of entities.
+- In MVI `Model` classes, declare properties derived entirely from other model properties with an explicit type and a custom getter placed on the following indented line; do not initialize and store the derived value in the property declaration.
 - Place screen business logic, branching, and decisions inside the appropriate `dispatch` intent branch; composable screens and components must receive already prepared UI state and dispatch intents only.
 - A `ViewModel` class may declare only the `dispatch` and `catch` functions; do not declare private or public helper functions in it. Inline calculations and transformations into the appropriate `dispatch` branch, or move them outside the ViewModel to the appropriate architectural layer.
 - When creating a new screen, always create its ViewModel, Model, and Intent files immediately; do not create standalone screen composables without the matching MVI classes.

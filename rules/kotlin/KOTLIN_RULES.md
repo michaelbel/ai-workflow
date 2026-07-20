@@ -16,3 +16,4 @@
 - Use `lastIndex` instead of `size - 1` or `size.minus(1)` when referencing the last index of a collection.
 - Place experimental opt-in annotations only at file level, for example `@file:OptIn(ExperimentalMaterial3Api::class)`, not on individual declarations.
 - If a `companion object` and all its constants are used only within the same file, declare both the `companion object` and each constant as `private`: `private companion object { private const val LIMIT = 10 }`.
+- When instantiating a data class constructor, always use named arguments for every parameter, one per line; do not rely on positional arguments, especially for `Boolean` and nullable parameters where the meaning is not obvious from the value alone.

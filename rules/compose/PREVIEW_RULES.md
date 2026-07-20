@@ -7,3 +7,5 @@
 - When a component uses a `{Component}State` data class because it has more than one field, always create a matching private `PreviewParameterProvider` for that state in the same file.
 - Use `BooleanProvider` for boolean-parameterized previews.
 - `PreviewParameterProvider` classes are private and declared at the bottom of the file.
+- Build preview and `PreviewParameterProvider` values through `Empty.copy(...)` when the model exposes an `Empty` instance; do not construct them with a full explicit constructor call.
+- In `Empty.copy(...)` calls for previews, set only the fields the component actually reads/renders; do not add unrelated fields "for realism."

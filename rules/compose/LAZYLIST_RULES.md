@@ -9,3 +9,4 @@
 - Detect the last lazy list item with `index != items.lastIndex`; do not compare item ids with `items.last().id`.
 - Do not add blank lines between adjacent `item {}` blocks.
 - Never add horizontal padding to individual list items when all items share the same padding; put it in `contentPadding` with `PaddingValues(horizontal = 16.dp)` instead.
+- Render a screen's loading/content/error/empty states inside one lazy list; do not branch with `when`/`if` into separate lazy list instances per state. Put each state's items behind `if (state.isLoading) { ... }`, `if (state.isContentVisible) { ... }`, etc. inside the same list body, and control scrolling for non-content states via `userScrollEnabled`.

@@ -14,3 +14,4 @@
   suspend fun selectNotNull(id: Int): Entity
   ```
 - Use `select` when the row may be absent; use `selectNotNull` only when the caller definitely knows the value exists in the database.
+- Do not write `@Transaction` DAO methods that orchestrate multiple other DAO methods, for example a `replace` method that calls `delete()` then `upsert(entity)`; keep DAO methods as single declarative `@Query`/`@Insert`/`@Upsert`/`@Delete` operations and combine multiple DAO calls with `AppDatabase.withTransaction` in the use case layer instead.

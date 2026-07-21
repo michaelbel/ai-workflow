@@ -12,6 +12,7 @@
 - Use `MaterialTheme.colorScheme` for component colors.
 - Declare shape values inline at the call site, for example `RoundedCornerShape(8.dp)`; do not extract simple shapes into `private val` variables.
 - Add new UI colors to the UI kit Colors file and expose them through `MaterialTheme.colorScheme`; do not create local `private val ... = Color(...)` constants in feature or component files.
+- Name new `ColorScheme` color extensions after the HTML/CSS hex color name matching the hex value, for example `val ColorScheme.midnightBlue: Color get() = Color(0xFF251052)`; do not name them after their usage or purpose.
 - Use `MaterialTheme.typography` for component text styles; do not instantiate `TextStyle` directly inside components.
 - In Material top app bars (`TopAppBar`, `CenterAlignedTopAppBar`, `LargeTopAppBar`, and similar), set container, navigation icon, title/subtitle, and action icon colors through the `colors` parameter with `TopAppBarDefaults.*topAppBarColors(...)` whenever the API exposes those colors; do not hardcode `Icon` or `Text` colors inside app bar slots when they can inherit from `colors`.
 - For composable function calls, order arguments the same way as they are declared in the SDK/component signature.

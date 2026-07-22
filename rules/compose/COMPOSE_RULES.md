@@ -3,6 +3,7 @@
 - When creating a composable function, always create a preview for it.
 - The `modifier` parameter must be the first optional parameter in a composable function signature.
 - When a component composable needs more than one data or callback field, move those fields into a `{Component}State` data class declared in the same file and pass it through a `state` parameter instead of separate parameters.
+- Do not declare local `val` in a composable body to derive a condition or boolean from `state` fields; instead expose it as a computed property with an explicit type and a getter on the `{Component}State` data class itself, and read that property directly in the composable instead of recomputing the condition inline.
 - Composable screens and components must not contain business logic, branching decision functions, or `if`/`else` that decides domain behavior; move that logic to the ViewModel and render prepared UI state instead.
 - Do not introduce local abstractions, helper variables, helper models, or extracted functions only to eliminate small UI duplication; prefer straightforward duplicated code until there is clear repeated behavior worth abstracting.
 - Use the project's `Shared*` component wrapper instead of a direct framework component when such a wrapper exists in the project.
@@ -27,7 +28,7 @@
 - Inside containers such as `Column`, `Row`, `Box`, `ConstraintLayout`, add a blank line between adjacent child composables; do not write `Text(...)` immediately followed by another `Text(...)` or component call without an empty line.
 - In a `constrainAs` block, order constraint assignments as: `width`, `height`, `start`, `top`, `end`, `bottom`.
 - When a composable is positioned via `constrainAs`, declare its size inside the `constrainAs` block using the `Dimension` API (`Dimension.value(...)`, `Dimension.fillToConstraints`, `Dimension.wrapContent`) instead of size modifiers in the outer modifier chain.
-- Name ConstraintLayout refs created via `createRef` or `createRefs` with a `Ref` postfix; for example, `val buttonRef = createRef()`.
+- Name ConstraintLayout refs created via `createRef` or `createRefs` with a `Ref` postfix; this applies both to single refs and to every component of a destructured `createRefs()` declaration.
 - When all items in a `LazyColumn` share the same horizontal padding, or all `LazyRow` items share the same vertical padding, move it to the list's `contentPadding` argument instead.
 - Call `currentSnackbarData?.dismiss()` outside `scope.launch` — `dismiss()` is synchronous and does not need a coroutine scope.
 - In a `Text` composable, pass `textAlign` inside the `style` argument rather than as a separate `textAlign` argument.

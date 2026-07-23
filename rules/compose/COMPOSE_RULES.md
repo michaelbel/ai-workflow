@@ -24,6 +24,7 @@
 - For `Modifier.offset(...)` backed by state, use the lambda overload: `Modifier.offset { ... }`.
 - For `floatingActionButton`, place the button directly in the slot and apply padding to the button modifier; do not wrap it in `Box` only to add full-width, navigation bar padding, or horizontal padding.
 - Use `Modifier.size(width = ..., height = ...)` instead of chaining `Modifier.width(...).height(...)`.
+- When a design requires text to be vertically centered in a fixed-height area, apply the width, height, and padding modifiers directly to `Text`, then use `Modifier.wrapContentHeight(align = Alignment.CenterVertically)`; do not wrap the `Text` in a fixed-height `Box` solely for vertical alignment.
 - In Compose containers, separate sibling composable calls with a blank line.
 - Inside containers such as `Column`, `Row`, `Box`, `ConstraintLayout`, add a blank line between adjacent child composables; do not write `Text(...)` immediately followed by another `Text(...)` or component call without an empty line.
 - In a `constrainAs` block, order constraint assignments as: `width`, `height`, `start`, `top`, `end`, `bottom`.

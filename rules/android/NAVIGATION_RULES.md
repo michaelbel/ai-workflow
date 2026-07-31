@@ -1,9 +1,12 @@
-# Navigation Rules
+# Правила навигации
 
-- Every screen route is a `@Serializable data class` or `@Serializable data object` that implements `NavKey`.
-- Routes live in `features/{feature}/navigation`.
-- Use `data object {Feature}Route: NavKey` for screens without arguments.
-- Use `data class {Feature}Route(...): NavKey` for screens with arguments.
-- ViewModels retrieve route arguments via `savedStateHandle.toRoute<{Feature}Route>()`.
-- Register routes in the project's navigation display wrapper with `entry<{Feature}Route> { {Feature}Screen(it) }` when the route has arguments, or `entry<{Feature}Route> { {Feature}Screen() }` when it does not.
-- Back navigation uses a separate `@Serializable data object BackRoute: NavKey`.
+- Каждый маршрут экрана — это `@Serializable data class` или `@Serializable data object`,
+  реализующий `NavKey`.
+- Маршруты находятся в `features/{feature}/navigation`.
+- Используй `data object {Feature}Route: NavKey` для экранов без аргументов.
+- Используй `data class {Feature}Route(...): NavKey` для экранов с аргументами.
+- ViewModel-и получают аргументы маршрута через `savedStateHandle.toRoute<{Feature}Route>()`.
+- Регистрируй маршруты в навигационной обёртке отображения проекта через
+  `entry<{Feature}Route> { {Feature}Screen(it) }`, когда у маршрута есть аргументы, или
+  `entry<{Feature}Route> { {Feature}Screen() }`, когда их нет.
+- Для навигации назад используй отдельный `@Serializable data object BackRoute: NavKey`.

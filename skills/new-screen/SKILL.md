@@ -2,11 +2,11 @@
 name: new-screen
 ---
 
-# New Screen
+# Новый экран
 
-Creates a project MVI feature screen. Replace `{feature}` with the snake_case feature folder, `{Feature}` with the PascalCase feature name, and `{package}` with the target package.
+Создаёт MVI-экран фичи проекта. Замени `{feature}` на папку фичи в snake_case, `{Feature}` на имя фичи в PascalCase, а `{package}` на целевой пакет.
 
-Files:
+Файлы:
 - `features/{feature}/{Feature}Screen.kt`
 - `features/{feature}/{Feature}ViewModel.kt`
 - `features/{feature}/model/{Feature}Model.kt`
@@ -28,9 +28,9 @@ sealed interface {Feature}Intent: Intent {
 }
 ```
 
-Rules:
-- All `data object` entries come before any `data class` entries.
-- Each intent represents a single user action or lifecycle event.
+Правила:
+- Все записи `data object` идут перед любыми записями `data class`.
+- Каждый intent представляет одно действие пользователя или событие жизненного цикла.
 
 ---
 
@@ -46,9 +46,9 @@ data class {Feature}Model(
 ): Model
 ```
 
-Rules:
-- All UI state lives here; no state is stored in the ViewModel.
-- Omit `isLoading` when loading can be derived from a collection being empty.
+Правила:
+- Всё UI-состояние хранится здесь; никакое состояние не хранится в ViewModel.
+- Опускай `isLoading`, когда загрузку можно вывести из пустоты коллекции.
 
 ---
 
@@ -64,9 +64,9 @@ sealed interface {Feature}Event: Event {
 }
 ```
 
-Rules:
-- Use events only for one-time side effects such as navigation, snackbars, and dialogs.
-- All `data object` entries come before any `data class` entries.
+Правила:
+- Используй события только для одноразовых побочных эффектов, таких как навигация, snackbar и диалоги.
+- Все записи `data object` идут перед любыми записями `data class`.
 
 ---
 
@@ -109,15 +109,15 @@ class {Feature}ViewModel @Inject constructor(
 }
 ```
 
-Rules:
-- Use `@HiltViewModel` and constructor injection.
-- Extend the project's shared MVI ViewModel base with `{Feature}Intent`, `{Feature}Model`, and `{Feature}Event`.
-- No stored variables; all state lives in the Model and changes only through `reduce { it.copy(...) }`.
-- `dispatch` must be a `when` over all intent branches with no `else`.
-- Send one-time events with `send(...)`.
-- Private handler functions use `viewModelScope.launch { }` for async work.
-- Inject concrete `UseCase` / `FlowUseCase` classes needed by the screen; do not inject repositories, interactors, or aggregate facades.
-- Call one-shot use cases with `.getOrThrow()` and handle thrown exceptions in the ViewModel `catch` function.
+Правила:
+- Используй `@HiltViewModel` и инъекцию через конструктор.
+- Наследуйся от общего базового MVI ViewModel проекта с `{Feature}Intent`, `{Feature}Model` и `{Feature}Event`.
+- Никаких сохранённых переменных; всё состояние живёт в Model и меняется только через `reduce { it.copy(...) }`.
+- `dispatch` должен быть `when` по всем веткам intent без `else`.
+- Отправляй одноразовые события через `send(...)`.
+- Приватные функции-обработчики используют `viewModelScope.launch { }` для асинхронной работы.
+- Внедряй конкретные классы `UseCase` / `FlowUseCase`, нужные экрану; не внедряй репозитории, интеракторы или агрегирующие фасады.
+- Вызывай одноразовые use case через `.getOrThrow()` и обрабатывай выброшенные исключения в функции `catch` ViewModel.
 
 ---
 
@@ -188,11 +188,11 @@ private class {Feature}ModelPreviewParameterProvider: PreviewParameterProvider<{
 }
 ```
 
-Rules:
-- Public `{Feature}Screen(viewModel = hiltViewModel())` only collects state, observes events, and delegates UI to private `{Feature}ScreenContent`.
-- Collect state with `collectAsStateWithLifecycle()`.
-- Observe one-time events with `ObserveAsEvents`.
-- Preview `{Feature}ScreenContent`, not the public screen.
-- Use `@PreviewWrapper(ThemeWrapper::class)` and a private `PreviewParameterProvider`.
-- Apply `innerPadding` from `Scaffold` via `contentPadding` on lists or `Modifier.padding` on single content.
-- Add `@file:OptIn(...)` at the top when experimental APIs are used.
+Правила:
+- Публичный `{Feature}Screen(viewModel = hiltViewModel())` только собирает state, наблюдает события и делегирует UI приватному `{Feature}ScreenContent`.
+- Собирай state через `collectAsStateWithLifecycle()`.
+- Наблюдай одноразовые события через `ObserveAsEvents`.
+- Делай preview для `{Feature}ScreenContent`, а не для публичного экрана.
+- Используй `@PreviewWrapper(ThemeWrapper::class)` и приватный `PreviewParameterProvider`.
+- Применяй `innerPadding` из `Scaffold` через `contentPadding` для списков или `Modifier.padding` для одиночного содержимого.
+- Добавляй `@file:OptIn(...)` вверху, когда используются экспериментальные API.

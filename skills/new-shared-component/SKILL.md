@@ -2,11 +2,11 @@
 name: new-shared-component
 ---
 
-# New Shared Component
+# Новый общий компонент
 
-Creates a reusable shared UI component with a State holder, preview, and PreviewParameterProvider. Replace `{Component}` with the component name (e.g. `PaymentBox`, `LoyaltyCardBox`) and `{package}` with the target package.
+Создаёт переиспользуемый общий UI-компонент с State-холдером, preview и PreviewParameterProvider. Замени `{Component}` на имя компонента (например, `PaymentBox`, `LoyaltyCardBox`), а `{package}` на целевой пакет.
 
-One file per component. Place it in `shared/ui/components` or a dedicated subfolder there.
+Один файл на компонент. Размещай его в `shared/ui/components` или отдельной подпапке там.
 
 ---
 
@@ -53,12 +53,12 @@ private class {Component}StateProvider: PreviewParameterProvider<{Component}Stat
 }
 ```
 
-Rules:
-- State is a `data class` named `{Component}State`; it holds all data and callbacks the component needs.
-- If the component needs more than one data or callback field, those fields must be placed in `{Component}State` in the same file instead of being passed as separate composable parameters.
-- The component composable takes `state` as the first parameter, `modifier` as the second with a default of `Modifier`.
-- The preview calls the component directly — never the ViewModel or screen.
-- Use `@PreviewWrapper(ThemeWrapper::class) @FontScalePreviews` for previews.
-- Create only one preview function per component file and represent all preview variants through `PreviewParameterProvider`.
-- Create a private `{Component}StateProvider: PreviewParameterProvider<{Component}State>` in the same file whenever `{Component}State` is used.
-- Each component lives in its own file; do not declare multiple components in one file.
+Правила:
+- State — это `data class` с именем `{Component}State`; он хранит все данные и callback, нужные компоненту.
+- Если компоненту нужно больше одного поля данных или callback, эти поля должны быть размещены в `{Component}State` в том же файле, а не переданы как отдельные параметры composable.
+- Composable компонента принимает `state` первым параметром, `modifier` вторым со значением по умолчанию `Modifier`.
+- Preview вызывает компонент напрямую — никогда не ViewModel или экран.
+- Используй `@PreviewWrapper(ThemeWrapper::class) @FontScalePreviews` для preview.
+- Создавай только одну функцию preview на файл компонента и представляй все варианты preview через `PreviewParameterProvider`.
+- Создавай приватный `{Component}StateProvider: PreviewParameterProvider<{Component}State>` в том же файле всякий раз, когда используется `{Component}State`.
+- Каждый компонент находится в своём файле; не объявляй несколько компонентов в одном файле.

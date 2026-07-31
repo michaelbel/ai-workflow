@@ -2,13 +2,13 @@
 name: new-data-layer
 ---
 
-# New Data Layer
+# Новый слой данных
 
-Creates or extends the project data/domain flow for a feature using `UseCase` and `FlowUseCase`. Replace `{Feature}` with the domain name, `{feature}` with the lower camel-case name, `{featureTable}` with the Room table name, and `{package}` with the target package.
+Создаёт или расширяет поток данных/domain проекта для фичи с использованием `UseCase` и `FlowUseCase`. Замени `{Feature}` на имя domain, `{feature}` на имя в lower camel case, `{featureTable}` на имя таблицы Room, а `{package}` на целевой пакет.
 
-This skill covers DAO, entity, mapper, request/response models, one-shot use cases, and flow use cases. New data work does not create Repository or Interactor layers.
+Этот скилл охватывает DAO, entity, мапперы, модели запроса/ответа, одноразовые use case и flow use case. Новая работа с данными не создаёт слои Repository или Interactor.
 
-Files usually created or touched:
+Обычно создаваемые или изменяемые файлы:
 - `shared/domain/usecase/{Feature}UseCase.kt`
 - `shared/domain/usecase/{Feature}FlowUseCase.kt`
 - `shared/data/persistence/database/dao/{Feature}Dao.kt`
@@ -21,9 +21,9 @@ Files usually created or touched:
 
 ---
 
-## One-Shot UseCase With One Parameter
+## Одноразовый UseCase с одним параметром
 
-Use this for suspend Room/Ktor/DataStore work that returns a single result.
+Используй это для suspend-операций Room/Ktor/DataStore, возвращающих один результат.
 
 ```kotlin
 @file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
@@ -67,18 +67,18 @@ class Load{Feature}UseCase @Inject constructor(
 }
 ```
 
-Rules:
-- Add `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")` when the single `params` argument is renamed to a semantic name.
-- Pass `dispatchers.io` for Room and Ktor work.
-- Do not return `Result`; `UseCase` wraps `execute` in `Result`.
-- Throw a domain-specific exception from `onFailure`.
-- Create `val request = ...` before calling `networkService`.
+Правила:
+- Добавляй `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`, когда единственный аргумент `params` переименован в семантическое имя.
+- Передавай `dispatchers.io` для работы с Room и Ktor.
+- Не возвращай `Result`; `UseCase` сам оборачивает `execute` в `Result`.
+- Выбрасывай domain-специфичное исключение из `onFailure`.
+- Создавай `val request = ...` перед вызовом `networkService`.
 
 ---
 
-## One-Shot UseCase With Params
+## Одноразовый UseCase с Params
 
-Use a nested `Params` data class when there are two or more input values.
+Используй вложенный `data class Params`, когда есть два и более входных значения.
 
 ```kotlin
 package {package}.usecase
@@ -106,16 +106,16 @@ class Save{Feature}UseCase @Inject constructor(
 }
 ```
 
-Rules:
-- Keep `Params` nested inside the use case.
-- Do not use `Pair`, `Triple`, maps, or multiple `invoke` arguments.
-- Create params at the call site with `{Feature}UseCase.Params(...)`.
+Правила:
+- Держи `Params` вложенным внутри use case.
+- Не используй `Pair`, `Triple`, map-ы или несколько аргументов `invoke`.
+- Создавай params в месте вызова через `{Feature}UseCase.Params(...)`.
 
 ---
 
 ## FlowUseCase
 
-Use this for Room Flow or other observable streams.
+Используй это для Room Flow или других наблюдаемых потоков.
 
 ```kotlin
 @file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
@@ -141,18 +141,18 @@ class {Feature}EntityFlowUseCase @Inject constructor(
 }
 ```
 
-Rules:
-- `execute` is not `suspend`.
-- Return the DAO Flow directly.
-- Do not call `flowOn`; the base `FlowUseCase` applies it.
-- Do not wrap Flow values in `Result`.
-- If the flow has two or more input values, use nested `Params` exactly like one-shot use cases.
+Правила:
+- `execute` не является `suspend`.
+- Возвращай Flow из DAO напрямую.
+- Не вызывай `flowOn`; базовый `FlowUseCase` применяет его сам.
+- Не оборачивай значения Flow в `Result`.
+- Если у flow два и более входных значения, используй вложенный `Params` точно так же, как в одноразовых use case.
 
 ---
 
-## Network Result Values
+## Значения результата сети
 
-Use `handleResponseResult(...).getOrThrow()` when the network response is needed as a value before continuing.
+Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ нужен как значение перед продолжением.
 
 ```kotlin
 @file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
@@ -176,16 +176,16 @@ class {Feature}UseCase @Inject constructor(
 }
 ```
 
-Rules:
-- Do not return `handleResponseResult` from `execute`.
-- Do not wrap the result with `Result.success` / `Result.failure`.
-- Let `.getOrThrow()` propagate failures into the base `UseCase`.
+Правила:
+- Не возвращай `handleResponseResult` из `execute`.
+- Не оборачивай результат в `Result.success` / `Result.failure`.
+- Позволяй `.getOrThrow()` распространять ошибки в базовый `UseCase`.
 
 ---
 
-## Composing UseCases
+## Композиция UseCase
 
-When one use case calls another, unwrap the result with `getOrThrow()` so the parent use case fails consistently.
+Когда один use case вызывает другой, разворачивай результат через `getOrThrow()`, чтобы родительский use case падал согласованно.
 
 ```kotlin
 class Reload{Feature}UseCase @Inject constructor(
@@ -206,13 +206,13 @@ class Reload{Feature}UseCase @Inject constructor(
 }
 ```
 
-Rules:
-- Never ignore the `Result` returned by another use case.
-- Do not call `.fold` only to re-wrap the same success or failure.
+Правила:
+- Никогда не игнорируй `Result`, возвращаемый другим use case.
+- Не вызывай `.fold` только ради повторного оборачивания того же успеха или ошибки.
 
 ---
 
-## Consuming From ViewModel
+## Использование из ViewModel
 
 ```kotlin
 @HiltViewModel
@@ -240,11 +240,11 @@ class {Feature}ViewModel @Inject constructor(
 }
 ```
 
-Rules:
-- Inject concrete use cases, not repositories, interactors, or aggregate facades.
-- Use separate `Collect...` and `Load...` intents when Room data is refreshed from network.
-- Call one-shot use cases with `.getOrThrow()` inside `launch { ... }`.
-- Handle domain, Room, and network exceptions in the ViewModel `catch` function.
+Правила:
+- Внедряй конкретные use case, а не репозитории, интеракторы или агрегирующие фасады.
+- Используй отдельные intent-ы `Collect...` и `Load...`, когда данные Room обновляются из сети.
+- Вызывай одноразовые use case через `.getOrThrow()` внутри `launch { ... }`.
+- Обрабатывай domain-, Room- и сетевые исключения в функции `catch` ViewModel.
 
 ---
 
@@ -275,12 +275,12 @@ interface {Feature}Dao {
 }
 ```
 
-Rules:
-- Use `@get:Query` with `val` for Room Flow accessors that have no parameters.
-- Use `fun` when a Flow query has parameters.
-- Place all regular `fun` methods before any `suspend fun` methods.
-- Use `@Upsert` instead of separate `@Insert` / `@Update`.
-- Annotate methods returning Pojo types with `@Transaction`.
+Правила:
+- Используй `@get:Query` с `val` для Room Flow-аксессоров без параметров.
+- Используй `fun`, когда у Flow-запроса есть параметры.
+- Размещай все обычные методы `fun` перед любыми методами `suspend fun`.
+- Используй `@Upsert` вместо отдельных `@Insert` / `@Update`.
+- Помечай методы, возвращающие типы Pojo, аннотацией `@Transaction`.
 
 ---
 
@@ -303,13 +303,13 @@ data class {Feature}Entity(
 }
 ```
 
-Rules:
-- When changing Room database tables or entities, increment `AppDatabase.DATABASE_VERSION`.
-- Keep each model in its own file.
+Правила:
+- При изменении таблиц или entity базы данных Room увеличивай `AppDatabase.DATABASE_VERSION`.
+- Держи каждую модель в отдельном файле.
 
 ---
 
-## Network Models
+## Модели сети
 
 ```kotlin
 @Serializable
@@ -324,9 +324,9 @@ data class {Feature}Response(
 )
 ```
 
-Rules:
-- Request model class names end with `Request`.
-- Response model class names end with `Response`.
-- Every request and response model is annotated with `@Serializable`.
-- Every request and response field has `@SerialName`.
-- Each API model annotated with `@Serializable` and `@SerialName` lives in its own file.
+Правила:
+- Имена классов моделей запросов заканчиваются на `Request`.
+- Имена классов моделей ответов заканчиваются на `Response`.
+- Каждая модель запроса и ответа аннотирована `@Serializable`.
+- Каждое поле запроса и ответа имеет `@SerialName`.
+- Каждая API-модель, аннотированная `@Serializable` и `@SerialName`, находится в отдельном файле.

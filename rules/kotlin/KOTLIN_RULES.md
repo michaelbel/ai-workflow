@@ -1,19 +1,38 @@
-# Kotlin Rules
+# Правила Kotlin
 
-- Prefer `when` instead of `if / else if` chains when expressing branching logic.
-- When returning one of two branches, prefer `return when { ... }` over `return if (...) ... else ...`.
-- In `when` branches, use the single-line form without braces only when the whole branch fits on one line: `condition -> statement`; if the branch body is multiline, wrap it in braces even when it contains only one statement.
-- In `when` branches, do not put `launch` directly after `->`; wrap the branch body in braces and call `launch { ... }` inside the branch block, even when `launch` is the only statement.
-- In `sealed interface` and `sealed class`, declare all `data object` entries before any `data class` entries.
-- In `sealed interface`, keep short `data class` declarations with parameters on a single line: `data class Example(val param: Int) : ExampleInterface`.
-- If a `sealed class` has no constructor parameters and all its members are `object` or `data object`, use a `sealed interface` instead.
-- Add imports in the imports section instead of using fully qualified names inline; for example, prefer `import androidx.compose.ui.graphics.Color` with `containerColor = Color.Transparent` over `containerColor = androidx.compose.ui.graphics.Color.Transparent`.
-- Do not write whitespace before `:` in class inheritance or delegation declarations; write `class Foo: Bar`, not `class Foo : Bar`.
-- Always write functions with `{}` and `return`; never use `=` for the function body.
-- Do not use the `internal` visibility modifier in Kotlin code.
-- Do not extract local helper functions just to remove a few repeated lines; prefer straightforward code over premature abstraction.
-- Each file should contain at most one API model annotated with both `@Serializable` and `@SerialName`; move additional models to separate files.
-- Use `lastIndex` instead of `size - 1` or `size.minus(1)` when referencing the last index of a collection.
-- Place experimental opt-in annotations only at file level, for example `@file:OptIn(ExperimentalMaterial3Api::class)`, not on individual declarations.
-- If a `companion object` and all its constants are used only within the same file, declare both the `companion object` and each constant as `private`: `private companion object { private const val LIMIT = 10 }`.
-- When instantiating a data class constructor, always use named arguments for every parameter, one per line; do not rely on positional arguments, especially for `Boolean` and nullable parameters where the meaning is not obvious from the value alone.
+- Предпочитай `when` вместо цепочек `if / else if` при выражении ветвящейся логики.
+- При возврате одной из двух веток предпочитай `return when { ... }` вместо
+  `return if (...) ... else ...`.
+- В ветках `when` используй однострочную форму без фигурных скобок только если вся ветка помещается
+  на одной строке: `condition -> statement`; если тело ветки многострочное, оборачивай его в
+  фигурные скобки, даже если оно содержит только одну инструкцию.
+- В ветках `when` не ставь `launch` сразу после `->`; оборачивай тело ветки в фигурные скобки и
+  вызывай `launch { ... }` внутри блока ветки, даже если `launch` — единственная инструкция.
+- В `sealed interface` и `sealed class` объявляй все записи `data object` перед любыми записями
+  `data class`.
+- В `sealed interface` держи короткие объявления `data class` с параметрами на одной строке:
+  `data class Example(val param: Int) : ExampleInterface`.
+- Если у `sealed class` нет параметров конструктора и все её члены — `object` или `data object`,
+  используй вместо неё `sealed interface`.
+- Добавляй импорты в секцию импортов вместо использования полностью квалифицированных имён inline;
+  например, предпочитай `import androidx.compose.ui.graphics.Color` с
+  `containerColor = Color.Transparent` вместо
+  `containerColor = androidx.compose.ui.graphics.Color.Transparent`.
+- Не ставь пробел перед `:` в объявлениях наследования или делегирования класса; пиши
+  `class Foo: Bar`, а не `class Foo : Bar`.
+- Всегда пиши функции с `{}` и `return`; никогда не используй `=` для тела функции.
+- Не используй модификатор видимости `internal` в коде на Kotlin.
+- Не выделяй локальные вспомогательные функции только ради удаления нескольких повторяющихся строк;
+  предпочитай прямолинейный код преждевременной абстракции.
+- Каждый файл должен содержать не более одной API-модели, аннотированной одновременно
+  `@Serializable` и `@SerialName`; дополнительные модели переноси в отдельные файлы.
+- Используй `lastIndex` вместо `size - 1` или `size.minus(1)` при обращении к последнему индексу
+  коллекции.
+- Размещай экспериментальные opt-in аннотации только на уровне файла, например
+  `@file:OptIn(ExperimentalMaterial3Api::class)`, а не на отдельных объявлениях.
+- Если `companion object` и все его константы используются только в пределах одного файла, объявляй
+  и `companion object`, и каждую константу как `private`:
+  `private companion object { private const val LIMIT = 10 }`.
+- При создании экземпляра конструктора data class всегда используй именованные аргументы для каждого
+  параметра, по одному на строку; не полагайся на позиционные аргументы, особенно для `Boolean` и
+  nullable-параметров, где смысл не очевиден из одного значения.

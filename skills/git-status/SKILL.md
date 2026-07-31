@@ -3,8 +3,8 @@ name: git-status
 command: git status --short
 ---
 
-# Git Status
+# Статус Git
 
-Shows the current working tree status in short format.
+Показывает текущий статус рабочего дерева в кратком формате.
 
-Use this skill to quickly check what files are modified, staged, or untracked before committing.
+Используй этот скилл, чтобы быстро проверить, какие файлы изменены, добавлены в индекс или не отслеживаются, перед коммитом.

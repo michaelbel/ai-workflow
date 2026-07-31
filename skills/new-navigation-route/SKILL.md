@@ -2,18 +2,18 @@
 name: new-navigation-route
 ---
 
-# New Navigation Route
+# Новый маршрут навигации
 
-Creates a Navigation 3 route for the project.
+Создаёт маршрут Navigation 3 для проекта.
 
-Rules:
-- Put route files in `features/{feature}/navigation`.
-- Every route is `@Serializable` and implements `NavKey`.
-- Use `data object` for routes without arguments.
-- Use `data class` for routes with arguments.
-- Add the route to the correct navigation display entry provider.
+Правила:
+- Размещай файлы маршрутов в `features/{feature}/navigation`.
+- Каждый маршрут — это `@Serializable` и реализует `NavKey`.
+- Используй `data object` для маршрутов без аргументов.
+- Используй `data class` для маршрутов с аргументами.
+- Добавляй маршрут в соответствующий провайдер записей навигационного отображения.
 
-No-argument route:
+Маршрут без аргументов:
 
 ```kotlin
 package {package}.features.{feature}.navigation
@@ -25,7 +25,7 @@ import kotlinx.serialization.Serializable
 data object {Feature}Route: NavKey
 ```
 
-Argument route:
+Маршрут с аргументом:
 
 ```kotlin
 @Serializable

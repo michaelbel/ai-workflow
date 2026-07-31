@@ -1,18 +1,18 @@
-# GitHub README Rules
+# Правила GitHub README
 
-Every README follows this fixed structure, in this order:
+Каждый README следует этой фиксированной структуре в этом порядке:
 
-## 1. Last-commit badge (always first)
+## 1. Бейдж last-commit (всегда первый)
 
 ```markdown
 [![last-commit](https://img.shields.io/github/last-commit/<owner>/<repo>?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/<owner>/<repo>/commits)
 ```
 
-## 2. Project description
+## 2. Описание проекта
 
-Two sentences max. Plain prose, no headers, describes what the project does.
+Максимум два предложения. Обычный текст, без заголовков, описывает, что делает проект.
 
-## 3. Screenshot
+## 3. Скриншот
 
 ```markdown
 <div align="left">
@@ -20,29 +20,33 @@ Two sentences max. Plain prose, no headers, describes what the project does.
 </div>
 ```
 
-## 4. Technologies
+## 4. Технологии
 
-`## Technologies` header followed by shield badges, one per technology, all linking to the repo root.
+Заголовок `## Technologies`, за которым следуют shield-бейджи, по одному на технологию, все
+ссылаются на корень репозитория.
 
 ```markdown
 ## Technologies
 [![<name>](https://img.shields.io/badge/<label>-<color>.svg?style=for-the-badge&logo=<logo>&logoColor=<color>)](https://github.com/<owner>/<repo>)
 ```
 
-### Badge rules
+### Правила бейджей
 
-When the user asks to add badges, create shields.io badges in `for-the-badge` style.
+Когда пользователь просит добавить бейджи, создавай бейджи shields.io в стиле `for-the-badge`.
 
-- Technology badges go under `## Technologies`.
-- Contact, profile, social, donation, and resource badges go in a separate section chosen by the README context, for example `## Contacts`, `## Links`, or `## Resources`.
-- Use one Markdown badge per line.
-- Use official logo slugs when shields.io supports them.
-- Use inline `data:image/svg+xml;base64,...` logos when a service has no suitable shields.io logo or when the user provides a custom logo.
-- Preserve the target links provided by the user.
-- Keep labels short; use `_` instead of spaces inside shields.io badge labels.
-- If the user asks for badges like the examples below, use the same colors, logos, and link style unless they request changes.
+- Бейджи технологий размещаются под `## Technologies`.
+- Бейджи контактов, профиля, соцсетей, донатов и ресурсов размещаются в отдельном разделе,
+  выбранном исходя из контекста README, например `## Contacts`, `## Links` или `## Resources`.
+- Используй один Markdown-бейдж на строку.
+- Используй официальные slug-и логотипов, когда shields.io их поддерживает.
+- Используй inline-логотипы `data:image/svg+xml;base64,...`, когда у сервиса нет подходящего
+  логотипа в shields.io или когда пользователь предоставляет кастомный логотип.
+- Сохраняй целевые ссылки, предоставленные пользователем.
+- Держи подписи короткими; используй `_` вместо пробелов внутри подписей бейджей shields.io.
+- Если пользователь просит бейджи как в примерах ниже, используй те же цвета, логотипы и стиль
+  ссылок, если он не попросит изменений.
 
-Technology badge examples:
+Примеры бейджей технологий:
 
 ```markdown
 [![Android](https://img.shields.io/badge/Android-50AE55?style=for-the-badge&logo=android&logoColor=F6F6F6)](https://d.android.com)
@@ -55,7 +59,7 @@ Technology badge examples:
 [![Claude](https://img.shields.io/badge/Claude-D97757?&style=for-the-badge&logo=data:image/svg+xml;base64,<claude-svg-base64>&logoColor=white)](https://claude.ai)
 ```
 
-Contact/profile badge examples:
+Примеры бейджей контактов/профиля:
 
 ```markdown
 [![](https://img.shields.io/badge/Telegram-24A1DE?&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDciIGhlaWdodD0iMzkiIHZpZXdCb3g9IjAgMCA0NyAzOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjE3MjkyIDE2LjQ2NjRDMTUuNTYyNSAxMS4wNjg0IDIzLjgyNDIgNy41MDk3NSAyNy45NTggNS43OTAzOEMzOS43NjA3IDAuODgxMjMxIDQyLjIxMzIgMC4wMjg0NTkzIDQzLjgxMTcgMC4wMDAzMDAyMzhDNDQuMTYzMiAtMC4wMDU4OTMwMyA0NC45NDkzIDAuMDgxMjM3OSA0NS40NTg1IDAuNDk0NDJDNDUuODg4NSAwLjg0MzMwMyA0Ni4wMDY4IDEuMzE0NTkgNDYuMDYzNCAxLjY0NTM3QzQ2LjEyIDEuOTc2MTUgNDYuMTkwNSAyLjcyOTY4IDQ2LjEzNDUgMy4zMTg0NkM0NS40OTQ5IDEwLjAzODcgNDIuNzI3NCAyNi4zNDcgNDEuMzE5NCAzMy44NzM4QzQwLjcyMzcgMzcuMDU4NyAzOS41NTA2IDM4LjEyNjUgMzguNDE1IDM4LjIzMUMzNS45NDY5IDM4LjQ1ODIgMzQuMDcyOCAzNi42IDMxLjY4MjMgMzUuMDMzQzI3Ljk0MTggMzIuNTgxIDI1LjgyODYgMzEuMDU0NyAyMi4xOTc4IDI4LjY2MkMxOC4wMDE3IDI1Ljg5NjggMjAuNzIxOCAyNC4zNzcxIDIzLjExMzIgMjEuODkzM0MyMy43MzkgMjEuMjQzMyAzNC42MTMzIDExLjM1MjMgMzQuODIzOCAxMC40NTVDMzQuODUwMSAxMC4zNDI4IDM0Ljg3NDUgOS45MjQ1MSAzNC42MjYgOS43MDM2NEMzNC4zNzc1IDkuNDgyNzYgMzQuMDEwNyA5LjU1ODI5IDMzLjc0NjEgOS42MTgzNkMzMy4zNzA5IDkuNzAzNTEgMjcuMzk1MyAxMy42NTMxIDE1LjgxOTMgMjEuNDY3M0MxNC4xMjMyIDIyLjYzMiAxMi41ODY4IDIzLjE5OTUgMTEuMjEwNCAyMy4xNjk3QzkuNjkyODkgMjMuMTM2OSA2Ljc3Mzg4IDIyLjMxMTcgNC42MDM5MSAyMS42MDY0QzEuOTQyMzQgMjAuNzQxMiAtMC4xNzMwMTkgMjAuMjgzOCAwLjAxMTE4MTUgMTguODE0NEMwLjEwNzEyNCAxOC4wNDkxIDEuMTYxMDQgMTcuMjY2NCAzLjE3MjkyIDE2LjQ2NjRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)](https://t.me/michaelbel)
@@ -66,7 +70,7 @@ Contact/profile badge examples:
 [![](https://img.shields.io/badge/LeetCode-282828?style=for-the-badge&logo=leetcode&logoColor=FFA116)](https://leetcode.com/u/michaelbel)
 ```
 
-Resource/community badge examples:
+Примеры бейджей ресурсов/сообщества:
 
 ```markdown
 [![](https://img.shields.io/badge/Telegram_Канал-24A1DE?&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDciIGhlaWdodD0iMzkiIHZpZXdCb3g9IjAgMCA0NyAzOSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0zLjE3MjkyIDE2LjQ2NjRDMTUuNTYyNSAxMS4wNjg0IDIzLjgyNDIgNy41MDk3NSAyNy45NTggNS43OTAzOEMzOS43NjA3IDAuODgxMjMxIDQyLjIxMzIgMC4wMjg0NTkzIDQzLjgxMTcgMC4wMDAzMDAyMzhDNDQuMTYzMiAtMC4wMDU4OTMwMyA0NC45NDkzIDAuMDgxMjM3OSA0NS40NTg1IDAuNDk0NDJDNDUuODg4NSAwLjg0MzMwMyA0Ni4wMDY4IDEuMzE0NTkgNDYuMDYzNCAxLjY0NTM3QzQ2LjEyIDEuOTc2MTUgNDYuMTkwNSAyLjcyOTY4IDQ2LjEzNDUgMy4zMTg0NkM0NS40OTQ5IDEwLjAzODcgNDIuNzI3NCAyNi4zNDcgNDEuMzE5NCAzMy44NzM4QzQwLjcyMzcgMzcuMDU4NyAzOS41NTA2IDM4LjEyNjUgMzguNDE1IDM4LjIzMUMzNS45NDY5IDM4LjQ1ODIgMzQuMDcyOCAzNi42IDMxLjY4MjMgMzUuMDMzQzI3Ljk0MTggMzIuNTgxIDI1LjgyODYgMzEuMDU0NyAyMi4xOTc4IDI4LjY2MkMxOC4wMDE3IDI1Ljg5NjggMjAuNzIxOCAyNC4zNzcxIDIzLjExMzIgMjEuODkzM0MyMy43MzkgMjEuMjQzMyAzNC42MTMzIDExLjM1MjMgMzQuODIzOCAxMC40NTVDMzQuODUwMSAxMC4zNDI4IDM0Ljg3NDUgOS45MjQ1MSAzNC42MjYgOS43MDM2NEMzNC4zNzc1IDkuNDgyNzYgMzQuMDEwNyA5LjU1ODI5IDMzLjc0NjEgOS42MTgzNkMzMy4zNzA5IDkuNzAzNTEgMjcuMzk1MyAxMy42NTMxIDE1LjgxOTMgMjEuNDY3M0MxNC4xMjMyIDIyLjYzMiAxMi41ODY4IDIzLjE5OTUgMTEuMjEwNCAyMy4xNjk3QzkuNjkyODkgMjMuMTM2OSA2Ljc3Mzg4IDIyLjMxMTcgNC42MDM5MSAyMS42MDY0QzEuOTQyMzQgMjAuNzQxMiAtMC4xNzMwMTkgMjAuMjgzOCAwLjAxMTE4MTUgMTguODE0NEMwLjEwNzEyNCAxOC4wNDkxIDEuMTYxMDQgMTcuMjY2NCAzLjE3MjkyIDE2LjQ2NjRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K)](https://t.me/+QBkL98rFVfs0ZGNi)
@@ -75,7 +79,7 @@ Resource/community badge examples:
 
 ---
 
-### Full example
+### Полный пример
 
 ```markdown
 [![last-commit](https://img.shields.io/github/last-commit/michaelbel/total?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/total/commits)

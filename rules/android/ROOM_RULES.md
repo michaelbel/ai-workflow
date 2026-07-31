@@ -1,11 +1,15 @@
-# Room Rules
+# Правила Room
 
-- In DAO interfaces, place all regular `fun` methods before any `suspend fun` methods.
-- When changing Room database tables or entities, always increment `AppDatabase.DATABASE_VERSION`.
-- For Room entities, declare primary keys in the `@Entity(primaryKeys = [...])` parameter instead of using `@PrimaryKey` on a property.
-- In `@Dao` interfaces, annotate methods that return Pojo types with `@Transaction` to ensure consistent multi-table reads.
-- Use `AppDatabase.withTransaction` only when the transaction block contains two or more DAO/database method calls; do not wrap a single method call in `withTransaction`.
-- For single-row Room reads, expose both nullable `select` and non-null `selectNotNull` formats when both call sites exist:
+- В интерфейсах DAO размещай все обычные методы `fun` перед любыми методами `suspend fun`.
+- При изменении таблиц или entity базы данных Room всегда увеличивай `AppDatabase.DATABASE_VERSION`.
+- Для entity Room объявляй первичные ключи в параметре `@Entity(primaryKeys = [...])` вместо
+  использования `@PrimaryKey` на свойстве.
+- В интерфейсах `@Dao` помечай методы, возвращающие типы Pojo, аннотацией `@Transaction`, чтобы
+  обеспечить согласованное чтение из нескольких таблиц.
+- Используй `AppDatabase.withTransaction` только когда блок транзакции содержит два и более вызова
+  методов DAO/базы данных; не оборачивай один вызов метода в `withTransaction`.
+- Для чтения одной строки Room предоставляй как nullable `select`, так и non-null `selectNotNull`
+  форматы, когда оба варианта использования существуют:
   ```kotlin
   @Query("SELECT * FROM EntityTable WHERE id = :id LIMIT 1")
   suspend fun select(id: Int): Entity?
@@ -13,5 +17,9 @@
   @Query("SELECT * FROM EntityTable WHERE id = :id LIMIT 1")
   suspend fun selectNotNull(id: Int): Entity
   ```
-- Use `select` when the row may be absent; use `selectNotNull` only when the caller definitely knows the value exists in the database.
-- Do not write `@Transaction` DAO methods that orchestrate multiple other DAO methods, for example a `replace` method that calls `delete()` then `upsert(entity)`; keep DAO methods as single declarative `@Query`/`@Insert`/`@Upsert`/`@Delete` operations and combine multiple DAO calls with `AppDatabase.withTransaction` in the use case layer instead.
+- Используй `select`, когда строка может отсутствовать; используй `selectNotNull` только когда
+  вызывающий код точно знает, что значение существует в базе данных.
+- Не пиши методы DAO с `@Transaction`, которые оркестрируют несколько других методов DAO, например
+  метод `replace`, вызывающий `delete()`, а затем `upsert(entity)`; держи методы DAO как отдельные
+  декларативные операции `@Query`/`@Insert`/`@Upsert`/`@Delete` и комбинируй несколько вызовов DAO
+  через `AppDatabase.withTransaction` на уровне use case.

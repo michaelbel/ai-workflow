@@ -1,5 +1,6 @@
-# Network Rules
+# Правила сети
 
-- Request model class names must end with `Request`.
-- Response model class names must end with `Response`.
-- Every request and response model must be annotated with `@Serializable`, and every field must have a `@SerialName` annotation.
+- Имена классов моделей запросов должны заканчиваться на `Request`.
+- Имена классов моделей ответов должны заканчиваться на `Response`.
+- Каждая модель запроса и ответа должна быть аннотирована `@Serializable`, а каждое поле должно
+  иметь аннотацию `@SerialName`.

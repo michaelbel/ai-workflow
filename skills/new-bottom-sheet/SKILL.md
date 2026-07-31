@@ -2,11 +2,11 @@
 name: new-bottom-sheet
 ---
 
-# New Bottom Sheet
+# Новый Bottom Sheet
 
-Creates a project Compose bottom sheet. Replace `{Feature}` with the sheet purpose, `{feature}` with the lower camel-case name, and `{package}` with the target package.
+Создаёт Compose bottom sheet проекта. Замени `{Feature}` на назначение sheet, `{feature}` на имя в lower camel case, а `{package}` на целевой пакет.
 
-Use this skill for feature bottom sheets under `features/{feature}_sheet`.
+Используй этот скилл для bottom sheet фич в `features/{feature}_sheet`.
 
 ---
 
@@ -154,10 +154,10 @@ private class {Feature}SheetModelPreviewParameterProvider: PreviewParameterProvi
 }
 ```
 
-Rules:
-- Use file-level `@file:OptIn(ExperimentalMaterial3Api::class)`.
-- Use `rememberModalBottomSheetState(skipPartiallyExpanded = true)`.
-- Follow Compose Rules: use the project's `Shared*` wrapper, such as `SharedModalBottomSheet`, when it exists in the project.
-- Preview the composable that renders the bottom sheet itself, not a separate private content-only composable.
-- Wrap bottom sheet previews in `Box(modifier = Modifier.fillMaxSize())`; otherwise the preview may not render.
-- Use anonymized sample preview data such as `sample-id`, `Sample item`, and `Sample details`.
+Правила:
+- Используй file-level `@file:OptIn(ExperimentalMaterial3Api::class)`.
+- Используй `rememberModalBottomSheetState(skipPartiallyExpanded = true)`.
+- Следуй правилам Compose: используй обёртку `Shared*` проекта, такую как `SharedModalBottomSheet`, когда она существует в проекте.
+- Делай preview composable, который сам рендерит bottom sheet, а не отдельный приватный composable только с содержимым.
+- Оборачивай preview bottom sheet в `Box(modifier = Modifier.fillMaxSize())`; иначе preview может не отрендериться.
+- Используй анонимизированные тестовые данные для preview, такие как `sample-id`, `Sample item` и `Sample details`.

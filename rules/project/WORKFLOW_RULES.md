@@ -1,5 +1,8 @@
-# Workflow Rules
+# Правила рабочего процесса
 
-- Use standard project conventions and follow existing documentation when making changes.
-- Do not be afraid of duplication: duplication is preferred over premature abstractions, helper variables, helper functions, or shared models that only remove small repeated code.
-- Do not run tests.
+- Используй стандартные соглашения проекта и следуй существующей документации при внесении
+  изменений.
+- Не бойся дублирования: дублирование предпочтительнее преждевременных абстракций, вспомогательных
+  переменных, вспомогательных функций или общих моделей, которые лишь устраняют небольшой
+  повторяющийся код.
+- Не запускай тесты.

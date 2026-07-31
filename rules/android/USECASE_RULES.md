@@ -1,28 +1,81 @@
-# UseCase Rules
+# Правила UseCase
 
-- Put Room, Ktor, DataStore, and business operations in concrete `UseCase` / `FlowUseCase` classes under `shared/domain/usecase`; do not create Repository or Interactor layers for new work.
-- Use `UseCase<P, R>` for one-shot suspend operations and `FlowUseCase<P, R>` for observable streams.
-- Inject concrete data dependencies directly into the use case constructor: `NetworkService`, `AppDatabase`, DAO classes, DataStore classes, analytics helpers, or other use cases when composing operations.
-- Inject `SharedDispatchers` as a non-`private` constructor parameter and pass `dispatchers.io` for Room/Ktor work or `dispatchers.immediate` only for CPU-light immediate work.
-- Do not wrap `execute` in `withContext` or `flowOn`; the base `UseCase` / `FlowUseCase` class owns dispatcher switching.
-- `UseCase.execute` returns the raw domain result `R` and throws domain-specific exceptions on failures; it must not return `Result`, `Result.success`, or `Result.failure`.
-- Call other `UseCase` instances from `execute` with `.getOrThrow()` so failures propagate into the parent `UseCase` result.
-- Call `UseCase` instances from ViewModels inside `launch { ... }` and finish each call with `.getOrThrow()`; handle thrown domain, Room, and network exceptions in the ViewModel `catch` function.
-- `FlowUseCase.execute` returns `Flow<R>` directly, is not `suspend`, and must not wrap values in `Result`.
-- Name `FlowUseCase` classes after the value type they return plus `FlowUseCase`; for example, `Flow<List<ItemEntity>>` must be `ItemEntitiesFlowUseCase`, and `Flow<ItemEntity>` must be `ItemEntityFlowUseCase`.
-- For no input parameters, use `Unit` as the parameter type and keep `execute(params: Unit)`.
-- For exactly one input parameter, use the domain type as `P`, rename the override parameter to a semantic name, and add `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`; do not create a single-field `Params` data class, even when the field is nullable or has a default value.
-- For two or more input parameters, define a nested `data class Params(...)` inside the use case and use `UseCase<FeatureUseCase.Params, R>` or `FlowUseCase<FeatureFlowUseCase.Params, R>`; do not use `Pair`, `Triple`, maps, or multiple `invoke` arguments.
-- If a use case has a nested `Params` class, import it directly (`import package.SomeUseCase.Params`) and reference only the short name in the generic signature: `UseCase<Params, Result>` or `FlowUseCase<Params, Result>`; do not use the qualified form `SomeUseCase.Params`.
-- If a use case has a nested output/result data class (e.g. `data class PaymentData` inside `PaymentDataFlowUseCase`), import it directly (`import package.SomeUseCase.PaymentData`) and reference only the short name everywhere, including the generic signature: `FlowUseCase<Params, PaymentData>`; do not use the qualified form `SomeUseCase.PaymentData`.
-- A `FlowUseCase` must wrap one DAO flow method; if different filters require different DAO flow methods, create separate `FlowUseCase` classes instead of branching between DAO calls inside one use case.
-- Name network use cases after the network request path or network service method in PascalCase plus `UseCase`; for example, `ktorHttpClient.get("items/details")` must be `ItemsDetailsUseCase`, and `networkService.catalogBrandsFavorites(...)` must be `CatalogBrandsFavoritesUseCase`. Do not use intent-style names such as `Load...UseCase` for direct network sync calls.
-- Name custom network exceptions after the same request path or network service method in PascalCase plus `Exception`; for example, `ktorHttpClient.get("items/details")` must use `ItemsDetailsException`, and `networkService.catalogBrandsFavorites(...)` must use `CatalogBrandsFavoritesException`.
-- Declare custom network exception `data class` types inside the network use case that throws them.
-- In network use cases, create `val request = ...` inside the `request = { ... }` lambda immediately before calling `networkService`; never build the request outside that lambda or inline request construction in `networkService` arguments.
-- Use `handleResponse` for network calls processed by callbacks; throw a domain-specific exception in `onFailure`.
-- Use `handleResponseResult(...).getOrThrow()` when a network response should be consumed as a value inside `execute`.
-- Wrap multiple related Room writes in `AppDatabase.withTransaction`.
-- Keep mapping logic in mapper KTX files; use cases may orchestrate mapped values but should not grow inline mapper code.
-- New use cases are concrete `@Inject constructor` classes and usually do not need Hilt `@Binds` modules.
-- ViewModels inject the specific use cases they need, not repositories, interactors, or aggregate facades.
+- Размещай операции Room, Ktor, DataStore и бизнес-операции в конкретных классах `UseCase` /
+  `FlowUseCase` в `shared/domain/usecase`; не создавай слои Repository или Interactor для новой
+  работы.
+- Используй `UseCase<P, R>` для одноразовых suspend-операций и `FlowUseCase<P, R>` для наблюдаемых
+  потоков.
+- Внедряй конкретные зависимости данных напрямую в конструктор use case: `NetworkService`,
+  `AppDatabase`, классы DAO, классы DataStore, хелперы аналитики или другие use case при композиции
+  операций.
+- Внедряй `SharedDispatchers` как не-`private` параметр конструктора и передавай `dispatchers.io`
+  для работы с Room/Ktor или `dispatchers.immediate` только для лёгкой по CPU немедленной работы.
+- Не оборачивай `execute` в `withContext` или `flowOn`; базовый класс `UseCase` / `FlowUseCase` сам
+  отвечает за переключение диспетчеров.
+- `UseCase.execute` возвращает сырой domain-результат `R` и выбрасывает domain-специфичные
+  исключения при ошибках; он не должен возвращать `Result`, `Result.success` или `Result.failure`.
+- Вызывай другие экземпляры `UseCase` из `execute` с `.getOrThrow()`, чтобы ошибки распространялись
+  в результат родительского `UseCase`.
+- Вызывай экземпляры `UseCase` из ViewModel внутри `launch { ... }` и завершай каждый вызов через
+  `.getOrThrow()`; обрабатывай выброшенные domain-, Room- и сетевые исключения в функции `catch`
+  ViewModel.
+- `FlowUseCase.execute` напрямую возвращает `Flow<R>`, не является `suspend` и не должен оборачивать
+  значения в `Result`.
+- Называй классы `FlowUseCase` по типу значения, которое они возвращают, плюс `FlowUseCase`;
+  например, `Flow<List<ItemEntity>>` должен быть `ItemEntitiesFlowUseCase`, а `Flow<ItemEntity>` —
+  `ItemEntityFlowUseCase`.
+- При отсутствии входных параметров используй `Unit` как тип параметра и оставляй
+  `execute(params: Unit)`.
+- Для ровно одного входного параметра используй domain-тип как `P`, переименуй override-параметр в
+  семантическое имя и добавь `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`; не создавай
+  `Params` data class с одним полем, даже если поле nullable или имеет значение по умолчанию.
+- Для двух и более входных параметров определяй вложенный `data class Params(...)` внутри use case и
+  используй `UseCase<FeatureUseCase.Params, R>` или `FlowUseCase<FeatureFlowUseCase.Params, R>`; не
+  используй `Pair`, `Triple`, map-ы или несколько аргументов `invoke`.
+- Если у use case есть вложенный класс `Params`, импортируй его напрямую
+  (`import package.SomeUseCase.Params`) и используй только короткое имя в generic-сигнатуре:
+  `UseCase<Params, Result>` или `FlowUseCase<Params, Result>`; не используй квалифицированную форму
+  `SomeUseCase.Params`.
+- Если у use case есть вложенный выходной/результирующий data class (например,
+  `data class PaymentData` внутри `PaymentDataFlowUseCase`), импортируй его напрямую
+  (`import package.SomeUseCase.PaymentData`) и используй только короткое имя везде, включая
+  generic-сигнатуру: `FlowUseCase<Params, PaymentData>`; не используй квалифицированную форму
+  `SomeUseCase.PaymentData`.
+- `FlowUseCase` должен оборачивать один flow-метод DAO; если разным фильтрам нужны разные
+  flow-методы DAO, создавай отдельные классы `FlowUseCase` вместо ветвления между вызовами DAO
+  внутри одного use case.
+- Называй сетевые use case по пути сетевого запроса или методу сетевого сервиса в PascalCase плюс
+  `UseCase`; например, `ktorHttpClient.get("items/details")` должен быть `ItemsDetailsUseCase`, а
+  `networkService.catalogBrandsFavorites(...)` — `CatalogBrandsFavoritesUseCase`. Не используй имена
+  в стиле intent, такие как `Load...UseCase`, для прямых синхронных сетевых вызовов.
+- Называй кастомные сетевые исключения по тому же пути запроса или методу сетевого сервиса в
+  PascalCase плюс `Exception`; например, `ktorHttpClient.get("items/details")` должен использовать
+  `ItemsDetailsException`, а `networkService.catalogBrandsFavorites(...)` —
+  `CatalogBrandsFavoritesException`.
+- Объявляй кастомные типы `data class` сетевых исключений внутри сетевого use case, который их
+  выбрасывает.
+- В сетевых use case создавай `val request = ...` внутри лямбды `request = { ... }` непосредственно
+  перед вызовом `networkService`; никогда не создавай запрос вне этой лямбды и не встраивай его
+  создание в аргументы `networkService`.
+- Используй `handleResponse` для сетевых вызовов, обрабатываемых через callback; выбрасывай
+  domain-специфичное исключение в `onFailure`.
+- Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ нужно потребить как
+  значение внутри `execute`.
+- Оборачивай несколько связанных операций записи в Room в `AppDatabase.withTransaction`.
+- Держи логику маппинга в KTX-файлах мапперов; use case могут оркестрировать смапленные значения, но
+  не должны обрастать inline-кодом мапперов.
+- Новые use case — это конкретные классы с `@Inject constructor`, и обычно им не нужны модули Hilt
+  `@Binds`.
+- ViewModel-и внедряют конкретные нужные им use case, а не репозитории, интеракторы или агрегирующие
+  фасады.
+- В сетевых вызовах use case всегда создавай объекты запроса в отдельном локальном `val request`
+  внутри `request = { ... }` перед вызовом `networkService`; не создавай запрос вне лямбды, не
+  встраивай его создание inline и не передавай смапленные вызовы запроса напрямую в аргументы
+  `networkService`.
+- В use case используй `handleResponse` для сетевых вызовов в стиле callback и
+  `handleResponseResult(...).getOrThrow()` при потреблении ответа как значения; не оборачивай
+  результаты use case вручную в `Result.success` / `Result.failure`.
+- При вызове `handleResponse` всегда передавай все три именованных аргумента: `request`, `onSuccess`
+  и `onFailure`; в `onFailure` создавай отдельный `data class`-исключение, наследующее базовое
+  сетевое исключение проекта, и выбрасывай его; перехватывай этот конкретный тип исключения в
+  функции `catch` ViewModel.

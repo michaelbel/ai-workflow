@@ -1,13 +1,23 @@
-# Compose Screen Rules
+# Правила Compose-экранов
 
-- Public `{Feature}Screen(viewModel = hiltViewModel())` collects state, creates remembered event helpers, observes events, and delegates UI to private `{Feature}ScreenContent`.
-- `*ScreenContent` receives `state`, `dispatch`, and any remembered UI helpers needed for previews.
-- `*ScreenContent` and child components must not contain business logic or domain decisions; expose derived UI flags/text/actions from the ViewModel model and render them directly.
-- Keep screen state branches such as loading, content, error, and empty inline in the `when` block inside `*ScreenContent`; do not extract them into separate `Loading`, `Content`, `Error`, or `Empty` composables/functions unless they are reused real components.
-- Collect state with `collectAsStateWithLifecycle()`.
-- Observe one-time events with `ObserveAsEvents`.
-- Snackbars use `SnackbarHostState`; dismiss `currentSnackbarData` before showing a new snackbar.
-- Use `SnackbarMessage` for regular informational messages and `SnackbarErrorMessage` for error messages.
-- Render dialogs and bottom sheets from an explicit `is...Visible` property in the screen `Model`; do not use nullable payload checks as the visibility condition. Pass nullable payload data to the dialog/sheet model separately.
-- Declare simple shapes inline, for example `RoundedCornerShape(8.dp)`, instead of extracting them into feature-level `private val` variables.
-- Add new colors to the project UI kit colors and consume them through `MaterialTheme.colorScheme`; do not keep raw `Color(0x...)` constants in feature files.
+- Публичный `{Feature}Screen(viewModel = hiltViewModel())` собирает state, создаёт
+  remembered-хелперы событий, наблюдает события и делегирует UI приватному `{Feature}ScreenContent`.
+- `*ScreenContent` получает `state`, `dispatch` и любые remembered UI-хелперы, нужные для preview.
+- `*ScreenContent` и дочерние компоненты не должны содержать бизнес-логику или domain-решения;
+  предоставляй производные UI-флаги/текст/действия из модели ViewModel и рендери их напрямую.
+- Держи ветки состояния экрана, такие как loading, content, error и empty, inline в блоке `when`
+  внутри `*ScreenContent`; не выделяй их в отдельные composable/функции `Loading`, `Content`,
+  `Error` или `Empty`, если только они не являются переиспользуемыми реальными компонентами.
+- Собирай state через `collectAsStateWithLifecycle()`.
+- Наблюдай одноразовые события через `ObserveAsEvents`.
+- Snackbar используют `SnackbarHostState`; закрывай `currentSnackbarData` перед показом нового
+  snackbar.
+- Используй `SnackbarMessage` для обычных информационных сообщений и `SnackbarErrorMessage` для
+  сообщений об ошибках.
+- Рендери диалоги и bottom sheet на основе явного свойства `is...Visible` в `Model` экрана; не
+  используй проверки nullable payload как условие видимости. Передавай nullable данные payload в
+  модель диалога/sheet отдельно.
+- Объявляй простые shape inline, например `RoundedCornerShape(8.dp)`, вместо выделения их в
+  переменные `private val` уровня фичи.
+- Добавляй новые цвета в цвета UI kit проекта и используй их через `MaterialTheme.colorScheme`; не
+  держи сырые константы `Color(0x...)` в файлах фич.

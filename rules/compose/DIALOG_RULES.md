@@ -1,14 +1,24 @@
-# Dialog Rules
+# Правила Dialog
 
-- Use `AlertDialog` when the dialog has action buttons; use `BasicAlertDialog` when the dialog has no action buttons.
-- For `AlertDialog`, pass an `icon` slot when an icon is needed; set `modifier = Modifier.size(...)` on the `Icon`.
-- For `AlertDialog`, pass a `title` slot when the dialog has a title.
-- For `AlertDialog`, pass the dialog body through the `text` slot.
-- For `AlertDialog`, set `iconContentColor`, `titleContentColor`, and `textContentColor` when custom content colors are needed.
-- For `BasicAlertDialog`, apply `clip` and `background` on the modifier directly.
-- Always set `modifier = Modifier.fillMaxWidth().wrapContentHeight().clip(RoundedCornerShape(16.dp)).background(MaterialTheme.colorScheme.surfaceContainerHigh)` on `BasicAlertDialog`.
-- Preview dialog composables inside `Box(modifier = Modifier.fillMaxSize())`; otherwise `AlertDialog`/`BasicAlertDialog` previews may not render.
-- Wrap scrollable content in a `Column` with `weight(1F, fill = false)` and `verticalScroll(rememberScrollState())` to handle long text without clipping.
-- Place action buttons in `FlowRow` with `horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)` and `verticalArrangement = Arrangement.spacedBy(8.dp)`.
-- In the confirm button lambda, call `onConfirmRequest()` before `onDismissRequest()`.
-- Outer `Column` uses `verticalArrangement = Arrangement.spacedBy(40.dp)` between the content column and the button row.
+- Используй `AlertDialog`, когда в диалоге есть кнопки действий; используй `BasicAlertDialog`, когда
+  кнопок действий нет.
+- Для `AlertDialog` передавай слот `icon`, когда нужна иконка; устанавливай
+  `modifier = Modifier.size(...)` на `Icon`.
+- Для `AlertDialog` передавай слот `title`, когда у диалога есть заголовок.
+- Для `AlertDialog` передавай тело диалога через слот `text`.
+- Для `AlertDialog` устанавливай `iconContentColor`, `titleContentColor` и `textContentColor`, когда
+  нужны кастомные цвета содержимого.
+- Для `BasicAlertDialog` применяй `clip` и `background` прямо на modifier.
+- Всегда устанавливай
+  `modifier = Modifier.fillMaxWidth().wrapContentHeight().clip(RoundedCornerShape(16.dp)).background(MaterialTheme.colorScheme.surfaceContainerHigh)`
+  на `BasicAlertDialog`.
+- Делай preview composable-диалогов внутри `Box(modifier = Modifier.fillMaxSize())`; иначе preview
+  `AlertDialog`/`BasicAlertDialog` может не отрендериться.
+- Оборачивай прокручиваемое содержимое в `Column` с `weight(1F, fill = false)` и
+  `verticalScroll(rememberScrollState())`, чтобы обрабатывать длинный текст без обрезки.
+- Размещай кнопки действий в `FlowRow` с
+  `horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)` и
+  `verticalArrangement = Arrangement.spacedBy(8.dp)`.
+- В лямбде кнопки подтверждения вызывай `onConfirmRequest()` перед `onDismissRequest()`.
+- Внешний `Column` использует `verticalArrangement = Arrangement.spacedBy(40.dp)` между колонкой
+  содержимого и рядом кнопок.

@@ -1,3 +1,3 @@
-# Project Rules
+# Правила проекта
 
-- When deleting files, also delete any directories that become empty as a result.
+- При удалении файлов также удаляй все директории, которые в результате становятся пустыми.

@@ -1,27 +1,61 @@
-# MVI Rules
+# Правила MVI
 
-- Feature screens live under `features/{feature}` and are split into `{Feature}Screen.kt`, `{Feature}ViewModel.kt`, `model/{Feature}Model.kt`, `intent/{Feature}Intent.kt`, optional `event/{Feature}Event.kt`, and optional `navigation/{Feature}Route.kt`.
-- Every new feature screen must include `{Feature}ViewModel.kt`, `model/{Feature}Model.kt`, and `intent/{Feature}Intent.kt` from the start, even when the initial screen state and intents are minimal.
-- `ViewModel` classes use `@HiltViewModel`, constructor injection, and extend the project's shared MVI ViewModel base.
-- Do not place constants or extension functions in MVI `ViewModel`, `Screen`, `Intent`, `Model`, `Event`, or `Route` files/classes; move them to dedicated non-MVI files/packages.
-- Do not place helper classes inside MVI classes; declare them at file level or in dedicated files/packages.
-- Do not create or store variables in ViewModel classes; keep them in Model classes.
-- For data backed by Room, store and pass the Room `Entity` class directly in feature `Model` classes and composable components; do not map it to a UI model or another intermediate class.
-- In feature `Model` classes, name Room entity properties after the entity shape: use `...Entity` for a single entity and `...Entities` for a list of entities.
-- In MVI `Model` classes, declare properties derived entirely from other model properties with an explicit type and a custom getter placed on the following indented line; do not initialize and store the derived value in the property declaration.
-- Place screen business logic, branching, and decisions inside the appropriate `dispatch` intent branch; composable screens and components must receive already prepared UI state and dispatch intents only.
-- A `ViewModel` class may declare only the `dispatch` and `catch` functions; do not declare private or public helper functions in it. Inline calculations and transformations into the appropriate `dispatch` branch, or move them outside the ViewModel to the appropriate architectural layer.
-- When creating a new screen, always create its ViewModel, Model, and Intent files immediately; do not create standalone screen composables without the matching MVI classes.
-- `dispatch` is a `when` over all intent branches with no `else`; state changes only through `reduce { it.copy(...) }`.
-- One-time actions use `send({Feature}Event...)` from the ViewModel and `ObserveAsEvents` in the screen.
-- `Intent`, `Model`, and `Event` types implement the project's shared MVI marker interfaces.
-- For screen models backed by local collections, avoid storing or updating `isLoading` when loading can be derived from the collection state; treat the screen as loading when the backing collection is empty.
-- Do not store mutable boolean loading state for network requests; store a nullable `Job` for each request in the `Model` and expose loading as a computed property, for example `val isLoading: Boolean get() = requestJob?.isActive == true`.
-- When launching a network request from a ViewModel, assign the launched `Job` into the `Model`, use `invokeOnCompletion` to reset that job to `null`, and do not set loading with `try/finally` boolean updates.
-- For screen data backed by Room and refreshed from network, use separate `Collect...` and `Load...` intents: `Collect...` reads Room data, `Load...` performs the network request and saves the result to Room.
-- When collecting Room entity data from a `FlowUseCase`, name the `collectLatest` lambda parameter `entity` for a single entity or `entities` for a list of entities.
-- ViewModels inject concrete `UseCase` / `FlowUseCase` classes needed by the screen; do not inject repositories, interactors, or aggregate domain facades.
-- Call one-shot use cases inside `launch { ... }` with `.getOrThrow()` and handle thrown exceptions in the ViewModel `catch` function.
-- In ViewModel `catch`, handle the feature's specific network exception before broader exceptions: reset the related request `Job` to `null` and send a `SnackbarErrorMessage` with `throwable.message`.
-- In ViewModel `catch`, handle broader `ClientException` values by sending `SnackbarErrorMessage(throwable.message)`, handle `RoomException` and `RoomSQLiteException` by sending `SnackbarErrorMessage(throwable.message.orEmpty())`, and delegate unknown errors to `super.catch(throwable)`.
-- Import nested use case exceptions directly in ViewModels, for example `import shared.domain.usecase.ItemsDetailsUseCase.ItemsDetailsException`.
+- Экраны фич находятся в `features/{feature}` и разбиты на `{Feature}Screen.kt`,
+  `{Feature}ViewModel.kt`, `model/{Feature}Model.kt`, `intent/{Feature}Intent.kt`, опционально
+  `event/{Feature}Event.kt` и опционально `navigation/{Feature}Route.kt`.
+- Каждый новый экран фичи должен сразу включать `{Feature}ViewModel.kt`, `model/{Feature}Model.kt` и
+  `intent/{Feature}Intent.kt`, даже если начальное состояние экрана и intent-ы минимальны.
+- Классы `ViewModel` используют `@HiltViewModel`, инъекцию через конструктор и наследуются от общего
+  базового MVI ViewModel проекта.
+- Не размещай константы или функции-расширения в файлах/классах MVI `ViewModel`, `Screen`, `Intent`,
+  `Model`, `Event` или `Route`; переноси их в отдельные не-MVI файлы/пакеты.
+- Не размещай вспомогательные классы внутри MVI-классов; объявляй их на уровне файла или в отдельных
+  файлах/пакетах.
+- Не создавай и не храни переменные в классах ViewModel; храни их в классах Model.
+- Для данных, поддерживаемых Room, храни и передавай класс `Entity` из Room напрямую в классах
+  `Model` фичи и composable-компонентах; не маппи его в UI-модель или другой промежуточный класс.
+- В классах `Model` фичи называй свойства Room entity по форме entity: используй `...Entity` для
+  одной entity и `...Entities` для списка entity.
+- В классах `Model` MVI объявляй свойства, полностью производные от других свойств модели, с явным
+  типом и кастомным геттером на следующей строке с отступом; не инициализируй и не храни производное
+  значение в объявлении свойства.
+- Размещай бизнес-логику, ветвление и решения экрана внутри соответствующей ветки intent в
+  `dispatch`; composable-экраны и компоненты должны получать уже подготовленное UI-состояние и
+  только диспатчить intent-ы.
+- Класс `ViewModel` может объявлять только функции `dispatch` и `catch`; не объявляй в нём приватные
+  или публичные вспомогательные функции. Встраивай вычисления и преобразования в соответствующую
+  ветку `dispatch` либо выноси их из ViewModel в соответствующий архитектурный слой.
+- При создании нового экрана сразу создавай его файлы ViewModel, Model и Intent; не создавай
+  отдельные composable-экраны без соответствующих MVI-классов.
+- `dispatch` — это `when` по всем веткам intent без `else`; состояние меняется только через
+  `reduce { it.copy(...) }`.
+- Одноразовые действия используют `send({Feature}Event...)` из ViewModel и `ObserveAsEvents` на
+  экране.
+- Типы `Intent`, `Model` и `Event` реализуют общие маркерные интерфейсы MVI проекта.
+- Для моделей экрана, поддерживаемых локальными коллекциями, избегай хранения или обновления
+  `isLoading`, когда загрузку можно вывести из состояния коллекции; считай экран загружающимся,
+  когда поддерживающая коллекция пуста.
+- Не храни изменяемое булево состояние загрузки для сетевых запросов; храни nullable `Job` для
+  каждого запроса в `Model` и предоставляй загрузку как вычисляемое свойство, например
+  `val isLoading: Boolean get() = requestJob?.isActive == true`.
+- При запуске сетевого запроса из ViewModel присваивай запущенный `Job` в `Model`, используй
+  `invokeOnCompletion`, чтобы сбросить этот job в `null`, и не устанавливай загрузку через булевы
+  обновления в `try/finally`.
+- Для данных экрана, поддерживаемых Room и обновляемых из сети, используй отдельные intent-ы
+  `Collect...` и `Load...`: `Collect...` читает данные из Room, `Load...` выполняет сетевой запрос и
+  сохраняет результат в Room.
+- При сборе данных entity из Room через `FlowUseCase` называй параметр лямбды `collectLatest` как
+  `entity` для одной entity или `entities` для списка entity.
+- ViewModel-и внедряют конкретные классы `UseCase` / `FlowUseCase`, нужные экрану; не внедряй
+  репозитории, интеракторы или агрегирующие domain-фасады.
+- Вызывай одноразовые use case внутри `launch { ... }` с `.getOrThrow()` и обрабатывай выброшенные
+  исключения в функции `catch` ViewModel.
+- В `catch` ViewModel обрабатывай специфичное сетевое исключение фичи раньше более общих исключений:
+  сбрасывай связанный `Job` запроса в `null` и отправляй `SnackbarErrorMessage` с
+  `throwable.message`.
+- В `catch` ViewModel обрабатывай более общие значения `ClientException`, отправляя
+  `SnackbarErrorMessage(throwable.message)`, обрабатывай `RoomException` и `RoomSQLiteException`,
+  отправляя `SnackbarErrorMessage(throwable.message.orEmpty())`, а неизвестные ошибки делегируй в
+  `super.catch(throwable)`.
+- Импортируй вложенные исключения use case напрямую в ViewModel, например
+  `import shared.domain.usecase.ItemsDetailsUseCase.ItemsDetailsException`.

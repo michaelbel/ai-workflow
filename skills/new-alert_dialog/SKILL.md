@@ -2,15 +2,15 @@
 name: new-alert_dialog
 ---
 
-# New Alert Dialog
+# Новый Alert Dialog
 
-Creates a project Compose dialog. Replace `{Feature}` with the dialog purpose, `{feature}` with the lower camel-case name, and `{package}` with the target package.
+Создаёт Compose-диалог проекта. Замени `{Feature}` на назначение диалога, `{feature}` на имя в lower camel case, а `{package}` на целевой пакет.
 
-Use `AlertDialog` when the dialog has action buttons. Use `BasicAlertDialog` when the dialog has no action buttons.
+Используй `AlertDialog`, когда в диалоге есть кнопки действий. Используй `BasicAlertDialog`, когда кнопок действий нет.
 
 ---
 
-## AlertDialog With Two Buttons
+## AlertDialog с двумя кнопками
 
 ```kotlin
 package {package}
@@ -116,7 +116,7 @@ private fun {Feature}DialogPreview() {
 
 ---
 
-## AlertDialog With One Button
+## AlertDialog с одной кнопкой
 
 ```kotlin
 @Composable
@@ -166,7 +166,7 @@ private fun {Feature}StatusDialogPreview() {
 
 ---
 
-## BasicAlertDialog Without Buttons
+## BasicAlertDialog без кнопок
 
 ```kotlin
 @file:OptIn(ExperimentalMaterial3Api::class)
@@ -303,10 +303,10 @@ private fun optionItemShape(
 }
 ```
 
-Rules:
-- Use `AlertDialog` for dialogs with one or more buttons.
-- Use `BasicAlertDialog` for dialogs without buttons.
-- For `BasicAlertDialog`, apply `clip` and `background` on the dialog modifier directly.
-- Preview every dialog inside `Box(modifier = Modifier.fillMaxSize())`.
-- In confirm button lambdas, dispatch the confirm intent before the dismiss intent.
-- Use anonymized preview values such as `0000`, `SampleA`, `SampleB`, and `SampleC`.
+Правила:
+- Используй `AlertDialog` для диалогов с одной или несколькими кнопками.
+- Используй `BasicAlertDialog` для диалогов без кнопок.
+- Для `BasicAlertDialog` применяй `clip` и `background` прямо на modifier диалога.
+- Делай preview каждого диалога внутри `Box(modifier = Modifier.fillMaxSize())`.
+- В лямбдах кнопки подтверждения диспатчи intent подтверждения перед intent закрытия.
+- Используй анонимизированные значения для preview, такие как `0000`, `SampleA`, `SampleB` и `SampleC`.

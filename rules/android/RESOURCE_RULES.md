@@ -1,6 +1,10 @@
-# Resource Rules
+# Правила ресурсов
 
-- UI strings are referenced through the project's string facade, not direct `R.string` or `R.plurals` usages in UI code.
-- Do not hardcode user-facing strings directly in Kotlin or XML UI code; add them to `strings.xml` and reference them through the project's string facade.
-- When adding a string resource, add it to `strings.xml` and expose it through the project's string facade.
-- For uppercase UI text, add a dedicated uppercase resource and string-facade entry; do not call `uppercase()` or `uppercase(Locale...)` in UI, model, or mapper code.
+- Строки UI используются через фасад строк проекта, а не через прямое использование `R.string` или
+  `R.plurals` в UI-коде.
+- Не хардкодь пользовательские строки напрямую в Kotlin или XML UI-коде; добавляй их в `strings.xml`
+  и используй через фасад строк проекта.
+- При добавлении строкового ресурса добавляй его в `strings.xml` и предоставляй доступ через фасад
+  строк проекта.
+- Для UI-текста в верхнем регистре добавляй отдельный ресурс в верхнем регистре и запись в фасаде
+  строк; не вызывай `uppercase()` или `uppercase(Locale...)` в UI, модели или коде маппера.

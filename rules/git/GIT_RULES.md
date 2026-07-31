@@ -1,5 +1,11 @@
-# Git Rules
+# Правила Git
 
-- Never commit unrelated files together; stage selectively and make one focused commit per logical change with a clear, specific message.
-- When the user asks to commit, choose an appropriate commit message and commit all currently changed files using one or several focused commits; do not leave files in a modified state. If the user changed or removed something themselves, commit only the current working tree state and do not restore changes from your context.
-- Commit dependency updates one per commit as `Bump <dependency> from <old version> to <new version>` — even if multiple deps are in the same file, apply each change separately and commit individually.
+- Никогда не коммить несвязанные файлы вместе; добавляй файлы в индекс выборочно и делайте один
+  целевой коммит на каждое логическое изменение с понятным, конкретным сообщением.
+- Когда пользователь просит закоммитить, выбери подходящее сообщение коммита и закоммить все текущие
+  изменённые файлы одним или несколькими целевыми коммитами; не оставляй файлы в изменённом
+  состоянии. Если пользователь сам что-то изменил или удалил, коммить только текущее состояние
+  рабочего дерева и не восстанавливай изменения из своего контекста.
+- Обновления зависимостей коммить по одному на коммит в формате
+  `Bump <dependency> from <old version> to <new version>` — даже если несколько зависимостей
+  находятся в одном файле, применяй и коммитьте каждое изменение по отдельности.

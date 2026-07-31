@@ -1,41 +1,97 @@
-# Compose Rules
+# Правила Compose
 
-- When creating a composable function, always create a preview for it.
-- The `modifier` parameter must be the first optional parameter in a composable function signature.
-- When a component composable needs more than one data or callback field, move those fields into a `{Component}State` data class declared in the same file and pass it through a `state` parameter instead of separate parameters.
-- Do not declare local `val` in a composable body to derive a condition or boolean from `state` fields; instead expose it as a computed property with an explicit type and a getter on the `{Component}State` data class itself, and read that property directly in the composable instead of recomputing the condition inline.
-- Composable screens and components must not contain business logic, branching decision functions, or `if`/`else` that decides domain behavior; move that logic to the ViewModel and render prepared UI state instead.
-- Do not introduce local abstractions, helper variables, helper models, or extracted functions only to eliminate small UI duplication; prefer straightforward duplicated code until there is clear repeated behavior worth abstracting.
-- Use the project's `Shared*` component wrapper instead of a direct framework component when such a wrapper exists in the project.
-- In composables, use `val resources = LocalResources.current`; do not use `val resources = LocalContext.current.resources`.
-- For composable calls with named arguments, prefer multiline formatting over single-line calls; for example, write `Row(` on one line and place `verticalAlignment = ...` on the following line instead of `Row(verticalAlignment = ...)`. Do not write `Box(modifier = Modifier.fillMaxSize()) {`; write `Box(` with `modifier = Modifier.fillMaxSize()` on the next line instead.
-- Add new colors through `MaterialTheme.colorScheme`; do not use raw `Color` constants for theme colors inside components.
-- Use `MaterialTheme.colorScheme` for component colors.
-- Declare shape values inline at the call site, for example `RoundedCornerShape(8.dp)`; do not extract simple shapes into `private val` variables.
-- Add new UI colors to the UI kit Colors file and expose them through `MaterialTheme.colorScheme`; do not create local `private val ... = Color(...)` constants in feature or component files.
-- Name new `ColorScheme` color extensions after the HTML/CSS hex color name matching the hex value, for example `val ColorScheme.midnightBlue: Color get() = Color(0xFF251052)`; do not name them after their usage or purpose.
-- Use `MaterialTheme.typography` for component text styles; do not instantiate `TextStyle` directly inside components.
-- In Material top app bars (`TopAppBar`, `CenterAlignedTopAppBar`, `LargeTopAppBar`, and similar), set container, navigation icon, title/subtitle, and action icon colors through the `colors` parameter with `TopAppBarDefaults.*topAppBarColors(...)` whenever the API exposes those colors; do not hardcode `Icon` or `Text` colors inside app bar slots when they can inherit from `colors`.
-- For composable function calls, order arguments the same way as they are declared in the SDK/component signature.
-- For `padding(...)` and `PaddingValues(...)`, order named parameters following the method signature: `start`, `top`, `end`, `bottom`; or when using shorthand, `horizontal`, `vertical`.
-- Omit named `padding(...)` or `PaddingValues(...)` arguments that are `0.dp`; unspecified padding dimensions default to `0.dp`.
-- When padding is symmetric, use `all`, `horizontal`, or `vertical` instead of repeating equal values for opposite sides.
-- Use `PaddingValues()` instead of `PaddingValues(0.dp)` — all dimensions default to `0.dp`.
-- For `Modifier.offset(...)` backed by state, use the lambda overload: `Modifier.offset { ... }`.
-- For `floatingActionButton`, place the button directly in the slot and apply padding to the button modifier; do not wrap it in `Box` only to add full-width, navigation bar padding, or horizontal padding.
-- Use `Modifier.size(width = ..., height = ...)` instead of chaining `Modifier.width(...).height(...)`.
-- When a design requires text to be vertically centered in a fixed-height area, apply the width, height, and padding modifiers directly to `Text`, then use `Modifier.wrapContentHeight(align = Alignment.CenterVertically)`; do not wrap the `Text` in a fixed-height `Box` solely for vertical alignment.
-- In Compose containers, separate sibling composable calls with a blank line.
-- Inside containers such as `Column`, `Row`, `Box`, `ConstraintLayout`, add a blank line between adjacent child composables; do not write `Text(...)` immediately followed by another `Text(...)` or component call without an empty line.
-- In a `constrainAs` block, order constraint assignments as: `width`, `height`, `start`, `top`, `end`, `bottom`.
-- When a composable is positioned via `constrainAs`, declare its size inside the `constrainAs` block using the `Dimension` API (`Dimension.value(...)`, `Dimension.fillToConstraints`, `Dimension.wrapContent`) instead of size modifiers in the outer modifier chain.
-- Name ConstraintLayout refs created via `createRef` or `createRefs` with a `Ref` postfix; this applies both to single refs and to every component of a destructured `createRefs()` declaration.
-- When all items in a `LazyColumn` share the same horizontal padding, or all `LazyRow` items share the same vertical padding, move it to the list's `contentPadding` argument instead.
-- Call `currentSnackbarData?.dismiss()` outside `scope.launch` — `dismiss()` is synchronous and does not need a coroutine scope.
-- In a `Text` composable, pass `textAlign` inside the `style` argument rather than as a separate `textAlign` argument.
-- Replace equal-sized `Spacer` elements between `Row` or `Column` children with `horizontalArrangement = Arrangement.spacedBy(...)` or `verticalArrangement = Arrangement.spacedBy(...)`.
-- When a centered `Column` needs uniform spacing between children, use `verticalArrangement = Arrangement.spacedBy(..., Alignment.CenterVertically)` instead of adding top padding to individual children.
-- When the first and last children of a `Row` or `Column` have the same edge padding, move it to the parent container using `padding(horizontal = ...)` or `padding(vertical = ...)`.
-- In vector icon files, use named parameters for all boolean arguments.
-- For each shared UI component, create a separate file; do not declare multiple component composables in one file.
-- Create new shared UI components in `shared/ui/components`; when needed, group them into dedicated subfolders there.
+- При создании composable-функции всегда создавай для неё preview.
+- Параметр `modifier` должен быть первым опциональным параметром в сигнатуре composable-функции.
+- Когда composable-компоненту нужно больше одного поля данных или callback, перенеси эти поля в
+  `{Component}State` data class, объявленный в том же файле, и передавай его через параметр `state`
+  вместо отдельных параметров.
+- Не объявляй локальный `val` в теле composable, чтобы вывести условие или boolean из полей `state`;
+  вместо этого предоставляй его как вычисляемое свойство с явным типом и геттером на самом
+  `{Component}State` data class, и читай это свойство напрямую в composable вместо пересчёта условия
+  inline.
+- Composable-экраны и компоненты не должны содержать бизнес-логику, ветвящиеся функции принятия
+  решений или `if`/`else`, определяющие domain-поведение; переноси эту логику в ViewModel и рендери
+  уже подготовленное UI-состояние.
+- Не вводи локальные абстракции, вспомогательные переменные, вспомогательные модели или выделенные
+  функции только ради устранения небольшого UI-дублирования; предпочитай прямолинейный дублирующийся
+  код, пока не появится явно повторяющееся поведение, достойное абстракции.
+- Используй обёртку компонента `Shared*` проекта вместо прямого компонента фреймворка, когда такая
+  обёртка существует в проекте.
+- В composable используй `val resources = LocalResources.current`; не используй
+  `val resources = LocalContext.current.resources`.
+- Для вызовов composable с именованными аргументами предпочитай многострочное форматирование
+  однострочным вызовам; например, пиши `Row(` на одной строке и размещай `verticalAlignment = ...`
+  на следующей строке вместо `Row(verticalAlignment = ...)`. Не пиши
+  `Box(modifier = Modifier.fillMaxSize()) {`; вместо этого пиши `Box(` с
+  `modifier = Modifier.fillMaxSize()` на следующей строке.
+- Добавляй новые цвета через `MaterialTheme.colorScheme`; не используй сырые константы `Color` для
+  тематических цветов внутри компонентов.
+- Используй `MaterialTheme.colorScheme` для цветов компонентов.
+- Объявляй значения shape inline в месте вызова, например `RoundedCornerShape(8.dp)`; не выделяй
+  простые shape в переменные `private val`.
+- Добавляй новые UI-цвета в файл Colors UI kit и предоставляй их через `MaterialTheme.colorScheme`;
+  не создавай локальные константы `private val ... = Color(...)` в файлах фич или компонентов.
+- Называй новые расширения цветов `ColorScheme` по HTML/CSS-имени hex-цвета, соответствующему
+  hex-значению, например `val ColorScheme.midnightBlue: Color get() = Color(0xFF251052)`; не называй
+  их по назначению или использованию.
+- Используй `MaterialTheme.typography` для стилей текста компонентов; не создавай `TextStyle`
+  напрямую внутри компонентов.
+- В Material top app bar (`TopAppBar`, `CenterAlignedTopAppBar`, `LargeTopAppBar` и подобных)
+  устанавливай цвета контейнера, иконки навигации, заголовка/подзаголовка и иконок действий через
+  параметр `colors` с `TopAppBarDefaults.*topAppBarColors(...)`, когда API предоставляет эти цвета;
+  не хардкодь цвета `Icon` или `Text` внутри слотов app bar, когда они могут наследоваться от
+  `colors`.
+- Для вызовов composable-функций упорядочивай аргументы так же, как они объявлены в сигнатуре
+  SDK/компонента.
+- Для `padding(...)` и `PaddingValues(...)` упорядочивай именованные параметры согласно сигнатуре
+  метода: `start`, `top`, `end`, `bottom`; либо при использовании сокращённой формы — `horizontal`,
+  `vertical`.
+- Опускай именованные аргументы `padding(...)` или `PaddingValues(...)`, равные `0.dp`; неуказанные
+  измерения padding по умолчанию равны `0.dp`.
+- Когда padding симметричен, используй `all`, `horizontal` или `vertical` вместо повторения
+  одинаковых значений для противоположных сторон.
+- Используй `PaddingValues()` вместо `PaddingValues(0.dp)` — все измерения по умолчанию равны
+  `0.dp`.
+- Для `Modifier.offset(...)`, зависящего от state, используй lambda-перегрузку:
+  `Modifier.offset { ... }`.
+- Для `floatingActionButton` размещай кнопку прямо в слоте и применяй padding к modifier кнопки; не
+  оборачивай её в `Box` только ради полной ширины, отступа под навигационную панель или
+  горизонтального padding.
+- Используй `Modifier.size(width = ..., height = ...)` вместо цепочки
+  `Modifier.width(...).height(...)`.
+- Когда по дизайну текст должен быть вертикально центрирован в области фиксированной высоты,
+  применяй модификаторы ширины, высоты и padding напрямую к `Text`, затем используй
+  `Modifier.wrapContentHeight(align = Alignment.CenterVertically)`; не оборачивай `Text` в `Box`
+  фиксированной высоты только ради вертикального выравнивания.
+- В Compose-контейнерах разделяй соседние вызовы composable пустой строкой.
+- Внутри контейнеров вроде `Column`, `Row`, `Box`, `ConstraintLayout` добавляй пустую строку между
+  соседними дочерними composable; не пиши `Text(...)` сразу за которым следует другой `Text(...)`
+  или вызов компонента без пустой строки.
+- В блоке `constrainAs` упорядочивай присваивания ограничений так: `width`, `height`, `start`,
+  `top`, `end`, `bottom`.
+- Когда composable позиционируется через `constrainAs`, объявляй его размер внутри блока
+  `constrainAs`, используя API `Dimension` (`Dimension.value(...)`, `Dimension.fillToConstraints`,
+  `Dimension.wrapContent`), вместо модификаторов размера во внешней цепочке modifier.
+- Называй refs ConstraintLayout, созданные через `createRef` или `createRefs`, с постфиксом `Ref`;
+  это применимо как к одиночным refs, так и к каждому компоненту деструктурированного объявления
+  `createRefs()`.
+- Когда все элементы `LazyColumn` имеют одинаковый горизонтальный padding, или все элементы
+  `LazyRow` — одинаковый вертикальный padding, переноси его в аргумент `contentPadding` списка.
+- Вызывай `currentSnackbarData?.dismiss()` вне `scope.launch` — `dismiss()` синхронный и не требует
+  coroutine scope.
+- В composable `Text` передавай `textAlign` внутри аргумента `style`, а не как отдельный аргумент
+  `textAlign`.
+- Заменяй одинаковые по размеру элементы `Spacer` между дочерними элементами `Row` или `Column` на
+  `horizontalArrangement = Arrangement.spacedBy(...)` или
+  `verticalArrangement = Arrangement.spacedBy(...)`.
+- Когда центрированному `Column` нужны равномерные отступы между дочерними элементами, используй
+  `verticalArrangement = Arrangement.spacedBy(..., Alignment.CenterVertically)` вместо добавления
+  верхнего padding отдельным дочерним элементам.
+- Когда первый и последний дочерние элементы `Row` или `Column` имеют одинаковый крайний padding,
+  переноси его в родительский контейнер через `padding(horizontal = ...)` или
+  `padding(vertical = ...)`.
+- В файлах векторных иконок используй именованные параметры для всех булевых аргументов.
+- Для каждого общего UI-компонента создавай отдельный файл; не объявляй несколько composable
+  компонентов в одном файле.
+- Создавай новые общие UI-компоненты в `shared/ui/components`; при необходимости группируй их там в
+  отдельные подпапки.

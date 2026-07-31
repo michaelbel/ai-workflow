@@ -1,12 +1,28 @@
-# LazyList Rules
+# Правила LazyList
 
-- Pass `innerPadding` from `Scaffold` into `contentPadding`, not as `Modifier.padding`; combine with additional offsets using the `+` operator: `contentPadding = innerPadding + PaddingValues(bottom = 72.dp)`.
-- Use `Arrangement.spacedBy()` for uniform spacing between homogeneous list items; do not insert `Spacer` between every item.
-- Use an explicit `Spacer` only at the end of a list to create a gap below the last item (e.g. space under a floating action button).
-- Use `items(...)` or `items(count = ...)` to render collections in lazy lists; do not loop with `forEachIndexed` and create separate `item {}` blocks for each element.
-- Use raw stable ids as lazy item keys, for example `key = { item -> item.id }`; do not build string keys such as `"item-${item.id}"` when the id is already stable.
-- When a list item needs its index, such as for detecting the last item, use `items(count = items.size, key = { index -> items[index].id })` and read `val item = items[index]` inside the item content.
-- Detect the last lazy list item with `index != items.lastIndex`; do not compare item ids with `items.last().id`.
-- Do not add blank lines between adjacent `item {}` blocks.
-- Never add horizontal padding to individual list items when all items share the same padding; put it in `contentPadding` with `PaddingValues(horizontal = 16.dp)` instead.
-- Render a screen's loading/content/error/empty states inside one lazy list; do not branch with `when`/`if` into separate lazy list instances per state. Put each state's items behind `if (state.isLoading) { ... }`, `if (state.isContentVisible) { ... }`, etc. inside the same list body, and control scrolling for non-content states via `userScrollEnabled`.
+- Передавай `innerPadding` из `Scaffold` в `contentPadding`, а не как `Modifier.padding`; комбинируй
+  с дополнительными отступами через оператор `+`:
+  `contentPadding = innerPadding + PaddingValues(bottom = 72.dp)`.
+- Используй `Arrangement.spacedBy()` для равномерных отступов между однородными элементами списка;
+  не вставляй `Spacer` между каждым элементом.
+- Используй явный `Spacer` только в конце списка, чтобы создать отступ под последним элементом
+  (например, место под floating action button).
+- Используй `items(...)` или `items(count = ...)` для рендеринга коллекций в lazy-списках; не
+  используй цикл с `forEachIndexed` с созданием отдельных блоков `item {}` для каждого элемента.
+- Используй сырые стабильные id как ключи элементов lazy-списка, например
+  `key = { item -> item.id }`; не строй строковые ключи вроде `"item-${item.id}"`, когда id уже
+  стабилен.
+- Когда элементу списка нужен его индекс, например для определения последнего элемента, используй
+  `items(count = items.size, key = { index -> items[index].id })` и читай `val item = items[index]`
+  внутри содержимого элемента.
+- Определяй последний элемент lazy-списка через `index != items.lastIndex`; не сравнивай id
+  элементов с `items.last().id`.
+- Не добавляй пустые строки между соседними блоками `item {}`.
+- Никогда не добавляй горизонтальный padding отдельным элементам списка, если все элементы имеют
+  одинаковый padding; вместо этого помещай его в `contentPadding` через
+  `PaddingValues(horizontal = 16.dp)`.
+- Рендери состояния загрузки/контента/ошибки/пустого экрана внутри одного lazy-списка; не разветвляй
+  через `when`/`if` на отдельные экземпляры lazy-списка для каждого состояния. Размещай элементы
+  каждого состояния за `if (state.isLoading) { ... }`, `if (state.isContentVisible) { ... }` и т.д.
+  внутри одного тела списка, а прокрутку для нестандартных состояний контролируй через
+  `userScrollEnabled`.

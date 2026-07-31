@@ -1,6 +1,6 @@
-# Repository Structure Rules
+# Правила структуры репозитория
 
-Every GitHub repository must follow this structure.
+Каждый GitHub-репозиторий должен следовать этой структуре.
 
 ## .github/FUNDING.yml
 
@@ -13,7 +13,7 @@ custom: [
 ]
 ```
 
-After pushing: go to **Settings → General → Sponsorships** and enable the Sponsor button.
+После push: перейди в **Settings → General → Sponsorships** и включи кнопку Sponsor.
 
 ## .github/CODEOWNERS
 
@@ -23,7 +23,8 @@ After pushing: go to **Settings → General → Sponsorships** and enable the Sp
 
 ## .idea/icon.svg
 
-The `.idea/` directory must contain `icon.svg` (project icon). The directory itself is gitignored except for this file.
+Директория `.idea/` должна содержать `icon.svg` (иконку проекта). Сама директория в gitignore, кроме
+этого файла.
 
 ## .gitignore
 
@@ -33,13 +34,13 @@ The `.idea/` directory must contain `icon.svg` (project icon). The directory its
 !.idea/icon.svg
 ```
 
-## AI instruction files
+## Файлы инструкций для AI
 
-- `AGENTS.md` — main instructions file (committed, real file)
-- `CLAUDE.md` — symlink → `AGENTS.md`
-- `GEMINI.md` — symlink → `AGENTS.md`
+- `AGENTS.md` — основной файл инструкций (закоммичен, реальный файл)
+- `CLAUDE.md` — симлинк → `AGENTS.md`
+- `GEMINI.md` — симлинк → `AGENTS.md`
 
-Create symlinks:
+Создание симлинков:
 
 ```bash
 ln -s AGENTS.md CLAUDE.md
@@ -48,13 +49,13 @@ ln -s AGENTS.md GEMINI.md
 
 ---
 
-### Checklist when setting up a new repo
+### Чек-лист при настройке нового репозитория
 
-- [ ] `.github/FUNDING.yml` with all four funding links
-- [ ] Sponsorships enabled in GitHub Settings
-- [ ] `.github/CODEOWNERS` with `* @michaelbel`
-- [ ] `.idea/icon.svg` present and tracked
-- [ ] `.gitignore` with `.claude/`, `.idea/`, `!.idea/icon.svg`
-- [ ] `AGENTS.md` committed
-- [ ] `CLAUDE.md` symlink → `AGENTS.md`
-- [ ] `GEMINI.md` symlink → `AGENTS.md`
+- [ ] `.github/FUNDING.yml` со всеми четырьмя ссылками на донаты
+- [ ] Sponsorships включены в GitHub Settings
+- [ ] `.github/CODEOWNERS` с `* @michaelbel`
+- [ ] `.idea/icon.svg` присутствует и отслеживается
+- [ ] `.gitignore` с `.claude/`, `.idea/`, `!.idea/icon.svg`
+- [ ] `AGENTS.md` закоммичен
+- [ ] `CLAUDE.md` симлинк → `AGENTS.md`
+- [ ] `GEMINI.md` симлинк → `AGENTS.md`

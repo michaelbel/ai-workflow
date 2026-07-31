@@ -1,12 +1,23 @@
-# Preview Rules
+# Правила Preview
 
-- Always annotate previews with `@PreviewWrapper(ThemeWrapper::class)`.
-- Previews must call the private `*Content` composable, not the public `*Screen` composable that accepts a ViewModel.
-- Composable components must have only one preview function; represent all preview variants through a `PreviewParameterProvider`.
-- When a component or screen has multiple meaningful visual states, use a `PreviewParameterProvider` and a single preview function with `@PreviewParameter`; do not write multiple separate preview functions for different states.
-- When a component uses a `{Component}State` data class because it has more than one field, always create a matching private `PreviewParameterProvider` for that state in the same file.
-- When a component conditionally renders parts of its UI based on computed properties of `{Component}State`, the matching `PreviewParameterProvider` must include one value per meaningful visibility combination, so every conditional branch is represented in the preview instead of only the default/first state.
-- Use `BooleanProvider` for boolean-parameterized previews.
-- `PreviewParameterProvider` classes are private and declared at the bottom of the file.
-- Build preview and `PreviewParameterProvider` values through `Empty.copy(...)` when the model exposes an `Empty` instance; do not construct them with a full explicit constructor call.
-- In `Empty.copy(...)` calls for previews, set only the fields the component actually reads/renders; do not add unrelated fields "for realism."
+- Всегда аннотируй previews через `@PreviewWrapper(ThemeWrapper::class)`.
+- Preview должны вызывать приватный composable `*Content`, а не публичный composable `*Screen`,
+  принимающий ViewModel.
+- Composable-компоненты должны иметь только одну функцию preview; все варианты preview представляй
+  через `PreviewParameterProvider`.
+- Когда у компонента или экрана есть несколько значимых визуальных состояний, используй
+  `PreviewParameterProvider` и одну функцию preview с `@PreviewParameter`; не пиши несколько
+  отдельных функций preview для разных состояний.
+- Когда компонент использует `{Component}State` data class, потому что у него больше одного поля,
+  всегда создавай соответствующий приватный `PreviewParameterProvider` для этого состояния в том же
+  файле.
+- Когда компонент условно рендерит части своего UI на основе вычисляемых свойств `{Component}State`,
+  соответствующий `PreviewParameterProvider` должен включать одно значение на каждую значимую
+  комбинацию видимости, чтобы каждая условная ветка была представлена в preview, а не только
+  состояние по умолчанию/первое.
+- Используй `BooleanProvider` для preview с булевыми параметрами.
+- Классы `PreviewParameterProvider` приватные и объявляются в конце файла.
+- Строй значения preview и `PreviewParameterProvider` через `Empty.copy(...)`, когда модель
+  предоставляет экземпляр `Empty`; не создавай их полным явным вызовом конструктора.
+- В вызовах `Empty.copy(...)` для preview устанавливай только те поля, которые компонент
+  действительно читает/рендерит; не добавляй несвязанные поля «для реалистичности».

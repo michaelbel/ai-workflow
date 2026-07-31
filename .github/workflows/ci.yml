@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  mcp:
+    name: mcp (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20, 24]
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: mcp/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: mcp
+
+      - name: Validate (frontmatter, drift regressions, symlinks, single version source, README)
+        run: npm run validate
+        working-directory: mcp
+
+      - name: Unit tests
+        run: npm test
+        working-directory: mcp
+
+      - name: TypeScript build
+        run: npm run build
+        working-directory: mcp
+
+      - name: Stdio smoke test
+        run: npm run smoke
+        working-directory: mcp
+
+      - name: npm pack --dry-run
+        run: npm pack --dry-run
+        working-directory: mcp
+
+      - name: Verify rules/skills are included in the packed tarball
+        run: |
+          set -euo pipefail
+          npm pack --json --dry-run > /tmp/pack.json
+          node -e '
+            const fs = require("fs");
+            const [pkg] = JSON.parse(fs.readFileSync("/tmp/pack.json", "utf8"));
+            const files = pkg.files.map((f) => f.path);
+            const hasRule = files.some((f) => f.startsWith("assets/rules/") && f.endsWith(".md"));
+            const hasSkill = files.some((f) => f.startsWith("assets/skills/") && f.endsWith("SKILL.md"));
+            const hasDist = files.some((f) => f.startsWith("dist/") && f.endsWith(".js"));
+            if (!hasRule || !hasSkill || !hasDist) {
+              console.error("Packed tarball is missing expected assets/dist files.", { hasRule, hasSkill, hasDist });
+              process.exit(1);
+            }
+            console.log(`Packed tarball OK: ${files.length} files, rules/skills/dist all present.`);
+          '
+        working-directory: mcp

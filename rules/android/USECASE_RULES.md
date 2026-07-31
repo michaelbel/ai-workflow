@@ -44,38 +44,5 @@
 - `FlowUseCase` должен оборачивать один flow-метод DAO; если разным фильтрам нужны разные
   flow-методы DAO, создавай отдельные классы `FlowUseCase` вместо ветвления между вызовами DAO
   внутри одного use case.
-- Называй сетевые use case по пути сетевого запроса или методу сетевого сервиса в PascalCase плюс
-  `UseCase`; например, `ktorHttpClient.get("items/details")` должен быть `ItemsDetailsUseCase`, а
-  `networkService.catalogBrandsFavorites(...)` — `CatalogBrandsFavoritesUseCase`. Не используй имена
-  в стиле intent, такие как `Load...UseCase`, для прямых синхронных сетевых вызовов.
-- Называй кастомные сетевые исключения по тому же пути запроса или методу сетевого сервиса в
-  PascalCase плюс `Exception`; например, `ktorHttpClient.get("items/details")` должен использовать
-  `ItemsDetailsException`, а `networkService.catalogBrandsFavorites(...)` —
-  `CatalogBrandsFavoritesException`.
-- Объявляй кастомные типы `data class` сетевых исключений внутри сетевого use case, который их
-  выбрасывает.
-- В сетевых use case создавай `val request = ...` внутри лямбды `request = { ... }` непосредственно
-  перед вызовом `networkService`; никогда не создавай запрос вне этой лямбды и не встраивай его
-  создание в аргументы `networkService`.
-- Используй `handleResponse` для сетевых вызовов, обрабатываемых через callback; выбрасывай
-  domain-специфичное исключение в `onFailure`.
-- Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ нужно потребить как
-  значение внутри `execute`.
-- Оборачивай несколько связанных операций записи в Room в `AppDatabase.withTransaction`.
-- Держи логику маппинга в KTX-файлах мапперов; use case могут оркестрировать смапленные значения, но
-  не должны обрастать inline-кодом мапперов.
 - Новые use case — это конкретные классы с `@Inject constructor`, и обычно им не нужны модули Hilt
   `@Binds`.
-- ViewModel-и внедряют конкретные нужные им use case, а не репозитории, интеракторы или агрегирующие
-  фасады.
-- В сетевых вызовах use case всегда создавай объекты запроса в отдельном локальном `val request`
-  внутри `request = { ... }` перед вызовом `networkService`; не создавай запрос вне лямбды, не
-  встраивай его создание inline и не передавай смапленные вызовы запроса напрямую в аргументы
-  `networkService`.
-- В use case используй `handleResponse` для сетевых вызовов в стиле callback и
-  `handleResponseResult(...).getOrThrow()` при потреблении ответа как значения; не оборачивай
-  результаты use case вручную в `Result.success` / `Result.failure`.
-- При вызове `handleResponse` всегда передавай все три именованных аргумента: `request`, `onSuccess`
-  и `onFailure`; в `onFailure` создавай отдельный `data class`-исключение, наследующее базовое
-  сетевое исключение проекта, и выбрасывай его; перехватывай этот конкретный тип исключения в
-  функции `catch` ViewModel.

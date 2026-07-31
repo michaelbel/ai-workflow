@@ -7,6 +7,9 @@
 @rules/project/WORKFLOW_RULES.md
 @rules/kotlin/KOTLIN_RULES.md
 @rules/compose/COMPOSE_RULES.md
+@rules/compose/COMPOSE_SPACING_RULES.md
+@rules/compose/COMPOSE_COLOR_RULES.md
+@rules/compose/COMPOSE_CONSTRAINTLAYOUT_RULES.md
 @rules/compose/LAZYLIST_RULES.md
 @rules/compose/PREVIEW_RULES.md
 @rules/compose/SCAFFOLD_RULES.md
@@ -18,6 +21,8 @@
 @rules/kmp/KMP_RULES.md
 @rules/android/ROOM_RULES.md
 @rules/android/MVI_RULES.md
+@rules/android/MVI_STATE_RULES.md
+@rules/android/MVI_ERROR_HANDLING_RULES.md
 @rules/android/ARCHITECTURE_RULES.md
 @rules/android/USECASE_RULES.md
 @rules/android/NAVIGATION_RULES.md

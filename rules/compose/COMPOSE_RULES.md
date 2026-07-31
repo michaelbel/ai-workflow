@@ -24,72 +24,14 @@
   на следующей строке вместо `Row(verticalAlignment = ...)`. Не пиши
   `Box(modifier = Modifier.fillMaxSize()) {`; вместо этого пиши `Box(` с
   `modifier = Modifier.fillMaxSize()` на следующей строке.
-- Добавляй новые цвета через `MaterialTheme.colorScheme`; не используй сырые константы `Color` для
-  тематических цветов внутри компонентов.
-- Используй `MaterialTheme.colorScheme` для цветов компонентов.
-- Объявляй значения shape inline в месте вызова, например `RoundedCornerShape(8.dp)`; не выделяй
-  простые shape в переменные `private val`.
-- Добавляй новые UI-цвета в файл Colors UI kit и предоставляй их через `MaterialTheme.colorScheme`;
-  не создавай локальные константы `private val ... = Color(...)` в файлах фич или компонентов.
-- Называй новые расширения цветов `ColorScheme` по HTML/CSS-имени hex-цвета, соответствующему
-  hex-значению, например `val ColorScheme.midnightBlue: Color get() = Color(0xFF251052)`; не называй
-  их по назначению или использованию.
-- Используй `MaterialTheme.typography` для стилей текста компонентов; не создавай `TextStyle`
-  напрямую внутри компонентов.
-- В Material top app bar (`TopAppBar`, `CenterAlignedTopAppBar`, `LargeTopAppBar` и подобных)
-  устанавливай цвета контейнера, иконки навигации, заголовка/подзаголовка и иконок действий через
-  параметр `colors` с `TopAppBarDefaults.*topAppBarColors(...)`, когда API предоставляет эти цвета;
-  не хардкодь цвета `Icon` или `Text` внутри слотов app bar, когда они могут наследоваться от
-  `colors`.
 - Для вызовов composable-функций упорядочивай аргументы так же, как они объявлены в сигнатуре
   SDK/компонента.
-- Для `padding(...)` и `PaddingValues(...)` упорядочивай именованные параметры согласно сигнатуре
-  метода: `start`, `top`, `end`, `bottom`; либо при использовании сокращённой формы — `horizontal`,
-  `vertical`.
-- Опускай именованные аргументы `padding(...)` или `PaddingValues(...)`, равные `0.dp`; неуказанные
-  измерения padding по умолчанию равны `0.dp`.
-- Когда padding симметричен, используй `all`, `horizontal` или `vertical` вместо повторения
-  одинаковых значений для противоположных сторон.
-- Используй `PaddingValues()` вместо `PaddingValues(0.dp)` — все измерения по умолчанию равны
-  `0.dp`.
-- Для `Modifier.offset(...)`, зависящего от state, используй lambda-перегрузку:
-  `Modifier.offset { ... }`.
-- Для `floatingActionButton` размещай кнопку прямо в слоте и применяй padding к modifier кнопки; не
-  оборачивай её в `Box` только ради полной ширины, отступа под навигационную панель или
-  горизонтального padding.
-- Используй `Modifier.size(width = ..., height = ...)` вместо цепочки
-  `Modifier.width(...).height(...)`.
-- Когда по дизайну текст должен быть вертикально центрирован в области фиксированной высоты,
-  применяй модификаторы ширины, высоты и padding напрямую к `Text`, затем используй
-  `Modifier.wrapContentHeight(align = Alignment.CenterVertically)`; не оборачивай `Text` в `Box`
-  фиксированной высоты только ради вертикального выравнивания.
-- В Compose-контейнерах разделяй соседние вызовы composable пустой строкой.
-- Внутри контейнеров вроде `Column`, `Row`, `Box`, `ConstraintLayout` добавляй пустую строку между
-  соседними дочерними composable; не пиши `Text(...)` сразу за которым следует другой `Text(...)`
-  или вызов компонента без пустой строки.
-- В блоке `constrainAs` упорядочивай присваивания ограничений так: `width`, `height`, `start`,
-  `top`, `end`, `bottom`.
-- Когда composable позиционируется через `constrainAs`, объявляй его размер внутри блока
-  `constrainAs`, используя API `Dimension` (`Dimension.value(...)`, `Dimension.fillToConstraints`,
-  `Dimension.wrapContent`), вместо модификаторов размера во внешней цепочке modifier.
-- Называй refs ConstraintLayout, созданные через `createRef` или `createRefs`, с постфиксом `Ref`;
-  это применимо как к одиночным refs, так и к каждому компоненту деструктурированного объявления
-  `createRefs()`.
-- Когда все элементы `LazyColumn` имеют одинаковый горизонтальный padding, или все элементы
-  `LazyRow` — одинаковый вертикальный padding, переноси его в аргумент `contentPadding` списка.
-- Вызывай `currentSnackbarData?.dismiss()` вне `scope.launch` — `dismiss()` синхронный и не требует
-  coroutine scope.
-- В composable `Text` передавай `textAlign` внутри аргумента `style`, а не как отдельный аргумент
-  `textAlign`.
-- Заменяй одинаковые по размеру элементы `Spacer` между дочерними элементами `Row` или `Column` на
-  `horizontalArrangement = Arrangement.spacedBy(...)` или
-  `verticalArrangement = Arrangement.spacedBy(...)`.
-- Когда центрированному `Column` нужны равномерные отступы между дочерними элементами, используй
-  `verticalArrangement = Arrangement.spacedBy(..., Alignment.CenterVertically)` вместо добавления
-  верхнего padding отдельным дочерним элементам.
-- Когда первый и последний дочерние элементы `Row` или `Column` имеют одинаковый крайний padding,
-  переноси его в родительский контейнер через `padding(horizontal = ...)` или
-  `padding(vertical = ...)`.
+- Объявляй значения shape inline в месте вызова, например `RoundedCornerShape(8.dp)`; не выделяй
+  простые shape в переменные `private val`.
+- В Compose-контейнерах разделяй соседние вызовы composable пустой строкой. Внутри контейнеров вроде
+  `Column`, `Row`, `Box`, `ConstraintLayout` добавляй пустую строку между соседними дочерними
+  composable; не пиши `Text(...)` сразу за которым следует другой `Text(...)` или вызов компонента
+  без пустой строки.
 - В файлах векторных иконок используй именованные параметры для всех булевых аргументов.
 - Для каждого общего UI-компонента создавай отдельный файл; не объявляй несколько composable
   компонентов в одном файле.

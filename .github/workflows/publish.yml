@@ -1,28 +1,86 @@
 name: Publish MCP to npm
 
+# Only ever triggered by pushing an immutable release tag, never by a branch push. The job below
+# additionally verifies the tag matches mcp/package.json's version exactly and is reachable from
+# origin/main before publishing, so a stray or forged tag cannot publish an unreviewed commit.
 on:
   push:
     tags:
-      - '*'
+      - 'mcp-v*'
+
+permissions:
+  contents: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          # Full history so `git merge-base --is-ancestor` below can check tag-vs-origin/main
+          # reachability regardless of how deep the tag is.
+          fetch-depth: 0
 
       - uses: actions/setup-node@v6
         with:
           node-version: 24
+          cache: npm
+          cache-dependency-path: mcp/package-lock.json
+          registry-url: https://registry.npmjs.org
+
+      - name: Verify tag matches mcp/package.json version
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF#refs/tags/}"
+          version="$(node -p "require('./package.json').version")"
+          expected="mcp-v${version}"
+          if [ "$tag" != "$expected" ]; then
+            echo "::error::Tag '$tag' does not match expected '$expected' (mcp/package.json version is '$version')."
+            exit 1
+          fi
+          echo "Tag '$tag' matches mcp/package.json version '$version'."
+        working-directory: mcp
+
+      - name: Verify tag commit is reachable from origin/main
+        run: |
+          set -euo pipefail
+          git fetch origin main --quiet
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::Tagged commit $GITHUB_SHA is not reachable from origin/main. Refusing to publish."
+            exit 1
+          fi
+          echo "Tagged commit $GITHUB_SHA is reachable from origin/main."
 
       - name: Install dependencies
         run: npm ci
         working-directory: mcp
 
+      - name: Validate
+        run: npm run validate
+        working-directory: mcp
+
+      - name: Unit tests
+        run: npm test
+        working-directory: mcp
+
+      - name: Build
+        run: npm run build
+        working-directory: mcp
+
+      - name: Stdio smoke test
+        run: npm run smoke
+        working-directory: mcp
+
+      - name: npm pack --dry-run
+        run: npm pack --dry-run
+        working-directory: mcp
+
+      # npm provenance (--provenance) is intentionally not enabled here: it requires
+      # `id-token: write` permission plus registry/org-level configuration that is outside this
+      # repository's control. Revisit if/when that's set up; until then this workflow stays with a
+      # classic npm token published via `secrets.NPM_TOKEN`.
       - name: Publish to npm
-        run: |
-          npm config set //registry.npmjs.org/:_authToken "$NODE_AUTH_TOKEN"
-          npm publish
+        run: npm publish
         working-directory: mcp
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

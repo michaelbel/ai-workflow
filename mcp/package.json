@@ -8,12 +8,20 @@
     "ai-workflow-mcp": "dist/index.js"
   },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsx src/index.ts",
+    "copy-assets": "tsx scripts/copy-assets.ts",
+    "build": "npm run copy-assets && tsc",
+    "dev": "npm run copy-assets && tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run copy-assets && tsx --test \"test/**/*.test.ts\"",
+    "validate": "tsx scripts/validate.ts",
+    "smoke": "tsx scripts/smoke.ts",
+    "check": "npm run validate && npm test && npm run build && npm run smoke && npm pack --dry-run",
+    "prepack": "npm run build",
     "prepare": "npm run build"
   },
   "files": [
-    "dist/"
+    "dist/",
+    "assets/"
   ],
   "publishConfig": {
     "access": "public"

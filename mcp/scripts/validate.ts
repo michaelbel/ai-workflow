@@ -1,0 +1,221 @@
+/**
+ * `npm run validate` — repo-wide static checks. Prints one line per failure with the offending
+ * file and reason, and exits non-zero if anything fails. See docs/plans/ai-workflow-hardening for
+ * the rationale behind each check.
+ */
+import { existsSync, lstatSync, readFileSync, readdirSync, readlinkSync } from "node:fs";
+import { dirname, join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
+import { parseFrontmatter } from "../src/frontmatter.js";
+
+const mcpDir = join(dirname(fileURLToPath(import.meta.url)), "..");
+const repoRoot = join(mcpDir, "..");
+
+interface Failure {
+  file: string;
+  reason: string;
+}
+
+const failures: Failure[] = [];
+
+function fail(file: string, reason: string): void {
+  failures.push({ file: relative(repoRoot, file), reason });
+}
+
+function readText(path: string): string {
+  return readFileSync(path, "utf8");
+}
+
+// ─── 1. Skill frontmatter: valid, name == directory, description present/bounded/routing-shaped ──
+
+const skillsDir = join(repoRoot, "skills");
+const skillDirs = readdirSync(skillsDir).filter((entry) => lstatSync(join(skillsDir, entry)).isDirectory());
+
+const MAX_DESCRIPTION_LENGTH = 1024;
+
+for (const dir of skillDirs) {
+  const skillMdPath = join(skillsDir, dir, "SKILL.md");
+  if (!existsSync(skillMdPath)) {
+    fail(skillMdPath, "missing SKILL.md");
+    continue;
+  }
+
+  const raw = readText(skillMdPath);
+  const { fields } = parseFrontmatter(raw);
+
+  if (!raw.startsWith("---\n")) {
+    fail(skillMdPath, "does not start with a '---' frontmatter block");
+    continue;
+  }
+
+  if (!fields.name) {
+    fail(skillMdPath, "frontmatter is missing 'name'");
+  } else if (fields.name !== dir) {
+    fail(skillMdPath, `frontmatter 'name: ${fields.name}' does not match directory '${dir}'`);
+  }
+
+  const description = fields.description ?? "";
+  if (!description) {
+    fail(skillMdPath, "frontmatter is missing a non-empty 'description'");
+    continue;
+  }
+
+  if (description.length > MAX_DESCRIPTION_LENGTH) {
+    fail(skillMdPath, `description is ${description.length} chars, exceeds the ${MAX_DESCRIPTION_LENGTH} limit`);
+  }
+
+  const lower = description.toLowerCase();
+  if (!lower.includes("use when")) {
+    fail(skillMdPath, "description does not explain when to use the skill (expected 'Use when ...')");
+  }
+  if (!lower.includes("do not use")) {
+    fail(skillMdPath, "description does not explain when NOT to use the skill (expected 'Do not use ...')");
+  }
+}
+
+// ─── 2. AGENTS.md @rules/... imports all resolve ──────────────────────────────────────────────
+
+const agentsMdPath = join(repoRoot, "AGENTS.md");
+const agentsMd = readText(agentsMdPath);
+const importPattern = /^@(rules\/[^\s]+\.md)$/gm;
+let importMatch: RegExpExecArray | null;
+let foundAnyImport = false;
+while ((importMatch = importPattern.exec(agentsMd)) !== null) {
+  foundAnyImport = true;
+  const importedPath = join(repoRoot, importMatch[1]);
+  if (!existsSync(importedPath)) {
+    fail(agentsMdPath, `imports '@${importMatch[1]}' but that file does not exist`);
+  }
+}
+if (!foundAnyImport) {
+  fail(agentsMdPath, "no '@rules/...' imports found — expected at least one");
+}
+
+// ─── 3. CLAUDE.md / GEMINI.md are symlinks to AGENTS.md ───────────────────────────────────────
+
+for (const linkName of ["CLAUDE.md", "GEMINI.md"]) {
+  const linkPath = join(repoRoot, linkName);
+  if (!existsSync(linkPath) || !lstatSync(linkPath).isSymbolicLink()) {
+    fail(linkPath, `expected '${linkName}' to be a symlink to AGENTS.md`);
+    continue;
+  }
+  const target = readlinkSync(linkPath);
+  if (target !== "AGENTS.md") {
+    fail(linkPath, `symlink target is '${target}', expected 'AGENTS.md'`);
+  }
+}
+
+// ─── 4. package.json version has a single source of truth (no hardcoded literal in server code) ──
+
+const packageJsonPath = join(mcpDir, "package.json");
+const packageJson = JSON.parse(readText(packageJsonPath)) as { version: string };
+
+for (const relativeSrc of ["src/server.ts", "src/index.ts"]) {
+  const srcPath = join(mcpDir, relativeSrc);
+  const srcText = readText(srcPath);
+  const hardcodedVersionPattern = /version:\s*["'`]\d+\.\d+\.\d+["'`]/;
+  if (hardcodedVersionPattern.test(srcText)) {
+    fail(srcPath, "contains a hardcoded semver literal for 'version' instead of reading it from package.json");
+  }
+}
+
+// ─── 5. No execSync / run_skill left in mcp/src ───────────────────────────────────────────────
+
+function listFilesRecursive(dir: string): string[] {
+  const results: string[] = [];
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      results.push(...listFilesRecursive(fullPath));
+    } else {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
+const srcDir = join(mcpDir, "src");
+for (const file of listFilesRecursive(srcDir)) {
+  if (!file.endsWith(".ts")) {
+    continue;
+  }
+  const text = readText(file);
+  if (text.includes("execSync")) {
+    fail(file, "contains 'execSync' — arbitrary shell execution must not exist in this server");
+  }
+  if (/"run_skill"/.test(text)) {
+    fail(file, "still references the removed 'run_skill' tool");
+  }
+}
+
+// ─── 6. Rule/skill drift regressions (see docs/plans/ai-workflow-hardening/plan.md) ────────────
+
+const newScreenSkill = readText(join(skillsDir, "new-screen", "SKILL.md"));
+if (newScreenSkill.includes("viewModelScope")) {
+  fail(join(skillsDir, "new-screen", "SKILL.md"), "regression: 'viewModelScope' reintroduced (MVI_RULES forbids ViewModel helper coroutine scopes)");
+}
+if (newScreenSkill.includes("private fun loadData")) {
+  fail(join(skillsDir, "new-screen", "SKILL.md"), "regression: private ViewModel helper function reintroduced (MVI_RULES only allows dispatch/catch)");
+}
+
+const newDataLayerSkill = readText(join(skillsDir, "new-data-layer", "SKILL.md"));
+if (newDataLayerSkill.includes("@PrimaryKey")) {
+  fail(join(skillsDir, "new-data-layer", "SKILL.md"), "regression: '@PrimaryKey' reintroduced (ROOM_RULES requires @Entity(primaryKeys = [...]))");
+}
+if (/database\.withTransaction \{\s*\n\s*\{feature\}Dao\.upsert/.test(newDataLayerSkill)) {
+  fail(join(skillsDir, "new-data-layer", "SKILL.md"), "regression: single DAO call wrapped in withTransaction again (ROOM_RULES forbids this)");
+}
+if (/suspend fun select\(id: String\): \{Feature\}Entity\s*$/m.test(newDataLayerSkill)) {
+  fail(join(skillsDir, "new-data-layer", "SKILL.md"), "regression: 'select' returns non-null again (ROOM_RULES naming convention reserves 'select' for the nullable form)");
+}
+
+const newAlertDialogSkill = readText(join(skillsDir, "new-alert_dialog", "SKILL.md"));
+if (/\)\s*=\s*when\s*\{/.test(newAlertDialogSkill)) {
+  fail(join(skillsDir, "new-alert_dialog", "SKILL.md"), "regression: expression-body function reintroduced (KOTLIN_RULES requires block bodies with explicit return)");
+}
+
+const newBottomSheetSkill = readText(join(skillsDir, "new-bottom-sheet", "SKILL.md"));
+if (/\}\n\s*\n\s*item \{/.test(newBottomSheetSkill)) {
+  fail(join(skillsDir, "new-bottom-sheet", "SKILL.md"), "regression: blank line reintroduced between adjacent item {} blocks (LAZYLIST_RULES forbids this)");
+}
+if (newBottomSheetSkill.includes("height(0.dp)")) {
+  fail(join(skillsDir, "new-bottom-sheet", "SKILL.md"), "regression: zero-height Spacer reintroduced");
+}
+
+const gitStatusSkill = readText(join(skillsDir, "git-status", "SKILL.md"));
+if (/^command:/m.test(gitStatusSkill)) {
+  fail(join(skillsDir, "git-status", "SKILL.md"), "regression: 'command:' frontmatter field reintroduced (run_skill was removed, this field is unused)");
+}
+
+// ─── 7. README's tool table matches the tools actually registered in server.ts ────────────────
+
+const readmePath = join(repoRoot, "README.md");
+const readmeText = readText(readmePath);
+const serverTsText = readText(join(mcpDir, "src", "server.ts"));
+
+const registeredTools = [...serverTsText.matchAll(/server\.registerTool\(\s*\n?\s*"([a-z_]+)"/g)].map((m) => m[1]);
+if (registeredTools.length === 0) {
+  fail(join(mcpDir, "src", "server.ts"), "no tools found via 'server.registerTool(\"...\"' — validate script may be out of date");
+}
+
+for (const toolName of registeredTools) {
+  if (!readmeText.includes(`\`${toolName}\``)) {
+    fail(readmePath, `README does not mention the registered tool '${toolName}'`);
+  }
+}
+
+if (/\|\s*`run_skill`\s*\|/.test(readmeText)) {
+  fail(readmePath, "README's tool table still lists the removed 'run_skill' tool");
+}
+
+// ─── report ─────────────────────────────────────────────────────────────────────────────────
+
+if (failures.length > 0) {
+  console.error(`validate: ${failures.length} check(s) failed\n`);
+  for (const failure of failures) {
+    console.error(`  ${failure.file}: ${failure.reason}`);
+  }
+  process.exit(1);
+}
+
+console.log(`validate: all checks passed (${skillDirs.length} skills, package.json version ${packageJson.version})`);

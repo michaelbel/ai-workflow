@@ -30,12 +30,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewWrapper
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.mercury.courier.shared.ui.preview.wrapper.ThemeWrapper
-import ru.mercury.courier.shared.ui.theme.CourierStrings
-import ru.mercury.courier.shared.ui.theme.medium14
-import ru.mercury.courier.shared.ui.theme.onSurfaceVariant2
-import ru.mercury.courier.shared.ui.theme.regular14
-import ru.mercury.courier.shared.ui.theme.regular22
+import {package}.shared.ui.preview.wrapper.ThemeWrapper
+import {package}.shared.ui.theme.AppStrings
+import {package}.shared.ui.theme.medium14
+import {package}.shared.ui.theme.onSurfaceVariant2
+import {package}.shared.ui.theme.regular14
+import {package}.shared.ui.theme.regular22
 
 @Composable
 fun {Feature}Dialog(
@@ -52,7 +52,7 @@ fun {Feature}Dialog(
                 }
             ) {
                 Text(
-                    text = stringResource(CourierStrings.{Feature}Confirm),
+                    text = stringResource(AppStrings.{Feature}Confirm),
                     style = MaterialTheme.typography.medium14.copy(
                         color = MaterialTheme.colorScheme.onBackground,
                         lineHeight = 20.sp
@@ -65,7 +65,7 @@ fun {Feature}Dialog(
                 onClick = { dispatch({Feature}DialogIntent.DismissClick) }
             ) {
                 Text(
-                    text = stringResource(CourierStrings.DialogCancel),
+                    text = stringResource(AppStrings.DialogCancel),
                     style = MaterialTheme.typography.regular14.copy(
                         color = MaterialTheme.colorScheme.onBackground,
                         lineHeight = 20.sp
@@ -78,7 +78,7 @@ fun {Feature}Dialog(
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
                 Text(
-                    text = stringResource(CourierStrings.{Feature}Title),
+                    text = stringResource(AppStrings.{Feature}Title),
                     style = MaterialTheme.typography.regular22.copy(
                         color = MaterialTheme.colorScheme.onBackground,
                         lineHeight = 22.sp
@@ -86,7 +86,7 @@ fun {Feature}Dialog(
                 )
 
                 Text(
-                    text = stringResource(CourierStrings.{Feature}Message, state.sampleValue),
+                    text = stringResource(AppStrings.{Feature}Message, state.sampleValue),
                     style = MaterialTheme.typography.regular14.copy(
                         color = MaterialTheme.colorScheme.onSurfaceVariant2,
                         lineHeight = 20.sp
@@ -130,7 +130,7 @@ fun {Feature}StatusDialog(
                 onClick = { dispatch({Feature}DialogIntent.DismissClick) }
             ) {
                 Text(
-                    text = stringResource(CourierStrings.DialogOk),
+                    text = stringResource(AppStrings.DialogOk),
                     style = MaterialTheme.typography.medium14.copy(
                         color = MaterialTheme.colorScheme.onBackground,
                         lineHeight = 20.sp
@@ -140,7 +140,7 @@ fun {Feature}StatusDialog(
         },
         text = {
             Text(
-                text = stringResource(CourierStrings.{Feature}Message),
+                text = stringResource(AppStrings.{Feature}Message),
                 style = MaterialTheme.typography.regular22.copy(
                     color = MaterialTheme.colorScheme.onBackground,
                     lineHeight = 22.sp
@@ -199,11 +199,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewWrapper
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.mercury.courier.shared.ui.components.system.CourierFixedText
-import ru.mercury.courier.shared.ui.preview.wrapper.ThemeWrapper
-import ru.mercury.courier.shared.ui.theme.CourierStrings
-import ru.mercury.courier.shared.ui.theme.regular14
-import ru.mercury.courier.shared.ui.theme.regular22
+import {package}.shared.ui.components.system.SharedFixedText
+import {package}.shared.ui.preview.wrapper.ThemeWrapper
+import {package}.shared.ui.theme.AppStrings
+import {package}.shared.ui.theme.regular14
+import {package}.shared.ui.theme.regular22
 
 @Composable
 fun {Feature}PickerDialog(
@@ -223,8 +223,8 @@ fun {Feature}PickerDialog(
             verticalArrangement = Arrangement.spacedBy(2.dp),
             horizontalAlignment = Alignment.Start
         ) {
-            CourierFixedText(
-                text = stringResource(CourierStrings.{Feature}Title),
+            SharedFixedText(
+                text = stringResource(AppStrings.{Feature}Title),
                 modifier = Modifier.padding(horizontal = 24.dp),
                 style = MaterialTheme.typography.regular22.copy(
                     color = MaterialTheme.colorScheme.onBackground,
@@ -246,7 +246,7 @@ fun {Feature}PickerDialog(
                             dispatch({Feature}PickerDialogIntent.DismissClick)
                         },
                     headlineContent = {
-                        CourierFixedText(
+                        SharedFixedText(
                             text = option.title,
                             style = MaterialTheme.typography.regular14.copy(
                                 lineHeight = 20.sp

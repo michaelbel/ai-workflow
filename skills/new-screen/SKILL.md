@@ -21,7 +21,7 @@ name: new-screen
 ```kotlin
 package {package}.features.{feature}.intent
 
-import ru.mercury.courier.shared.mvi.Intent
+import {package}.shared.mvi.Intent
 
 sealed interface {Feature}Intent: Intent {
     data object LoadData: {Feature}Intent
@@ -39,7 +39,7 @@ sealed interface {Feature}Intent: Intent {
 ```kotlin
 package {package}.features.{feature}.model
 
-import ru.mercury.courier.shared.mvi.Model
+import {package}.shared.mvi.Model
 
 data class {Feature}Model(
     val isLoading: Boolean = true
@@ -57,7 +57,7 @@ data class {Feature}Model(
 ```kotlin
 package {package}.features.{feature}.event
 
-import ru.mercury.courier.shared.mvi.Event
+import {package}.shared.mvi.Event
 
 sealed interface {Feature}Event: Event {
     data object BackClick: {Feature}Event
@@ -79,16 +79,16 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
-import ru.mercury.courier.features.{feature}.event.{Feature}Event
-import ru.mercury.courier.features.{feature}.intent.{Feature}Intent
-import ru.mercury.courier.features.{feature}.model.{Feature}Model
-import ru.mercury.courier.shared.domain.usecase.Load{Feature}UseCase
-import ru.mercury.courier.shared.mvi.CourierViewModel
+import {package}.features.{feature}.event.{Feature}Event
+import {package}.features.{feature}.intent.{Feature}Intent
+import {package}.features.{feature}.model.{Feature}Model
+import {package}.shared.domain.usecase.Load{Feature}UseCase
+import {package}.shared.mvi.BaseViewModel
 
 @HiltViewModel
 class {Feature}ViewModel @Inject constructor(
     private val load{Feature}UseCase: Load{Feature}UseCase
-): CourierViewModel<{Feature}Intent, {Feature}Model, {Feature}Event>({Feature}Model()) {
+): BaseViewModel<{Feature}Intent, {Feature}Model, {Feature}Event>({Feature}Model()) {
 
     init {
         dispatch({Feature}Intent.LoadData)
@@ -134,11 +134,11 @@ import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.tooling.preview.PreviewWrapper
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import ru.mercury.courier.features.{feature}.event.{Feature}Event
-import ru.mercury.courier.features.{feature}.intent.{Feature}Intent
-import ru.mercury.courier.features.{feature}.model.{Feature}Model
-import ru.mercury.courier.shared.ui.preview.wrapper.ThemeWrapper
-import ru.mercury.courier.shared.ui.utils.ObserveAsEvents
+import {package}.features.{feature}.event.{Feature}Event
+import {package}.features.{feature}.intent.{Feature}Intent
+import {package}.features.{feature}.model.{Feature}Model
+import {package}.shared.ui.preview.wrapper.ThemeWrapper
+import {package}.shared.ui.utils.ObserveAsEvents
 
 @Composable
 fun {Feature}Screen(

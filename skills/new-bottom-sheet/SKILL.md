@@ -39,12 +39,12 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.tooling.preview.PreviewWrapper
 import androidx.compose.ui.unit.dp
-import ru.mercury.courier.shared.ui.components.SharedLazyColumn
-import ru.mercury.courier.shared.ui.components.SharedModalBottomSheet
-import ru.mercury.courier.shared.ui.components.system.CourierFixedText
-import ru.mercury.courier.shared.ui.preview.wrapper.ThemeWrapper
-import ru.mercury.courier.shared.ui.theme.CourierStrings
-import ru.mercury.courier.shared.ui.theme.medium16
+import {package}.shared.ui.components.SharedLazyColumn
+import {package}.shared.ui.components.SharedModalBottomSheet
+import {package}.shared.ui.components.system.SharedFixedText
+import {package}.shared.ui.preview.wrapper.ThemeWrapper
+import {package}.shared.ui.theme.AppStrings
+import {package}.shared.ui.theme.medium16
 
 @Composable
 fun {Feature}BottomSheet(
@@ -100,8 +100,8 @@ fun {Feature}BottomSheet(
                             .height(56.dp),
                         shape = RoundedCornerShape(8.dp)
                     ) {
-                        CourierFixedText(
-                            text = stringResource(CourierStrings.{Feature}PrimaryAction),
+                        SharedFixedText(
+                            text = stringResource(AppStrings.{Feature}PrimaryAction),
                             style = MaterialTheme.typography.medium16.copy(
                                 textAlign = TextAlign.Center
                             )

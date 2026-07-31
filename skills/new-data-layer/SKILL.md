@@ -32,16 +32,16 @@ package {package}.usecase
 
 import androidx.room.withTransaction
 import javax.inject.Inject
-import ru.mercury.courier.shared.coroutines.SharedDispatchers
-import ru.mercury.courier.shared.data.{Feature}Id
-import ru.mercury.courier.shared.data.error.{Feature}Exception
-import ru.mercury.courier.shared.data.network.NetworkService
-import ru.mercury.courier.shared.data.network.request.{Feature}Request
-import ru.mercury.courier.shared.data.persistence.database.AppDatabase
-import ru.mercury.courier.shared.data.persistence.database.dao.{Feature}Dao
-import ru.mercury.courier.shared.domain.mapper.entity
-import ru.mercury.courier.shared.domain.mapper.handleResponse
-import ru.mercury.courier.shared.domain.usecase.UseCase
+import {package}.shared.coroutines.SharedDispatchers
+import {package}.shared.data.{Feature}Id
+import {package}.shared.data.error.{Feature}Exception
+import {package}.shared.data.network.NetworkService
+import {package}.shared.data.network.request.{Feature}Request
+import {package}.shared.data.persistence.database.AppDatabase
+import {package}.shared.data.persistence.database.dao.{Feature}Dao
+import {package}.shared.domain.mapper.entity
+import {package}.shared.domain.mapper.handleResponse
+import {package}.shared.domain.usecase.UseCase
 
 class Load{Feature}UseCase @Inject constructor(
     private val networkService: NetworkService,
@@ -84,11 +84,11 @@ class Load{Feature}UseCase @Inject constructor(
 package {package}.usecase
 
 import javax.inject.Inject
-import ru.mercury.courier.shared.coroutines.SharedDispatchers
-import ru.mercury.courier.shared.data.{Feature}Id
-import ru.mercury.courier.shared.data.UserId
-import ru.mercury.courier.shared.data.persistence.database.dao.{Feature}Dao
-import ru.mercury.courier.shared.domain.usecase.UseCase
+import {package}.shared.coroutines.SharedDispatchers
+import {package}.shared.data.{Feature}Id
+import {package}.shared.data.UserId
+import {package}.shared.data.persistence.database.dao.{Feature}Dao
+import {package}.shared.domain.usecase.UseCase
 
 class Save{Feature}UseCase @Inject constructor(
     private val {feature}Dao: {Feature}Dao,
@@ -124,11 +124,11 @@ package {package}.usecase
 
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import ru.mercury.courier.shared.coroutines.SharedDispatchers
-import ru.mercury.courier.shared.data.{Feature}Id
-import ru.mercury.courier.shared.data.persistence.database.dao.{Feature}Dao
-import ru.mercury.courier.shared.data.persistence.database.entity.{Feature}Entity
-import ru.mercury.courier.shared.domain.usecase.FlowUseCase
+import {package}.shared.coroutines.SharedDispatchers
+import {package}.shared.data.{Feature}Id
+import {package}.shared.data.persistence.database.dao.{Feature}Dao
+import {package}.shared.data.persistence.database.entity.{Feature}Entity
+import {package}.shared.domain.usecase.FlowUseCase
 
 class {Feature}EntityFlowUseCase @Inject constructor(
     private val {feature}Dao: {Feature}Dao,
@@ -219,7 +219,7 @@ class Reload{Feature}UseCase @Inject constructor(
 class {Feature}ViewModel @Inject constructor(
     private val load{Feature}UseCase: Load{Feature}UseCase,
     private val {feature}EntityFlowUseCase: {Feature}EntityFlowUseCase
-): CourierViewModel<{Feature}Intent, {Feature}Model, {Feature}Event>({Feature}Model()) {
+): BaseViewModel<{Feature}Intent, {Feature}Model, {Feature}Event>({Feature}Model()) {
 
     override fun dispatch(intent: {Feature}Intent) {
         when (intent) {

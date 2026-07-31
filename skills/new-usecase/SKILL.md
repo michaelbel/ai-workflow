@@ -1,5 +1,11 @@
 ---
 name: new-usecase
+description: >-
+  Use when the user asks to add a single `UseCase` or `FlowUseCase` in `shared/domain/usecase`
+  — one suspend operation or one observable Flow — or says "add a use case", "new UseCase",
+  "new FlowUseCase". Assumes the DAO/entity/network models it depends on already exist. Do not
+  use when the DAO, entity, request/response models, and mappers for a feature don't exist yet;
+  use new-data-layer instead to scaffold the whole flow, including its use cases.
 ---
 
 # Новый UseCase

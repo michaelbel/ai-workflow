@@ -1,5 +1,13 @@
 ---
 name: add-string
+description: >-
+  Use when the user asks to add, wire up, or reference a UI string or plural resource in an
+  Android/Kotlin project, or says "add a string", "add this text", "add a plural", "hardcoded
+  string", "add to strings.xml". Adds the entry to strings.xml and exposes it through the
+  project's string facade so UI code never references R.string/R.plurals directly. Do not use
+  this to build the screen, dialog, or component that will display the string; use new-screen,
+  new-alert_dialog, new-bottom-sheet, or new-shared-component for the surrounding UI and call
+  back into this skill only for the string resource itself.
 ---
 
 # Добавление строки

@@ -1,5 +1,12 @@
 ---
 name: new-alert_dialog
+description: >-
+  Use when the user asks to create a Compose confirmation dialog, alert dialog, picker dialog,
+  or status popup with an explicit dismiss/confirm action, or says "create a dialog", "add an
+  alert dialog", "confirmation popup", "new AlertDialog". Covers AlertDialog with one or two
+  buttons and BasicAlertDialog for a buttonless picker. Do not use for a scrollable modal
+  surface anchored to the bottom of the screen; use new-bottom-sheet instead. Do not use for a
+  full screen or a plain reusable component; use new-screen or new-shared-component instead.
 ---
 
 # Новый Alert Dialog
@@ -195,6 +202,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewWrapper
 import androidx.compose.ui.unit.dp
@@ -295,11 +303,13 @@ private fun {Feature}PickerDialogPreview() {
 private fun optionItemShape(
     index: Int,
     lastIndex: Int
-) = when {
-    index == 0 && index == lastIndex -> RoundedCornerShape(16.dp)
-    index == 0 -> RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
-    index == lastIndex -> RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 16.dp, bottomEnd = 16.dp)
-    else -> RoundedCornerShape(4.dp)
+): Shape {
+    return when {
+        index == 0 && index == lastIndex -> RoundedCornerShape(16.dp)
+        index == 0 -> RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
+        index == lastIndex -> RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 16.dp, bottomEnd = 16.dp)
+        else -> RoundedCornerShape(4.dp)
+    }
 }
 ```
 

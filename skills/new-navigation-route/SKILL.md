@@ -1,5 +1,11 @@
 ---
 name: new-navigation-route
+description: >-
+  Use when the user asks to add a Navigation 3 route, a `NavKey`, or wire a screen into the nav
+  graph, or says "add a route", "create a navigation route", "add this screen to navigation".
+  Covers the `data object`/`data class` `NavKey` route file under `features/{feature}/navigation`
+  and registering it with `entry<...>`. Do not use this to create the screen or ViewModel itself;
+  use new-screen instead and add the route alongside it.
 ---
 
 # Новый маршрут навигации

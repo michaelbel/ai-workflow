@@ -1,5 +1,13 @@
 ---
 name: new-data-layer
+description: >-
+  Use when the user asks to create or extend a full data/domain flow for a feature — DAO,
+  Room entity, network request/response models, mappers, and both the one-shot UseCase and the
+  observable FlowUseCase that back it — or says "add a data layer", "wire up Room and network
+  for X", "add a feature's persistence and API". Do not use when only a single UseCase or
+  FlowUseCase is needed and the DAO/entity/network models already exist; use new-usecase
+  instead. Do not use for the screen or ViewModel that consumes this data; use new-screen
+  instead.
 ---
 
 # Новый слой данных
@@ -30,14 +38,12 @@ name: new-data-layer
 
 package {package}.usecase
 
-import androidx.room.withTransaction
 import javax.inject.Inject
 import {package}.shared.coroutines.SharedDispatchers
 import {package}.shared.data.{Feature}Id
 import {package}.shared.data.error.{Feature}Exception
 import {package}.shared.data.network.NetworkService
 import {package}.shared.data.network.request.{Feature}Request
-import {package}.shared.data.persistence.database.AppDatabase
 import {package}.shared.data.persistence.database.dao.{Feature}Dao
 import {package}.shared.domain.mapper.entity
 import {package}.shared.domain.mapper.handleResponse
@@ -45,7 +51,6 @@ import {package}.shared.domain.usecase.UseCase
 
 class Load{Feature}UseCase @Inject constructor(
     private val networkService: NetworkService,
-    private val database: AppDatabase,
     private val {feature}Dao: {Feature}Dao,
     dispatchers: SharedDispatchers
 ): UseCase<{Feature}Id, Unit>(dispatchers.io) {
@@ -56,11 +61,7 @@ class Load{Feature}UseCase @Inject constructor(
                 val request = {Feature}Request({feature}Id)
                 networkService.load{Feature}(request)
             },
-            onSuccess = { data ->
-                database.withTransaction {
-                    {feature}Dao.upsert(data.entity)
-                }
-            },
+            onSuccess = { data -> {feature}Dao.upsert(data.entity) },
             onFailure = { error -> throw {Feature}Exception(error.message) }
         )
     }
@@ -73,6 +74,7 @@ class Load{Feature}UseCase @Inject constructor(
 - Не возвращай `Result`; `UseCase` сам оборачивает `execute` в `Result`.
 - Выбрасывай domain-специфичное исключение из `onFailure`.
 - Создавай `val request = ...` перед вызовом `networkService`.
+- Внедряй `AppDatabase` и используй `database.withTransaction { ... }` только когда блок содержит два и более вызова методов DAO/базы данных; для одного вызова DAO, как здесь, вызывай метод DAO напрямую.
 
 ---
 
@@ -268,7 +270,7 @@ interface {Feature}Dao {
     fun selectFlow(id: String): Flow<{Feature}Entity>
 
     @Query("SELECT * FROM {featureTable} WHERE id = :id")
-    suspend fun select(id: String): {Feature}Entity
+    suspend fun select(id: String): {Feature}Entity?
 
     @Upsert
     suspend fun upsert(entity: {Feature}Entity)
@@ -281,6 +283,7 @@ interface {Feature}Dao {
 - Размещай все обычные методы `fun` перед любыми методами `suspend fun`.
 - Используй `@Upsert` вместо отдельных `@Insert` / `@Update`.
 - Помечай методы, возвращающие типы Pojo, аннотацией `@Transaction`.
+- Используй `select`, возвращающий nullable `{Feature}Entity?`, когда строка может отсутствовать; добавляй non-null `selectNotNull`, возвращающий `{Feature}Entity`, только когда в проекте уже есть вызывающий код, точно знающий, что строка существует.
 
 ---
 
@@ -290,11 +293,10 @@ interface {Feature}Dao {
 package {package}.persistence.database.entity
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
-@Entity(tableName = "{featureTable}")
+@Entity(tableName = "{featureTable}", primaryKeys = ["id"])
 data class {Feature}Entity(
-    @PrimaryKey val id: String,
+    val id: String,
     val name: String
 ) {
     companion object {

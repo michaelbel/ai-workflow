@@ -1,5 +1,11 @@
 ---
 name: new-bottom-sheet
+description: >-
+  Use when the user asks to create a Compose bottom sheet, modal sheet feature, or a `_sheet`
+  package, or says "create a bottom sheet", "add a modal sheet", "new ModalBottomSheet". Covers
+  the `{feature}_sheet` package layout, `SharedModalBottomSheet`, `rememberModalBottomSheetState`,
+  and its preview. Do not use for a dialog with simple confirm/dismiss buttons; use
+  new-alert_dialog instead. Do not use for a full navigable screen; use new-screen instead.
 ---
 
 # Новый Bottom Sheet
@@ -20,7 +26,6 @@ package {package}
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -76,13 +81,6 @@ fun {Feature}BottomSheet(
                     )
                 )
             }
-
-            item {
-                Spacer(
-                    modifier = Modifier.height(0.dp)
-                )
-            }
-
             if (state.showSecondaryAction) {
                 item {
                     {Feature}SecondaryButton(
@@ -90,7 +88,6 @@ fun {Feature}BottomSheet(
                     )
                 }
             }
-
             if (state.showPrimaryAction) {
                 item {
                     Button(
@@ -161,3 +158,5 @@ private class {Feature}SheetModelPreviewParameterProvider: PreviewParameterProvi
 - Делай preview composable, который сам рендерит bottom sheet, а не отдельный приватный composable только с содержимым.
 - Оборачивай preview bottom sheet в `Box(modifier = Modifier.fillMaxSize())`; иначе preview может не отрендериться.
 - Используй анонимизированные тестовые данные для preview, такие как `sample-id`, `Sample item` и `Sample details`.
+- Не добавляй пустые строки между соседними блоками `item {}` внутри `SharedLazyColumn`.
+- Не добавляй `Spacer` без визуального назначения; используй `Spacer` только в конце списка, чтобы создать отступ под последним элементом.

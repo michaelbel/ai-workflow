@@ -1,5 +1,13 @@
 ---
 name: new-screen
+description: >-
+  Use when the user asks to create a new Android screen, Compose screen, MVI feature, ViewModel
+  with Intent/Model/Event, or says "create a screen", "add a feature screen", "new Compose
+  screen". Scaffolds `{Feature}Screen`, `{Feature}ViewModel`, `{Feature}Model`, `{Feature}Intent`
+  and optionally `{Feature}Event`/`{Feature}Route` under `features/{feature}`. Do not use for a
+  standalone reusable component, dialog, or bottom sheet; use new-shared-component,
+  new-alert_dialog, or new-bottom-sheet instead. Do not use for just the DAO/network/use case
+  layer without a screen; use new-data-layer or new-usecase instead.
 ---
 
 # Новый экран
@@ -75,10 +83,8 @@ sealed interface {Feature}Event: Event {
 ```kotlin
 package {package}.features.{feature}
 
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.launch
 import {package}.features.{feature}.event.{Feature}Event
 import {package}.features.{feature}.intent.{Feature}Intent
 import {package}.features.{feature}.model.{Feature}Model
@@ -96,14 +102,12 @@ class {Feature}ViewModel @Inject constructor(
 
     override fun dispatch(intent: {Feature}Intent) {
         when (intent) {
-            is {Feature}Intent.LoadData -> loadData()
-        }
-    }
-
-    private fun loadData() {
-        viewModelScope.launch {
-            load{Feature}UseCase(Unit).getOrThrow()
-            reduce { it.copy(isLoading = false) }
+            is {Feature}Intent.LoadData -> {
+                launch {
+                    load{Feature}UseCase(Unit).getOrThrow()
+                    reduce { it.copy(isLoading = false) }
+                }
+            }
         }
     }
 }
@@ -115,7 +119,7 @@ class {Feature}ViewModel @Inject constructor(
 - Никаких сохранённых переменных; всё состояние живёт в Model и меняется только через `reduce { it.copy(...) }`.
 - `dispatch` должен быть `when` по всем веткам intent без `else`.
 - Отправляй одноразовые события через `send(...)`.
-- Приватные функции-обработчики используют `viewModelScope.launch { }` для асинхронной работы.
+- `ViewModel` объявляет только `dispatch` и `catch`; не создавай приватные функции-обработчики. Размещай вызов use case и `reduce` прямо в соответствующей ветке `dispatch`, оборачивая тело ветки в `launch { }`, предоставляемый базовым MVI ViewModel.
 - Внедряй конкретные классы `UseCase` / `FlowUseCase`, нужные экрану; не внедряй репозитории, интеракторы или агрегирующие фасады.
 - Вызывай одноразовые use case через `.getOrThrow()` и обрабатывай выброшенные исключения в функции `catch` ViewModel.
 

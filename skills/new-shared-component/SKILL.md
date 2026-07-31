@@ -1,5 +1,12 @@
 ---
 name: new-shared-component
+description: >-
+  Use when the user asks to create a reusable Compose UI component for `shared/ui/components`,
+  or says "create a shared component", "add a reusable component", "new UI component". Covers
+  the `{Component}State` data class, the composable taking `state`/`modifier`, and its
+  `PreviewParameterProvider`. Do not use for a full screen tied to a ViewModel; use new-screen
+  instead. Do not use for a dialog or bottom sheet; use new-alert_dialog or new-bottom-sheet
+  instead, since those have their own state/lifecycle conventions.
 ---
 
 # Новый общий компонент

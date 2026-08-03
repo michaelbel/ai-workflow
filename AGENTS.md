@@ -16,6 +16,7 @@
 @rules/compose/DIALOG_RULES.md
 @rules/compose/SHIMMER_RULES.md
 @rules/compose/TYPOGRAPHY_RULES.md
+@rules/compose/TEXTFIELD_RULES.md
 @rules/compose/COMPOSE_SCREEN_RULES.md
 @rules/compose/BOTTOM_SHEET_RULES.md
 @rules/kmp/KMP_RULES.md

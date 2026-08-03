@@ -1,0 +1,15 @@
+{
+  "name": "ai-workflow",
+  "owner": {
+    "name": "Michael Bel",
+    "email": "michaelbel24865@gmail.com",
+    "url": "https://github.com/michaelbel"
+  },
+  "plugins": [
+    {
+      "name": "ai-workflow",
+      "source": "./integrations/claude-code",
+      "description": "ai-workflow MCP server + hooks (Claude Code)"
+    }
+  ]
+}

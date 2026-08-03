@@ -27,6 +27,17 @@ command = "npx"
 args = ["-y", "@michaelbel/ai-workflow-mcp"]
 ```
 
+**Claude Code + hooks** — плагин `integrations/claude-code/` подключает MCP-сервер и набор
+Claude Code-хуков (например, напоминание про `git stash` перед переключением веток) одной
+командой:
+
+```
+/plugin marketplace add michaelbel/ai-workflow
+/plugin install ai-workflow@ai-workflow
+```
+
+Подробности — в `integrations/claude-code/README.md`.
+
 ### Инструменты
 
 | Инструмент  | Описание                                                                |

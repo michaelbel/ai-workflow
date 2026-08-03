@@ -1,0 +1,13 @@
+{
+  "name": "ai-workflow",
+  "displayName": "AI Workflow",
+  "description": "Connects the ai-workflow MCP server (rules/skills for AI agents) and installs the ai-workflow hook set alongside it.",
+  "author": {
+    "name": "Michael Bel",
+    "email": "michaelbel24865@gmail.com"
+  },
+  "homepage": "https://github.com/michaelbel/ai-workflow",
+  "repository": "https://github.com/michaelbel/ai-workflow",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
+}

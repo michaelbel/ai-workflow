@@ -13,5 +13,5 @@
   `floatingActionButton` в `Scaffold`, а не в `bottomBar`.
 - Закрывай текущий snackbar перед показом нового: вызывай `hostState.currentSnackbarData?.dismiss()`
   перед `scope.launch { hostState.showSnackbar(...) }`.
-- Всегда оборачивай `Scaffold` в `Box(modifier = Modifier.fillMaxSize())`, когда верхний snackbar
-  нужно разместить вне scaffold.
+- Всегда оборачивай `Scaffold` в многострочно оформленный `Box` с
+  `modifier = Modifier.fillMaxSize()`, когда верхний snackbar нужно разместить вне scaffold.

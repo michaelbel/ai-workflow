@@ -12,8 +12,9 @@
 - Всегда устанавливай
   `modifier = Modifier.fillMaxWidth().wrapContentHeight().clip(RoundedCornerShape(16.dp)).background(MaterialTheme.colorScheme.surfaceContainerHigh)`
   на `BasicAlertDialog`.
-- Делай preview composable-диалогов внутри `Box(modifier = Modifier.fillMaxSize())`; иначе preview
-  `AlertDialog`/`BasicAlertDialog` может не отрендериться.
+- Делай preview composable-диалогов внутри многострочно оформленного `Box` с
+  `modifier = Modifier.fillMaxSize()`; иначе preview `AlertDialog`/`BasicAlertDialog` может не
+  отрендериться.
 - Оборачивай прокручиваемое содержимое в `Column` с `weight(1F, fill = false)` и
   `verticalScroll(rememberScrollState())`, чтобы обрабатывать длинный текст без обрезки.
 - Размещай кнопки действий в `FlowRow` с

@@ -19,11 +19,15 @@
   обёртка существует в проекте.
 - В composable используй `val resources = LocalResources.current`; не используй
   `val resources = LocalContext.current.resources`.
-- Для вызовов composable с именованными аргументами предпочитай многострочное форматирование
-  однострочным вызовам; например, пиши `Row(` на одной строке и размещай `verticalAlignment = ...`
-  на следующей строке вместо `Row(verticalAlignment = ...)`. Не пиши
-  `Box(modifier = Modifier.fillMaxSize()) {`; вместо этого пиши `Box(` с
-  `modifier = Modifier.fillMaxSize()` на следующей строке.
+- Вызовы composable с именованными аргументами всегда форматируй многострочно: имя composable,
+  каждый аргумент и закрывающая скобка должны находиться на отдельных строках. Не используй
+  однострочную запись `Box(modifier = Modifier.fillMaxSize()) {`; оформляй её так:
+
+  ```kotlin
+  Box(
+      modifier = Modifier.fillMaxSize()
+  ) {
+  ```
 - Для вызовов composable-функций упорядочивай аргументы так же, как они объявлены в сигнатуре
   SDK/компонента.
 - Объявляй значения shape inline в месте вызова, например `RoundedCornerShape(8.dp)`; не выделяй

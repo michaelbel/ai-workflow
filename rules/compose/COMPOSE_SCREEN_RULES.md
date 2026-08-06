@@ -17,6 +17,8 @@
 - Рендери диалоги и bottom sheet на основе явного свойства `is...Visible` в `Model` экрана; не
   используй проверки nullable payload как условие видимости. Передавай nullable данные payload в
   модель диалога/sheet отдельно.
+- Размещай каждый диалог и bottom sheet в отдельном одиночном `if (state.is...Visible)`; не
+  используй `when` для выбора между диалогами и bottom sheet.
 - Объявляй простые shape inline, например `RoundedCornerShape(8.dp)`, вместо выделения их в
   переменные `private val` уровня фичи.
 - Добавляй новые цвета в цвета UI kit проекта и используй их через `MaterialTheme.colorScheme`; не

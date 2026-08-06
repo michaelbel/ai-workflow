@@ -8,5 +8,5 @@
 - Когда кнопка закрывает sheet, вызывай `sheetState.hide()` внутри `scope.launch` перед диспатчем
   intent подтверждения или закрытия.
 - Делай preview для composable, который сам рендерит `SharedModalBottomSheet` или
-  `ModalBottomSheet`; оборачивай его в `Box(modifier = Modifier.fillMaxSize())`, иначе preview
-  bottom sheet может не отрендериться.
+  `ModalBottomSheet`; оборачивай его в многострочно оформленный `Box` с
+  `modifier = Modifier.fillMaxSize()`, иначе preview bottom sheet может не отрендериться.

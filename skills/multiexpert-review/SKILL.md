@@ -3,7 +3,7 @@ name: multiexpert-review
 argument-hint: "[--profile=<implementation-plan|test-plan|spec>] [--experts=<expert,…>] [--max-cycles=<N>] [--reviewer-model=<tier>] [--quick] <артефакт или путь>"
 description: >
   Ревью плана, спецификации или тест-плана панелью независимых экспертных агентов по протоколу
-  PoLL (Panel of LLM Evaluators) до того, как решение зафиксировано. Triggers: "review the plan",
+  PoLL (Panel of LLM Evaluators) до того, как решение зафиксировано. Use when: "review the plan",
   "review the spec", "panel review", "validate the approach", "what did I miss?", «отревьюй план»,
   «что я упустил». НЕ для ревью кода — это агент code-reviewer.
 ---

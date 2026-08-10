@@ -3,7 +3,7 @@ name: worktree-cleanup
 description: >
   Находит простаивающие git worktree и локальные ветки текущего репозитория, классифицирует их
   (смержена / remote исчез / брошенный агентский / ещё в работе) и удаляет безопасные после одного
-  подтверждения. Triggers: "clean up worktrees", "stale branches", "disk space", «почисти ветки»,
+  подтверждения. Use when: "clean up worktrees", "stale branches", "disk space", «почисти ветки»,
   после слияния PR, в конце сессии. Worktree с незакоммиченным или незапушенным показывает, но
   никогда не удаляет.
 ---

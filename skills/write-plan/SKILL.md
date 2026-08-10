@@ -5,7 +5,7 @@ description: >
   Производит закоммиченный документ плана реализации (docs/plans/<slug>/plan.md + tasks.md) вместо
   эфемерного запроса на одобрение — автономная замена встроенного режима планирования; опционально
   добавляет тест-план в docs/testplans/; затем гоняет обязательный цикл multiexpert-review, пока
-  план не пройдёт. Triggers: "plan this", "plan the implementation", "break this into tasks",
+  план не пройдёт. Use when: "plan this", "plan the implementation", "break this into tasks",
   "write a test plan", "what should I test", "what are the edge cases", «спланируй», «разбей на
   задачи» — для УЖЕ ПРИНЯТОГО решения. НЕ для: выбора что строить (research), контракта фичи и AC
   (write-spec), тривиальных правок.

@@ -3,7 +3,7 @@ name: drive-to-merge
 argument-hint: "<pr|url> [--reviews=<auto|ask>] [--merge=<auto|ask|never>] [--rebase=<yes|no>] [--follow-ups=<yes|no>] [--max-rounds=<N>]"
 description: >
   Доводит существующий PR/MR до merge: следит за CI, разбирает комментарии ревью, чинит падения,
-  перезапрашивает ревью и крутит цикл, пока не смержен. Triggers: "get this PR merged", "monitor
+  перезапрашивает ревью и крутит цикл, пока не смержен. Use when: "get this PR merged", "monitor
   CI and reviews", "ship this PR", "land this PR", «доведи PR до merge», «проследи за CI». НЕ для
   создания PR (create-pr) и исполнения плана с нуля (implement-plan).
 ---

@@ -5,15 +5,13 @@ description: >
   восьми осям: бюджет always-on, дублирование между слоями, кандидаты на прогрессивное раскрытие,
   маршрутизация model/effort, шум permissions, hooks, MCP и плагины, инвентарь агентов и скиллов.
   Выдаёт находки с ценой в байтах, спрашивает мультивыбором, что применить, применяет и проверяет
-  свежими сессиями. Вызывать, как только речь заходит о разросшейся конфигурации, съеденном
-  контексте или медленном старте — даже если слово «аудит» не прозвучало. Triggers: "optimize my
-  harness", "audit my Claude config", "context is bloated", "too many rules", "trim CLAUDE.md",
-  "too many permission prompts", «оптимизируй харнес», «разросся конфиг», «почисти ~/.claude»,
-  «настрой харнес под Opus 5». Срабатывать и тогда, когда названа одна часть конфига — CLAUDE.md,
-  набор правил, агенты, — но просят разобрать, что из неё реально нужно, а что модель знает и так.
-  НЕ для: точечной правки settings.json (update-config), пополнения
-  permission-правил (fewer-permission-prompts), одного нового правила или агента
-  (claude-config-engineer).
+  свежими сессиями. Use when речь заходит о разросшейся конфигурации, съеденном контексте или
+  медленном старте — даже без слова «аудит», а также когда названа лишь одна часть конфига
+  (CLAUDE.md, правила, агенты), но просят разобрать, что из неё реально нужно. Triggers: "optimize
+  my harness", "audit my Claude config", "context is bloated", "too many rules", "trim CLAUDE.md",
+  "too many permission prompts", «оптимизируй харнес», «разросся конфиг», «почисти ~/.claude». НЕ
+  для: точечной правки settings.json (update-config), пополнения permission-правил
+  (fewer-permission-prompts), одного нового правила/агента (claude-config-engineer).
 argument-hint: "[путь к харнесу] [--audit-only] [--axes бюджет,дубли,permissions,...]"
 ---
 

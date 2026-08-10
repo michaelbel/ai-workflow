@@ -3,7 +3,7 @@ name: research
 argument-hint: "<тема> [--tracks=<codebase,web,docs,deps,oss,architecture>] [--focus=<акценты>] [--autonomous]"
 description: >
   Параллельное экспертное исследование темы, идеи, проблемы или технологии до реализации: до шести
-  доменных агентов одновременно, синтез находок и проверка результата. Triggers: "research",
+  доменных агентов одновременно, синтез находок и проверка результата. Use when: "research",
   "investigate options", "explore this idea", "technical spike", "feasibility", "compare
   approaches", "pros and cons of", «разберись с», «какие есть варианты», «реализуемо ли». НЕ для:
   ревью кода (code-reviewer), ревью плана (multiexpert-review), поиска по своей кодовой базе

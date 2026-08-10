@@ -5,7 +5,7 @@ description: >
   Единственный гейт после реализации: проверяет код против его контракта верификации
   (спецификация, тест-план или воспроизведение бага), прогоняя пирамиду L0–L5 тремя блоками —
   механический, слои суждения, device. По умолчанию ничего не меняет, правки включает `--fix`.
-  Triggers: "verify this", "test this", "QA the implementation", "run the test plan", "verify the
+  Use when: "verify this", "test this", "QA the implementation", "run the test plan", "verify the
   fix", "prepare for review", «проверь это», «прогони приёмку», «баг ушёл?».
 ---
 

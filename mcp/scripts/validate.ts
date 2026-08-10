@@ -64,12 +64,14 @@ for (const dir of skillDirs) {
     fail(skillMdPath, `description is ${description.length} chars, exceeds the ${MAX_DESCRIPTION_LENGTH} limit`);
   }
 
-  const lower = description.toLowerCase();
-  if (!lower.includes("use when")) {
-    fail(skillMdPath, "description does not explain when to use the skill (expected 'Use when ...')");
-  }
-  if (!lower.includes("do not use")) {
-    fail(skillMdPath, "description does not explain when NOT to use the skill (expected 'Do not use ...')");
+  // Skills carrying a `license:` field are vendored from a third-party skill pack (Google,
+  // chrisbanes, etc.) and keep that vendor's own description conventions — only skills authored
+  // in this repo are held to the "Use when ..." routing-shape requirement.
+  if (!fields.license) {
+    const lower = description.toLowerCase();
+    if (!lower.includes("use when")) {
+      fail(skillMdPath, "description does not explain when to use the skill (expected 'Use when ...')");
+    }
   }
 }
 

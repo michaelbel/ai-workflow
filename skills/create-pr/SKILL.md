@@ -5,7 +5,7 @@ description: >
   Ведёт PR (GitHub) или MR (GitLab) текущей ветки через жизненный цикл: `draft` создаёт черновик,
   `refresh` обновляет тело не трогая статус, `promote` переводит в ready; без действия —
   спрашивает. Тело собирает из артефактов конвейера (research, план, тест-план, приёмка) либо из
-  git log и диффа. Triggers: "create PR", "open draft PR", "refresh PR description", "promote to
+  git log и диффа. Use when: "create PR", "open draft PR", "refresh PR description", "promote to
   ready", «открой PR», «обнови описание PR».
 ---
 

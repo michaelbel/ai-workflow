@@ -5,7 +5,7 @@ description: >
   Исполняет утверждённый план из docs/plans/<slug>/: строит DAG по зависимостям `after:`, выбирает
   последовательную или параллельную стратегию с изоляцией в worktree, ведёт живой список статусов
   и отправляет по субагенту-специалисту на задачу — оркестрирует главная сессия, код пишут
-  специалисты. Каждая задача закрывается своим `check`, progress.md — журнал. Triggers: "implement
+  специалисты. Каждая задача закрывается своим `check`, progress.md — журнал. Use when: "implement
   the plan", "execute the plan", "run the plan", "start the tasks", «исполни план». НЕ для:
   написания плана (write-plan), выбора что строить (research / write-spec), кода без плана,
   доведения PR до merge (drive-to-merge).

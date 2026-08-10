@@ -3,7 +3,7 @@ name: evaluate-dependency
 description: >
   Решает, стоит ли брать новую библиотеку, ДО того как она попадёт в build-файл: последняя версия,
   стабильность, известные CVE, активность репозитория, динамика issue, лицензия, adoption,
-  репутация издателя. Вердикт ADOPT / ADOPT WITH CAUTION / AVOID с доказательствами. Triggers:
+  репутация издателя. Вердикт ADOPT / ADOPT WITH CAUTION / AVOID с доказательствами. Use when:
   "should we use X", "is X maintained", "evaluate this library", «стоит ли брать», «какую
   библиотеку выбрать». НЕ для разрешения конфликтов версий и не для аудита кода зависимости.
 ---

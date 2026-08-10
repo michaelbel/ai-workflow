@@ -45,4 +45,4 @@ function countMarkdownFiles(dir: string): number {
   return count;
 }
 
-console.log(`copy-assets: bundled ${ruleCount} rule(s) and ${skillCount} skill(s) into ${assetsDir}`);
+console.error(`copy-assets: bundled ${ruleCount} rule(s) and ${skillCount} skill(s) into ${assetsDir}`);

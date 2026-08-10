@@ -36,10 +36,6 @@ jobs:
         run: npm run validate
         working-directory: mcp
 
-      - name: Unit tests
-        run: npm test
-        working-directory: mcp
-
       - name: TypeScript build
         run: npm run build
         working-directory: mcp

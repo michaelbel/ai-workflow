@@ -22,7 +22,8 @@ as an MCP server it talks to, instead of living inside it.
 integrations/claude-code/
   README.md                    # this file
   .claude-plugin/
-    plugin.json                # plugin manifest: points at ./hooks/hooks.json and ./.mcp.json
+    plugin.json                # plugin manifest: points at ./.mcp.json; hooks/hooks.json is
+                                # auto-discovered by convention, not referenced here
   .mcp.json                    # declares the ai-workflow MCP server (npx -y @michaelbel/ai-workflow-mcp)
   hooks/
     hooks.json                 # wires each hook script to a Claude Code event/matcher

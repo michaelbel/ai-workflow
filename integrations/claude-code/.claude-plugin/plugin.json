@@ -8,6 +8,5 @@
   },
   "homepage": "https://github.com/michaelbel/ai-workflow",
   "repository": "https://github.com/michaelbel/ai-workflow",
-  "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json"
 }

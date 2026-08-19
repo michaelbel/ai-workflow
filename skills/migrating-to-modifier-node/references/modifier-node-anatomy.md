@@ -298,17 +298,17 @@ private class HoverableCardNode(
 
 ## 5. Migration cheat sheet — `composed { }` source → `Modifier.Node` target
 
-| `composed { }` body uses … | Target node interface(s) |
-|---|---|
-| `drawBehind { }` / `drawWithCache { }` | `DrawModifierNode` |
-| `layout { }` / custom `Layout` | `LayoutModifierNode` |
-| `pointerInput { }` | `PointerInputModifierNode` (or delegate to a gesture node) |
-| `LocalFoo.current` | add `CompositionLocalConsumerModifierNode` |
-| `LaunchedEffect { ... }` | `onAttach { coroutineScope.launch { ... } }` |
-| `DisposableEffect { onDispose { x.dispose() } }` | `onDetach { x.dispose() }` |
-| `onSizeChanged { }` / `onPlaced { }` | `LayoutAwareModifierNode` |
-| `onGloballyPositioned { }` | `GlobalPositionAwareModifierNode` |
-| `semantics { }` | `SemanticsModifierNode` |
-| Multiple of the above | `DelegatingNode` over single-purpose children |
+| `composed { }` body uses …                       | Target node interface(s)                                   |
+|--------------------------------------------------|------------------------------------------------------------|
+| `drawBehind { }` / `drawWithCache { }`           | `DrawModifierNode`                                         |
+| `layout { }` / custom `Layout`                   | `LayoutModifierNode`                                       |
+| `pointerInput { }`                               | `PointerInputModifierNode` (or delegate to a gesture node) |
+| `LocalFoo.current`                               | add `CompositionLocalConsumerModifierNode`                 |
+| `LaunchedEffect { ... }`                         | `onAttach { coroutineScope.launch { ... } }`               |
+| `DisposableEffect { onDispose { x.dispose() } }` | `onDetach { x.dispose() }`                                 |
+| `onSizeChanged { }` / `onPlaced { }`             | `LayoutAwareModifierNode`                                  |
+| `onGloballyPositioned { }`                       | `GlobalPositionAwareModifierNode`                          |
+| `semantics { }`                                  | `SemanticsModifierNode`                                    |
+| Multiple of the above                            | `DelegatingNode` over single-purpose children              |
 
 Once the source body is decomposed into the table above, the migration is mechanical: write the `data class FooElement`, write the `class FooNode` implementing the matching interfaces, move each side-effect into the right lifecycle hook, and expose `fun Modifier.foo(...) = this then FooElement(...)`.

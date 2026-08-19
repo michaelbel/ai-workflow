@@ -1,0 +1,25 @@
+{
+  "name": "ai-workflow",
+  "displayName": "AI Workflow",
+  "version": "1.0.0",
+  "description": "AI Workflow MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Cursor.",
+  "author": {
+    "name": "Michael Bel",
+    "email": "michaelbel24865@gmail.com",
+    "url": "https://github.com/michaelbel"
+  },
+  "keywords": [
+    "ai-workflow",
+    "cursor",
+    "skills",
+    "mcp",
+    "kotlin",
+    "android",
+    "compose",
+    "kmp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "homepage": "https://github.com/michaelbel/ai-workflow",
+  "repository": "https://github.com/michaelbel/ai-workflow"
+}

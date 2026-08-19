@@ -19,12 +19,33 @@ MCP-клиенту.
 claude mcp add --global ai-workflow npx -- -y @michaelbel/ai-workflow-mcp
 ```
 
-**Codex** — добавить в `~/.codex/config.toml`:
+**Codex** — плагином:
+
+```bash
+codex plugin marketplace add michaelbel/ai-workflow
+codex plugin add ai-workflow@ai-workflow
+```
+
+или вручную в `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.ai-workflow]
 command = "npx"
 args = ["-y", "@michaelbel/ai-workflow-mcp"]
+```
+
+**Cursor** — плагином (манифест `.cursor-plugin/`) либо через `.mcp.json` репозитория.
+
+**Kimi Code** — плагином:
+
+```
+/plugins install https://github.com/michaelbel/ai-workflow
+```
+
+**Gemini CLI** — расширением:
+
+```bash
+gemini extensions install https://github.com/michaelbel/ai-workflow
 ```
 
 **Claude Code + hooks** — плагин `integrations/claude-code/` подключает MCP-сервер и набор

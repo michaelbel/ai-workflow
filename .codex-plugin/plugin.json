@@ -1,0 +1,36 @@
+{
+  "name": "ai-workflow",
+  "version": "1.0.0",
+  "description": "AI Workflow MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Codex.",
+  "author": {
+    "name": "Michael Bel",
+    "email": "michaelbel24865@gmail.com",
+    "url": "https://github.com/michaelbel"
+  },
+  "homepage": "https://github.com/michaelbel/ai-workflow",
+  "repository": "https://github.com/michaelbel/ai-workflow",
+  "keywords": [
+    "ai-workflow",
+    "codex",
+    "skills",
+    "mcp",
+    "kotlin",
+    "android",
+    "compose",
+    "kmp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "AI Workflow",
+    "shortDescription": "Rules and skills for Kotlin/Android/Compose development from Codex.",
+    "longDescription": "Use the ai-workflow MCP server and skills library to pull project rules (git, Kotlin, Compose, Android architecture, navigation, Room, networking) and task skills (new screen, new use case, migrations, testing, Google Play billing, and more) into Codex on demand.",
+    "developerName": "Michael Bel",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Skills",
+      "MCP"
+    ],
+    "websiteURL": "https://github.com/michaelbel/ai-workflow"
+  }
+}

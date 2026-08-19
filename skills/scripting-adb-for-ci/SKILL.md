@@ -1,7 +1,6 @@
 ---
 name: scripting-adb-for-ci
 description: Use this skill to wire `adb` reliably into CI — bash idioms, exit codes, parallel device fan-out with `xargs -P`, port forwarding (`adb forward` LOCAL REMOTE vs `adb reverse` REMOTE LOCAL — opposite argument order, the most common scripting bug), test-runner status codes (`-1` error, `-2` failure, `-3` ignored, `-4` assumption-failure), `am instrument -w -r` with `--num-shards` / `--shard-index`, the `timeout` wrapper (since `adb -t` is transport-id, NOT timeout), retry-on-transient-error with `adb kill-server`, idempotent setup (`pm clear` + animations to 0), `trap` cleanup, capture-on-failure (`screencap` + `logcat -d`), and Test Orchestrator wiring through `androidTestUtil("androidx.test:orchestrator:1.6.1")` (NOT `androidTestImplementation`). If the user mentions "adb forward vs reverse argument order", "am instrument exit code 0 even on failure", "adb timeout flag", "retry adb kill-server", "trap cleanup adb", or "androidTestUtil orchestrator", use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

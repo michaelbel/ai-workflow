@@ -6,7 +6,6 @@ description: Provides guidelines for developing projected Android XR apps for di
   interaction models for the glasses form factor. Use this skill to build an Android
   XR Augmented Experience app with Jetpack Compose Glimmer that adheres to the Glimmer
   design system for optimized glasses styling.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

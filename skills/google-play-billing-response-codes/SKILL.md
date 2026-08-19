@@ -1,7 +1,6 @@
 ---
 name: google-play-billing-response-codes
 description: Use this skill as a reference lookup for every Play Billing Library BillingResponseCode and sub response code, with description, category, and handling guidance. Grounded in PBL 9.x.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook appendix B

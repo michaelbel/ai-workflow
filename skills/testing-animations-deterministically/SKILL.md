@@ -1,7 +1,6 @@
 ---
 name: testing-animations-deterministically
 description: Use this skill to write non-flaky Compose animation tests by setting mainClock.autoAdvance = false and stepping frames by hand with advanceTimeByFrame and advanceTimeBy(durationMillis). Explains why InfiniteAnimationPolicy cancels indeterminate animations the moment the test starts unless autoAdvance is disabled, why the first frame after a state toggle does not initialize playTime, and why state mutations during the paused-clock window must go through runOnUiThread instead of runOnIdle. If the user mentions "animation never finishes", "InfiniteAnimationPolicy CancellationException", "Crossfade test flaky", "indeterminate progress indicator", "Thread.sleep(500) waiting for animation", advanceTimeByFrame, advanceTimeBy, or autoAdvance, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

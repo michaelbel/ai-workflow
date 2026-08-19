@@ -1,7 +1,6 @@
 ---
 name: google-play-testing
 description: Use this skill when testing a Google Play Billing integration. Covers license test accounts, static test responses, Play Console sandbox purchases, and subscription lifecycle acceleration for renewals, grace period, and account hold.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 16

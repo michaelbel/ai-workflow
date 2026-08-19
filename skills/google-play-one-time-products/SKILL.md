@@ -1,7 +1,6 @@
 ---
 name: google-play-one-time-products
 description: Use this skill when implementing, acknowledging, or consuming Google Play one time products (consumables and non consumables) with the Play Billing Library. Covers launch, pending transactions, consume for consumables, acknowledge for non consumables.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 3

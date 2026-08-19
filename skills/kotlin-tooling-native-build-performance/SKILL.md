@@ -7,7 +7,6 @@ description: >
   cold CI builds that re-download the Kotlin/Native toolchain, KSP or other
   generated code on the native path, transitiveExport usage, or asks for a
   local-development versus CI build performance plan.
-license: Apache-2.0
 metadata:
   author: JetBrains
   version: "1.0.0"

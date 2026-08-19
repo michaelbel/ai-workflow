@@ -1,7 +1,6 @@
 ---
 name: google-play-security
 description: Use this skill when hardening a Google Play Billing integration against fraud. Covers server side receipt verification, replay attack protection, device fingerprinting, velocity checks, and the most common billing fraud patterns.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 15

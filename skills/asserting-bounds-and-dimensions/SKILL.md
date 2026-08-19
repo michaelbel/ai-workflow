@@ -1,7 +1,6 @@
 ---
 name: asserting-bounds-and-dimensions
 description: Use this skill to verify Compose layout measurements from a UI test using `assertWidthIsEqualTo`, `assertHeightIsEqualTo`, `assertWidthIsAtLeast`, `assertHeightIsAtLeast`, `assertTouchWidthIsEqualTo`, `assertTouchHeightIsEqualTo`, `assertPositionInRootIsEqualTo`, `assertTopPositionInRootIsEqualTo`, `assertLeftPositionInRootIsEqualTo`, plus read helpers `getUnclippedBoundsInRoot`, `getBoundsInRoot`, `getAlignmentLinePosition`, `getFirstLinkBounds`, and the underlying `Dp.assertIsEqualTo(expected, subject, tolerance = Dp(.5f))`. Covers the half-dp default tolerance, the unclipped vs clipped distinction, the canonical "compute padding from two unclipped rects" pattern, and minimum-touch-target assertions like `assertHeightIsAtLeast(MinHeight + 1.dp)`. Use when the developer wants to assert sizes, padding, alignment, position in dp, or asks about `getUnclippedBoundsInRoot`, `DpRect`, touch-target size, or compares widths in pixels. If the developer is comparing layout dimensions from a test, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

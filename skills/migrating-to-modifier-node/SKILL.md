@@ -1,7 +1,6 @@
 ---
 name: migrating-to-modifier-node
 description: Use this skill to author new custom Jetpack Compose modifiers and migrate legacy ones from Modifier.composed { } to Modifier.Node + ModifierNodeElement<T>. Covers the persistent-node lifecycle (onAttach, onDetach, onReset, coroutineScope), the specialized node interfaces (DrawModifierNode, LayoutModifierNode, SemanticsModifierNode, PointerInputModifierNode, CompositionLocalConsumerModifierNode, LayoutAwareModifierNode, GlobalPositionAwareModifierNode, ObserverModifierNode, DelegatingNode, TraversableNode), why ModifierNodeElement MUST be a data class for diffing, and the manual-invalidation knobs (invalidateDraw, invalidateMeasurement, invalidatePlacement, shouldAutoInvalidate). Use when the developer mentions Modifier.composed, custom modifier, ModifierNodeElement, Modifier.Node, "rewriting our drawBehind helper", node lifecycle, or sees Modifier.composed { } in a code review.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

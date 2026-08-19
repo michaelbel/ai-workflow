@@ -1,7 +1,6 @@
 ---
 name: launching-fragments-with-fragmentscenario
 description: Use this skill to test a `Fragment` in isolation using `FragmentScenario`, `launchFragmentInContainer<F>()`, and `launchFragment<F>()`. Covers the `androidx.fragment:fragment-testing` + `androidx.fragment:fragment-testing-manifest` artifact split, the `EmptyFragmentActivity` host (`android:Theme.WithActionBar` parent — not AppCompat), the `themeResId` override, the `FragmentFactory` survival across `recreate()` via the ViewModelStore-backed holder, the `containerViewId = android.R.id.content` vs `0` distinction (in-container vs headless), and the `findNavController()` limitation. Use when the user reports `You need to use a Theme.AppCompat theme (or descendant)`, `Fragment ... does not have a NavController set`, `Cannot set initial Lifecycle state to DESTROYED for FragmentScenario`, or asks "how do I test a fragment in isolation" / "headless fragment test".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

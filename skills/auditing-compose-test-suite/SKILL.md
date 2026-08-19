@@ -1,7 +1,6 @@
 ---
 name: auditing-compose-test-suite
 description: Use this skill to perform an end-to-end review of an existing Jetpack Compose UI test file or test suite. Sequences six audit phases (setup correctness, finder discipline, assertion strength, action correctness, time/idle correctness, debug output) and routes each finding to the precise sibling skill that fixes it. Produces a prioritized issue list — does NOT mutate code. Use when the user asks "review my Compose tests", "audit this test class", "is this test flaky", "why is this test slow on CI", "which Compose tests should I rewrite", or pastes a `*Test.kt` file and asks for feedback.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

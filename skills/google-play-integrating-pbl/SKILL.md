@@ -1,7 +1,6 @@
 ---
 name: google-play-integrating-pbl
 description: Use this skill when integrating the Google Play Billing Library client side (adding the dependency, wiring BillingClient, managing its connection lifecycle, and querying product details). Grounded in PBL 9.x.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 5

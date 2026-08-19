@@ -1,7 +1,6 @@
 ---
 name: choosing-what-to-test
 description: Use this skill to pick which behaviors to cover in an Android test suite using Google's five-category state vocabulary plus the explicit "what NOT to test" list from `/training/testing/fundamentals/what-to-test`. Covers state on screen, state held in memory (ViewModels), persisted state (DB / DataStore / files), other state (system bars / system services), and errors / edge cases. Includes Google's verbatim "Tests to Avoid" list (framework entry points such as activities / fragments / services should not have business logic) and an edge-case mining checklist. Use when the user asks "what should I write tests for", "should I unit-test this Activity", "do I need a test for this util class", "what edge cases am I missing", or "should I test the ViewModel or the Composable".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

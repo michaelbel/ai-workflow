@@ -1,7 +1,6 @@
 ---
 name: configuring-junit4-on-android
 description: Use this skill to stand up a JUnit4-based JVM unit-test suite on an Android module. Covers the canonical Gradle dependency matrix (`junit:junit:4.13.2`, `androidx.test:core:1.7.0`, `androidx.test.ext:junit:1.3.0`, `androidx.test.ext:truth:1.7.0`), the `@RunWith(AndroidJUnit4::class)` runner, `InstrumentationRegistry.getInstrumentation()`, `ApplicationProvider.getApplicationContext()`, the `@SmallTest` / `@MediumTest` / `@LargeTest` size annotations wired into `am instrument -e size`, the androidx-test Truth subjects, and the canonical `MainDispatcherRule` setup pattern. Use when the user mentions `AndroidJUnit4 unresolved`, `which AndroidJUnit4`, `InstrumentationRegistry deprecated`, `getApplicationContext in unit test`, `Truth IntentSubject`, `@SmallTest`, `MainDispatcherRule`, or asks how to wire JUnit4 into an Android module's `src/test/`.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

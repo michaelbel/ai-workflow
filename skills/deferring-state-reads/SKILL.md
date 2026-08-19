@@ -1,7 +1,6 @@
 ---
 name: deferring-state-reads
 description: Use this skill to push frequently-changing Jetpack Compose state reads (scroll position, animation values, drag offsets) out of the Composition phase and down into Layout or Draw using lambda-based modifiers like Modifier.offset { }, Modifier.layout { }, Modifier.graphicsLayer { }, Modifier.drawBehind { }, and Modifier.drawWithCache { }. Covers the three-phase model (Composition, Layout, Draw), why a state read at phase N invalidates phase N and every phase below, the modifier-phase cheat sheet, and lambda providers (() -> T) for hoisting hot values across composables. Use when the developer mentions every-frame work, scroll jank, animation jank, dropped frames, animated alpha or offset, "the whole subtree recomposes on scroll", Modifier.alpha(state.value), Modifier.offset(x.dp), or graphicsLayer.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

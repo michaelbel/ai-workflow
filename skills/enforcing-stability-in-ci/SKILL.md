@@ -1,7 +1,6 @@
 ---
 name: enforcing-stability-in-ci
 description: Use this skill to set up a CI gate that fails the build when Compose stability silently regresses, using the `skydoves/compose-stability-analyzer` Gradle plugin (primary) or the `j-roskopf/ComposeGuard` plugin (alternative for non-Android multiplatform). Covers applying `com.github.skydoves.compose.stability.analyzer`, configuring the `composeStabilityAnalyzer { stabilityValidation { ... } }` DSL, generating a `.stability` baseline with `:stabilityDump`, committing it to version control, and wiring `:stabilityCheck` into a GitHub Actions or other CI job. Use when the team wants a stability SLO, when an unstable parameter slipped into a shared data class and went unnoticed until jank was reported, when migrating a large app to strong skipping, or when the user mentions stabilityCheck, stabilityDump, baseline drift, ComposeGuard, or "fail the build on stability regression".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

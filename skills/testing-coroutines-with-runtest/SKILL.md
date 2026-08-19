@@ -1,7 +1,6 @@
 ---
 name: testing-coroutines-with-runtest
 description: Use this skill to test suspend functions and coroutine-using classes on the JVM with kotlinx-coroutines-test. Covers runTest, TestScope, StandardTestDispatcher vs UnconfinedTestDispatcher, virtual time via TestCoroutineScheduler (advanceTimeBy, advanceUntilIdle, runCurrent), the canonical MainDispatcherRule wrapper for Dispatchers.setMain/resetMain, the TestResult Promise contract on KMP, and the runBlockingTest -> runTest migration. If the user mentions runTest, runBlockingTest deprecated, advanceUntilIdle, advanceTimeBy, TestScope, StandardTestDispatcher, UnconfinedTestDispatcher, MainDispatcherRule, "Module with the Main dispatcher is missing", "test hangs forever", dispatchTimeoutMs, viewModelScope test, or a ViewModel that posts state from a coroutine, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

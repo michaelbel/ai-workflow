@@ -8,7 +8,6 @@ description: >
   entities, diagnosing N+1 or LazyInitializationException, placing indexes and 
   uniqueness rules, or preventing Kotlin-specific bugs such as data class 
   entities and broken equals/hashCode.
-license: Apache-2.0
 metadata:
   author: JetBrains
   version: "1.0.0"

@@ -7,7 +7,6 @@ description: Instructions to make or update an app's UI so that it adapts to dif
   API. It also covers multi-pane layouts using Navigation3 Scenes, adaptive UI components
   (such as buttons) with varying target sizes, and adaptive layouts (including navigation
   areas - nav rails and nav bars) using the Compose Grid and FlexBox APIs.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

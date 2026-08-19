@@ -5,7 +5,6 @@ description: Implements Google Cast support in Android apps using Jetpack Media3
   and managing CastPlayer or RemoteCastPlayer for playback in both Compose and View-based
   UIs. Use when adding Cast functionality or migrating from legacy Cast SDK to Media3
   Cast.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

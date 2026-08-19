@@ -1,7 +1,6 @@
 ---
 name: running-instrumented-tests-with-androidjunit4
 description: Use this skill to stand up an Android instrumentation test source set with the canonical `AndroidJUnit4` runner, the correct `AndroidJUnitRunner` Gradle wiring, and supporting infrastructure (Test Orchestrator, runtime permission grants, size annotations, SDK suppression, hermetic animation defaults). Covers `androidx.test:core:1.7.0` / `:runner:1.7.0` / `:rules:1.7.0` / `androidx.test.ext:junit:1.3.0` coordinates, `androidx.test.platform.app.InstrumentationRegistry`, and the `androidTestUtil` configuration trap for `androidx.test:orchestrator`. Use when the user reports `Test runner not found`, `AndroidJUnit4 deprecated`, `InstrumentationRegistry deprecated`, asks "why is my orchestrator not running", "how do I pass `-e` args to the test", "how do I grant a runtime permission in a test", or "instrumented test won't compile".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

@@ -1,7 +1,6 @@
 ---
 name: google-play-price-changes
 description: Use this skill when changing subscription prices on Google Play. Covers opt out price decreases versus opt in price increases, the 30 to 37 day notification timeline, the SUBSCRIPTION_PENDING state, and the API calls to manage price changes for existing subscribers.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 14

@@ -5,7 +5,6 @@ description: Learn how to install and migrate to Jetpack Navigation 3, and how t
   (dialogs, bottom sheets, list-detail, two-pane, supporting pane), conditional navigation
   (such as logged-in navigation versus anonymous), returning results from flows, integration
   with Hilt, ViewModel, Kotlin, and view interoperability.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

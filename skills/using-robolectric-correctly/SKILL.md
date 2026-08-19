@@ -1,7 +1,6 @@
 ---
 name: using-robolectric-correctly
 description: Use this skill to run Android-aware unit tests on the JVM with Robolectric — the right runner choice (AndroidJUnit4 vs RobolectricTestRunner), @Config sdk/qualifiers/application, the includeAndroidResources requirement, common shadows (ShadowApplication, ShadowLog, ShadowLooper, ShadowPackageManager, ShadowSystemClock), looper draining (shadowOf(Looper.getMainLooper()).idle()), and when NOT to reach for Robolectric (screenshot tests, RenderThread, accessibility services). Also covers the AGP 7.2+ sharedTest reality check and the migration to KMP androidHostTest/androidDeviceTest. If the user mentions Robolectric, AndroidJUnit4 host test, RobolectricTestRunner, @Config, includeAndroidResources, ShadowLooper.idle, shadowOf, sharedTest broken on AGP 7.2, ParameterizedRobolectricTestRunner, "test passes on JVM fails on device", or "Resources NotFoundException" in unit tests, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

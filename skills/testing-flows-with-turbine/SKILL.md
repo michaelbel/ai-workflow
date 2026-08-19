@@ -1,7 +1,6 @@
 ---
 name: testing-flows-with-turbine
 description: Use this skill to assert Flow emissions in tests with Cash App Turbine. Covers flow.test entry, ReceiveTurbine API (awaitItem, awaitComplete, awaitError, expectMostRecentItem, skipItems, expectNoEvents, cancel and friends, plus the non-suspending takeItem/takeComplete/takeError), turbineScope/testIn for multi-flow tests, the standalone Turbine<T> channel (add/close/asChannel/ensureAllEventsConsumed) for verifying non-Flow callbacks and listeners, the hot vs cold cancellation contract (StateFlow/SharedFlow never auto-complete), Turbine's wall-clock timeout decoupled from runTest virtual time, and the decision matrix between Turbine and raw flow.toList. If the user mentions Turbine, awaitItem, awaitComplete, expectMostRecentItem, takeItem, "test hangs on collect", "SharedFlow never completes", "StateFlow first emission", "TurbineAssertionError", "withTurbineTimeout", "Turbine() channel", "capture a callback in a test", or asserts a ViewModel's StateFlow/SharedFlow, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

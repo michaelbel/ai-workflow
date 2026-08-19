@@ -1,7 +1,6 @@
 ---
 name: enabling-accessibility-checks
 description: Use this skill to enable Espresso's `AccessibilityValidator` against the Compose semantics tree via `enableAccessibilityChecks(...)` from `androidx.compose.ui:ui-test-accessibility` (for `ComposeUiTest`) or `androidx.compose.ui:ui-test-junit4-accessibility` (for `ComposeTestRule` / `AndroidComposeTestRule`). Covers the API surface, the auto-check after every UI-mutating action (`performMultiModalInput` is the lone exception), the manual `tryPerformAccessibilityChecks()` entry point, sharing the validator with Espresso via `AccessibilityChecks.enable()`, the API 34+ requirement, and the Robolectric inconclusive behavior (logs a `Log.w` warning and still installs the validator, but Robolectric does not faithfully drive accessibility services — b/332778271). Use when the developer asks "how do I enable a11y checks in a Compose test", "AccessibilityChecks.enable", "AccessibilityValidator throws on click", "robolectric a11y not supported", or "ComposeTestRule IllegalStateException".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

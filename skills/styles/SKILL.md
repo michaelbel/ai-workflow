@@ -5,7 +5,6 @@ description: Use this skill to integrate the Jetpack Compose Styles API into an 
   themes, making custom components styleable, and migrating existing layout properties
   to use unified styles. Migrate custom design system components, replace hard coded
   parameters with Style attributes, and use Modifier.styleable for interaction states.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

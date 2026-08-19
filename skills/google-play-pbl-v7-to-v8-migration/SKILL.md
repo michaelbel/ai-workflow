@@ -1,7 +1,6 @@
 ---
 name: google-play-pbl-v7-to-v8-migration
 description: Use this skill when migrating an Android app from Play Billing Library 7.x to 8.x. Covers the full breaking change list, the dependency bump, the required API renames, and the step by step verification flow.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook appendix D

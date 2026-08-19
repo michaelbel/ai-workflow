@@ -1,7 +1,6 @@
 ---
 name: google-play-cancellations-pauses-winback
 description: Use this skill when implementing cancellations, developer initiated revocations, subscription pauses, and winback offers on Google Play. Covers user initiated cancellation, system cancellation, developer revoke/refund, pause resume flow, and winback API tools.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 13

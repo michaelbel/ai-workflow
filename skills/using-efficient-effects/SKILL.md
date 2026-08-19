@@ -1,7 +1,6 @@
 ---
 name: using-efficient-effects
 description: Use this skill to choose the cheapest correct effect API in Jetpack Compose — `LaunchedEffect`, `DisposableEffect`, `SideEffect`, `rememberUpdatedState`, and skydoves/compose-effects' `RememberedEffect` and `ViewModelStoreScope`. Covers stale-callback bugs in long-lived `LaunchedEffect`, setup/teardown for non-coroutine subscribers, avoiding a coroutine scope just to react to a key change, and per-row ViewModels in a `LazyColumn`. Trigger when the user mentions LaunchedEffect, DisposableEffect, RememberedEffect, SideEffect, rememberUpdatedState, ViewModelStoreScope, effect restarts unexpectedly, leaked listener, or per-item ViewModel.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

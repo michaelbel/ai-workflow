@@ -1,7 +1,6 @@
 ---
 name: google-play-error-handling
 description: Use this skill when designing error handling and retry strategy for the Play Billing Library. Classifies every BillingResponseCode into recoverable, non recoverable, and user driven categories and builds a retry plan with exponential backoff and circuit breaker patterns.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 8

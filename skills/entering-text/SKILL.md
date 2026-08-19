@@ -1,7 +1,6 @@
 ---
 name: entering-text
 description: Use this skill to drive Jetpack Compose text fields from tests with the text-specific actions — performTextInput (insert at cursor via the InsertTextAtCursor semantics action), performTextReplacement (clear + replace via SetText), performTextClearance (replace with empty string), performTextInputSelection (set TextRange selection), and performImeAction (fire the configured IME action such as Next, Done, Search). Covers the auto-focus path, the enabled / editable / focusable preconditions, the append vs replace gotcha that produces "helloworld" instead of "world", and the IME-action focus chain (Next advances focus to the next focusable). Use when the developer asks "how do I type into a TextField in a test", "test an IME Next button", "test a clear-text action", "BasicTextField won't accept input", "text input duplicated in test", or reports "Failed to perform text input" / "Failed to perform IME action" / "Default ImeAction" errors.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

@@ -1,7 +1,6 @@
 ---
 name: choosing-derivedstateof
 description: Use this skill to decide when Jetpack Compose derivedStateOf is the right tool and when it is pure overhead. Covers the "input frequency must exceed output frequency" rule, the mandatory remember { derivedStateOf { } } wrapper, the canonical pitfall of capturing non-state variables by initial value (and the remember(key) fix), and the snapshotFlow alternative for fire-and-forget side effects on derived values. Use when the developer mentions derivedStateOf, scroll-position-driven booleans, threshold checks, firstVisibleItemIndex, "show FAB on scroll", recomposition counts that don't drop after wrapping a value, or asks whether a computed string concatenation should use derivedStateOf.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

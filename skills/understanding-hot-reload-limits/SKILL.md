@@ -1,7 +1,6 @@
 ---
 name: understanding-hot-reload-limits
 description: Use this skill to teach Claude exactly which Kotlin and Compose changes hot-reload under Compose HotSwan and which trigger a full incremental rebuild fallback. Root cause is Android Runtime (ART) class schema immutability; only method bodies are mutable at runtime, so any change to fields, signatures, constructors, interfaces, inline functions, or new resource ids forces a rebuild. Covers the supported-changes table, the rebuild-forcing list, the diff-then-batch workflow that keeps a hot-reload session inside the fast path, and the inline-function and new-resource-id pitfalls. Trigger when the user asks "why did this rebuild?", "why isn't this hot reloading?", wants to learn HotSwan's boundaries before adopting it, or when reviewing a refactor that risks pushing a hot-reload session into a full rebuild.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

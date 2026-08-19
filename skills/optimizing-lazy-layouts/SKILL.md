@@ -1,7 +1,6 @@
 ---
 name: optimizing-lazy-layouts
 description: Use this skill to fix scroll jank, lost item state, and broken animateItem() animations in LazyColumn, LazyRow, LazyVerticalGrid, and LazyHorizontalGrid. Covers stable item keys, contentType for mixed-type feeds, Modifier.animateItem() requirements, hoisting modifier chains and painters out of the items lambda, and validating item composable stability. Use when the developer mentions LazyColumn jank, dropped frames while scrolling, items losing scroll state on insert/remove/reorder, mixed feeds of cards/headers/ads feeling sluggish, animateItem() not animating, RecyclerView view-type analog, key parameter, or contentType parameter. The prefetch-window tuning lives in a sibling skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

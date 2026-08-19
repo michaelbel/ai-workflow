@@ -1,7 +1,6 @@
 ---
 name: configuring-r8-for-compose
 description: Use this skill to configure R8 correctly for a Jetpack Compose application — full mode by default, `proguard-android-optimize.txt`, resource shrinking on, and minimal keep rules because Compose ships consumer ProGuard rules. Covers AGP 8.0+ R8 full mode default, R8's Compose-aware optimizations (lambda grouping, `sourceInformation()` stripping, composable arg constant-folding, `ComposerImpl` devirtualization), legitimate keep needs (`@Serializable`, Hilt entry points, reflective `Saver`s), and the AGP 8.x missing-rule reporter / R8 retrace. Cited gain is roughly 75 percent startup and 60 percent frame-render improvement debug-to-release. Use when setting up a new Compose app, when a PR adds an over-broad keep like `-keep class androidx.compose.** { *; }`, when a release build crashes after enabling minification, when APK size needs reduction, or when first enabling minification.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

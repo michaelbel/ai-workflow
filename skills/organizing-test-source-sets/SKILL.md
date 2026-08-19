@@ -1,7 +1,6 @@
 ---
 name: organizing-test-source-sets
 description: Use this skill to organize Android test source sets — `src/test/`, `src/androidTest/`, the community `src/sharedTest/` convention, and the modern KMP-style `androidHostTest` / `androidDeviceTest` split that Compose itself adopted after AGP 7.2 broke the classic `sourceSets` wiring. Includes the `testImplementation` / `androidTestImplementation` / `debugImplementation` configuration matrix per Google's `/training/testing/local-tests` and `/training/testing/instrumented-tests` pages. Use when the user asks "where do I put my tests", "test or androidTest", "sharedTest setup", "AGP 7.2 broke my sourceSets", "androidHostTest vs androidDeviceTest", "testImplementation vs androidTestImplementation vs debugImplementation", or "why is my Robolectric test in androidTest".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

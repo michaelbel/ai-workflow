@@ -4,7 +4,6 @@ description: Best practices for Android Intent security. Use this skill when aud
   component configurations in AndroidManifest.xml activities, services, receivers)
   or source code handling incoming Intents (getIntent, getParcelableExtra) to prevent
   Intent Redirection and unauthorized access.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

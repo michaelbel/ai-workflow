@@ -1,7 +1,6 @@
 ---
 name: stabilizing-compose-types
 description: Use this skill to fix unstable Jetpack Compose types once a stability diagnosis has identified them. Covers the three-tier strategy — make the type truly stable with val plus immutable fields, mark with @Immutable or @Stable when the source is owned, and use stabilityConfigurationFiles for third-party or Java types. Explains the compiler-level difference between @Immutable and @Stable (static expression promotion), kotlinx.collections.immutable for List/Set/Map parameters, and the StableHolder wrapper escape hatch. Use when the developer asks how to stabilize a User class, a List parameter, java.time.LocalDateTime, a Flow parameter, or when the compiler report shows unstable params and the developer wants the fix. The diagnostic step lives in a sibling skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

@@ -1,7 +1,6 @@
 ---
 name: compose-agent
 description: "Helps AI coding assistants write modern Jetpack Compose: correct state, side effects, performance-aware modifiers, Navigation 3, Paging 3 in Compose, coroutines on lifecycle, animations, UI tests, focus/keyboard navigation, Compose Multiplatform boundaries, idiomatic Kotlin, and well-shaped composable APIs. Targets the mistakes LLMs actually make in Compose code. Use when reading, writing, or reviewing Compose projects."
-license: MIT
 allowed-tools: Read, Glob, Grep, Edit, Write, Bash
 argument-hint: "[focus area, e.g. 'state', 'effects', 'navigation', 'paging', 'lifecycle', 'animation', 'testing', 'focus', 'kmp']"
 metadata:

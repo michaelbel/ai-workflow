@@ -1,7 +1,6 @@
 ---
 name: google-play-plan-changes
 description: Use this skill when implementing Google Play subscription upgrades, downgrades, or plan switches with setSubscriptionUpdateParams. Covers the six replacement modes (WITH_TIME_PRORATION, CHARGE_PRORATED_PRICE, WITHOUT_PRORATION, DEFERRED, CHARGE_FULL_PRICE, the deprecated UNKNOWN) and when each applies.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 7

@@ -1,7 +1,6 @@
 ---
 name: using-strong-skipping-correctly
 description: Use this skill to reason about Jetpack Compose's Strong Skipping Mode — the default since Kotlin 2.0.20 — including what it changes about skippability, when it does and does not auto-`remember` lambdas, and which escape hatches (`@DontMemoize`, `@NonSkippableComposable`, `@NonRestartableComposable`, `@ReadOnlyComposable`) apply where. Covers verifying the mode is active, auditing lambda capture sites, and the gaps where strong skipping does not memoize (`LazyListScope.items {}`, `Modifier.pointerInput {}`, object expressions, non-@Composable scopes). Use when the developer asks "do I still need @Stable?", "does this composable skip?", "why does this still recompose despite strong skipping", "when do I need @DontMemoize or @NonSkippableComposable?", is migrating from older Compose, or sees auto-remembered lambdas in compiler output.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

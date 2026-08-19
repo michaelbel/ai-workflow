@@ -1,7 +1,6 @@
 ---
 name: understanding-adb-architecture
 description: Use this skill to reason about the three-piece ADB topology (client CLI, host server on TCP 5037, on-device daemon `adbd`), the lifecycle commands `adb start-server` / `adb kill-server` / `adb reconnect`, ADB environment variables (`ADB_TRACE`, `ADB_VENDOR_KEYS`, `ANDROID_ADB_SERVER_PORT`, `ANDROID_SERIAL`, `ADB_LOCAL_TRANSPORT_MAX_PORT`, `ADB_MDNS_AUTO_CONNECT`, `ADB_MDNS_OPENSCREEN`, `ADB_LIBUSB`, `ADB_BURST_MODE`), the host RSA key pair under `~/.android/`, the server log location, and version mismatches between Android Studio's bundled `platform-tools` and a system-installed `adb`. Use when the user mentions `daemon not running; starting now`, `server version doesn't match`, port 5037 collisions, ADB_TRACE, vendor keys, mDNS Openscreen vs Bonjour, libusb regressions, "adb is being weird", or asks "what does adb actually do".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

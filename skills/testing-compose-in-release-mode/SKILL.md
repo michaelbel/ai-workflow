@@ -1,7 +1,6 @@
 ---
 name: testing-compose-in-release-mode
 description: Use this skill to ensure Jetpack Compose performance numbers reflect production reality by measuring against a release variant with R8 enabled, Live Literals disabled, and Compose Compiler reports read from the release output directory. Covers why debug builds lie (interpreted Compose runtime, JIT warmup, Live Literals constant-getters), how to set up a release-with-symbols measurement build, and how to wire Macrobenchmark, Compose Compiler reports, Layout Inspector, simpleperf, and Android Studio Profiler against it. Cited result is roughly 75 percent startup gain and 60 percent frame-render gain debug to release. Use when the developer reports "slow startup", "jank", "dropped frames", "high recomposition count", or quotes timings from `assembleDebug`, Layout Inspector, or `CompilationMode.None`. Use when reviewing a perf bug, setting up a CI perf gate, or before filing a perf regression.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

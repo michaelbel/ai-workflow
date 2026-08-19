@@ -1,7 +1,6 @@
 ---
 name: avoiding-subcomposition-pitfalls
 description: Use this skill when a Compose tree uses SubcomposeLayout, BoxWithConstraints, or Scaffold and the developer reports extra measure passes, slow first frame, or layout passes running content composition repeatedly. Covers why SubcomposeLayout composes its slots during the measure phase, why BoxWithConstraints forces a subcomposition for every new Constraints value, why nesting Scaffold or BoxWithConstraints multiplies the cost, when a custom Layout or Modifier.layout { } replaces SubcomposeLayout, and how to use SubcomposeLayoutState's slot reuse policy and precompose APIs when SubcomposeLayout is genuinely required. Use when the developer mentions BoxWithConstraints, SubcomposeLayout, Scaffold, "extra measure pass", "double measurement", "first frame slow", "subcompose", or notices that wrapping content in BoxWithConstraints regresses scroll perf inside a LazyColumn.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

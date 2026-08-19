@@ -1,7 +1,6 @@
 ---
 name: iterating-with-ai-and-mcp
 description: Use this skill to drive Compose HotSwan from an AI agent (Claude Code, Cursor, any MCP client) so the agent can edit a Kotlin file, trigger a hot reload, capture a device screenshot, evaluate the result against a design intent, and iterate without a human in the loop. Covers the seven HotSwan MCP tools (hotswan_get_status, hotswan_reload, hotswan_take_screenshot, hotswan_start_snapshot, hotswan_stop_snapshot, hotswan_select_variant, hotswan_build_and_install), the canonical edit-reload-screenshot loop, snapshot-based rollback, and when to fall back to a full install for schema changes. Use when the developer says "get the AI to tune this screen until it matches a mock", asks "can the AI see what changed?" or "can the AI screenshot the device?", sets up a Claude Code or Cursor workflow that needs MCP tool access, or wants AI-driven UI iteration.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

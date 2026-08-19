@@ -1,7 +1,6 @@
 ---
 name: injecting-mouse-and-keyboard
 description: Use this skill to drive Jetpack Compose UI from tests with non-touch input — performMouseInput (click, rightClick, doubleClick, tripleClick, longClick, animateMoveTo, dragAndDrop, smoothScroll, enter / exit, press / release / scroll), performKeyInput (keyDown, keyUp, isKeyDown, modifier-state vals isCtrlDown / isShiftDown / isAltDown / isMetaDown / isFnDown / isCapsLockOn / isNumLockOn / isScrollLockOn, helpers pressKey, withKeyDown, withKeysDown, withKeyToggled, withKeysToggled), performKeyPress for direct KeyEvent injection, and performMultiModalInput for hover-then-click flows. Covers MouseButton (Primary, Secondary, Tertiary), ScrollWheel (Horizontal, Vertical), and the repeat-key behaviour driven by advanceEventTime. Use when the developer asks "how do I right-click in a Compose test", "test a Ctrl+S shortcut", "send a keyboard shortcut", "simulate hover", "test a tooltip", "scroll the mouse wheel", or "drag and drop with a mouse" on desktop or Compose Multiplatform.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

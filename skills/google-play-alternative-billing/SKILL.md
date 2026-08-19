@@ -1,7 +1,6 @@
 ---
 name: google-play-alternative-billing
 description: Use this skill when implementing Google Play's alternative billing programs or external offers (introduced across PBL 8.2 to 8.3, current as of PBL 9.x). Covers user choice billing, alternative billing only, external transaction reporting, and the regional program eligibility.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 18

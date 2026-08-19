@@ -1,7 +1,6 @@
 ---
 name: running-instrumented-tests-via-adb
 description: Use this skill to run instrumented Android tests directly through `adb shell am instrument -w -r` without going through Gradle. Covers the required `-w` (wait — REQUIRED for meaningful exit codes) and `-r` (raw output) flags, the `-e` argument table (`class`, `class#method`, `package`, `size`, `numShards`/`shardIndex`, `debug`, `annotation` / `notAnnotation`, `listener`, `clearPackageData`, `targetInstrumentation`), the canonical runners `AndroidJUnitRunner` and `AndroidTestOrchestrator`, the orchestrator wrapping pattern (target = orchestrator, `-e targetInstrumentation <pkg>/<runner>`), and the output framing (`INSTRUMENTATION_STATUS_CODE` 1=start, 0=ok, -1=error, -2=failure, -3=ignored, -4=assumption-failure; `INSTRUMENTATION_RESULT`; `INSTRUMENTATION_CODE`). Use when the user mentions `am instrument`, `AndroidJUnitRunner`, "run tests from CI without Gradle", "Orchestrator", `clearPackageData`, `targetInstrumentation`, exit codes from `am instrument`, or `INSTRUMENTATION_STATUS_CODE`.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

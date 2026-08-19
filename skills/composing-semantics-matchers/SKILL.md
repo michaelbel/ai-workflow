@@ -1,7 +1,6 @@
 ---
 name: composing-semantics-matchers
 description: Use this skill to build precise Compose UI test queries by composing `SemanticsMatcher` predicates with `infix and`, `infix or`, and `operator not`, plus the prebuilt filter library (`hasText`, `hasClickAction`, `isEnabled`, `isOn`, `hasTestTag`, `hasContentDescription`, `hasParent`, `hasAnyAncestor`, `hasAnyChild`, `hasAnySibling`, `hasAnyDescendant`, `hasImeAction`, `hasScrollToKeyAction`, `hasScrollToNodeAction`, `isDialog`, `isPopup`, `isRoot`, `isFocused`, `isEditable`, `isHeading`). Covers `SemanticsMatcher.expectValue` / `keyIsDefined` / `keyNotDefined` for custom semantics keys. Use when the developer asks how to find "an enabled button with text Submit", how to combine matchers, how to filter by a custom `SemanticsPropertyKey`, how to write a hierarchical predicate, or mentions `hasParent`, `hasAnyAncestor`, `expectValue`. If the developer wants one matcher instead of three chained assertions, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

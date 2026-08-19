@@ -1,7 +1,6 @@
 ---
 name: tracing-recompositions-at-runtime
 description: Use this skill to instrument a Jetpack Compose composable with `@TraceRecomposition` from `skydoves/compose-stability-analyzer` so per-recomposition diffs (which state or parameter changed, what value transition) print to logcat under the `Recomposition` tag. Works in release-with-debug-symbols builds where Android Studio Layout Inspector cannot reach, and feeds the IntelliJ / Android Studio plugin's live recomposition heatmap (green under 10, yellow 10–50, red 50+). Covers the Gradle plugin setup, the `ComposeStabilityAnalyzer.setEnabled(BuildConfig.DEBUG)` runtime gate that keeps the instrumentation out of production, and the handoff to debug-time Layout Inspector and CI `stabilityCheck`. Use when the user mentions `@TraceRecomposition`, "trace recomposition", "compose-stability-analyzer", "recomposition logcat", "recomposition heatmap", "release-mode recomposition counts", or needs to confirm a stability fix in a release-like build.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

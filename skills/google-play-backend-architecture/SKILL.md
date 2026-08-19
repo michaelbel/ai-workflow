@@ -1,7 +1,6 @@
 ---
 name: google-play-backend-architecture
 description: Use this skill when building a backend for Google Play Billing receipt verification. Covers receiving purchase tokens from the client, calling the Google Play Developer API to verify, storing subscription state, and exposing a production ready verification endpoint.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 9

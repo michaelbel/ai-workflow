@@ -1,7 +1,6 @@
 ---
 name: ordering-modifier-chains
 description: Use this skill to diagnose and fix Jetpack Compose Modifier ordering bugs — wrong paint region for background, wrong click area for clickable, wrong clipping for clip, wrong measurement for padding/size, surprising graphicsLayer scope. Covers the wrap-the-next-modifier mental model, the canonical pitfalls (padding vs background, clickable placement, clip before background, graphicsLayer placement), and why hoisting an entire Modifier chain via remember { Modifier.… } is rarely a real perf win because Compose already interns identical chains. Use when the developer asks "why does the click area extend past the visible button", "why is my background painted in the wrong place", "does Modifier order matter", "should I cache my Modifier chain", or reviews a diff that reorders modifiers.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

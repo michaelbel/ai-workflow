@@ -1,7 +1,6 @@
 ---
 name: extracting-logs-with-logcat
 description: Use this skill to read device logs for test failures, debug, smoke testing, and CI repros. Covers `adb logcat` (stream), `adb logcat -d` (dump and exit), `adb logcat -c` (clear), buffer selection (`-b main|system|crash|events|radio|kernel|all`), priority ladder (V/D/I/W/E/F/S), filter expressions like `MyApp:D *:S`, format flags (`-v threadtime`, `-v json` on Android 11+), `--pid $(adb shell pidof -s pkg)`, time/count filters (`-T '01-01 12:00:00.000'`, `-t 100`), buffer rotation (`-r <kbytes>`, `-n <count>`, `-f <file>`), buffer sizing (`-G`, `-g`), and stripping `Log.d` calls in release builds via R8 `-assumenosideeffects`. If the user mentions "logcat filter only my app", "events buffer am_proc_start", "logcat json format", "grep logcat expensive", "missing logs after restart", "stripping Log.d release", or "logcat -f writes to host or device", use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

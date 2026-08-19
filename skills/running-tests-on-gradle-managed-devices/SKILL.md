@@ -1,7 +1,6 @@
 ---
 name: running-tests-on-gradle-managed-devices
 description: Use this skill to run instrumented Android tests on Gradle Managed Devices (GMD) — emulators that Gradle provisions, boots, runs tests on, and tears down, so CI and every developer get the same device without managing an emulator by hand. Covers the `android.testOptions.managedDevices { localDevices { create(...) { device; apiLevel; systemImageSource } } }` DSL, `ManagedVirtualDevice`, device `groups`, the generated tasks (`<deviceName>DebugAndroidTest`, `<groupName>GroupDebugAndroidTest`, `allDevicesCheck`), Automated Test Device (ATD) images (`aosp-atd`/`google-atd`) for lighter headless CI, test sharding across managed-device copies, where the HTML report and extra outputs land, and how this differs from `connectedAndroidTest` and `adb shell am instrument`. Use when the user mentions "Gradle Managed Devices", "managedDevices", "allDevicesCheck", "ManagedVirtualDevice", "pixel2api30DebugAndroidTest", "ATD image", "automated test device", or "reproducible emulator for tests".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

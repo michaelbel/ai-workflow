@@ -1,7 +1,6 @@
 ---
 name: auditing-compose-performance
 description: Use this skill to run an end-to-end Jetpack Compose performance audit when the symptom is broad ("the app feels sluggish", "scroll is rough everywhere", "we're starting a perf sprint", "what should we fix first?"). Orchestrates the four-phase Measure → Diagnose → Fix → Verify loop by sequencing the 25 focused skills (release-mode setup, R8, Baseline Profiles, Compose Compiler reports, stability inference, Layout Inspector, `@TraceRecomposition`, stabilization, strong skipping, phase-deferral, derivedStateOf, lazy layouts, lazy prefetch, Modifier.Node, modifier ordering, flow collection, effects, CI gates, hot-reload) and produces a written audit report with Before/After Macrobenchmark numbers. Use when the developer wants a perf sprint kickoff, a pre-release perf gate, onboarding to a perf-troubled codebase, or a written deliverable. Use when the user mentions "audit", "perf review", "perf sprint", "where do I start", or has no specific symptom yet.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

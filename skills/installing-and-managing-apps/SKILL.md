@@ -1,7 +1,6 @@
 ---
 name: installing-and-managing-apps
 description: Use this skill to install, uninstall, list, inspect, and reset Android apps via `adb install` (with `-r` reinstall, `-d` allow-downgrade, `-t` allow test packages, `-g` grant all runtime permissions, `--user` per-user install, `adb install-multiple` for split APKs) and the on-device `pm` tool (`pm list packages [-f|-d|-e|-s|-3|-i|-u]`, `pm path`, `pm clear`, `pm grant` / `pm revoke`, `pm enable` / `pm disable`, `pm uninstall [-k]`, `cmd package dump-profiles`). Calls out the canonical hermetic-reset pattern (`pm clear` wipes data; `am force-stop` does NOT) and the common install errors (`INSTALL_FAILED_USER_RESTRICTED`, `INSTALL_FAILED_VERSION_DOWNGRADE`, signing-conflict). Use when the user mentions "reset app between tests", `pm clear`, `am force-stop` confusion, install fails after debugger, split APK install, runtime permission grants, multi-user profile installs, or "how do I list third-party apps".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

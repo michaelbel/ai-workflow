@@ -1,7 +1,6 @@
 ---
 name: google-play-pbl-v8-to-v9-migration
 description: "Use this skill when migrating an Android app from Play Billing Library 8.x to 9.x. Covers the small v9 delta (no API removals): the dependency bump, the targetSdk 35 and androidx.core requirements, the blocked Play Store error reclassification, the nullable getLinkUri change, the optional in app price increase messaging, and the verification flow."
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: Google Play Billing Library v9 migration guide and release notes; RevenueCat Play Billing v9 deep dive

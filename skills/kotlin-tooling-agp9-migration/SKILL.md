@@ -7,7 +7,6 @@ description: >
   upgrading AGP, when build fails due to KMP+AGP incompatibility, or when the
   user mentions AGP 9.0, android multiplatform plugin, KMP migration, or
   com.android.kotlin.multiplatform.library.
-license: Apache-2.0
 metadata:
   author: JetBrains
   version: "1.0.0"

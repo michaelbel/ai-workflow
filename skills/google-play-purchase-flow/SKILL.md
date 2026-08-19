@@ -1,7 +1,6 @@
 ---
 name: google-play-purchase-flow
 description: Use this skill when implementing the Play Billing purchase flow end to end. Covers building BillingFlowParams, launching launchBillingFlow(), receiving results in PurchasesUpdatedListener, handling every BillingResult outcome, and posting to your backend.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 6

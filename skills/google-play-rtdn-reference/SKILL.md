@@ -1,7 +1,6 @@
 ---
 name: google-play-rtdn-reference
 description: Use this skill as a quick lookup for all Google Play Real Time Developer Notification (RTDN) types with their integer codes, trigger conditions, and recommended handling. Covers subscription notifications, one time purchase notifications, voided purchase notifications, and test notifications.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook appendix A

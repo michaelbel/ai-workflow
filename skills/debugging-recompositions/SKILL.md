@@ -1,7 +1,6 @@
 ---
 name: debugging-recompositions
 description: Use this skill to find which Jetpack Compose composables are recomposing and why, using Android Studio Layout Inspector recomposition counts and skip counts, the per-parameter Argument Change Reasons (Changed / Unchanged / Uncertain / Static / Unknown) introduced in Android Studio Hedgehog and later, and runtime `@TraceRecomposition` from `compose-stability-analyzer` for production-like measurement. Walks through enabling counts, mapping each Argument Change Reason to a fix, and confirming the result in a release build. Use when the developer says "this should be skipping but isn't", "I want to see recomposition counts", asks what "Uncertain" or "Unknown" means in the inspector, or needs to confirm a stability or strong-skipping fix actually worked end-to-end.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

@@ -1,7 +1,6 @@
 ---
 name: google-play-play-developer-api-reference
 description: Use this skill as a quick reference for billing related Google Play Developer API REST endpoints, covering purchases.products, purchases.subscriptionsv2, purchases.voidedpurchases, and monetization endpoints. Lists paths, auth scopes, and typical request shapes.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook appendix C

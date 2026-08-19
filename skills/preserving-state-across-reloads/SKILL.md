@@ -1,7 +1,6 @@
 ---
 name: preserving-state-across-reloads
 description: Use this skill to keep Jetpack Compose state alive across HotSwan hot reloads by understanding the three escalating tiers Compose HotSwan uses (tier 1 targeted recomposition, tier 2 composition reset, tier 3 Activity.recreate) and choosing edits and state holders that stay inside tier 1 where scroll position, lazy items, dialog state, and per-composable remember values all survive. Explains which edits force escalation, which state holders survive each tier, and how to hoist transient UI state when the iteration loop must escalate. Use when the developer says "scroll jumped to top after a hot reload", "lost dialog state", "lazy column re-fetched", "tab selection reset", asks why HotSwan reload escalated to tier 2 or 3, plans a refactor and needs to know which scope it touches, or wants to know which state holders survive composition reset.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

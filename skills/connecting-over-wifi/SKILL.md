@@ -1,7 +1,6 @@
 ---
 name: connecting-over-wifi
 description: Use this skill to connect ADB to an Android 11+ device wirelessly with the modern `adb pair` flow (pairing code or QR via `Settings → Developer options → Wireless debugging`), then `adb connect <host:port>` and `adb disconnect`, plus mDNS auto-discovery via `adb mdns check` / `adb mdns services` and the `_adb-tls-pairing._tcp` / `_adb-tls-connect._tcp` service types. Covers the ADB v34+ default mDNS backend (Openscreen on Linux/Windows, not Bonjour as the public doc says), the legacy `adb tcpip <port>` + `adb connect` path that pre-dates pairing, security caveats (corporate Wi-Fi blocks p2p; flat LAN exposure), version requirements (Android 11/API 30 for phones, Android 13/API 33 for TV+Wear), and the `ADB_MDNS_OPENSCREEN` / `ADB_MDNS_AUTO_CONNECT` environment variables. Use when the user mentions `adb pair`, `adb connect`, "wireless debugging", "QR code pairing", `_adb-tls-connect`, "Openscreen vs Bonjour", `adb tcpip 5555`, or "device not connecting after pairing successfully".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

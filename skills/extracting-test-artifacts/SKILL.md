@@ -1,7 +1,6 @@
 ---
 name: extracting-test-artifacts
 description: Use this skill to move files between host and device with `adb pull` and `adb push`, including the modern `-z` (compression), `-Z` (no compression), `--sync`, and `-a` (preserve attrs) flags. Covers the path-permission rules — `/data/local/tmp/` is freely writable, `/sdcard/` (alias `/storage/emulated/0/`) is shell-writable with scoped-storage rules on API 30+, `/data/data/<pkg>/` requires `run-as <pkg>` on debuggable builds, and `/sdcard/Android/data/<pkg>/files/` is package-owned but pullable. Includes `adb shell run-as <pkg> cat <path>` for text grabs, `adb exec-out run-as <pkg> tar cf - <path> | tar xf -` for binary-clean directory grabs, the `connected_android_test_additional_output/` Gradle output dir, and the `androidx.test:services` `useTestStorageService` flag for the modern artefact-collection API. If the user mentions "adb pull permission denied data data", "run-as", "scoped storage shell", "tar through adb", "test storage service", or "exec-out vs shell for binary", use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

@@ -1,7 +1,6 @@
 ---
 name: diagnosing-compose-stability
 description: Use this skill to diagnose Jetpack Compose stability problems by enabling and reading the Compose Compiler Reports (classes.txt, composables.txt, composables.csv, module.json). Covers the Gradle DSL, the release-only build requirement, and how to interpret per-class and per-composable stability annotations including stable, unstable, runtime, restartable, skippable, readonly, @static, and @dynamic markers. Use when the developer asks "why does this recompose", reports jank, dropped frames, slow scroll, high recomposition count, suspects an unstable parameter, mentions Compose Compiler Reports, classes.txt, composables.txt, module.json, or wants to know which composables are non-skippable. The fix lives in a sibling skill — this one only diagnoses.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

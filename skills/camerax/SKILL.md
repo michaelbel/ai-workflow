@@ -4,7 +4,6 @@ description: Provide technical guidance for Android camera development with Came
   Use when implementing camera features, handling asynchronous recording lifecycles,
   wiring low-level hardware interop using CameraX, or integrating ML Kit or Media3
   effects.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

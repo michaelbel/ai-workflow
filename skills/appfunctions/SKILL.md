@@ -6,7 +6,6 @@ description: Analyzes Android apps to identify key user workflows for AppFunctio
   Generates Kotlin code to expose these workflows to the Android system, allowing
   agents to discover and execute them on-device. Also refines KDoc documentation to
   ensure AI agents correctly understand and use the provided functionality.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

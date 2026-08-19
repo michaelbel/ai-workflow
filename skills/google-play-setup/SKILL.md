@@ -1,7 +1,6 @@
 ---
 name: google-play-setup
 description: Use this skill when configuring Play Console, creating products, enabling service account API access, or setting up RTDN before writing billing code. You stand up the full Google Play billing environment so app and backend code can authenticate, query products, and receive server side purchase events.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 2

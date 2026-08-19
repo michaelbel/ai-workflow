@@ -1,7 +1,6 @@
 ---
 name: using-stability-analyzer-ide-plugin
 description: Use this skill to install and operate the `skydoves/compose-stability-analyzer` IntelliJ / Android Studio plugin so the developer sees Compose stability feedback live in the editor instead of waiting for a Gradle build. Covers installing the plugin from disk, configuring the `Settings → Tools → Compose Stability Analyzer` panel, reading the four gutter colors (green stable, red unstable, yellow runtime, gray no-params), the per-parameter hover documentation, the inline parameter hint badges, and the `UnstableComposable` weak-warning inspection with its `@Suppress("NonSkippableComposable")` and `@Suppress("ParamsComparedByRef")` quick fixes. Use when the user mentions gutter icons, inline hints, the stability inspection, the IDEA plugin, real-time stability feedback while editing, or asks why a composable is flagged as non-skippable in the editor.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

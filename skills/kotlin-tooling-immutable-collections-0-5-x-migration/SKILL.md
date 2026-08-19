@@ -9,7 +9,6 @@ description: >
   version, recompile, and apply the rename each deprecation warning names. Use when the user
   mentions kotlinx.collections.immutable 0.5.x, PersistentList migration, "Use adding()
   instead", KEEP-0459, or sees deprecation warnings from kotlinx.collections.immutable.
-license: Apache-2.0
 metadata:
   author: JetBrains
   version: "2.4.0"

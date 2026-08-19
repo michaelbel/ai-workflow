@@ -1,7 +1,6 @@
 ---
 name: cross-app-tests-with-uiautomator
 description: Use this skill to drive cross-app and system-UI flows from instrumentation tests using UiAutomator 2.3.0 — `UiDevice`, `BySelector` / `UiObject2` (modern), `UiSelector` / `UiObject` (legacy), `Until` conditions, and `Configurator` global timeouts. Covers the singleton acquisition (`UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())`), `pressBack/pressHome/pressRecentApps`, `device.findObject(By...)` cached-node refresh and `StaleObjectException` recovery, the `executeShellCommand` `@Discouraged` path vs `Context.startActivity` plus `<queries>`, and the full `By` factory catalog. Use when the user reports `StaleObjectException`, `Espresso InjectEventSecurityException`, `findObject returns null`, asks "how do I open Settings from a test", "toggle Wi-Fi", "dismiss notification shade", or "test that spans my app and another".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

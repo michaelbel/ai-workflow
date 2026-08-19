@@ -1,7 +1,6 @@
 ---
 name: developing-with-compose-previews
 description: Use this skill to make `@Preview` functions the primary feedback loop for Jetpack Compose UI work — preview-driven development. Covers hoisting state out of composables so a preview never needs a `ViewModel` or DI graph, `LocalInspectionMode` for conditional preview rendering (e.g. placeholder instead of Coil/Glide), `@PreviewParameter` + `PreviewParameterProvider` for rendering every UI state side by side, multi-configuration previews (`uiMode`, `fontScale`, `device`, `widthDp`, `locale`), `@Preview`-annotated annotation classes for reusable preview sets, and the anti-patterns that make previews rot (screen-level previews, unwrapped theme, zero-width `fillMaxWidth` previews, Lorem-ipsum data). Use when the user mentions "preview won't render", "preview needs a ViewModel", "@PreviewParameter", "LocalInspectionMode", "preview out of date", "preview-driven development", "previews keep breaking", or "how to structure Compose previews".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

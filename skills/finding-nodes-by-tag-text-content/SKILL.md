@@ -1,7 +1,6 @@
 ---
 name: finding-nodes-by-tag-text-content
 description: Use this skill to locate Compose semantics nodes from a UI test using `onNodeWithTag`, `onNodeWithText`, `onNodeWithContentDescription`, `onAllNodes*`, and `onRoot`. Covers the count contract (single-node finders fail on 0 or >1 matches; collection finders never throw on 0), the merged-vs-unmerged tree distinction, and why tagging in production beats text-matching from tests. Use when the developer reports "no node matched", "multiple nodes matched", "tag not found", "useUnmergedTree", "Modifier.testTag", or asks how to find a Button/Text/Icon in a Compose test. If the developer mentions onNodeWithText, onNodeWithTag, onNodeWithContentDescription, onAllNodesWithTag, onRoot, or merged tree vs unmerged tree, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

@@ -1,7 +1,6 @@
 ---
 name: asserting-node-state-and-text
 description: Use this skill to verify a Compose semantics node's properties from a UI test using `assertExists`, `assertDoesNotExist`, `assertIsDisplayed`, `assertIsNotDisplayed`, `assertIsDeactivated`, `assertIsEnabled`, `assertIsOn`, `assertIsOff`, `assertIsSelected`, `assertIsFocused`, `assertTextEquals`, `assertTextContains`, `assertContentDescriptionEquals`, `assertValueEquals`, `assertRangeInfoEquals`, `assertHasClickAction`, plus the generic `assert(matcher)` escape hatch and the boolean `isDisplayed()` / `isNotDisplayed()` for `waitUntil` predicates. Covers collection variants `assertCountEquals`, `assertAny`, `assertAll`. Use when the developer wants to verify a Switch is on, a Button is enabled, a Text shows the expected string, a node is displayed vs merely composed, or asks about `assertIsDisplayed` vs `assertExists`. If the developer mentions any `assert*` API on `SemanticsNodeInteraction`, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

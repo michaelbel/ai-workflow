@@ -1,7 +1,6 @@
 ---
 name: google-play-subscription-states
 description: Use this skill when mapping a Google Play subscription to the seven states (PENDING, ACTIVE, IN_GRACE_PERIOD, ON_HOLD, PAUSED, CANCELED, EXPIRED) and deciding what access your app should grant in each state.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 11

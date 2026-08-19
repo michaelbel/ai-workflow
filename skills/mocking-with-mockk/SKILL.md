@@ -1,7 +1,6 @@
 ---
 name: mocking-with-mockk
 description: Use this skill to wire MockK (the Kotlin-first mocking framework) into a JVM unit-test suite, especially when coroutines, singleton/`object` mocking, or constructor mocking dominate. Covers `io.mockk:mockk-jvm:1.14.x` (and `mockk-android` + `mockk-agent` for instrumented), `every { } returns`, `coEvery` / `coVerify` (native suspend support — the big win over Mockito), `mockk(relaxed = true)` / `relaxUnitFun = true`, `slot<T>()` capture, `verifySequence` / `verifyOrder` / `confirmVerified`, `mockkStatic` / `mockkObject` / `mockkConstructor` with `unmockkAll()` cleanup, `@MockK` / `@RelaxedMockK` / `@SpyK` / `@InjectMockKs` annotations, and the Mockito-vs-MockK decision criteria. Use when the user mentions `coEvery`, `mockkObject`, `mockkStatic`, `slot`, `MockKException`, `every returns vs coEvery`, `relaxed = true`, or asks how to mock a Kotlin `object`/singleton.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

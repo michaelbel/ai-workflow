@@ -1,7 +1,6 @@
 ---
 name: synchronizing-with-idle
 description: Use this skill to choose the right idle-synchronization primitive in Compose UI tests — waitForIdle, awaitIdle, waitUntil(conditionDescription, timeoutMillis, condition), waitUntilNodeCount, waitUntilExactlyOneExists, waitUntilAtLeastOneExists, waitUntilDoesNotExist, runOnIdle, runOnUiThread, runWhenIdle, awaitAndRunWhenIdle, hasPendingWork, and IdlingResource. Explains what "idle" means (no pending recomposition or draw, every IdlingResource isIdleNow), the wall-clock vs test-clock timeout split, the Espresso/Robolectric strategy bridge, and why direct state reads from the test thread race the recomposer. If the user mentions "test is flaky", "test passes locally fails on CI", "Thread.sleep waiting for state", "Espresso IdlingResource", "ComposeTimeoutException waitUntil", "AndroidComposeUiTestTimeoutException", waitUntilExactlyOneExists, runOnIdle, runWhenIdle, or "register IdlingResource", use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

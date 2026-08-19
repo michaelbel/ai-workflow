@@ -6,7 +6,6 @@ description: Provides a structured workflow for migrating an Android XML View to
   when you need to migrate an XML View to Jetpack Compose in an Android project. It
   solves the problem of converting the UI of a legacy XML View into modern, declarative
   Compose components while maintaining interoperability.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

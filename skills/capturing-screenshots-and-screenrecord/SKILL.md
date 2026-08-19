@@ -1,7 +1,6 @@
 ---
 name: capturing-screenshots-and-screenrecord
 description: Use this skill to capture visual artefacts from a device for test failures, golden image generation, QA repro, and demo videos. Covers `adb shell screencap -p` (PNG screenshot), `adb exec-out screencap -p > out.png` (binary-clean stream that avoids CRLF translation on Windows), `adb shell screenrecord` with `--size`, `--bit-rate`, `--time-limit`, `--rotate`, `--bugreport`, `--verbose` flags, the 3-minute hard cap, scoped-storage rules for `/sdcard/` on API 30+, and the JUnit4 TestWatcher capture-on-failure pattern that grabs a screencap plus `logcat -d` on failure. If the user mentions "screenshot device", "screencap PNG", "raw RGBA dump", "screenrecord 3 minute limit", "scrcpy / Vysor streaming", "exec-out vs shell", or "bugreport overlay timestamp", use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

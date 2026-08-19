@@ -1,7 +1,6 @@
 ---
 name: google-play-catalog-management
 description: Use this skill when managing Google Play product and subscription catalogs programmatically with the Google Play Developer API. Covers create, update, archive for both inappproducts and monetization.subscriptions endpoints, plus regional pricing automation.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 17

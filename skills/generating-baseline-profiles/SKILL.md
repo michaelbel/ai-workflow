@@ -1,7 +1,6 @@
 ---
 name: generating-baseline-profiles
 description: Use this skill to generate and measure Jetpack Compose Baseline Profiles end-to-end with the AGP 8.2+ Baseline Profile Generator module and the Macrobenchmark harness. Covers writing the `BaselineProfileRule` journey for cold startup plus first-scroll, generating `baseline-prof.txt`, verifying it shipped at `assets/dexopt/baseline.prof`, measuring with `MacrobenchmarkRule` under `CompilationMode.Partial(BaselineProfileMode.Require)`, and emitting accurate time-to-fully-drawn via `ReportDrawn` / `ReportDrawnWhen` / `ReportDrawnAfter` from `androidx.activity.compose`. Compose ships unbundled, so every Compose UI app benefits — cited gains around 30% faster startup and 40% smoother first-scroll. Use when the user mentions "baseline profile", "macrobenchmark", "slow cold startup", "first-scroll jank", "StartupTimingMetric", "FrameTimingMetric", "ReportDrawn", "TTFD", or preparing a release build for performance measurement.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

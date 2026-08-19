@@ -1,7 +1,6 @@
 ---
 name: migrating-from-android-test-classes
 description: Use this skill to migrate a codebase off the deprecated `android.test.*` testing classes that ship in the Android platform SDK onto AndroidX Test. Covers `InstrumentationTestRunner` → `AndroidJUnitRunner`; `InstrumentationTestCase`/`AndroidTestCase` → `@RunWith(AndroidJUnit4)` + `InstrumentationRegistry`/`ApplicationProvider`; `ActivityInstrumentationTestCase2` → `ActivityScenario`/`ActivityScenarioRule` + Espresso; `ServiceTestCase`/`ProviderTestCase2` → `ServiceTestRule`/`ProviderTestRule`; `MoreAsserts` → Truth/Hamcrest; `ViewAsserts`/`TouchUtils` → Espresso matchers/actions; `android.test.UiThreadTest`/`FlakyTest`/`suitebuilder.annotation.*` → `androidx.test.*`; `android.test.mock.*` → real test contexts or Mockito; and JUnit3 `extends TestCase` → JUnit4 `@Test`. Use when the user sees `@Deprecated` on `android.test.*`, asks how to replace `ActivityInstrumentationTestCase2` / `InstrumentationTestCase` / `MoreAsserts` / `TouchUtils`, or "old Android tests won't run on AndroidJUnitRunner".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

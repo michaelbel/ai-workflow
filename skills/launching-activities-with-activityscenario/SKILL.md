@@ -1,7 +1,6 @@
 ---
 name: launching-activities-with-activityscenario
 description: Use this skill to launch, drive, and tear down an Activity from an instrumentation test using `ActivityScenario` and the JUnit4 wrapper `ActivityScenarioRule`. Covers `ActivityScenario.launch<A>()`, `launch(intent)`, `launchActivityForResult`, `moveToState(Lifecycle.State.*)`, `recreate()`, `onActivity { }`, the `Closeable` / `use { }` idiom, and the manifest declaration trap. Establishes that `androidx.test.ext.junit.rules.ActivityScenarioRule` is the single canonical FQN — `androidx.test.rule.ActivityScenarioRule` does NOT exist; the package only ships the deprecated `ActivityTestRule`. Use when the user reports `ActivityNotFoundException`, `ActivityTestRule deprecated`, "how do I rotate the activity in a test", "how do I read setResult from a test", "how do I survive recreate", "Cannot run onActivity since Activity is not alive", or "test deadlocks on launch".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

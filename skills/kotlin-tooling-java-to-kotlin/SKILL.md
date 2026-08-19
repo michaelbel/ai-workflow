@@ -6,7 +6,6 @@ description: >
   working with .java files that need to become .kt files. Handles framework-aware
   conversion for Spring, Lombok, Hibernate, Jackson, Micronaut, Quarkus, Dagger/Hilt,
   RxJava, JUnit, Guice, Retrofit, and Mockito.
-license: Apache-2.0
 metadata:
   author: JetBrains
   version: "1.0.0"

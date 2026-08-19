@@ -1,7 +1,6 @@
 ---
 name: injecting-touch-gestures
 description: Use this skill to drive Jetpack Compose UI with synthetic touch events through performTouchInput and the TouchInjectionScope DSL — click, longClick, doubleClick, swipe, swipeUp / swipeDown / swipeLeft / swipeRight, swipeWithVelocity, pinch, multiTouchSwipe, plus the low-level down / moveTo / moveBy / move / up / cancel primitives. Covers node-local coordinates, the geometry helpers (center, topLeft, bottomRight, percentOffset), event batching, splitting a gesture across multiple performTouchInput blocks, and why performGesture must not be used. Use when the developer asks "how do I simulate a swipe", "drag a node by 100 pixels", "long-press in a Compose test", "pinch to zoom", "test a fling with velocity", or reports "performGesture is deprecated", a Thread.sleep mid-gesture, or a flaky drag test using hardcoded screen coordinates.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

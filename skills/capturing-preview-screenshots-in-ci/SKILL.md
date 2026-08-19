@@ -1,7 +1,6 @@
 ---
 name: capturing-preview-screenshots-in-ci
 description: Use this skill to render every Jetpack Compose `@Preview` as a screenshot on a real Android device or emulator and publish a browsable HTML catalog from CI. Covers the Compose HotSwan Gradle compiler plugin (`com.github.skydoves.compose.hotswan.compiler`) and `debugImplementation("com.github.skydoves.compose.hotswan:preview")`, the `captureAllPreviews` task, capturing one preview over ADB via `HotSwanPreviewActivity` + `screencap`, the `hotSwanCompiler { preview { renderDelayMs; demoMode; sdkModeEnabled } }` DSL, per-preview `@PreviewScreenshot(renderDelay = …)`, running it on an emulator in GitHub Actions (`reactivecircus/android-emulator-runner` or Gradle Managed Devices) and deploying the catalog to GitHub Pages, and how device rendering differs from host-JVM tools (Paparazzi, Roborazzi). Use when the user mentions "captureAllPreviews", "HotSwan", "preview screenshots in CI", "screenshot catalog", "preview catalog on GitHub Pages", or "Paparazzi vs Roborazzi vs device screenshots".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

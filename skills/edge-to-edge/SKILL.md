@@ -4,7 +4,6 @@ description: Use this skill to migrate your Jetpack Compose app to add adaptive 
   support and troubleshoot common issues. Use this skill to fix UI components (like
   buttons or lists) that are obscured by or overlapping with the navigation bar or
   status bar, fix IME insets, and fix system bar legibility.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

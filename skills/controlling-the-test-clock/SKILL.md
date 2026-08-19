@@ -1,7 +1,6 @@
 ---
 name: controlling-the-test-clock
 description: Use this skill to drive the Compose test clock by hand with MainTestClock — currentTime, autoAdvance, advanceTimeByFrame, advanceTimeBy(milliseconds, ignoreFrameDuration), and advanceTimeUntil. Explains the 16 ms frame delay used by TestMonotonicFrameClock, the per-frame ordering where withFrameNanos awaiters resume before recomposition, and how the recomposer and MainTestClock share one TestCoroutineScheduler. Covers v1 versus v2 entry-point dispatcher differences (UnconfinedTestDispatcher vs StandardTestDispatcher) and when an explicit runCurrent or advanceTimeBy(0) is required after migration. If the user mentions MainTestClock, mainClock.advanceTimeBy, mainClock.advanceTimeByFrame, mainClock.advanceTimeUntil, ComposeTimeoutException, frame delay, TestCoroutineScheduler, "test clock vs wall clock", or "v2 createComposeRule queues tasks", use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

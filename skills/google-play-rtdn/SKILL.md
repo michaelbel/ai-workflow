@@ -1,7 +1,6 @@
 ---
 name: google-play-rtdn
 description: Use this skill when setting up Real Time Developer Notifications (RTDN) for Google Play. Covers the full pipeline from Cloud Pub/Sub configuration through message parsing and processing all 22 subscription notification types (renewals, cancellations, revocations, account holds, etc.).
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 10

@@ -1,7 +1,6 @@
 ---
 name: injecting-input-and-state
 description: Use this skill to drive an Android device from the host shell — inject taps, swipes, text, key events, and drag-and-drop via `adb shell input`; resize the display with `wm size` / `wm density`; flip hermetic-test settings with `settings put global window_animation_scale 0`; reset app state with `pm clear` vs `am force-stop`; launch Activities with `am start -n pkg/.Activity`; and use the modern `cmd <service>` wrapper (`cmd wifi`, `cmd connectivity`, `cmd uimode night`, `cmd locale set-app-locales`) instead of the deprecated `svc` aliases on API 30+. If the user mentions "input tap", "input swipe", "input text spaces", "KEYCODE_BACK", "wm size for screen-size matrix", "settings put animation_scale", "force-stop vs pm clear", "svc wifi no-op", "cmd wifi set-wifi-enabled", or "am start intent extras", use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

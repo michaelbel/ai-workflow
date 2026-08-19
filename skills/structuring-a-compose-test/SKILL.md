@@ -1,7 +1,6 @@
 ---
 name: structuring-a-compose-test
 description: Use this skill to structure a Jetpack Compose UI test class the way androidx itself writes them — `@MediumTest` + `@RunWith(AndroidJUnit4::class)`, a single `createComposeRule(StandardTestDispatcher())` rule, hoisted `mutableStateOf` declared above `setContent { }`, and the Test → Find → Assert → Act → Re-assert flow. Covers when to use `createAndroidComposeRule<MyActivity>()` for custom Activities, how to drive state from outside the composition via `runOnIdle { }`, why state must NOT be hoisted inside `setContent`, and why `@get:Rule createComposeRule()` and `runComposeUiTest { }` MUST NOT both appear in the same test. Use when the developer asks "how do I write a Compose test", "where do I declare state", "how do I name the test class", "MediumTest vs LargeTest", "rule.setContent inside @Before", or shows a test class that won't compile or doesn't drive state from outside.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

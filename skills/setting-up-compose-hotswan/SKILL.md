@@ -1,7 +1,6 @@
 ---
 name: setting-up-compose-hotswan
 description: Use this skill to install and verify Compose HotSwan end to end so a developer goes from zero to working sub-second hot reload on a real device or emulator in one session. Covers the JetBrains IDE plugin install, the `com.github.skydoves.compose.hotswan.compiler` Gradle plugin wiring, the canonical `hotSwanCompiler { enabled = true; debugOnly = true }` DSL block, the HotSwan tool window flow, and the first save-to-reload verification. Trigger when the user mentions HotSwan, Compose hot reload, instant UI update, "save and see", "no rebuild", live edit on device, fast Compose iteration, or already has the JetBrains plugin installed and asks how to apply the Gradle compiler plugin.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

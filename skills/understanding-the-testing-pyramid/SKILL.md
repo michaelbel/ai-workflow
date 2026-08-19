@@ -1,7 +1,6 @@
 ---
 name: understanding-the-testing-pyramid
 description: Use this skill to size an Android test suite using Google's small / medium / big scope vocabulary and the qualitative pyramid. Explains why most apps should hold "many small tests and relatively few big tests", how scope (small/medium/big) is orthogonal to execution location (local vs instrumented), and where the older 70/20/10 numeric ratio actually comes from. Use when the user asks "how many unit vs UI tests should I write", "what's the testing pyramid", "all my tests are instrumented and CI is slow", "test pyramid 70 20 10", "Android small medium large tests", "Robolectric counts as which layer", or mentions Unit / Component / Feature / Application / Release Candidate framing from the strategies page.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

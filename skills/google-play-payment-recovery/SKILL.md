@@ -1,7 +1,6 @@
 ---
 name: google-play-payment-recovery
 description: Use this skill when handling failed subscription renewals on Google Play. Covers Grace Period (user keeps access), Account Hold (access revoked), the RTDN signals that move between stages, and the in app messaging required to drive recovery.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 12

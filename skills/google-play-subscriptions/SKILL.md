@@ -1,7 +1,6 @@
 ---
 name: google-play-subscriptions
 description: Use this skill when modeling Google Play subscriptions (the three tier Subscription, Base Plan, Offer hierarchy), choosing a catalog shape, and deciding how to map your paywall to base plans and offers. Grounded in Play Billing Library 9.x.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 4

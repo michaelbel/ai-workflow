@@ -1,7 +1,6 @@
 ---
 name: collecting-flows-safely
 description: Use this skill to migrate Compose UI from `collectAsState()` to `collectAsStateWithLifecycle()`, hoist `Flow<T>` parameters out of composables, and apply `.conflate()` / `.distinctUntilChanged()` / `snapshotFlow` so background CPU and battery stop draining and chatty flows stop invalidating the UI per emission. Covers ViewModel `StateFlow`/`SharedFlow` consumers, sensor and location streams, and the "Flow as composable parameter" antipattern. Trigger when the user mentions `collectAsState`, `collectAsStateWithLifecycle`, lifecycle-aware flow collection, `Lifecycle.State.STARTED`, background battery drain from a Compose screen, `snapshotFlow`, `Flow` parameter on a composable, conflate, or distinctUntilChanged.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

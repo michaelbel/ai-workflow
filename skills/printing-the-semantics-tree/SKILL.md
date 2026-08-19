@@ -1,7 +1,6 @@
 ---
 name: printing-the-semantics-tree
 description: Use this skill to diagnose "no node matched", "found N nodes", and "useUnmergedTree" failures by dumping the actual semantics tree with `printToLog(tag, maxDepth)` and `printToString(maxDepth)`. Covers the output grammar (`Node #<id> at (l, t, r, b)px, Tag: '...'`, alphabetically sorted config, `Actions = [...]`, `[FlagKey]` for `Unit`-valued semantics, `MergeDescendants`, `ClearAndSetSemantics`), the framework hint that suggests `useUnmergedTree = true` when matches are found only in the unmerged tree, and `fetchSemanticsNode` / `fetchSemanticsNodes` for custom matchers. Use when the developer reports "tag not found", "multiple nodes matched", "merged tree vs unmerged tree", "test fails with assertion error and a long error message", or wants to debug a finder without adding `Thread.sleep`.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

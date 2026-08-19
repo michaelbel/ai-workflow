@@ -1,7 +1,6 @@
 ---
 name: testing-lazy-lists
 description: Use this skill to test `LazyColumn`, `LazyRow`, and `LazyVerticalGrid` correctly — tag the container with `Modifier.testTag(...)`, tag each item by its key, scroll via the semantic action (`hasScrollAction()`, `performScrollToIndex`, `performScrollToKey`) or via `Modifier.testTag` plus `performTouchInput { swipeUp() }`, and verify visibility with `assertIsDisplayed` (NOT `assertExists`, since off-screen lazy items still exist as semantic nodes in some configurations). Covers `LazyListState.layoutInfo.visibleItemsInfo` as the highest-signal probe, `mainClock.autoAdvance = false` for animated item placement, and the parameterized vertical/horizontal base-class pattern. Use when the developer asks "how do I scroll a LazyColumn in a test", "assertExists vs assertIsDisplayed", "scroll to a key", "test item placement animation", or sees a test pass when an item is off-screen.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

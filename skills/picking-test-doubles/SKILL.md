@@ -1,7 +1,6 @@
 ---
 name: picking-test-doubles
 description: Use this skill to pick the right test double — fake, mock, stub, spy, dummy, or Robolectric shadow — for an Android test. Encodes Google's verbatim preference order ("fakes ... are preferred", "Fakes are preferred over stubs for simplicity", "Fakes or mocks are therefore preferred over spies"), gives Android examples (in-memory `FakeUserRepository`, `mockk<UserRepository>()`, `ShadowSystemClock`), and a decision matrix mapping intent to the correct double. Use when the user asks "fake or mock", "should I use Mockito here", "how do I replace this dependency in tests", "what's the difference between a stub and a mock", "spy vs mock", or mentions `mockk`, `every { } returns`, `verify { }`, `org.mockito`, `argumentCaptor`, `Robolectric` shadows, `ShadowSystemClock`, or `FakeRepository`.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

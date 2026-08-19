@@ -1,7 +1,6 @@
 ---
 name: setting-up-host-vs-device-tests
 description: Use this skill to choose between host (Robolectric/JVM) and device (instrumentation) tests for Jetpack Compose, and to configure each correctly. Covers the `androidHostTest` (a.k.a. `src/test/`) vs `androidDeviceTest` (a.k.a. `src/androidTest/`) source set split, what each flavor can and cannot drive (RenderThread, screenshots, accessibility), the `@RunWith(AndroidJUnit4::class) @Config(minSdk = 23)` setup for Robolectric, and why `Thread.sleep` is forbidden everywhere except screenshot tests waiting on the RenderThread. Use when the user reports "tests pass locally but fail on CI", asks "Robolectric vs instrumentation", mentions screenshot tests, ripple animations, accessibility checks throwing on Robolectric, or "should this test live in test/ or androidTest/".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

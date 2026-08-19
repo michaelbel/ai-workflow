@@ -4,7 +4,6 @@ description: Analyzes Android build files and R8 keep rules to identify redundan
   broad package-wide rules, and rules that subsume library consumer keep rules. Use
   when developers want to optimize their app's size, remove redundant or overly broad
   keep rules, or troubleshoot Proguard configurations.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

@@ -6,7 +6,6 @@ description: Expert guidance for working with Wear OS Compose Material3. Use thi
   libraries. Also working with core components such as AppScaffold, ScreenScaffold,
   and TransformingLazyColumn, and core Wear OS concepts such as ambient mode. Migration
   from lower versions such as Material 2.5 and Horologist.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

@@ -1,7 +1,6 @@
 ---
 name: google-play-pbl-v7-to-v9-migration
 description: "Use this skill when migrating an Android app from Play Billing Library 7.x straight to 9.x. There is no direct path: you do the breaking v7 to v8 work first, then the small v8 to v9 delta. Covers the full rename map, the dependency bump, the two stage plan, and the verification flow."
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: Google Play Billing Library v9 migration guide and release notes; google-play-handbook appendix D; RevenueCat Play Billing v9 deep dive

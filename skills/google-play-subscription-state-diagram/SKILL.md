@@ -1,7 +1,6 @@
 ---
 name: google-play-subscription-state-diagram
 description: Use this skill as the pull out reference for the full Google Play subscription state machine, showing every state and every RTDN triggered transition in one diagram.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook appendix E

@@ -1,7 +1,6 @@
 ---
 name: writing-espresso-tests
 description: Use this skill to write Espresso 3.7.0 tests against Android Views — `onView(matcher).perform(action).check(matches(...))`, `onData(...)` for `AdapterView`, `RecyclerViewActions`, `Intents.intended/intending`, and `IdlingResource` registration. Covers the full `ViewMatchers` / `ViewActions` / `ViewAssertions` catalog, the `RootMatchers.DEFAULT` exclusion of dialogs and popups (the `inRoot(isDialog())` requirement), the `BottomNavigationViewActions` doesn't-exist gotcha in 3.7.0 contrib, and the `PickerActions.setDate(year, month, day)` 1-12 month convention. Use when the user reports `NoMatchingViewException`, `AmbiguousViewMatcherException`, `PerformException`, asks "how do I click in a dialog", "Espresso typeText doesn't fire", "intent stub for camera", or "Espresso vs UiAutomator".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

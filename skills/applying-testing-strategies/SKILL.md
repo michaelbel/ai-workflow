@@ -1,7 +1,6 @@
 ---
 name: applying-testing-strategies
 description: Use this skill to apply Android-team testing strategies — determinism, hermetic execution, Given-When-Then / Arrange-Act-Assert structure, naming conventions, and Hilt-based dependency replacement. Encodes which guidance actually lives on `/training/testing/fundamentals/strategies` (qualitative pyramid, network-access table) versus `/training/testing/instrumented-tests/stability` (determinism / flake) versus `/training/dependency-injection/hilt-testing` (`@HiltAndroidTest`, `HiltAndroidRule`, `@TestInstallIn`, `@UninstallModules`, `@BindValue`, rule ordering). Use when the user asks "how should I structure tests", "Given When Then or Arrange Act Assert", "how do I name test methods", "Hilt rule order", "@HiltAndroidTest", "@BindValue", "how to swap a binding for tests", "tests pass locally fail on CI", or "make tests deterministic".
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

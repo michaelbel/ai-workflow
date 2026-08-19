@@ -10,7 +10,6 @@ description: Provides instructions and architectural patterns for migrating Andr
   Presenter, ArrayObjectAdapter, or CursorMapper with modern Compose equivalents,
   implementing immersive carousels with focus memory, Media3 video playback with PlayerSurface,
   or custom 10-foot hero layouts.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

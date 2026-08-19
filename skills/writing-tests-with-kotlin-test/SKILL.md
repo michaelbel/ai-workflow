@@ -1,7 +1,6 @@
 ---
 name: writing-tests-with-kotlin-test
 description: Use this skill to write tests with the `kotlin.test` library — the multiplatform assertion + annotation API that compiles the same in `commonTest` and on the JVM (JUnit4 or JUnit5), Android, JS, Native, and Wasm. Covers the `kotlin.test` annotations (`@Test`, `@Ignore`, `@BeforeTest`, `@AfterTest`) and how they typealias onto the underlying framework; the `assert*` functions (`assertEquals`/`assertNotEquals`, `assertSame`, `assertNull`/`assertNotNull`, `assertIs`/`assertIsNot`, `assertContentEquals`, `assertContains`, `assertTrue`/`assertFalse`, `fail`, `expect`, `assertFails`, `assertFailsWith`); the `@OnlyInputTypes` compile-time type check; the `Asserter`/`AsserterContributor`/`DefaultAsserter` extension point that routes JVM failures to `org.junit.Assert` for clickable diffs; and the `kotlin("test")` capability that auto-selects JUnit4 vs JUnit5. Use when the user mentions `kotlin.test`, `import kotlin.test.*`, `@BeforeTest`, `assertFailsWith`, `assertContentEquals`, `assertIs`, or `kotlin("test")`.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

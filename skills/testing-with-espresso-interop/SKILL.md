@@ -1,7 +1,6 @@
 ---
 name: testing-with-espresso-interop
 description: Use this skill to mix Compose finders and Espresso `onView` in the same test — for Android `Dialog` windows, IME (soft keyboard) state, `ComposeView` inside an Android View hierarchy, or focus interactions that cross the Compose/View boundary. Covers `createAndroidComposeRule<A>()` setup, the `EspressoLink` bridge that auto-registers Compose's `IdlingResource` with Espresso, the `onRootWithViewInteraction` API, and why `Espresso.onView(...)` MUST run from the test thread (not from `runOnIdle` / `runOnUiThread`). Use when the developer mentions "Espresso onView and Compose at the same time", "ComposeView inside a View", "soft keyboard test", "Dialog focus", "compose interop test", or shows a test that calls Espresso from inside `runOnIdle` and deadlocks.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

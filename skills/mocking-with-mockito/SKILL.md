@@ -1,7 +1,6 @@
 ---
 name: mocking-with-mockito
 description: Use this skill to wire Mockito (the dominant Android mocking framework, exclusively used by androidx itself) into a JVM unit-test suite. Covers `org.mockito:mockito-core:5.x` plus the `org.mockito.kotlin:mockito-kotlin:5.x` Kotlin DSL — `mock<T>()`, `whenever`, `argumentCaptor<T>()`, `any()` / `anyOrNull()` / `eq()`, `MockitoJUnit.rule()` vs `MockitoAnnotations.openMocks(this)` lifecycle, the inline mock-maker for Kotlin final classes (`mock-maker-inline` plugin file), `@SdkSuppress(minSdkVersion = 28)` for instrumented final-class mocks, and the suspend-stubbing escape hatch via `runBlocking`. Use when the user mentions `whenever`, `Cannot mock final class`, `InvalidUseOfMatchersException`, `@Mock null`, `MockitoJUnitRunner`, `argumentCaptor`, `mock-maker-inline`, or asks how to mock with mockito-kotlin.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

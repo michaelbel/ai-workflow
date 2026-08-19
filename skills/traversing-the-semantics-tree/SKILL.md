@@ -1,7 +1,6 @@
 ---
 name: traversing-the-semantics-tree
 description: Use this skill to navigate from one Compose semantics node to its relatives via `onParent`, `onChildren`, `onChild`, `onChildAt`, `onSibling`, `onSiblings`, `onAncestors`, plus the collection helpers `onFirst`, `onLast`, `filter`, `filterToOne`, and the `[index]` operator. Covers when to traverse vs when to add a stable `testTag`, the LazyColumn/LazyRow caveat (only currently composed children appear), the absence of a singular `onAncestor`, and the sticky `useUnmergedTree` flag across navigation. Use when the developer mentions `onChildren`, `onChild`, `onParent`, `onSiblings`, `onAncestors`, `filterToOne`, `onFirst`, `onLast`, brittle child-index chains, or asks how to find the second child of a Row, the parent of a Text, or any sibling of a node. If the developer is dot-chaining navigation through a layout, use this skill.
-license: Apache-2.0. See LICENSE for complete terms.
 metadata:
   author: Jaewoong Eum (skydoves)
   keywords:

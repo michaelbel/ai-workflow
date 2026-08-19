@@ -1,7 +1,6 @@
 ---
 name: google-play-understanding-billing
 description: Use this skill when a developer is new to Google Play Billing or needs to orient themselves before picking an implementation task. Maps their goal to the right pillar (Play Billing Library, Google Play Developer API, Play Console plus RTDNs) and routes them to the concrete skill to invoke next.
-license: Apache-2.0; see LICENSE
 metadata:
   author: RevenueCat
   source: google-play-handbook chapter 1

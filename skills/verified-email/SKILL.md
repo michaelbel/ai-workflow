@@ -5,7 +5,6 @@ description: Provides a complete workflow for implementing verified email retrie
   email verification flow into an Android app. This skill solves the problem of high-friction
   sign-up processes by leveraging cryptographically verified credentials from trusted
   providers like Google.
-license: Complete terms in LICENSE.txt
 metadata:
   author: Google LLC
   last-updated: '2026-08-06'

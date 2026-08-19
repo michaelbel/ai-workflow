@@ -5,28 +5,10 @@
 @rules/github/GITHUB_REPO_RULES.md
 @rules/project/FILESYSTEM_RULES.md
 @rules/project/WORKFLOW_RULES.md
-@rules/kotlin/KOTLIN_RULES.md
-@rules/compose/COMPOSE_RULES.md
-@rules/compose/COMPOSE_SPACING_RULES.md
-@rules/compose/COMPOSE_COLOR_RULES.md
-@rules/compose/COMPOSE_CONSTRAINTLAYOUT_RULES.md
-@rules/compose/LAZYLIST_RULES.md
-@rules/compose/PREVIEW_RULES.md
-@rules/compose/SCAFFOLD_RULES.md
-@rules/compose/DIALOG_RULES.md
-@rules/compose/SHIMMER_RULES.md
-@rules/compose/TYPOGRAPHY_RULES.md
-@rules/compose/TEXTFIELD_RULES.md
-@rules/compose/COMPOSE_SCREEN_RULES.md
-@rules/compose/BOTTOM_SHEET_RULES.md
-@rules/kmp/KMP_RULES.md
-@rules/android/ROOM_RULES.md
-@rules/android/MVI_RULES.md
-@rules/android/MVI_STATE_RULES.md
-@rules/android/MVI_ERROR_HANDLING_RULES.md
-@rules/android/ARCHITECTURE_RULES.md
-@rules/android/USECASE_RULES.md
-@rules/android/NAVIGATION_RULES.md
-@rules/android/RESOURCE_RULES.md
-@rules/android/DOMAIN_RULES.md
-@rules/android/NETWORK_RULES.md
+
+## Kotlin, Compose, KMP, Android rules
+
+`rules/kotlin`, `rules/compose`, `rules/kmp`, and `rules/android` are the product this repo
+distributes to consumer projects; they are not preloaded here. Before reading, editing, or
+cross-checking one of these rule files, call the `ai-workflow` MCP `list` tool to see all rule
+names, then `get_rule` to fetch the ones relevant to the task at hand.

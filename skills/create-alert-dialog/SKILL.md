@@ -1,21 +1,24 @@
 ---
-name: new-alert-dialog
+name: create-alert-dialog
 description: >-
-  Use when the user asks to create a Compose confirmation dialog, alert dialog, picker dialog,
-  or status popup with an explicit dismiss/confirm action, or says "create a dialog", "add an
-  alert dialog", "confirmation popup", "new AlertDialog". Covers AlertDialog with one or two
-  buttons and BasicAlertDialog for a buttonless picker. Do not use for a scrollable modal
-  surface anchored to the bottom of the screen; use new-bottom-sheet instead. Do not use for a
-  full screen or a plain reusable component; use new-screen or new-shared-component instead.
+  Use when пользователь просит создать Compose confirmation dialog, alert dialog, picker
+  dialog или status popup с явным dismiss/confirm действием, или говорит "create a dialog", "add an
+  alert dialog", "confirmation popup", "new AlertDialog". Покрывает AlertDialog с одной или двумя
+  кнопками и BasicAlertDialog для picker'а без кнопок. Не используй для скроллируемой модальной
+  поверхности, закреплённой снизу экрана; используй вместо этого create-bottom-sheet. Не используй для
+  полного экрана или простого переиспользуемого компонента; используй вместо этого create-mvi-feature или
+  create-shared-component.
 metadata:
   author: michaelbel
 ---
 
 # Новый Alert Dialog
 
-Создаёт Compose-диалог проекта. Замени `{Feature}` на назначение диалога, `{feature}` на имя в lower camel case, а `{package}` на целевой пакет.
+Создаёт Compose-диалог проекта. Замени `{Feature}` на назначение диалога, `{feature}` на имя в
+lower camel case, а `{package}` на целевой пакет.
 
-Используй `AlertDialog`, когда в диалоге есть кнопки действий. Используй `BasicAlertDialog`, когда кнопок действий нет.
+Используй `AlertDialog`, когда в диалоге есть кнопки действий. Используй `BasicAlertDialog`, когда
+кнопок действий нет.
 
 ---
 
@@ -321,4 +324,5 @@ private fun optionItemShape(
 - Для `BasicAlertDialog` применяй `clip` и `background` прямо на modifier диалога.
 - Делай preview каждого диалога внутри `Box(modifier = Modifier.fillMaxSize())`.
 - В лямбдах кнопки подтверждения диспатчи intent подтверждения перед intent закрытия.
-- Используй анонимизированные значения для preview, такие как `0000`, `SampleA`, `SampleB` и `SampleC`.
+- Используй анонимизированные значения для preview, такие как `0000`, `SampleA`, `SampleB` и
+  `SampleC`.

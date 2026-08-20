@@ -65,7 +65,7 @@ Claude Code-хуков (например, напоминание про `git sta
 |-------------|--------------------------------------------------------------------------|
 | `list`      | Список всех доступных имён правил и скиллов (с описаниями скиллов)       |
 | `get_rule`  | Получить содержимое правила по имени вида `android/MVI_RULES`            |
-| `get_skill` | Получить инструкции скилла по имени вида `new-screen`                    |
+| `get_skill` | Получить инструкции скилла по имени вида `create-mvi-feature`            |
 
 Каждый вызов инструмента возвращает и человекочитаемый `content` (Markdown), и `structuredContent`
 с тем же результатом в виде структуры:
@@ -76,8 +76,9 @@ get_rule  -> { name: string, content: string, source: { kind, ref } }
 get_skill -> { name: string, description: string, content: string, source: { kind, ref } }
 ```
 
-Имена скиллов — простые kebab-case имена директорий, например `new-screen`, а не путь к файлу
-(`new-screen/SKILL`). Имена правил — вида `<категория>/<ИМЯ_ПРАВИЛА>`, например `android/MVI_RULES`.
+Имена скиллов — простые kebab-case имена директорий, например `create-mvi-feature`, а не путь к
+файлу (`create-mvi-feature/SKILL`). Имена правил — вида `<категория>/<ИМЯ_ПРАВИЛА>`, например
+`android/MVI_RULES`.
 
 При ошибке инструмент возвращает `isError: true` с телом
 `{ code, message, retryable, details? }`, где `code` — один из фиксированных кодов: `INVALID_NAME`,
@@ -183,11 +184,11 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 пользователя и какой соседний скилл выбрать вместо него в похожем сценарии).
 
 - `add-string` — Добавляет строковый ресурс UI в проект.
+- `create-alert-dialog` — Создаёт Compose-диалог проекта.
+- `create-bottom-sheet` — Создаёт Compose bottom sheet проекта.
+- `create-data-layer` — Создаёт или расширяет поток данных/domain проекта для фичи.
+- `create-mvi-feature` — Создаёт MVI-экран фичи проекта.
+- `create-nav-route` — Создаёт маршрут Navigation 3 для проекта.
+- `create-shared-component` — Создаёт переиспользуемый общий UI-компонент.
+- `create-usecase` — Создаёт один `UseCase` или `FlowUseCase` в `shared/domain/usecase`.
 - `git-status` — Показывает текущий статус рабочего дерева в кратком формате.
-- `new-alert-dialog` — Создаёт Compose-диалог проекта.
-- `new-bottom-sheet` — Создаёт Compose bottom sheet проекта.
-- `new-data-layer` — Создаёт или расширяет поток данных/domain проекта для фичи.
-- `new-navigation-route` — Создаёт маршрут Navigation 3 для проекта.
-- `new-screen` — Создаёт MVI-экран фичи проекта.
-- `new-shared-component` — Создаёт переиспользуемый общий UI-компонент.
-- `new-usecase` — Создаёт один `UseCase` или `FlowUseCase` в `shared/domain/usecase`.

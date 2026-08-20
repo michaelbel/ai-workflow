@@ -1,13 +1,13 @@
 ---
 name: add-string
 description: >-
-  Use when the user asks to add, wire up, or reference a UI string or plural resource in an
-  Android/Kotlin project, or says "add a string", "add this text", "add a plural", "hardcoded
-  string", "add to strings.xml". Adds the entry to strings.xml and exposes it through the
-  project's string facade so UI code never references R.string/R.plurals directly. Do not use
-  this to build the screen, dialog, or component that will display the string; use new-screen,
-  new-alert-dialog, new-bottom-sheet, or new-shared-component for the surrounding UI and call
-  back into this skill only for the string resource itself.
+  Use when пользователь просит добавить, подключить или сослаться на строковый или
+  plural-ресурс UI в Android/Kotlin-проекте, или говорит "add a string", "add this text", "add a
+  plural", "hardcoded string", "add to strings.xml". Добавляет запись в strings.xml и открывает её
+  через строковый фасад проекта, чтобы UI-код никогда не обращался к R.string/R.plurals напрямую. Не
+  используй это, чтобы построить экран, диалог или компонент, который будет отображать строку; для
+  окружающего UI используй create-mvi-feature, create-alert-dialog, create-bottom-sheet или create-shared-component,
+  а в этот скилл возвращайся только за самим строковым ресурсом.
 metadata:
   author: michaelbel
 ---
@@ -20,9 +20,13 @@ metadata:
 - Добавь строку в `app/src/main/res/values/strings.xml`.
 - Предоставь доступ к ней через файл-фасад строк проекта.
 - UI-код обращается к фасаду строк, а не напрямую к `R.string` или `R.plurals`.
-- Для текста UI в верхнем регистре добавляйте отдельный строковый ресурс в верхнем регистре и запись в фасаде строк; не вызывай `uppercase()`.
-- Сохраняй именование с префиксом фичи: `{feature}_{meaning}`, предоставляется как `{Feature}{Meaning}` в фасаде строк.
-- Множественные формы (`plurals`) также добавляй в `strings.xml` и предоставляй доступ через фасад строк; указывай только те `item quantity="..."`, которые нужны для конкретного языка (например, для русского — `one`, `few`, `many`, `other`, без `zero` и `two`).
+- Для текста UI в верхнем регистре добавляйте отдельный строковый ресурс в верхнем регистре и
+  запись в фасаде строк; не вызывай `uppercase()`.
+- Сохраняй именование с префиксом фичи: `{feature}_{meaning}`, предоставляется как
+  `{Feature}{Meaning}` в фасаде строк.
+- Множественные формы (`plurals`) также добавляй в `strings.xml` и предоставляй доступ через фасад
+  строк; указывай только те `item quantity="..."`, которые нужны для конкретного языка (например,
+  для русского — `one`, `few`, `many`, `other`, без `zero` и `two`).
 
 Пример:
 

@@ -1,18 +1,20 @@
 ---
-name: new-bottom-sheet
+name: create-bottom-sheet
 description: >-
-  Use when the user asks to create a Compose bottom sheet, modal sheet feature, or a `_sheet`
-  package, or says "create a bottom sheet", "add a modal sheet", "new ModalBottomSheet". Covers
-  the `{feature}_sheet` package layout, `SharedModalBottomSheet`, `rememberModalBottomSheetState`,
-  and its preview. Do not use for a dialog with simple confirm/dismiss buttons; use
-  new-alert-dialog instead. Do not use for a full navigable screen; use new-screen instead.
+  Use when пользователь просит создать Compose bottom sheet, modal sheet фичу или пакет
+  `_sheet`, или говорит "create a bottom sheet", "add a modal sheet", "new ModalBottomSheet".
+  Покрывает раскладку пакета `{feature}_sheet`, `SharedModalBottomSheet`,
+  `rememberModalBottomSheetState` и его preview. Не используй для диалога с простыми кнопками
+  confirm/dismiss; используй вместо этого create-alert-dialog. Не используй для полного навигируемого
+  экрана; используй вместо этого create-mvi-feature.
 metadata:
   author: michaelbel
 ---
 
 # Новый Bottom Sheet
 
-Создаёт Compose bottom sheet проекта. Замени `{Feature}` на назначение sheet, `{feature}` на имя в lower camel case, а `{package}` на целевой пакет.
+Создаёт Compose bottom sheet проекта. Замени `{Feature}` на назначение sheet, `{feature}` на имя в
+lower camel case, а `{package}` на целевой пакет.
 
 Используй этот скилл для bottom sheet фич в `features/{feature}_sheet`.
 
@@ -156,9 +158,14 @@ private class {Feature}SheetModelPreviewParameterProvider: PreviewParameterProvi
 Правила:
 - Используй file-level `@file:OptIn(ExperimentalMaterial3Api::class)`.
 - Используй `rememberModalBottomSheetState(skipPartiallyExpanded = true)`.
-- Следуй правилам Compose: используй обёртку `Shared*` проекта, такую как `SharedModalBottomSheet`, когда она существует в проекте.
-- Делай preview composable, который сам рендерит bottom sheet, а не отдельный приватный composable только с содержимым.
-- Оборачивай preview bottom sheet в `Box(modifier = Modifier.fillMaxSize())`; иначе preview может не отрендериться.
-- Используй анонимизированные тестовые данные для preview, такие как `sample-id`, `Sample item` и `Sample details`.
+- Следуй правилам Compose: используй обёртку `Shared*` проекта, такую как `SharedModalBottomSheet`,
+  когда она существует в проекте.
+- Делай preview composable, который сам рендерит bottom sheet, а не отдельный приватный composable
+  только с содержимым.
+- Оборачивай preview bottom sheet в `Box(modifier = Modifier.fillMaxSize())`; иначе preview может
+  не отрендериться.
+- Используй анонимизированные тестовые данные для preview, такие как `sample-id`, `Sample item` и
+  `Sample details`.
 - Не добавляй пустые строки между соседними блоками `item {}` внутри `SharedLazyColumn`.
-- Не добавляй `Spacer` без визуального назначения; используй `Spacer` только в конце списка, чтобы создать отступ под последним элементом.
+- Не добавляй `Spacer` без визуального назначения; используй `Spacer` только в конце списка, чтобы
+  создать отступ под последним элементом.

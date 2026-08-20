@@ -1,20 +1,21 @@
 ---
-name: new-screen
+name: create-mvi-feature
 description: >-
-  Use when the user asks to create a new Android screen, Compose screen, MVI feature, ViewModel
-  with Intent/Model/Event, or says "create a screen", "add a feature screen", "new Compose
-  screen". Scaffolds `{Feature}Screen`, `{Feature}ViewModel`, `{Feature}Model`, `{Feature}Intent`
-  and optionally `{Feature}Event`/`{Feature}Route` under `features/{feature}`. Do not use for a
-  standalone reusable component, dialog, or bottom sheet; use new-shared-component,
-  new-alert-dialog, or new-bottom-sheet instead. Do not use for just the DAO/network/use case
-  layer without a screen; use new-data-layer or new-usecase instead.
+  Use when пользователь просит создать новый Android-экран, Compose-экран, MVI-фичу,
+  ViewModel с Intent/Model/Event, или говорит "create a screen", "add a feature screen", "new
+  Compose screen". Строит `{Feature}Screen`, `{Feature}ViewModel`, `{Feature}Model`,
+  `{Feature}Intent` и опционально `{Feature}Event`/`{Feature}Route` в `features/{feature}`. Не
+  используй для отдельного переиспользуемого компонента, диалога или bottom sheet; используй вместо
+  этого create-shared-component, create-alert-dialog или create-bottom-sheet. Не используй только для слоя
+  DAO/network/use case без экрана; используй вместо этого create-data-layer или create-usecase.
 metadata:
   author: michaelbel
 ---
 
 # Новый экран
 
-Создаёт MVI-экран фичи проекта. Замени `{feature}` на папку фичи в snake_case, `{Feature}` на имя фичи в PascalCase, а `{package}` на целевой пакет.
+Создаёт MVI-экран фичи проекта. Замени `{feature}` на папку фичи в snake_case, `{Feature}` на имя
+фичи в PascalCase, а `{package}` на целевой пакет.
 
 Файлы:
 - `features/{feature}/{Feature}Screen.kt`
@@ -75,7 +76,8 @@ sealed interface {Feature}Event: Event {
 ```
 
 Правила:
-- Используй события только для одноразовых побочных эффектов, таких как навигация, snackbar и диалоги.
+- Используй события только для одноразовых побочных эффектов, таких как навигация, snackbar и
+  диалоги.
 - Все записи `data object` идут перед любыми записями `data class`.
 
 ---
@@ -117,13 +119,19 @@ class {Feature}ViewModel @Inject constructor(
 
 Правила:
 - Используй `@HiltViewModel` и инъекцию через конструктор.
-- Наследуйся от общего базового MVI ViewModel проекта с `{Feature}Intent`, `{Feature}Model` и `{Feature}Event`.
-- Никаких сохранённых переменных; всё состояние живёт в Model и меняется только через `reduce { it.copy(...) }`.
+- Наследуйся от общего базового MVI ViewModel проекта с `{Feature}Intent`, `{Feature}Model` и
+  `{Feature}Event`.
+- Никаких сохранённых переменных; всё состояние живёт в Model и меняется только через
+  `reduce { it.copy(...) }`.
 - `dispatch` должен быть `when` по всем веткам intent без `else`.
 - Отправляй одноразовые события через `send(...)`.
-- `ViewModel` объявляет только `dispatch` и `catch`; не создавай приватные функции-обработчики. Размещай вызов use case и `reduce` прямо в соответствующей ветке `dispatch`, оборачивая тело ветки в `launch { }`, предоставляемый базовым MVI ViewModel.
-- Внедряй конкретные классы `UseCase` / `FlowUseCase`, нужные экрану; не внедряй репозитории, интеракторы или агрегирующие фасады.
-- Вызывай одноразовые use case через `.getOrThrow()` и обрабатывай выброшенные исключения в функции `catch` ViewModel.
+- `ViewModel` объявляет только `dispatch` и `catch`; не создавай приватные функции-обработчики.
+  Размещай вызов use case и `reduce` прямо в соответствующей ветке `dispatch`, оборачивая тело
+  ветки в `launch { }`, предоставляемый базовым MVI ViewModel.
+- Внедряй конкретные классы `UseCase` / `FlowUseCase`, нужные экрану; не внедряй репозитории,
+  интеракторы или агрегирующие фасады.
+- Вызывай одноразовые use case через `.getOrThrow()` и обрабатывай выброшенные исключения в
+  функции `catch` ViewModel.
 
 ---
 
@@ -195,10 +203,12 @@ private class {Feature}ModelPreviewParameterProvider: PreviewParameterProvider<{
 ```
 
 Правила:
-- Публичный `{Feature}Screen(viewModel = hiltViewModel())` только собирает state, наблюдает события и делегирует UI приватному `{Feature}ScreenContent`.
+- Публичный `{Feature}Screen(viewModel = hiltViewModel())` только собирает state, наблюдает
+  события и делегирует UI приватному `{Feature}ScreenContent`.
 - Собирай state через `collectAsStateWithLifecycle()`.
 - Наблюдай одноразовые события через `ObserveAsEvents`.
 - Делай preview для `{Feature}ScreenContent`, а не для публичного экрана.
 - Используй `@PreviewWrapper(ThemeWrapper::class)` и приватный `PreviewParameterProvider`.
-- Применяй `innerPadding` из `Scaffold` через `contentPadding` для списков или `Modifier.padding` для одиночного содержимого.
+- Применяй `innerPadding` из `Scaffold` через `contentPadding` для списков или `Modifier.padding`
+  для одиночного содержимого.
 - Добавляй `@file:OptIn(...)` вверху, когда используются экспериментальные API.

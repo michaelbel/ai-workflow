@@ -1,12 +1,12 @@
 ---
 name: git-status
 description: >-
-  Use when the user asks what changed in the working tree, wants a quick pre-commit check, or
-  says "git status", "what's changed", "what's staged", "any untracked files". Documents that
-  the check is `git status --short` and how to read its output (staged/modified/untracked).
-  This skill only describes the command; it does not execute it — run `git status --short`
-  yourself with your own terminal/shell tool. Do not use this for creating a commit; follow
-  rules/git/GIT_RULES.md directly for that instead.
+  Use when пользователь спрашивает, что изменилось в рабочем дереве, хочет быстрый
+  pre-commit-чек, или говорит "git status", "what's changed", "what's staged", "any untracked
+  files". Документирует, что проверка — это `git status --short`, и как читать её вывод
+  (staged/modified/untracked). Этот скилл только описывает команду, но не выполняет её — запусти
+  `git status --short` сам через свой terminal/shell-инструмент. Не используй это для создания
+  коммита; для этого следуй напрямую rules/git/GIT_RULES.md.
 metadata:
   author: michaelbel
 ---
@@ -15,4 +15,6 @@ metadata:
 
 Показывает, как быстро проверить текущий статус рабочего дерева в кратком формате.
 
-Выполни `git status --short` своим терминальным инструментом, чтобы увидеть, какие файлы изменены, добавлены в индекс или не отслеживаются, перед коммитом. Этот скилл только описывает команду и формат вывода — MCP-сервер не выполняет команды.
+Выполни `git status --short` своим терминальным инструментом, чтобы увидеть, какие файлы изменены,
+добавлены в индекс или не отслеживаются, перед коммитом. Этот скилл только описывает команду и
+формат вывода — MCP-сервер не выполняет команды.

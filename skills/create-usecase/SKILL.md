@@ -1,11 +1,12 @@
 ---
-name: new-usecase
+name: create-usecase
 description: >-
-  Use when the user asks to add a single `UseCase` or `FlowUseCase` in `shared/domain/usecase`
-  — one suspend operation or one observable Flow — or says "add a use case", "new UseCase",
-  "new FlowUseCase". Assumes the DAO/entity/network models it depends on already exist. Do not
-  use when the DAO, entity, request/response models, and mappers for a feature don't exist yet;
-  use new-data-layer instead to scaffold the whole flow, including its use cases.
+  Use when пользователь просит добавить один `UseCase` или `FlowUseCase` в
+  `shared/domain/usecase` — одну suspend-операцию или один наблюдаемый Flow — или говорит "add a use
+  case", "new UseCase", "new FlowUseCase". Предполагает, что DAO/entity/network модели, от которых
+  он зависит, уже существуют. Не используй, если DAO, entity, модели request/response и мапперы для
+  фичи ещё не существуют; используй вместо этого create-data-layer, чтобы построить весь поток целиком,
+  включая его use case'ы.
 metadata:
   author: michaelbel
 ---
@@ -33,7 +34,8 @@ metadata:
 ## Параметры
 
 - Без входных данных: используй `Unit` и оставляй `execute(params: Unit)`.
-- Один входной параметр: используй domain-тип как `P`, переименуй override-параметр и добавь `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`.
+- Один входной параметр: используй domain-тип как `P`, переименуй override-параметр и добавь
+  `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`.
 - Два и более входных параметра: добавь вложенный `data class Params(...)` и используй его как `P`.
 
 ## Шаблон одноразового UseCase
@@ -104,7 +106,8 @@ class LoadThingUseCase @Inject constructor(
 ## Обязательное поведение
 
 - `UseCase.execute` возвращает сырой `R`, а не `Result<R>`.
-- Выбрасывай domain-специфичные исключения при ошибках; позволяй базовому `UseCase` конвертировать их в `Result.failure`.
+- Выбрасывай domain-специфичные исключения при ошибках; позволяй базовому `UseCase` конвертировать
+  их в `Result.failure`.
 - Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ потребляется как значение.
 - Вызывай другие use case через `.getOrThrow()`.
 - Вызывай одноразовые use case из ViewModel через `.getOrThrow()` внутри `launch { ... }`.

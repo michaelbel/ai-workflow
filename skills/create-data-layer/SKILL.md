@@ -1,22 +1,24 @@
 ---
-name: new-data-layer
+name: create-data-layer
 description: >-
-  Use when the user asks to create or extend a full data/domain flow for a feature — DAO,
-  Room entity, network request/response models, mappers, and both the one-shot UseCase and the
-  observable FlowUseCase that back it — or says "add a data layer", "wire up Room and network
-  for X", "add a feature's persistence and API". Do not use when only a single UseCase or
-  FlowUseCase is needed and the DAO/entity/network models already exist; use new-usecase
-  instead. Do not use for the screen or ViewModel that consumes this data; use new-screen
-  instead.
+  Use when пользователь просит создать или расширить полный поток данных/domain для фичи —
+  DAO, Room entity, модели network-запроса/ответа, мапперы, и одноразовый UseCase вместе с
+  наблюдаемым FlowUseCase поверх них — или говорит "add a data layer", "wire up Room and network for
+  X", "add a feature's persistence and API". Не используй, когда нужен только один UseCase или
+  FlowUseCase, а модели DAO/entity/network уже существуют; используй вместо этого create-usecase. Не
+  используй для экрана или ViewModel, потребляющих эти данные; используй вместо этого create-mvi-feature.
 metadata:
   author: michaelbel
 ---
 
 # Новый слой данных
 
-Создаёт или расширяет поток данных/domain проекта для фичи с использованием `UseCase` и `FlowUseCase`. Замени `{Feature}` на имя domain, `{feature}` на имя в lower camel case, `{featureTable}` на имя таблицы Room, а `{package}` на целевой пакет.
+Создаёт или расширяет поток данных/domain проекта для фичи с использованием `UseCase` и
+`FlowUseCase`. Замени `{Feature}` на имя domain, `{feature}` на имя в lower camel case,
+`{featureTable}` на имя таблицы Room, а `{package}` на целевой пакет.
 
-Этот скилл охватывает DAO, entity, мапперы, модели запроса/ответа, одноразовые use case и flow use case. Новая работа с данными не создаёт слои Repository или Interactor.
+Этот скилл охватывает DAO, entity, мапперы, модели запроса/ответа, одноразовые use case и flow use
+case. Новая работа с данными не создаёт слои Repository или Interactor.
 
 Обычно создаваемые или изменяемые файлы:
 - `shared/domain/usecase/{Feature}UseCase.kt`
@@ -71,12 +73,15 @@ class Load{Feature}UseCase @Inject constructor(
 ```
 
 Правила:
-- Добавляй `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`, когда единственный аргумент `params` переименован в семантическое имя.
+- Добавляй `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`, когда единственный аргумент
+  `params` переименован в семантическое имя.
 - Передавай `dispatchers.io` для работы с Room и Ktor.
 - Не возвращай `Result`; `UseCase` сам оборачивает `execute` в `Result`.
 - Выбрасывай domain-специфичное исключение из `onFailure`.
 - Создавай `val request = ...` перед вызовом `networkService`.
-- Внедряй `AppDatabase` и используй `database.withTransaction { ... }` только когда блок содержит два и более вызова методов DAO/базы данных; для одного вызова DAO, как здесь, вызывай метод DAO напрямую.
+- Внедряй `AppDatabase` и используй `database.withTransaction { ... }` только когда блок содержит
+  два и более вызова методов DAO/базы данных; для одного вызова DAO, как здесь, вызывай метод DAO
+  напрямую.
 
 ---
 
@@ -150,13 +155,15 @@ class {Feature}EntityFlowUseCase @Inject constructor(
 - Возвращай Flow из DAO напрямую.
 - Не вызывай `flowOn`; базовый `FlowUseCase` применяет его сам.
 - Не оборачивай значения Flow в `Result`.
-- Если у flow два и более входных значения, используй вложенный `Params` точно так же, как в одноразовых use case.
+- Если у flow два и более входных значения, используй вложенный `Params` точно так же, как в
+  одноразовых use case.
 
 ---
 
 ## Значения результата сети
 
-Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ нужен как значение перед продолжением.
+Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ нужен как значение перед
+продолжением.
 
 ```kotlin
 @file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
@@ -189,7 +196,8 @@ class {Feature}UseCase @Inject constructor(
 
 ## Композиция UseCase
 
-Когда один use case вызывает другой, разворачивай результат через `getOrThrow()`, чтобы родительский use case падал согласованно.
+Когда один use case вызывает другой, разворачивай результат через `getOrThrow()`, чтобы
+родительский use case падал согласованно.
 
 ```kotlin
 class Reload{Feature}UseCase @Inject constructor(
@@ -285,7 +293,9 @@ interface {Feature}Dao {
 - Размещай все обычные методы `fun` перед любыми методами `suspend fun`.
 - Используй `@Upsert` вместо отдельных `@Insert` / `@Update`.
 - Помечай методы, возвращающие типы Pojo, аннотацией `@Transaction`.
-- Используй `select`, возвращающий nullable `{Feature}Entity?`, когда строка может отсутствовать; добавляй non-null `selectNotNull`, возвращающий `{Feature}Entity`, только когда в проекте уже есть вызывающий код, точно знающий, что строка существует.
+- Используй `select`, возвращающий nullable `{Feature}Entity?`, когда строка может отсутствовать;
+  добавляй non-null `selectNotNull`, возвращающий `{Feature}Entity`, только когда в проекте уже
+  есть вызывающий код, точно знающий, что строка существует.
 
 ---
 

@@ -5,13 +5,6 @@ description: Analyze and create a testing strategy for native Android apps - ins
   UI tests, screenshot tests, and end-to-end tests.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - android
-  - testing
-  - ui tests
-  - screenshot tests
-  - coverage
 ---
 
 ## Step 1: analyze the current testing setup

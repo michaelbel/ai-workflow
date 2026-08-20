@@ -12,24 +12,6 @@ description: Provides instructions and architectural patterns for migrating Andr
   or custom 10-foot hero layouts.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - Android TV
-  - Jetpack Compose
-  - Leanback
-  - migration
-  - androidx.tv
-  - Carousel
-  - 10-foot UI
-  - PlayerSurface
-  - Media3
-  - focusRestorer
-  - FocusRequester
-  - TV development
-  - Android Views
-  - LeanbackSettingsFragment
-  - PreferenceFragment
-  - BrowseSupportFragment
 ---
 
 ## The 10-foot UI

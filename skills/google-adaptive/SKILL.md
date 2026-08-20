@@ -9,15 +9,6 @@ description: Instructions to make or update an app's UI so that it adapts to dif
   areas - nav rails and nav bars) using the Compose Grid and FlexBox APIs.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - android
-  - ui
-  - adaptive
-  - Grid
-  - FlexBox
-  - MediaQuery
-  - navigation
 ---
 
 ## Prerequisites

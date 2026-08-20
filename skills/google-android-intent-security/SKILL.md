@@ -6,21 +6,6 @@ description: Best practices for Android Intent security. Use this skill when aud
   Intent Redirection and unauthorized access.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - recipe
-  - Android
-  - Security
-  - Intent
-  - Redirection
-  - PendingIntent
-  - ContentProvider
-  - Service
-  - Signature
-  - Verification
-  - sanitizer
-  - Vulnerability
-  - Best Practices
 ---
 
 This skill provides guidelines and patterns to secure Android components (Activities, Services, Broadcast Receivers, Content Providers) and handle Intents safely, preventing privilege escalation and unauthorized access.

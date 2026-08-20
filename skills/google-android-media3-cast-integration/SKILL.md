@@ -1,5 +1,5 @@
 ---
-name: media3-cast-integration
+name: google-android-media3-cast-integration
 description: Implements Google Cast support in Android apps using Jetpack Media3.
   Handles adding build dependencies, updating manifest, configuring OptionsProvider,
   and managing CastPlayer or RemoteCastPlayer for playback in both Compose and View-based
@@ -7,16 +7,6 @@ description: Implements Google Cast support in Android apps using Jetpack Media3
   Cast.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - Android
-  - Media3
-  - Cast
-  - Integration
-  - Migration
-  - ExoPlayer
-  - MediaSession
-  - Jetpack Media3
 ---
 
 ## Prerequisites

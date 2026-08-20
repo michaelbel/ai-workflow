@@ -8,15 +8,6 @@ description: Expert guidance for working with Wear OS Compose Material3. Use thi
   from lower versions such as Material 2.5 and Horologist.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - Wear OS
-  - Compose
-  - Material3
-  - Horologist
-  - TransformingLazyColumn
-  - AppScaffold
-  - ScreenScaffold
 ---
 
 ## Prerequisites and compatibility

@@ -11,7 +11,6 @@ description: >
   instead", KEEP-0459, or sees deprecation warnings from kotlinx.collections.immutable.
 metadata:
   author: JetBrains
-  version: "2.4.0"
 ---
 
 # kotlinx.collections.immutable 0.5.x Migration

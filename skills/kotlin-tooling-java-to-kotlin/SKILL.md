@@ -8,7 +8,6 @@ description: >
   RxJava, JUnit, Guice, Retrofit, and Mockito.
 metadata:
   author: JetBrains
-  version: "1.0.0"
 ---
 
 # Java to Kotlin Conversion

@@ -8,6 +8,8 @@ description: >-
   FlowUseCase is needed and the DAO/entity/network models already exist; use new-usecase
   instead. Do not use for the screen or ViewModel that consumes this data; use new-screen
   instead.
+metadata:
+  author: michaelbel
 ---
 
 # Новый слой данных

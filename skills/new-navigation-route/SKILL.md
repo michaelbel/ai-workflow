@@ -6,6 +6,8 @@ description: >-
   Covers the `data object`/`data class` `NavKey` route file under `features/{feature}/navigation`
   and registering it with `entry<...>`. Do not use this to create the screen or ViewModel itself;
   use new-screen instead and add the route alongside it.
+metadata:
+  author: michaelbel
 ---
 
 # Новый маршрут навигации

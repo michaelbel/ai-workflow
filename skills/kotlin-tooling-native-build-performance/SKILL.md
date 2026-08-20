@@ -9,9 +9,6 @@ description: >
   local-development versus CI build performance plan.
 metadata:
   author: JetBrains
-  version: "1.0.0"
-  tested_models: "openai/gpt-5.5, openai/gpt-5.4-mini"
-  last_eval: "2026-07-06"
 ---
 
 # Kotlin/Native Build Performance

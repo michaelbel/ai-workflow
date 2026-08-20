@@ -7,6 +7,8 @@ description: >-
   This skill only describes the command; it does not execute it — run `git status --short`
   yourself with your own terminal/shell tool. Do not use this for creating a commit; follow
   rules/git/GIT_RULES.md directly for that instead.
+metadata:
+  author: michaelbel
 ---
 
 # Статус Git

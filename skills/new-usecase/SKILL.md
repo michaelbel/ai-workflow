@@ -6,6 +6,8 @@ description: >-
   "new FlowUseCase". Assumes the DAO/entity/network models it depends on already exist. Do not
   use when the DAO, entity, request/response models, and mappers for a feature don't exist yet;
   use new-data-layer instead to scaffold the whole flow, including its use cases.
+metadata:
+  author: michaelbel
 ---
 
 # Новый UseCase

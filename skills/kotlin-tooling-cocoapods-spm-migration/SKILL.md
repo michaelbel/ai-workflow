@@ -3,7 +3,6 @@ name: kotlin-tooling-cocoapods-spm-migration
 description: Migrate KMP projects from CocoaPods (kotlin("native.cocoapods")) to Swift Package Manager (swiftPMDependencies DSL) — replaces pod() with swiftPackage(), transforms cocoapods.* imports to swiftPMImport.*, and reconfigures the Xcode project.
 metadata:
   author: JetBrains
-  version: "1.0.0"
 ---
 
 # CocoaPods to SwiftPM Migration for KMP

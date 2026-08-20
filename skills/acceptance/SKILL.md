@@ -19,13 +19,13 @@ description: >
 доказано, а проект говорит, чем именно**. Поэтому каждую команду acceptance выводит из проекта, с
 которым работает.
 
-| Файл | Содержит |
-|---|---|
-| [`references/source-branches.md`](references/source-branches.md) | Шаг 1: frontmatter спецификации и четыре ветки `test_plan_source` (receipt / mounted / on-the-fly / absent) |
-| [`references/judgement-layers.md`](references/judgement-layers.md) | Блок 2: маршрутизация ревьюеров, паттерн-триггеры безопасности, coverage-аудит, цикл фиксов и бюджет раундов |
-| [`references/subcheck-prompts.md`](references/subcheck-prompts.md) | Контракты промптов и пути вывода для каждой подпроверки |
-| [`references/aggregation.md`](references/aggregation.md) | Шаг 6: агрегация PoLL, таблица Aggregated Status, шаблон расписки, маршрутизация дальше |
-| [`references/re-verification.md`](references/re-verification.md) | Цикл повторной верификации: таблица решений по `diff_hash` и переопределения при изменении спеки и тест-плана |
+| Файл                                                               | Содержит                                                                                                      |
+|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+| [`references/source-branches.md`](references/source-branches.md)   | Шаг 1: frontmatter спецификации и четыре ветки `test_plan_source` (receipt / mounted / on-the-fly / absent)   |
+| [`references/judgement-layers.md`](references/judgement-layers.md) | Блок 2: маршрутизация ревьюеров, паттерн-триггеры безопасности, coverage-аудит, цикл фиксов и бюджет раундов  |
+| [`references/subcheck-prompts.md`](references/subcheck-prompts.md) | Контракты промптов и пути вывода для каждой подпроверки                                                       |
+| [`references/aggregation.md`](references/aggregation.md)           | Шаг 6: агрегация PoLL, таблица Aggregated Status, шаблон расписки, маршрутизация дальше                       |
+| [`references/re-verification.md`](references/re-verification.md)   | Цикл повторной верификации: таблица решений по `diff_hash` и переопределения при изменении спеки и тест-плана |
 
 ---
 

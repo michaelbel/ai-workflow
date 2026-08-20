@@ -28,7 +28,7 @@ export function validateSkillName(rawName: string): string {
   if (!SKILL_NAME_PATTERN.test(name)) {
     throw new WorkflowError(
       "INVALID_NAME",
-      `Invalid skill name '${rawName}'. Expected a kebab-case skill directory name, e.g. 'create-mvi-feature'.`
+      `Invalid skill name '${rawName}'. Expected a kebab-case skill directory name, e.g. 'create-feature-scaffold-screen'.`
     );
   }
 

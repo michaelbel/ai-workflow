@@ -3,16 +3,16 @@ import { test } from "node:test";
 import { parseFrontmatter } from "../src/frontmatter.js";
 
 test("parseFrontmatter reads simple single-line fields", () => {
-  const markdown = ["---", "name: create-mvi-feature", "---", "", "# Body"].join("\n");
+  const markdown = ["---", "name: create-feature-scaffold-screen", "---", "", "# Body"].join("\n");
   const { fields, body } = parseFrontmatter(markdown);
-  assert.equal(fields.name, "create-mvi-feature");
+  assert.equal(fields.name, "create-feature-scaffold-screen");
   assert.equal(body.trim(), "# Body");
 });
 
 test("parseFrontmatter folds a '>-' block scalar into a single line", () => {
   const markdown = [
     "---",
-    "name: create-mvi-feature",
+    "name: create-feature-scaffold-screen",
     "description: >-",
     "  Use when the user asks to create a screen.",
     "  Do not use for a dialog; use new-alert_dialog instead.",

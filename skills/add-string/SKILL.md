@@ -1,13 +1,13 @@
 ---
 name: add-string
 description: >-
-  Use when пользователь просит добавить, подключить или сослаться на строковый или
-  plural-ресурс UI в Android/Kotlin-проекте, или говорит "add a string", "add this text", "add a
-  plural", "hardcoded string", "add to strings.xml". Добавляет запись в strings.xml и открывает её
-  через строковый фасад проекта, чтобы UI-код никогда не обращался к R.string/R.plurals напрямую. Не
-  используй это, чтобы построить экран, диалог или компонент, который будет отображать строку; для
-  окружающего UI используй create-mvi-feature, create-alert-dialog, create-bottom-sheet или create-shared-component,
-  а в этот скилл возвращайся только за самим строковым ресурсом.
+  Use when пользователь просит добавить, подключить или сослаться на строковый или plural-ресурс UI
+  в Android/Kotlin-проекте, или говорит "add a string", "add this text", "add a plural", "hardcoded
+  string", "add to strings.xml". Добавляет запись в strings.xml и открывает её через строковый фасад
+  проекта, чтобы UI-код никогда не обращался к R.string/R.plurals напрямую. Не используй это, чтобы
+  построить экран, диалог или компонент, который будет отображать строку; для окружающего UI
+  используй create-feature-scaffold-screen, create-feature-alert-dialog, create-feature-bottom-sheet
+  или create-shared-component, а в этот скилл возвращайся только за самим строковым ресурсом.
 metadata:
   author: michaelbel
 ---

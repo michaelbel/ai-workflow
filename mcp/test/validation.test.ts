@@ -4,7 +4,7 @@ import { WorkflowError } from "../src/errors.js";
 import { validateRuleName, validateSkillName } from "../src/validation.js";
 
 test("validateSkillName accepts plain kebab-case names", () => {
-  assert.equal(validateSkillName("create-mvi-feature"), "create-mvi-feature");
+  assert.equal(validateSkillName("create-feature-scaffold-screen"), "create-feature-scaffold-screen");
 });
 
 test("validateSkillName rejects underscores", () => {
@@ -12,7 +12,7 @@ test("validateSkillName rejects underscores", () => {
 });
 
 test("validateSkillName strips the deprecated '<name>/SKILL' alias", () => {
-  assert.equal(validateSkillName("create-mvi-feature/SKILL"), "create-mvi-feature");
+  assert.equal(validateSkillName("create-feature-scaffold-screen/SKILL"), "create-feature-scaffold-screen");
 });
 
 test("validateSkillName rejects path traversal", () => {

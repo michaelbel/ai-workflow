@@ -126,9 +126,9 @@ export function createServer(options: CreateServerOptions = {}): McpServer {
     "get_skill",
     {
       title: "Get skill instructions",
-      description: "Get the instructions for a skill. Use a name from the `list` tool, e.g. 'create-mvi-feature'.",
+      description: "Get the instructions for a skill. Use a name from the `list` tool, e.g. 'create-feature-scaffold-screen'.",
       inputSchema: {
-        name: z.string().describe("Skill name (kebab-case directory name), e.g. 'create-mvi-feature'"),
+        name: z.string().describe("Skill name (kebab-case directory name), e.g. 'create-feature-scaffold-screen'"),
       },
       outputSchema: {
         name: z.string(),

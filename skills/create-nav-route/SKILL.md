@@ -1,11 +1,12 @@
 ---
 name: create-nav-route
 description: >-
-  Use when пользователь просит добавить маршрут Navigation 3, `NavKey`, или подключить экран
-  к nav-графу, или говорит "add a route", "create a navigation route", "add this screen to
+  Use when пользователь просит добавить маршрут Navigation 3, `NavKey`, или подключить экран к
+  nav-графу, или говорит "add a route", "create a navigation route", "add this screen to
   navigation". Покрывает файл маршрута `NavKey` (`data object`/`data class`) в
   `features/{feature}/navigation` и его регистрацию через `entry<...>`. Не используй это, чтобы
-  создать сам экран или ViewModel; используй вместо этого create-mvi-feature и добавь маршрут рядом с ним.
+  создать сам экран или ViewModel; используй вместо этого create-feature-scaffold-screen и добавь
+  маршрут рядом с ним.
 metadata:
   author: michaelbel
 ---

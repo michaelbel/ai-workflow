@@ -1,13 +1,14 @@
 ---
-name: create-mvi-feature
+name: create-feature-scaffold-screen
 description: >-
-  Use when пользователь просит создать новый Android-экран, Compose-экран, MVI-фичу,
-  ViewModel с Intent/Model/Event, или говорит "create a screen", "add a feature screen", "new
-  Compose screen". Строит `{Feature}Screen`, `{Feature}ViewModel`, `{Feature}Model`,
-  `{Feature}Intent` и опционально `{Feature}Event`/`{Feature}Route` в `features/{feature}`. Не
-  используй для отдельного переиспользуемого компонента, диалога или bottom sheet; используй вместо
-  этого create-shared-component, create-alert-dialog или create-bottom-sheet. Не используй только для слоя
-  DAO/network/use case без экрана; используй вместо этого create-data-layer или create-usecase.
+  Use when пользователь просит создать новый Android-экран, Compose-экран, MVI-фичу, ViewModel с
+  Intent/Model/Event, или говорит "create a screen", "add a feature screen", "new Compose screen".
+  Строит `{Feature}Screen`, `{Feature}ViewModel`, `{Feature}Model`, `{Feature}Intent` и опционально
+  `{Feature}Event`/`{Feature}Route` в `features/{feature}`. Не используй для отдельного
+  переиспользуемого компонента, диалога или bottom sheet; используй вместо этого
+  create-shared-component, create-feature-alert-dialog или create-feature-bottom-sheet. Не используй
+  только для слоя DAO/network/use case без экрана; используй вместо этого create-data-layer или
+  create-usecase.
 metadata:
   author: michaelbel
 ---

@@ -5,9 +5,9 @@ description: >-
   `shared/ui/components`, или говорит "create a shared component", "add a reusable component", "new
   UI component". Покрывает data class `{Component}State`, composable, принимающий
   `state`/`modifier`, и его `PreviewParameterProvider`. Не используй для полного экрана,
-  привязанного к ViewModel; используй вместо этого create-mvi-feature. Не используй для диалога или bottom
-  sheet; используй вместо этого create-alert-dialog или create-bottom-sheet, поскольку у них свои
-  конвенции state/lifecycle.
+  привязанного к ViewModel; используй вместо этого create-feature-scaffold-screen. Не используй для
+  диалога или bottom sheet; используй вместо этого create-feature-alert-dialog или
+  create-feature-bottom-sheet, поскольку у них свои конвенции state/lifecycle.
 metadata:
   author: michaelbel
 ---

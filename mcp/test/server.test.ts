@@ -45,7 +45,7 @@ test("list returns structuredContent matching content, with the real rule/skill 
   assert.equal(result.isError, undefined);
   const structured = result.structuredContent as { rules: string[]; skills: Array<{ name: string; description: string }>; source: { kind: string; ref: string } };
   assert.ok(structured.rules.includes("android/MVI_RULES"));
-  assert.ok(structured.skills.some((skill) => skill.name === "create-mvi-feature"));
+  assert.ok(structured.skills.some((skill) => skill.name === "create-feature-scaffold-screen"));
   assert.equal(structured.source.kind, "bundled");
   assert.ok(!structured.skills.some((skill) => skill.name.includes("/SKILL")));
 
@@ -55,19 +55,19 @@ test("list returns structuredContent matching content, with the real rule/skill 
   }
 });
 
-test("get_skill('create-mvi-feature') reads the create-mvi-feature skill", async () => {
+test("get_skill('create-feature-scaffold-screen') reads the create-feature-scaffold-screen skill", async () => {
   const { client } = await connectedClient();
-  const result = await client.callTool({ name: "get_skill", arguments: { name: "create-mvi-feature" } });
+  const result = await client.callTool({ name: "get_skill", arguments: { name: "create-feature-scaffold-screen" } });
   assert.equal(result.isError, undefined);
   const structured = result.structuredContent as { name: string; content: string };
-  assert.equal(structured.name, "create-mvi-feature");
+  assert.equal(structured.name, "create-feature-scaffold-screen");
   assert.ok(structured.content.includes("{Feature}ViewModel"));
 });
 
-test("get_skill accepts the deprecated 'create-mvi-feature/SKILL' alias and returns identical content", async () => {
+test("get_skill accepts the deprecated 'create-feature-scaffold-screen/SKILL' alias and returns identical content", async () => {
   const { client } = await connectedClient();
-  const canonical = await client.callTool({ name: "get_skill", arguments: { name: "create-mvi-feature" } });
-  const deprecated = await client.callTool({ name: "get_skill", arguments: { name: "create-mvi-feature/SKILL" } });
+  const canonical = await client.callTool({ name: "get_skill", arguments: { name: "create-feature-scaffold-screen" } });
+  const deprecated = await client.callTool({ name: "get_skill", arguments: { name: "create-feature-scaffold-screen/SKILL" } });
   assert.deepEqual(deprecated.structuredContent, canonical.structuredContent);
 });
 

@@ -5,8 +5,8 @@ description: >-
   `shared/domain/usecase` — одну suspend-операцию или один наблюдаемый Flow — или говорит "add a use
   case", "new UseCase", "new FlowUseCase". Предполагает, что DAO/entity/network модели, от которых
   он зависит, уже существуют. Не используй, если DAO, entity, модели request/response и мапперы для
-  фичи ещё не существуют; используй вместо этого create-data-layer, чтобы построить весь поток целиком,
-  включая его use case'ы.
+  фичи ещё не существуют; используй вместо этого create-data-layer, чтобы построить весь поток
+  целиком, включая его use case'ы.
 metadata:
   author: michaelbel
 ---

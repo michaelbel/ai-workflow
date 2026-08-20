@@ -44,13 +44,13 @@ test("BundledSource.listSkills() returns bare directory names, never '<name>/SKI
   const source = new BundledSource("mcp-vtest");
   const skills = await source.listSkills();
   const names = skills.map((skill) => skill.name);
-  assert.ok(names.includes("create-mvi-feature"));
+  assert.ok(names.includes("create-feature-scaffold-screen"));
   assert.ok(!names.some((name) => name.includes("/SKILL")));
 });
 
-test("BundledSource.getSkill('create-mvi-feature') reads assets/skills/create-mvi-feature/SKILL.md", async () => {
+test("BundledSource.getSkill('create-feature-scaffold-screen') reads assets/skills/create-feature-scaffold-screen/SKILL.md", async () => {
   const source = new BundledSource("mcp-vtest");
-  const skill = await source.getSkill("create-mvi-feature");
+  const skill = await source.getSkill("create-feature-scaffold-screen");
   assert.ok(skill.content.includes("{Feature}ViewModel"));
   assert.ok(skill.description.toLowerCase().includes("use when"));
 });
@@ -87,7 +87,7 @@ test("BundledSource performs no network access", async () => {
     await source.listRules();
     await source.listSkills();
     await source.getRule("android/MVI_RULES");
-    await source.getSkill("create-mvi-feature");
+    await source.getSkill("create-feature-scaffold-screen");
     assert.equal(fetchCalled, false);
   } finally {
     globalThis.fetch = originalFetch;

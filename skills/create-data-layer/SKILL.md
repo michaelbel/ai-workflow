@@ -1,12 +1,13 @@
 ---
 name: create-data-layer
 description: >-
-  Use when пользователь просит создать или расширить полный поток данных/domain для фичи —
-  DAO, Room entity, модели network-запроса/ответа, мапперы, и одноразовый UseCase вместе с
-  наблюдаемым FlowUseCase поверх них — или говорит "add a data layer", "wire up Room and network for
-  X", "add a feature's persistence and API". Не используй, когда нужен только один UseCase или
-  FlowUseCase, а модели DAO/entity/network уже существуют; используй вместо этого create-usecase. Не
-  используй для экрана или ViewModel, потребляющих эти данные; используй вместо этого create-mvi-feature.
+  Use when пользователь просит создать или расширить полный поток данных/domain для фичи — DAO, Room
+  entity, модели network-запроса/ответа, мапперы, и одноразовый UseCase вместе с наблюдаемым
+  FlowUseCase поверх них — или говорит "add a data layer", "wire up Room and network for X", "add a
+  feature's persistence and API". Не используй, когда нужен только один UseCase или FlowUseCase, а
+  модели DAO/entity/network уже существуют; используй вместо этого create-usecase. Не используй для
+  экрана или ViewModel, потребляющих эти данные; используй вместо этого
+  create-feature-scaffold-screen.
 metadata:
   author: michaelbel
 ---

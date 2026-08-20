@@ -1,12 +1,12 @@
 ---
-name: create-bottom-sheet
+name: create-feature-bottom-sheet
 description: >-
-  Use when пользователь просит создать Compose bottom sheet, modal sheet фичу или пакет
-  `_sheet`, или говорит "create a bottom sheet", "add a modal sheet", "new ModalBottomSheet".
-  Покрывает раскладку пакета `{feature}_sheet`, `SharedModalBottomSheet`,
-  `rememberModalBottomSheetState` и его preview. Не используй для диалога с простыми кнопками
-  confirm/dismiss; используй вместо этого create-alert-dialog. Не используй для полного навигируемого
-  экрана; используй вместо этого create-mvi-feature.
+  Use when пользователь просит создать Compose bottom sheet, modal sheet фичу или пакет `_sheet`,
+  или говорит "create a bottom sheet", "add a modal sheet", "new ModalBottomSheet". Покрывает
+  раскладку пакета `{feature}_sheet`, `SharedModalBottomSheet`, `rememberModalBottomSheetState` и
+  его preview. Не используй для диалога с простыми кнопками confirm/dismiss; используй вместо этого
+  create-feature-alert-dialog. Не используй для полного навигируемого экрана; используй вместо этого
+  create-feature-scaffold-screen.
 metadata:
   author: michaelbel
 ---

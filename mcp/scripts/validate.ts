@@ -152,12 +152,12 @@ for (const file of listFilesRecursive(srcDir)) {
 
 // ─── 6. Rule/skill drift regressions (see docs/plans/ai-workflow-hardening/plan.md) ────────────
 
-const newScreenSkill = readText(join(skillsDir, "create-mvi-feature", "SKILL.md"));
+const newScreenSkill = readText(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"));
 if (newScreenSkill.includes("viewModelScope")) {
-  fail(join(skillsDir, "create-mvi-feature", "SKILL.md"), "regression: 'viewModelScope' reintroduced (MVI_RULES forbids ViewModel helper coroutine scopes)");
+  fail(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"), "regression: 'viewModelScope' reintroduced (MVI_RULES forbids ViewModel helper coroutine scopes)");
 }
 if (newScreenSkill.includes("private fun loadData")) {
-  fail(join(skillsDir, "create-mvi-feature", "SKILL.md"), "regression: private ViewModel helper function reintroduced (MVI_RULES only allows dispatch/catch)");
+  fail(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"), "regression: private ViewModel helper function reintroduced (MVI_RULES only allows dispatch/catch)");
 }
 
 const newDataLayerSkill = readText(join(skillsDir, "create-data-layer", "SKILL.md"));
@@ -171,17 +171,17 @@ if (/suspend fun select\(id: String\): \{Feature\}Entity\s*$/m.test(newDataLayer
   fail(join(skillsDir, "create-data-layer", "SKILL.md"), "regression: 'select' returns non-null again (ROOM_RULES naming convention reserves 'select' for the nullable form)");
 }
 
-const newAlertDialogSkill = readText(join(skillsDir, "create-alert-dialog", "SKILL.md"));
+const newAlertDialogSkill = readText(join(skillsDir, "create-feature-alert-dialog", "SKILL.md"));
 if (/\)\s*=\s*when\s*\{/.test(newAlertDialogSkill)) {
-  fail(join(skillsDir, "create-alert-dialog", "SKILL.md"), "regression: expression-body function reintroduced (KOTLIN_RULES requires block bodies with explicit return)");
+  fail(join(skillsDir, "create-feature-alert-dialog", "SKILL.md"), "regression: expression-body function reintroduced (KOTLIN_RULES requires block bodies with explicit return)");
 }
 
-const newBottomSheetSkill = readText(join(skillsDir, "create-bottom-sheet", "SKILL.md"));
+const newBottomSheetSkill = readText(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"));
 if (/\}\n\s*\n\s*item \{/.test(newBottomSheetSkill)) {
-  fail(join(skillsDir, "create-bottom-sheet", "SKILL.md"), "regression: blank line reintroduced between adjacent item {} blocks (LAZYLIST_RULES forbids this)");
+  fail(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"), "regression: blank line reintroduced between adjacent item {} blocks (LAZYLIST_RULES forbids this)");
 }
 if (newBottomSheetSkill.includes("height(0.dp)")) {
-  fail(join(skillsDir, "create-bottom-sheet", "SKILL.md"), "regression: zero-height Spacer reintroduced");
+  fail(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"), "regression: zero-height Spacer reintroduced");
 }
 
 const gitStatusSkill = readText(join(skillsDir, "git-status", "SKILL.md"));

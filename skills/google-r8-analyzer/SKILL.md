@@ -6,13 +6,6 @@ description: Analyzes Android build files and R8 keep rules to identify redundan
   keep rules, or troubleshoot Proguard configurations.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - R8
-  - proguard
-  - keep rules
-  - app size
-  - optimization
 ---
 
 ## Step 1. Setup and configuration check

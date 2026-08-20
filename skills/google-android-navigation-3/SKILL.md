@@ -7,29 +7,6 @@ description: Learn how to install and migrate to Jetpack Navigation 3, and how t
   with Hilt, ViewModel, Kotlin, and view interoperability.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - recipe
-  - Android
-  - Navigation 2
-  - Navigation 3
-  - migration
-  - Compose
-  - guide
-  - dependencies
-  - NavKey
-  - NavHost
-  - NavDisplay
-  - BottomSheet
-  - list-detail
-  - scenes
-  - two-pane
-  - supporting pane
-  - multiple backstacks
-  - dialog
-  - Hilt
-  - ViewModel
-  - View interop.
 ---
 
 *** ** * ** ***

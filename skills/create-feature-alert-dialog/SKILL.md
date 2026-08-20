@@ -25,8 +25,6 @@ lower camel case, а `{package}` на целевой пакет.
 Используй `AlertDialog`, когда в диалоге есть кнопки действий. Используй `BasicAlertDialog`, когда
 кнопок действий нет.
 
----
-
 ## AlertDialog с двумя кнопками
 
 ```kotlin
@@ -99,8 +97,6 @@ private fun {Feature}DialogPreview() {
 }
 ```
 
----
-
 ## AlertDialog с одной кнопкой
 
 ```kotlin
@@ -146,8 +142,6 @@ private fun {Feature}DialogPreview() {
     }
 }
 ```
-
----
 
 ## BasicAlertDialog без кнопок
 

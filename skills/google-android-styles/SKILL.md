@@ -7,13 +7,6 @@ description: Use this skill to integrate the Jetpack Compose Styles API into an 
   parameters with Style attributes, and use Modifier.styleable for interaction states.
 metadata:
   author: Google LLC
-  last-updated: '2026-08-06'
-  keywords:
-  - Jetpack Compose
-  - Styles
-  - Theming with Styles
-  - Migrate to Styles
-  - Modifier.styleable
 ---
 
 ## Limitations

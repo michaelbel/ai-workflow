@@ -184,7 +184,7 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 
 - `add-string` — Добавляет строковый ресурс UI в проект.
 - `git-status` — Показывает текущий статус рабочего дерева в кратком формате.
-- `new-alert_dialog` — Создаёт Compose-диалог проекта.
+- `new-alert-dialog` — Создаёт Compose-диалог проекта.
 - `new-bottom-sheet` — Создаёт Compose bottom sheet проекта.
 - `new-data-layer` — Создаёт или расширяет поток данных/domain проекта для фичи.
 - `new-navigation-route` — Создаёт маршрут Navigation 3 для проекта.

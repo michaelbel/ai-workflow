@@ -3,15 +3,11 @@ import { WorkflowError } from "./errors.js";
 const DEPRECATED_SKILL_SUFFIX = "/SKILL";
 
 /**
- * kebab-case-ish skill directory name: lowercase alphanumeric segments separated by `-` or `_`.
- *
- * Pure kebab-case (`-` only) would reject the real `new-alert_dialog` skill directory, which
- * mirrors the Android package convention `alert_dialog`. Renaming that directory was out of
- * scope for this hardening pass, so `_` is allowed as a segment separator alongside `-`. Either
- * way, no slash, dot, backslash, uppercase letter, or whitespace can appear, which is sufficient
- * to make path traversal (`..`, `/`, absolute paths) impossible.
+ * Pure kebab-case skill directory name: lowercase alphanumeric segments separated by `-`.
+ * No slash, dot, backslash, underscore, uppercase letter, or whitespace can appear, which is
+ * sufficient to make path traversal (`..`, `/`, absolute paths) impossible.
  */
-const SKILL_NAME_PATTERN = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
+const SKILL_NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 /**
  * Rule name: `<category>/<RULE_NAME>`, e.g. `android/MVI_RULES`. Exactly one `/` is allowed by

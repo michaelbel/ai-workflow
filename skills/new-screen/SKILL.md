@@ -6,8 +6,10 @@ description: >-
   screen". Scaffolds `{Feature}Screen`, `{Feature}ViewModel`, `{Feature}Model`, `{Feature}Intent`
   and optionally `{Feature}Event`/`{Feature}Route` under `features/{feature}`. Do not use for a
   standalone reusable component, dialog, or bottom sheet; use new-shared-component,
-  new-alert_dialog, or new-bottom-sheet instead. Do not use for just the DAO/network/use case
+  new-alert-dialog, or new-bottom-sheet instead. Do not use for just the DAO/network/use case
   layer without a screen; use new-data-layer or new-usecase instead.
+metadata:
+  author: michaelbel
 ---
 
 # Новый экран

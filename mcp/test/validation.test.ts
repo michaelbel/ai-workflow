@@ -7,8 +7,8 @@ test("validateSkillName accepts plain kebab-case names", () => {
   assert.equal(validateSkillName("new-screen"), "new-screen");
 });
 
-test("validateSkillName accepts underscores (e.g. new-alert_dialog)", () => {
-  assert.equal(validateSkillName("new-alert_dialog"), "new-alert_dialog");
+test("validateSkillName rejects underscores", () => {
+  assert.throws(() => validateSkillName("new-alert_dialog"), WorkflowError);
 });
 
 test("validateSkillName strips the deprecated '<name>/SKILL' alias", () => {

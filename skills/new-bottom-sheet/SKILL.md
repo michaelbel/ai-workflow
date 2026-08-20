@@ -5,7 +5,9 @@ description: >-
   package, or says "create a bottom sheet", "add a modal sheet", "new ModalBottomSheet". Covers
   the `{feature}_sheet` package layout, `SharedModalBottomSheet`, `rememberModalBottomSheetState`,
   and its preview. Do not use for a dialog with simple confirm/dismiss buttons; use
-  new-alert_dialog instead. Do not use for a full navigable screen; use new-screen instead.
+  new-alert-dialog instead. Do not use for a full navigable screen; use new-screen instead.
+metadata:
+  author: michaelbel
 ---
 
 # Новый Bottom Sheet

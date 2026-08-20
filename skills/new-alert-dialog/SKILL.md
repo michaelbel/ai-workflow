@@ -1,5 +1,5 @@
 ---
-name: new-alert_dialog
+name: new-alert-dialog
 description: >-
   Use when the user asks to create a Compose confirmation dialog, alert dialog, picker dialog,
   or status popup with an explicit dismiss/confirm action, or says "create a dialog", "add an
@@ -7,6 +7,8 @@ description: >-
   buttons and BasicAlertDialog for a buttonless picker. Do not use for a scrollable modal
   surface anchored to the bottom of the screen; use new-bottom-sheet instead. Do not use for a
   full screen or a plain reusable component; use new-screen or new-shared-component instead.
+metadata:
+  author: michaelbel
 ---
 
 # Новый Alert Dialog

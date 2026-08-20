@@ -5,8 +5,10 @@ description: >-
   or says "create a shared component", "add a reusable component", "new UI component". Covers
   the `{Component}State` data class, the composable taking `state`/`modifier`, and its
   `PreviewParameterProvider`. Do not use for a full screen tied to a ViewModel; use new-screen
-  instead. Do not use for a dialog or bottom sheet; use new-alert_dialog or new-bottom-sheet
+  instead. Do not use for a dialog or bottom sheet; use new-alert-dialog or new-bottom-sheet
   instead, since those have their own state/lifecycle conventions.
+metadata:
+  author: michaelbel
 ---
 
 # Новый общий компонент

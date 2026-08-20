@@ -171,9 +171,9 @@ if (/suspend fun select\(id: String\): \{Feature\}Entity\s*$/m.test(newDataLayer
   fail(join(skillsDir, "new-data-layer", "SKILL.md"), "regression: 'select' returns non-null again (ROOM_RULES naming convention reserves 'select' for the nullable form)");
 }
 
-const newAlertDialogSkill = readText(join(skillsDir, "new-alert_dialog", "SKILL.md"));
+const newAlertDialogSkill = readText(join(skillsDir, "new-alert-dialog", "SKILL.md"));
 if (/\)\s*=\s*when\s*\{/.test(newAlertDialogSkill)) {
-  fail(join(skillsDir, "new-alert_dialog", "SKILL.md"), "regression: expression-body function reintroduced (KOTLIN_RULES requires block bodies with explicit return)");
+  fail(join(skillsDir, "new-alert-dialog", "SKILL.md"), "regression: expression-body function reintroduced (KOTLIN_RULES requires block bodies with explicit return)");
 }
 
 const newBottomSheetSkill = readText(join(skillsDir, "new-bottom-sheet", "SKILL.md"));

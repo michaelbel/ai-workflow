@@ -189,4 +189,3 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 - `create-feature-scaffold-screen` — Создаёт MVI-экран фичи проекта.
 - `create-shared-component` — Создаёт переиспользуемый общий UI-компонент.
 - `create-usecase` — Создаёт один `UseCase` или `FlowUseCase` в `shared/domain/usecase`.
-- `git-status` — Показывает текущий статус рабочего дерева в кратком формате.

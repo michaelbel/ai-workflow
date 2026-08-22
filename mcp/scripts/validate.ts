@@ -184,11 +184,6 @@ if (newBottomSheetSkill.includes("height(0.dp)")) {
   fail(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"), "regression: zero-height Spacer reintroduced");
 }
 
-const gitStatusSkill = readText(join(skillsDir, "git-status", "SKILL.md"));
-if (/^command:/m.test(gitStatusSkill)) {
-  fail(join(skillsDir, "git-status", "SKILL.md"), "regression: 'command:' frontmatter field reintroduced (run_skill was removed, this field is unused)");
-}
-
 // ─── 7. README's tool table matches the tools actually registered in server.ts ────────────────
 
 const readmePath = join(repoRoot, "README.md");

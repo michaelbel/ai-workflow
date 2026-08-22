@@ -42,13 +42,13 @@ BLOCK.
 агрегатную команду проекта (`./gradlew check`, `npm test`, `make check`) командам ниже: они запасной
 вариант на случай, когда разрешима только сборка.
 
-| `ecosystem` | Команда |
-|---|---|
-| `gradle` | `./gradlew build -x test --quiet` (один модуль) либо `./gradlew :check` (много модулей) |
-| `node` | `npm run build` (либо `pnpm build` / `yarn build`) |
-| `rust` | `cargo build --release --quiet` |
-| `go` | `go build ./...` |
-| `python` | `python -m compileall .` либо сборка пакета |
+| `ecosystem` | Команда                                                                                 |
+|-------------|-----------------------------------------------------------------------------------------|
+| `gradle`    | `./gradlew build -x test --quiet` (один модуль) либо `./gradlew :check` (много модулей) |
+| `node`      | `npm run build` (либо `pnpm build` / `yarn build`)                                      |
+| `rust`      | `cargo build --release --quiet`                                                         |
+| `go`        | `go build ./...`                                                                        |
+| `python`    | `python -m compileall .` либо сборка пакета                                             |
 
 Определение многомодульности: просканировать `settings.gradle*` на `include(`. Подпроекты объявлены, а
 цель пользователь не назвал — спросить, какой модуль целевой, **до** начала шага 3.

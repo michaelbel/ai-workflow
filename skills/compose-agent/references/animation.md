@@ -8,16 +8,16 @@ Animation is not a separate concern from the rest of this skill. A bad animation
 
 This is the **first** decision, and the one LLMs get wrong most often — they reach for `Animatable` + `LaunchedEffect` for everything, including cases that need no coroutine and no effect at all.
 
-| You want to… | Use | Coroutine? |
-|---|---|---|
-| animate a single value when state changes (size, color, offset, alpha, dp) | `animate*AsState` | No |
-| animate several properties off the **same** state change, in sync | `updateTransition` + `transition.animate*` | No |
-| imperatively drive a value — gesture follow, fling, sequence, cancel/restart | `remember { Animatable(...) }` | Yes |
-| loop forever (pulsing, shimmer, indeterminate) | `rememberInfiniteTransition` | No |
-| enter/exit a composable from the tree | `AnimatedVisibility` | No |
-| swap between different content based on target state | `AnimatedContent` (or `Crossfade` for a plain fade) | No |
-| animate layout size changes automatically | `Modifier.animateContentSize()` | No |
-| animate item position in a lazy list | `Modifier.animateItem()` (in `LazyColumn`/`LazyRow` item scope) | No |
+| You want to…                                                                 | Use                                                             | Coroutine? |
+|------------------------------------------------------------------------------|-----------------------------------------------------------------|------------|
+| animate a single value when state changes (size, color, offset, alpha, dp)   | `animate*AsState`                                               | No         |
+| animate several properties off the **same** state change, in sync            | `updateTransition` + `transition.animate*`                      | No         |
+| imperatively drive a value — gesture follow, fling, sequence, cancel/restart | `remember { Animatable(...) }`                                  | Yes        |
+| loop forever (pulsing, shimmer, indeterminate)                               | `rememberInfiniteTransition`                                    | No         |
+| enter/exit a composable from the tree                                        | `AnimatedVisibility`                                            | No         |
+| swap between different content based on target state                         | `AnimatedContent` (or `Crossfade` for a plain fade)             | No         |
+| animate layout size changes automatically                                    | `Modifier.animateContentSize()`                                 | No         |
+| animate item position in a lazy list                                         | `Modifier.animateItem()` (in `LazyColumn`/`LazyRow` item scope) | No         |
 
 **LLM tell:** any `val anim = remember { Animatable(...) }` paired with a `LaunchedEffect` that just calls `anim.animateTo(target)` whenever `target` changes. That is `animateXAsState` rewritten in 6 lines with a bug surface. Collapse it.
 

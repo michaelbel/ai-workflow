@@ -9,20 +9,20 @@
 
 ## Матрица ревьюеров
 
-| Ревьюер | Срабатывает по frontmatter | Срабатывает по диффу |
-|---|---|---|
-| `code-reviewer` | всегда | всегда |
-| `business-analyst` | `acceptance_criteria_ids` непуст | изменились файлы спеки или требований |
-| `ux-expert` (дизайн) | задан `design.figma` и `has_ui_surface` | изменения UI-поверхности — экраны, views, composable, тексты, анимация |
-| `ux-expert` (a11y) | задан `non_functional.a11y` и `has_ui_surface` | тронуты атрибуты доступности или семантика |
-| `security-expert` | `risk_areas` ∈ {auth, payment, pii, data-migration} | любой паттерн из §Паттерн-триггеры безопасности |
-| `performance-expert` | задан `non_functional.sla` либо `risk_areas` содержит `perf-critical` | код горячего пути (отрисовка, циклы запросов, пакетные задания), формы N+1, аллокации больших буферов, изменения потоков и конкурентности |
-| `architecture-expert` | — | новый модуль, новый публичный символ API, изменение кросс-модульной зависимости, нарушение слоёв либо дифф, охватывающий ≥ 3 модулей верхнего уровня |
-| `build-engineer` | — | `build.gradle*`, `settings.gradle*`, `pom.xml`, `package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`, `Makefile`, правки version catalog, апгрейды плагинов |
-| `devops-expert` | — | `.github/workflows/*`, `.gitlab-ci.yml`, `Dockerfile`, `docker-compose*`, `.circleci/config.yml`, скрипты деплоя, инфраструктура как код |
-| coverage-аудит | — | см. §Coverage-аудит |
-| `error-handling-reviewer` | `risk_areas` содержит `error-handling` | дифф добавляет или меняет обработку ошибок — см. §Два ревьюера, форкнутых из `pr-review-toolkit` |
-| `test-quality-reviewer` | — | дифф трогает тестовые исходники — см. §Два ревьюера, форкнутых из `pr-review-toolkit` |
+| Ревьюер                   | Срабатывает по frontmatter                                            | Срабатывает по диффу                                                                                                                                            |
+|---------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `code-reviewer`           | всегда                                                                | всегда                                                                                                                                                          |
+| `business-analyst`        | `acceptance_criteria_ids` непуст                                      | изменились файлы спеки или требований                                                                                                                           |
+| `ux-expert` (дизайн)      | задан `design.figma` и `has_ui_surface`                               | изменения UI-поверхности — экраны, views, composable, тексты, анимация                                                                                          |
+| `ux-expert` (a11y)        | задан `non_functional.a11y` и `has_ui_surface`                        | тронуты атрибуты доступности или семантика                                                                                                                      |
+| `security-expert`         | `risk_areas` ∈ {auth, payment, pii, data-migration}                   | любой паттерн из §Паттерн-триггеры безопасности                                                                                                                 |
+| `performance-expert`      | задан `non_functional.sla` либо `risk_areas` содержит `perf-critical` | код горячего пути (отрисовка, циклы запросов, пакетные задания), формы N+1, аллокации больших буферов, изменения потоков и конкурентности                       |
+| `architecture-expert`     | —                                                                     | новый модуль, новый публичный символ API, изменение кросс-модульной зависимости, нарушение слоёв либо дифф, охватывающий ≥ 3 модулей верхнего уровня            |
+| `build-engineer`          | —                                                                     | `build.gradle*`, `settings.gradle*`, `pom.xml`, `package.json`, `Cargo.toml`, `go.mod`, `pyproject.toml`, `Makefile`, правки version catalog, апгрейды плагинов |
+| `devops-expert`           | —                                                                     | `.github/workflows/*`, `.gitlab-ci.yml`, `Dockerfile`, `docker-compose*`, `.circleci/config.yml`, скрипты деплоя, инфраструктура как код                        |
+| coverage-аудит            | —                                                                     | см. §Coverage-аудит                                                                                                                                             |
+| `error-handling-reviewer` | `risk_areas` содержит `error-handling`                                | дифф добавляет или меняет обработку ошибок — см. §Два ревьюера, форкнутых из `pr-review-toolkit`                                                                |
+| `test-quality-reviewer`   | —                                                                     | дифф трогает тестовые исходники — см. §Два ревьюера, форкнутых из `pr-review-toolkit`                                                                           |
 
 Сработали оба триггера `ux-expert` — один вызов с режимом `both`. Не сработал ни один триггер — слой
 это один `code-reviewer`, и это валидный исход, а не ошибка конфигурации.
@@ -44,14 +44,14 @@
 
 ## Паттерн-триггеры безопасности
 
-| Категория | Паттерн (путь либо содержимое диффа) | Тир |
-|---|---|---|
-| Сетевой слой | путь под `/network/`, `/api/`, `/http/`, `/rpc/`, `/graphql/` | broad |
-| Auth и криптография | путь под `/auth/`, `/crypto/`, `/token/`, `/session/` | narrow |
+| Категория               | Паттерн (путь либо содержимое диффа)                                                                                                                               | Тир    |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+| Сетевой слой            | путь под `/network/`, `/api/`, `/http/`, `/rpc/`, `/graphql/`                                                                                                      | broad  |
+| Auth и криптография     | путь под `/auth/`, `/crypto/`, `/token/`, `/session/`                                                                                                              | narrow |
 | Хранение учётных данных | в диффе встречаются `SharedPreferences`, `EncryptedSharedPreferences`, `Keychain`, `UserDefaults`, `localStorage`, `sessionStorage`, `document.cookie`, `KeyStore` | narrow |
-| Supply chain | новая строка зависимости в `build.gradle*`, `Podfile`, `Package.swift`, `package.json`, `pom.xml`, `Cargo.toml`, `requirements.txt`, `pyproject.toml`, `go.mod` | narrow |
-| Миграции БД | путь под `migrations/`, `*.sql`, `Migration.kt`, `schema.prisma`, конфигурация Flyway или Liquibase, `alembic/` | narrow |
-| Десериализация | блоки конфигурации Jackson, Gson, `kotlinx.serialization`, Python `pickle`, `XMLDecoder`, `ObjectInputStream` | narrow |
+| Supply chain            | новая строка зависимости в `build.gradle*`, `Podfile`, `Package.swift`, `package.json`, `pom.xml`, `Cargo.toml`, `requirements.txt`, `pyproject.toml`, `go.mod`    | narrow |
+| Миграции БД             | путь под `migrations/`, `*.sql`, `Migration.kt`, `schema.prisma`, конфигурация Flyway или Liquibase, `alembic/`                                                    | narrow |
+| Десериализация          | блоки конфигурации Jackson, Gson, `kotlinx.serialization`, Python `pickle`, `XMLDecoder`, `ObjectInputStream`                                                      | narrow |
 
 **Пороги** — контроль ложных срабатываний:
 

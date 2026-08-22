@@ -39,12 +39,12 @@ This skill covers grabbing PNG screenshots and MP4 screen recordings from a devi
 screencap [-h] [-p] [-d <displayId>] [<path-on-device>]
 ```
 
-| Flag | Meaning |
-|---|---|
-| (no flag) | Writes raw RGBA framebuffer to file. **Not** a PNG. |
-| `-p` | Encode as PNG. Required when streaming to stdout for the host. |
-| `-d <displayId>` | Capture a specific logical display (multi-display devices). |
-| `-h` | Help. |
+| Flag             | Meaning                                                        |
+|------------------|----------------------------------------------------------------|
+| (no flag)        | Writes raw RGBA framebuffer to file. **Not** a PNG.            |
+| `-p`             | Encode as PNG. Required when streaming to stdout for the host. |
+| `-d <displayId>` | Capture a specific logical display (multi-display devices).    |
+| `-h`             | Help.                                                          |
 
 Three idiomatic invocations:
 
@@ -82,15 +82,15 @@ screenrecord [--size WIDTHxHEIGHT] [--bit-rate RATE] [--time-limit TIME]
              [--rotate] [--bugreport] [--verbose] <path-on-device>
 ```
 
-| Flag | Verbatim meaning (developer.android.com/tools/adb#screenrecord) |
-|---|---|
-| `--help` | "Display command syntax and options". |
-| `--size WxH` | "Set the video size. The default value is the device's native display resolution (if supported), 1280x720 if not." |
-| `--bit-rate R` | "Set the video bit rate for the video, in megabits per second. The default value is 20Mbps." |
-| `--time-limit T` | "Set the maximum recording time, in seconds. The default and maximum value is 180 (3 minutes)." |
-| `--rotate` | "Rotate the output 90 degrees. This feature is experimental." |
-| `--bugreport` | Embeds a textual frame info / timestamp overlay used by bug-report attachments. |
-| `--verbose` | "Display log information on the command-line screen." |
+| Flag             | Verbatim meaning (developer.android.com/tools/adb#screenrecord)                                                    |
+|------------------|--------------------------------------------------------------------------------------------------------------------|
+| `--help`         | "Display command syntax and options".                                                                              |
+| `--size WxH`     | "Set the video size. The default value is the device's native display resolution (if supported), 1280x720 if not." |
+| `--bit-rate R`   | "Set the video bit rate for the video, in megabits per second. The default value is 20Mbps."                       |
+| `--time-limit T` | "Set the maximum recording time, in seconds. The default and maximum value is 180 (3 minutes)."                    |
+| `--rotate`       | "Rotate the output 90 degrees. This feature is experimental."                                                      |
+| `--bugreport`    | Embeds a textual frame info / timestamp overlay used by bug-report attachments.                                    |
+| `--verbose`      | "Display log information on the command-line screen."                                                              |
 
 ### Hard limits (verbatim)
 

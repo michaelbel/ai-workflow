@@ -8,15 +8,15 @@ When you see any of these in reviewed code — or are about to write any of them
 
 The Accompanist project was absorbed into AndroidX between 2023 and 2024. The libraries below are **deprecated or read-only** and should not be added to new code.
 
-| Accompanist library | Replacement |
-|---|---|
-| `accompanist-pager` | `HorizontalPager` / `VerticalPager` in `androidx.compose.foundation.pager` |
-| `accompanist-pager-indicators` | Build a simple `Row` of dots driven by `PagerState.currentPage`, or use Material 3 `PageIndicator` on the platforms that ship it |
-| `accompanist-swiperefresh` | `PullToRefreshBox` in `androidx.compose.material3.pulltorefresh` |
-| `accompanist-flowlayout` | `FlowRow` / `FlowColumn` in `androidx.compose.foundation.layout` |
-| `accompanist-systemuicontroller` | `ComponentActivity.enableEdgeToEdge()` plus `WindowInsets.*` for per-surface tweaks |
-| `accompanist-insets` | `WindowInsets.*` + `Modifier.windowInsetsPadding(...)` (in `androidx.compose.foundation.layout`) |
-| `accompanist-placeholder` | Community alternatives or a custom `Modifier.drawBehind` / `Modifier.shimmer` |
+| Accompanist library                | Replacement                                                                                                                                     |
+|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| `accompanist-pager`                | `HorizontalPager` / `VerticalPager` in `androidx.compose.foundation.pager`                                                                      |
+| `accompanist-pager-indicators`     | Build a simple `Row` of dots driven by `PagerState.currentPage`, or use Material 3 `PageIndicator` on the platforms that ship it                |
+| `accompanist-swiperefresh`         | `PullToRefreshBox` in `androidx.compose.material3.pulltorefresh`                                                                                |
+| `accompanist-flowlayout`           | `FlowRow` / `FlowColumn` in `androidx.compose.foundation.layout`                                                                                |
+| `accompanist-systemuicontroller`   | `ComponentActivity.enableEdgeToEdge()` plus `WindowInsets.*` for per-surface tweaks                                                             |
+| `accompanist-insets`               | `WindowInsets.*` + `Modifier.windowInsetsPadding(...)` (in `androidx.compose.foundation.layout`)                                                |
+| `accompanist-placeholder`          | Community alternatives or a custom `Modifier.drawBehind` / `Modifier.shimmer`                                                                   |
 | `accompanist-navigation-animation` | `NavHost` from `androidx.navigation:navigation-compose` (2.7+) has built-in enter/exit transition params; for Nav3, transitions are first-class |
 
 If a project still depends on these, the migration is usually mechanical. Flag it and prioritize `systemuicontroller` and `swiperefresh` first — the replacements have better behavior around insets and IME.
@@ -63,15 +63,15 @@ Same logic for `alpha`, `rotate`, `scale`, `padding`, and any other modifier tha
 
 Where a project has adopted Material 3, the Material 2 (`androidx.compose.material:material`) equivalents should not be mixed in. Most teams ship a slow migration — flag M2 usage one component at a time.
 
-| Material 2 | Material 3 |
-|---|---|
-| `androidx.compose.material.Scaffold` | `androidx.compose.material3.Scaffold` |
-| `BottomNavigation` / `BottomNavigationItem` | `NavigationBar` / `NavigationBarItem` |
-| `TopAppBar` (M2) | `TopAppBar` / `CenterAlignedTopAppBar` / `MediumTopAppBar` / `LargeTopAppBar` (M3) with `TopAppBarScrollBehavior` |
-| `BackdropScaffold` | No direct M3 equivalent — rebuild with `ModalBottomSheet` or a custom layout |
-| `Divider` | `HorizontalDivider` / `VerticalDivider` |
-| `ModalBottomSheetLayout` | `ModalBottomSheet` |
-| `androidx.compose.material.icons.*` | Same icon package works, but prefer the extended icon set `androidx.compose.material.icons.Icons.Outlined.*` / `Rounded.*` where your design system picks a specific style |
+| Material 2                                  | Material 3                                                                                                                                                                 |
+|---------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `androidx.compose.material.Scaffold`        | `androidx.compose.material3.Scaffold`                                                                                                                                      |
+| `BottomNavigation` / `BottomNavigationItem` | `NavigationBar` / `NavigationBarItem`                                                                                                                                      |
+| `TopAppBar` (M2)                            | `TopAppBar` / `CenterAlignedTopAppBar` / `MediumTopAppBar` / `LargeTopAppBar` (M3) with `TopAppBarScrollBehavior`                                                          |
+| `BackdropScaffold`                          | No direct M3 equivalent — rebuild with `ModalBottomSheet` or a custom layout                                                                                               |
+| `Divider`                                   | `HorizontalDivider` / `VerticalDivider`                                                                                                                                    |
+| `ModalBottomSheetLayout`                    | `ModalBottomSheet`                                                                                                                                                         |
+| `androidx.compose.material.icons.*`         | Same icon package works, but prefer the extended icon set `androidx.compose.material.icons.Icons.Outlined.*` / `Rounded.*` where your design system picks a specific style |
 
 ### Material 3 — Within M3, Watch For
 

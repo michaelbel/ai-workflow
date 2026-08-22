@@ -92,10 +92,7 @@ fun {Feature}Dialog(
             ) {
                 Text(
                     text = stringResource(AppStrings.{Feature}Confirm),
-                    style = MaterialTheme.typography.medium14.copy(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        lineHeight = 20.sp
-                    )
+                    style = MaterialTheme.typography.medium14
                 )
             }
         },
@@ -105,10 +102,7 @@ fun {Feature}Dialog(
             ) {
                 Text(
                     text = stringResource(AppStrings.DialogCancel),
-                    style = MaterialTheme.typography.regular14.copy(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        lineHeight = 20.sp
-                    )
+                    style = MaterialTheme.typography.regular14
                 )
             }
         },
@@ -123,9 +117,7 @@ fun {Feature}Dialog(
         text = {
             Text(
                 text = stringResource(AppStrings.{Feature}Message),
-                style = MaterialTheme.typography.regular14.copy(
-                    lineHeight = 20.sp
-                )
+                style = MaterialTheme.typography.regular14
             )
         },
         titleContentColor = MaterialTheme.colorScheme.onBackground,
@@ -166,10 +158,7 @@ fun {Feature}Dialog(
             ) {
                 Text(
                     text = stringResource(AppStrings.DialogOk),
-                    style = MaterialTheme.typography.medium14.copy(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        lineHeight = 20.sp
-                    )
+                    style = MaterialTheme.typography.medium14
                 )
             }
         },
@@ -183,17 +172,13 @@ fun {Feature}Dialog(
         title = {
             Text(
                 text = stringResource(AppStrings.{Feature}Title),
-                style = MaterialTheme.typography.regular22.copy(
-                    lineHeight = 22.sp
-                )
+                style = MaterialTheme.typography.regular22
             )
         },
         text = {
             Text(
                 text = stringResource(AppStrings.{Feature}Message),
-                style = MaterialTheme.typography.regular14.copy(
-                    lineHeight = 20.sp
-                )
+                style = MaterialTheme.typography.regular14
             )
         },
         iconContentColor = MaterialTheme.colorScheme.error,
@@ -248,10 +233,7 @@ fun {Feature}Dialog(
             ) {
                 Text(
                     text = stringResource(AppStrings.DialogChoose),
-                    style = MaterialTheme.typography.medium14.copy(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        lineHeight = 20.sp
-                    )
+                    style = MaterialTheme.typography.medium14
                 )
             }
         },
@@ -261,10 +243,7 @@ fun {Feature}Dialog(
             ) {
                 Text(
                     text = stringResource(AppStrings.DialogCancel),
-                    style = MaterialTheme.typography.regular14.copy(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        lineHeight = 20.sp
-                    )
+                    style = MaterialTheme.typography.regular14
                 )
             }
         },
@@ -272,10 +251,7 @@ fun {Feature}Dialog(
             Column {
                 Text(
                     text = stringResource(AppStrings.{Feature}Title),
-                    style = MaterialTheme.typography.regular22.copy(
-                        color = MaterialTheme.colorScheme.onBackground,
-                        lineHeight = 22.sp
-                    )
+                    style = MaterialTheme.typography.regular22
                 )
 
                 Spacer(
@@ -293,10 +269,7 @@ fun {Feature}Dialog(
                     ) {
                         Text(
                             text = option.title,
-                            style = MaterialTheme.typography.regular14.copy(
-                                color = MaterialTheme.colorScheme.onBackground,
-                                lineHeight = 20.sp
-                            )
+                            style = MaterialTheme.typography.regular14
                         )
 
                         RadioButton(
@@ -463,22 +436,28 @@ data class {Screen}Model(
 reduce { it.copy(is{Feature}DialogVisible = true) }
 ```
 
-### 3. Скрытие диалога
+### 3. Обработка intent'ов диалога в ViewModel экрана
 
-Добавь в `{Screen}Intent` экрана (не в `{Feature}Intent` самого диалога) событие
-`Dismiss{Feature}Dialog` и обработай его в `dispatch` экрана:
+Добавь в `{Screen}Intent` экрана один case `On{Feature}Intent`, оборачивающий весь `{Feature}Intent`
+диалога целиком — отдельный case на каждый intent диалога не создавай:
 
 ```kotlin
 sealed interface {Screen}Intent: Intent {
-    data object Dismiss{Feature}Dialog: {Screen}Intent
+    data class On{Feature}Intent(val intent: {Feature}Intent): {Screen}Intent
 }
 ```
+
+Разбирай `intent.intent` вложенным `when` внутри `dispatch` ViewModel экрана:
 
 ```kotlin
 override fun dispatch(intent: {Screen}Intent) {
     when (intent) {
-        is {Screen}Intent.Dismiss{Feature}Dialog -> {
-            reduce { it.copy(is{Feature}DialogVisible = false) }
+        is {Screen}Intent.On{Feature}Intent -> {
+            when (intent.intent) {
+                is {Feature}Intent.DismissClick -> {
+                    reduce { it.copy(is{Feature}DialogVisible = false) }
+                }
+            }
         }
     }
 }
@@ -488,8 +467,8 @@ override fun dispatch(intent: {Screen}Intent) {
 
 Рендери диалог внутри первой, публичной функции экрана (`{Screen}Screen`, не
 `{Screen}ScreenContent`), сразу после вызова `{Screen}ScreenContent(...)`. В `dispatch`-лямбде
-диалога перенаправляй каждый его intent в подходящий intent экрана — `DismissClick` обычно идёт в
-`Dismiss{Feature}Dialog`:
+диалога просто пробрасывай весь intent в `On{Feature}Intent`, не разбирая его case'ы в самом
+composable:
 
 ```kotlin
 @Composable
@@ -505,13 +484,7 @@ fun {Screen}Screen(
 
     if (state.is{Feature}DialogVisible) {
         {Feature}Dialog(
-            dispatch = { intent ->
-                when (intent) {
-                    is {Feature}Intent.DismissClick -> {
-                        viewModel.dispatch({Screen}Intent.Dismiss{Feature}Dialog)
-                    }
-                }
-            }
+            dispatch = { intent -> viewModel.dispatch({Screen}Intent.On{Feature}Intent(intent)) }
         )
     }
 }
@@ -520,14 +493,15 @@ fun {Screen}Screen(
 ### Если у диалога есть Model
 
 Когда диалог принимает `state`, не храни отдельную копию его Model в экране — вычисляй её
-свойством `get()` из уже существующих данных экрана:
+свойством `get()` из уже существующих данных экрана. Имя свойства оканчивается на `State`, а не на
+`Model` (сам тип остаётся `{Feature}Model`):
 
 ```kotlin
 data class {Screen}Model(
     val {feature}Message: String = "",
     val is{Feature}DialogVisible: Boolean = false
 ): Model {
-    val {feature}Model: {Feature}Model
+    val {feature}State: {Feature}Model
         get() = {Feature}Model(
             message = {feature}Message
         )
@@ -537,14 +511,8 @@ data class {Screen}Model(
 ```kotlin
 if (state.is{Feature}DialogVisible) {
     {Feature}Dialog(
-        state = state.{feature}Model,
-        dispatch = { intent ->
-            when (intent) {
-                is {Feature}Intent.ConfirmClick -> {
-                    viewModel.dispatch({Screen}Intent.Dismiss{Feature}Dialog)
-                }
-            }
-        }
+        state = state.{feature}State,
+        dispatch = { intent -> viewModel.dispatch({Screen}Intent.On{Feature}Intent(intent)) }
     )
 }
 ```
@@ -572,9 +540,10 @@ if (state.is{Feature}DialogVisible) {
   `SampleC`.
 - Видимостью диалога управляет вызывающий экран через `Boolean`-поле `is{Feature}DialogVisible` в
   своей `Model`; у самого диалога отдельной ViewModel нет.
-- Скрытие диалога — отдельное событие `Dismiss{Feature}Dialog` в `{Screen}Intent` экрана, а не в
-  `{Feature}Intent` диалога.
+- Экран оборачивает весь `{Feature}Intent` диалога в один case `On{Feature}Intent(val intent:
+  {Feature}Intent)` своего `{Screen}Intent`; отдельных case'ов на каждый intent диалога не
+  создавай — разбирай их вложенным `when` внутри `dispatch` ViewModel.
 - Рендери диалог в первой, публичной функции экрана, сразу после вызова
   `{Screen}ScreenContent(...)`.
 - Если диалогу нужна Model, вычисляй её свойством `get()` в `Model` экрана из уже существующих
-  данных — не храни отдельную копию.
+  данных — не храни отдельную копию; имя свойства оканчивается на `State`, а не на `Model`.

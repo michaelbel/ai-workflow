@@ -187,7 +187,6 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 - `create-feature-bottom-sheet` — Создаёт Compose bottom sheet проекта.
 - `create-data-layer` — Создаёт или расширяет поток данных/domain проекта для фичи.
 - `create-feature-scaffold-screen` — Создаёт MVI-экран фичи проекта.
-- `create-nav-route` — Создаёт маршрут Navigation 3 для проекта.
 - `create-shared-component` — Создаёт переиспользуемый общий UI-компонент.
 - `create-usecase` — Создаёт один `UseCase` или `FlowUseCase` в `shared/domain/usecase`.
 - `git-status` — Показывает текущий статус рабочего дерева в кратком формате.

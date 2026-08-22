@@ -1,6 +1,7 @@
 ---
-name: navigation-3
-description: Learn how to install and migrate to Jetpack Navigation 3, and how to
+name: google-android-navigation-3
+description: >-
+  Use when installing or migrating to Jetpack Navigation 3, and to
   implement features and patterns such as deep links, multiple backstacks, scenes
   (dialogs, bottom sheets, list-detail, two-pane, supporting pane), conditional navigation
   (such as logged-in navigation versus anonymous), returning results from flows, integration

@@ -1,7 +1,8 @@
 ---
-name: adaptive
-description: Instructions to make or update an app's UI so that it adapts to different
-  Android devices including phones, tablets, foldables, laptops, desktop, TV, Auto
+name: google-adaptive
+description: >-
+  Use when making or updating an app's UI so that it adapts to different Android
+  devices including phones, tablets, foldables, laptops, desktop, TV, Auto
   and XR. It includes how to handle different window sizes, pointing devices (such
   as mouse) and text entry devices (such as keyboard) using the Compose MediaQuery
   API. It also covers multi-pane layouts using Navigation3 Scenes, adaptive UI components

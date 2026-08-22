@@ -68,31 +68,7 @@ data class {Feature}SheetModel(
 ```kotlin
 package {package}
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import androidx.compose.ui.tooling.preview.PreviewWrapper
-import androidx.compose.ui.unit.dp
-import {package}.shared.ui.components.SharedLazyColumn
-import {package}.shared.ui.components.SharedModalBottomSheet
-import {package}.shared.ui.components.system.SharedFixedText
-import {package}.shared.ui.preview.wrapper.ThemeWrapper
-import {package}.shared.ui.theme.AppStrings
-import {package}.shared.ui.theme.medium16
+// Добавь все необходимые импорты
 
 @Composable
 fun {Feature}BottomSheet(
@@ -206,3 +182,119 @@ private class {Feature}SheetModelPreviewParameterProvider: PreviewParameterProvi
 - Не добавляй пустые строки между соседними блоками `item {}` внутри `SharedLazyColumn`.
 - Не добавляй `Spacer` без визуального назначения; используй `Spacer` только в конце списка, чтобы
   создать отступ под последним элементом.
+
+## Фаза 3: вызов sheet с экрана
+
+Sheet не хранит собственный ViewModel — видимостью и данными управляет экран, который его
+открывает.
+
+### 1. Флаг видимости в Model экрана
+
+В `Model` вызывающего экрана добавь `Boolean`-поле `is{Feature}SheetVisible` — `is`, имя sheet
+(с постфиксом `Sheet`), затем `Visible`:
+
+```kotlin
+data class {Screen}Model(
+    val is{Feature}SheetVisible: Boolean = false
+): Model
+```
+
+### 2. Показ sheet
+
+Там, где решаешь открыть sheet, диспатчи `reduce`, выставляющий флаг в `true`:
+
+```kotlin
+reduce { it.copy(is{Feature}SheetVisible = true) }
+```
+
+### 3. Обработка intent'ов sheet в ViewModel экрана
+
+Добавь в `{Screen}Intent` экрана один case `On{Feature}SheetIntent`, оборачивающий весь
+`{Feature}SheetIntent` целиком — отдельный case на каждый intent sheet не создавай:
+
+```kotlin
+sealed interface {Screen}Intent: Intent {
+    data class On{Feature}SheetIntent(val intent: {Feature}SheetIntent): {Screen}Intent
+}
+```
+
+Разбирай `intent.intent` вложенным `when` внутри `dispatch` ViewModel экрана:
+
+```kotlin
+override fun dispatch(intent: {Screen}Intent) {
+    when (intent) {
+        is {Screen}Intent.On{Feature}SheetIntent -> {
+            when (intent.intent) {
+                is {Feature}SheetIntent.DismissClick -> {
+                    reduce { it.copy(is{Feature}SheetVisible = false) }
+                }
+            }
+        }
+    }
+}
+```
+
+### 4. Отрисовка
+
+Рендери sheet внутри первой, публичной функции экрана (`{Screen}Screen`, не
+`{Screen}ScreenContent`), сразу после вызова `{Screen}ScreenContent(...)`. В `dispatch`-лямбде sheet
+просто пробрасывай весь intent в `On{Feature}SheetIntent`, не разбирая его case'ы в самом
+composable:
+
+```kotlin
+@Composable
+fun {Screen}Screen(
+    viewModel: {Screen}ViewModel = hiltViewModel()
+) {
+    val state by viewModel.stateFlow.collectAsStateWithLifecycle()
+
+    {Screen}ScreenContent(
+        state = state,
+        dispatch = viewModel::dispatch
+    )
+
+    if (state.is{Feature}SheetVisible) {
+        {Feature}BottomSheet(
+            dispatch = { intent -> viewModel.dispatch({Screen}Intent.On{Feature}SheetIntent(intent)) }
+        )
+    }
+}
+```
+
+### Если у sheet есть Model
+
+Когда sheet принимает `state`, не храни отдельную копию его Model в экране — вычисляй её свойством
+`get()` из уже существующих данных экрана. Имя свойства оканчивается на `State`, а не на `Model`
+(сам тип остаётся `{Feature}SheetModel`):
+
+```kotlin
+data class {Screen}Model(
+    val {feature}Item: {Feature}Item = {Feature}Item.Empty,
+    val is{Feature}SheetVisible: Boolean = false
+): Model {
+    val {feature}SheetState: {Feature}SheetModel
+        get() = {Feature}SheetModel(
+            item = {feature}Item
+        )
+}
+```
+
+```kotlin
+if (state.is{Feature}SheetVisible) {
+    {Feature}BottomSheet(
+        state = state.{feature}SheetState,
+        dispatch = { intent -> viewModel.dispatch({Screen}Intent.On{Feature}SheetIntent(intent)) }
+    )
+}
+```
+
+Правила:
+- Sheet не хранит собственный ViewModel; видимостью управляет `Boolean`-поле
+  `is{Feature}SheetVisible` в `Model` вызывающего экрана.
+- Экран оборачивает весь `{Feature}SheetIntent` в один case `On{Feature}SheetIntent(val intent:
+  {Feature}SheetIntent)` своего `{Screen}Intent`; отдельных case'ов на каждый intent sheet не
+  создавай — разбирай их вложенным `when` внутри `dispatch` ViewModel.
+- Рендери sheet в первой, публичной функции экрана, сразу после вызова
+  `{Screen}ScreenContent(...)`.
+- Если sheet нужна Model, вычисляй её свойством `get()` в `Model` экрана из уже существующих
+  данных — не храни отдельную копию; имя свойства оканчивается на `State`, а не на `Model`.

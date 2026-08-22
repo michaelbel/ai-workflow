@@ -42,20 +42,20 @@ are in use. Load ONLY the matching framework reference files to keep context foc
 
 ### Framework Detection Table
 
-| Import prefix | Framework guide |
-|---|---|
-| `org.springframework.*` | [SPRING.md](references/frameworks/SPRING.md) |
-| `lombok.*` | [LOMBOK.md](references/frameworks/LOMBOK.md) |
-| `javax.persistence.*`, `jakarta.persistence.*`, `org.hibernate.*` | [HIBERNATE.md](references/frameworks/HIBERNATE.md) |
-| `com.fasterxml.jackson.*` | [JACKSON.md](references/frameworks/JACKSON.md) |
-| `io.micronaut.*` | [MICRONAUT.md](references/frameworks/MICRONAUT.md) |
-| `io.quarkus.*`, `javax.enterprise.*`, `jakarta.enterprise.*` | [QUARKUS.md](references/frameworks/QUARKUS.md) |
-| `dagger.*`, `dagger.hilt.*` | [DAGGER-HILT.md](references/frameworks/DAGGER-HILT.md) |
-| `io.reactivex.*`, `rx.*` | [RXJAVA.md](references/frameworks/RXJAVA.md) |
-| `org.junit.*`, `org.testng.*` | [JUNIT.md](references/frameworks/JUNIT.md) |
-| `com.google.inject.*` | [GUICE.md](references/frameworks/GUICE.md) |
-| `retrofit2.*`, `okhttp3.*` | [RETROFIT.md](references/frameworks/RETROFIT.md) |
-| `org.mockito.*` | [MOCKITO.md](references/frameworks/MOCKITO.md) |
+| Import prefix                                                     | Framework guide                                        |
+|-------------------------------------------------------------------|--------------------------------------------------------|
+| `org.springframework.*`                                           | [SPRING.md](references/frameworks/SPRING.md)           |
+| `lombok.*`                                                        | [LOMBOK.md](references/frameworks/LOMBOK.md)           |
+| `javax.persistence.*`, `jakarta.persistence.*`, `org.hibernate.*` | [HIBERNATE.md](references/frameworks/HIBERNATE.md)     |
+| `com.fasterxml.jackson.*`                                         | [JACKSON.md](references/frameworks/JACKSON.md)         |
+| `io.micronaut.*`                                                  | [MICRONAUT.md](references/frameworks/MICRONAUT.md)     |
+| `io.quarkus.*`, `javax.enterprise.*`, `jakarta.enterprise.*`      | [QUARKUS.md](references/frameworks/QUARKUS.md)         |
+| `dagger.*`, `dagger.hilt.*`                                       | [DAGGER-HILT.md](references/frameworks/DAGGER-HILT.md) |
+| `io.reactivex.*`, `rx.*`                                          | [RXJAVA.md](references/frameworks/RXJAVA.md)           |
+| `org.junit.*`, `org.testng.*`                                     | [JUNIT.md](references/frameworks/JUNIT.md)             |
+| `com.google.inject.*`                                             | [GUICE.md](references/frameworks/GUICE.md)             |
+| `retrofit2.*`, `okhttp3.*`                                        | [RETROFIT.md](references/frameworks/RETROFIT.md)       |
+| `org.mockito.*`                                                   | [MOCKITO.md](references/frameworks/MOCKITO.md)         |
 
 If `javax.inject.*` is detected, check for Dagger/Hilt vs Guice by looking for other
 imports from those frameworks. If ambiguous, load both guides.

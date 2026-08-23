@@ -195,8 +195,10 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 - `create-notification-flow` — Создаёт поток локальных или push-уведомлений Android.
 - `create-offline-outbox` — Создаёт durable offline-очередь мутаций через Room, WorkManager и Ktor.
 - `create-paging-flow` — Создаёт Paging 3 pipeline для Room, network или RemoteMediator.
+- `create-project-from-template` — Создаёт и оформляет новый Android-проект из `MyApplication`.
 - `create-room-storage` — Создаёт законченную единицу Room-хранилища.
 - `create-shared-component` — Создаёт переиспользуемый общий UI-компонент.
 - `create-signalr-channel` — Создаёт SignalR realtime-канал и подключает его к session lifecycle.
 - `create-usecase` — Создаёт один `UseCase` или `FlowUseCase` в `shared/domain/usecase`.
 - `create-workmanager-task` — Создаёт WorkManager worker и use case планирования/отмены.
+- `github-repo-settings` — Пошагово применяет и проверяет стандартные настройки GitHub-репозитория.

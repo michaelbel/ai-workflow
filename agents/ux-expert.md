@@ -10,7 +10,7 @@ disallowedTools:
 model: opus
 permissionMode:
 maxTurns: 25
-skills:
+skills: google-adaptive, google-android-navigation-3
 mcpServers:
 hooks:
 memory:

@@ -10,7 +10,7 @@ disallowedTools: NotebookEdit, Agent
 model: sonnet
 permissionMode:
 maxTurns: 35
-skills:
+skills: github-repo-settings
 mcpServers:
 hooks:
 memory:

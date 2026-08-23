@@ -11,7 +11,7 @@ disallowedTools: NotebookEdit, Agent
 model: sonnet
 permissionMode:
 maxTurns: 35
-skills:
+skills: google-r8-analyzer
 mcpServers:
 hooks:
 memory:

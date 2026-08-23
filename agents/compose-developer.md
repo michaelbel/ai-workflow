@@ -10,7 +10,9 @@ disallowedTools:
 model: sonnet
 permissionMode:
 maxTurns: 100
-skills:
+skills: >-
+  create-feature-alert-dialog, create-feature-bottom-sheet, create-feature-scaffold-screen,
+  create-shared-component, google-adaptive, google-android-navigation-3, google-android-styles
 mcpServers:
 hooks:
 memory:

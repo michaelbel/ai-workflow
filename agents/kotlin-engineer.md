@@ -9,7 +9,11 @@ disallowedTools:
 model: sonnet
 permissionMode:
 maxTurns: 100
-skills:
+skills: >-
+  create-usecase, create-domain-mapper, create-room-storage, create-datastore-preference,
+  create-ktor-endpoint, create-workmanager-task, create-notification-flow, create-offline-outbox,
+  create-paging-flow, create-signalr-channel, create-data-layer, google-android-camerax,
+  kotlin-tooling-java-to-kotlin
 mcpServers:
 hooks:
 memory:

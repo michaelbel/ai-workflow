@@ -10,7 +10,7 @@ disallowedTools: Edit, Write, NotebookEdit, Agent
 model: opus
 permissionMode:
 maxTurns: 30
-skills:
+skills: google-android-intent-security, google-play-policy-insights
 mcpServers:
 hooks:
 memory:

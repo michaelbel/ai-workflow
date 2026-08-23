@@ -11,7 +11,7 @@ disallowedTools: Edit, NotebookEdit, Agent
 model: sonnet
 permissionMode:
 maxTurns:
-skills:
+skills: google-android-cli
 mcpServers:
 hooks:
 memory:

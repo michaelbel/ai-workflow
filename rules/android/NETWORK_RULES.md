@@ -19,7 +19,9 @@
   создание в аргументы `networkService`.
 - Используй `handleResponse` для сетевых вызовов, обрабатываемых через callback, и
   `handleResponseResult(...).getOrThrow()`, когда сетевой ответ нужно потребить как значение внутри
-  `execute`; не оборачивай результаты use case вручную в `Result.success` / `Result.failure`.
+  `execute`; если failure нужно преобразовать в endpoint-specific exception, используй
+  `getOrElse`, пробрось `CancellationException` и выбрось конкретное исключение. Не оборачивай
+  результаты use case вручную в `Result.success` / `Result.failure`.
 - При вызове `handleResponse` всегда передавай все три именованных аргумента: `request`, `onSuccess`
   и `onFailure`; в `onFailure` создавай отдельный `data class`-исключение, наследующее базовое
   сетевое исключение проекта, и выбрасывай его; перехватывай этот конкретный тип исключения в

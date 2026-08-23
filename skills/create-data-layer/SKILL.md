@@ -1,347 +1,60 @@
 ---
 name: create-data-layer
 description: >-
-  Use when пользователь просит создать или расширить полный поток данных/domain для фичи — DAO, Room
-  entity, модели network-запроса/ответа, мапперы, и одноразовый UseCase вместе с наблюдаемым
-  FlowUseCase поверх них — или говорит "add a data layer", "wire up Room and network for X", "add a
-  feature's persistence and API". Не используй, когда нужен только один UseCase или FlowUseCase, а
-  модели DAO/entity/network уже существуют; используй вместо этого create-usecase. Не используй для
-  экрана или ViewModel, потребляющих эти данные; используй вместо этого
-  create-feature-scaffold-screen.
+  Use when пользователь просит собрать или расширить составной поток данных фичи между Ktor, Room,
+  мапперами, use case, realtime или WorkManager — например "wire up API and Room", "add a data
+  layer", "reload persisted data from a socket event" или "sync in background". Выбирает
+  минимальный поток и маршрутизирует работу к специализированным skills. Не используй для одного
+  уже определённого endpoint, DAO/entity, mapper, use case, worker или realtime-канала; используй
+  соответствующий атомарный skill напрямую. Не используй для Screen/ViewModel.
 metadata:
   author: michaelbel
 ---
 
-# Новый слой данных
-
-Создаёт или расширяет поток данных/domain проекта для фичи с использованием `UseCase` и
-`FlowUseCase`. Замени `{Feature}` на имя domain, `{feature}` на имя в lower camel case,
-`{featureTable}` на имя таблицы Room, а `{package}` на целевой пакет.
-
-Этот скилл охватывает DAO, entity, мапперы, модели запроса/ответа, одноразовые use case и flow use
-case. Новая работа с данными не создаёт слои Repository или Interactor.
-
-Обычно создаваемые или изменяемые файлы:
-- `shared/domain/usecase/{Feature}UseCase.kt`
-- `shared/domain/usecase/{Feature}FlowUseCase.kt`
-- `shared/data/persistence/database/dao/{Feature}Dao.kt`
-- `shared/data/persistence/database/entity/{Feature}Entity.kt`
-- `shared/data/network/request/{Feature}Request.kt`
-- `shared/data/network/response/{Feature}Response.kt`
-- `shared/domain/mapper/*Ktx.kt`
-- `shared/data/persistence/database/AppDatabase.kt`
-- `shared/data/network/NetworkService.kt`
-
----
-
-## Одноразовый UseCase с одним параметром
-
-Используй это для suspend-операций Room/Ktor/DataStore, возвращающих один результат.
-
-```kotlin
-@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-
-package {package}.usecase
-
-import javax.inject.Inject
-import {package}.shared.coroutines.SharedDispatchers
-import {package}.shared.data.{Feature}Id
-import {package}.shared.data.error.{Feature}Exception
-import {package}.shared.data.network.NetworkService
-import {package}.shared.data.network.request.{Feature}Request
-import {package}.shared.data.persistence.database.dao.{Feature}Dao
-import {package}.shared.domain.mapper.entity
-import {package}.shared.domain.mapper.handleResponse
-import {package}.shared.domain.usecase.UseCase
-
-class Load{Feature}UseCase @Inject constructor(
-    private val networkService: NetworkService,
-    private val {feature}Dao: {Feature}Dao,
-    dispatchers: SharedDispatchers
-): UseCase<{Feature}Id, Unit>(dispatchers.io) {
-
-    override suspend fun execute({feature}Id: {Feature}Id) {
-        handleResponse(
-            request = {
-                val request = {Feature}Request({feature}Id)
-                networkService.load{Feature}(request)
-            },
-            onSuccess = { data -> {feature}Dao.upsert(data.entity) },
-            onFailure = { error -> throw {Feature}Exception(error.message) }
-        )
-    }
-}
-```
-
-Правила:
-- Добавляй `@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")`, когда единственный аргумент
-  `params` переименован в семантическое имя.
-- Передавай `dispatchers.io` для работы с Room и Ktor.
-- Не возвращай `Result`; `UseCase` сам оборачивает `execute` в `Result`.
-- Выбрасывай domain-специфичное исключение из `onFailure`.
-- Создавай `val request = ...` перед вызовом `networkService`.
-- Внедряй `AppDatabase` и используй `database.withTransaction { ... }` только когда блок содержит
-  два и более вызова методов DAO/базы данных; для одного вызова DAO, как здесь, вызывай метод DAO
-  напрямую.
-
----
-
-## Одноразовый UseCase с Params
-
-Используй вложенный `data class Params`, когда есть два и более входных значения.
-
-```kotlin
-package {package}.usecase
-
-import javax.inject.Inject
-import {package}.shared.coroutines.SharedDispatchers
-import {package}.shared.data.{Feature}Id
-import {package}.shared.data.UserId
-import {package}.shared.data.persistence.database.dao.{Feature}Dao
-import {package}.shared.domain.usecase.UseCase
-
-class Save{Feature}UseCase @Inject constructor(
-    private val {feature}Dao: {Feature}Dao,
-    dispatchers: SharedDispatchers
-): UseCase<Save{Feature}UseCase.Params, Unit>(dispatchers.io) {
-
-    override suspend fun execute(params: Params) {
-        {feature}Dao.update(params.{feature}Id, params.userId)
-    }
-
-    data class Params(
-        val {feature}Id: {Feature}Id,
-        val userId: UserId
-    )
-}
-```
-
-Правила:
-- Держи `Params` вложенным внутри use case.
-- Не используй `Pair`, `Triple`, map-ы или несколько аргументов `invoke`.
-- Создавай params в месте вызова через `{Feature}UseCase.Params(...)`.
-
----
-
-## FlowUseCase
-
-Используй это для Room Flow или других наблюдаемых потоков.
-
-```kotlin
-@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-
-package {package}.usecase
-
-import javax.inject.Inject
-import kotlinx.coroutines.flow.Flow
-import {package}.shared.coroutines.SharedDispatchers
-import {package}.shared.data.{Feature}Id
-import {package}.shared.data.persistence.database.dao.{Feature}Dao
-import {package}.shared.data.persistence.database.entity.{Feature}Entity
-import {package}.shared.domain.usecase.FlowUseCase
-
-class {Feature}EntityFlowUseCase @Inject constructor(
-    private val {feature}Dao: {Feature}Dao,
-    dispatchers: SharedDispatchers
-): FlowUseCase<{Feature}Id, {Feature}Entity>(dispatchers.io) {
-
-    override fun execute({feature}Id: {Feature}Id): Flow<{Feature}Entity> {
-        return {feature}Dao.selectFlow({feature}Id)
-    }
-}
-```
-
-Правила:
-- `execute` не является `suspend`.
-- Возвращай Flow из DAO напрямую.
-- Не вызывай `flowOn`; базовый `FlowUseCase` применяет его сам.
-- Не оборачивай значения Flow в `Result`.
-- Если у flow два и более входных значения, используй вложенный `Params` точно так же, как в
-  одноразовых use case.
-
----
-
-## Значения результата сети
-
-Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ нужен как значение перед
-продолжением.
-
-```kotlin
-@file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-
-class {Feature}UseCase @Inject constructor(
-    private val networkService: NetworkService,
-    private val {feature}Dao: {Feature}Dao,
-    dispatchers: SharedDispatchers
-): UseCase<{Feature}Id, {Feature}Entity>(dispatchers.io) {
-
-    override suspend fun execute({feature}Id: {Feature}Id): {Feature}Entity {
-        val data = handleResponseResult {
-            val request = {Feature}Request({feature}Id)
-            networkService.load{Feature}(request)
-        }.getOrThrow()
-
-        val entity = data.entity
-        {feature}Dao.upsert(entity)
-        return entity
-    }
-}
-```
-
-Правила:
-- Не возвращай `handleResponseResult` из `execute`.
-- Не оборачивай результат в `Result.success` / `Result.failure`.
-- Позволяй `.getOrThrow()` распространять ошибки в базовый `UseCase`.
-
----
-
-## Композиция UseCase
-
-Когда один use case вызывает другой, разворачивай результат через `getOrThrow()`, чтобы
-родительский use case падал согласованно.
-
-```kotlin
-class Reload{Feature}UseCase @Inject constructor(
-    private val load{Feature}UseCase: Load{Feature}UseCase,
-    private val save{Feature}UseCase: Save{Feature}UseCase,
-    dispatchers: SharedDispatchers
-): UseCase<Reload{Feature}UseCase.Params, Unit>(dispatchers.io) {
-
-    override suspend fun execute(params: Params) {
-        load{Feature}UseCase(params.{feature}Id).getOrThrow()
-        save{Feature}UseCase(Save{Feature}UseCase.Params(params.{feature}Id, params.userId)).getOrThrow()
-    }
-
-    data class Params(
-        val {feature}Id: {Feature}Id,
-        val userId: UserId
-    )
-}
-```
-
-Правила:
-- Никогда не игнорируй `Result`, возвращаемый другим use case.
-- Не вызывай `.fold` только ради повторного оборачивания того же успеха или ошибки.
-
----
-
-## Использование из ViewModel
-
-```kotlin
-@HiltViewModel
-class {Feature}ViewModel @Inject constructor(
-    private val load{Feature}UseCase: Load{Feature}UseCase,
-    private val {feature}EntityFlowUseCase: {Feature}EntityFlowUseCase
-): BaseViewModel<{Feature}Intent, {Feature}Model, {Feature}Event>({Feature}Model()) {
-
-    override fun dispatch(intent: {Feature}Intent) {
-        when (intent) {
-            is {Feature}Intent.Collect{Feature} -> {
-                launch {
-                    {feature}EntityFlowUseCase(intent.{feature}Id).collectLatest { entity ->
-                        reduce { it.copy(entity = entity) }
-                    }
-                }
-            }
-            is {Feature}Intent.Load{Feature} -> {
-                launch {
-                    load{Feature}UseCase(intent.{feature}Id).getOrThrow()
-                }
-            }
-        }
-    }
-}
-```
-
-Правила:
-- Внедряй конкретные use case, а не репозитории, интеракторы или агрегирующие фасады.
-- Используй отдельные intent-ы `Collect...` и `Load...`, когда данные Room обновляются из сети.
-- Вызывай одноразовые use case через `.getOrThrow()` внутри `launch { ... }`.
-- Обрабатывай domain-, Room- и сетевые исключения в функции `catch` ViewModel.
-
----
-
-## {Feature}Dao.kt
-
-```kotlin
-package {package}.persistence.database.dao
-
-import androidx.room.Dao
-import androidx.room.Query
-import androidx.room.Upsert
-import kotlinx.coroutines.flow.Flow
-
-@Dao
-interface {Feature}Dao {
-
-    @get:Query("SELECT * FROM {featureTable}")
-    val {feature}EntitiesFlow: Flow<List<{Feature}Entity>>
-
-    @Query("SELECT * FROM {featureTable} WHERE id = :id")
-    fun selectFlow(id: String): Flow<{Feature}Entity>
-
-    @Query("SELECT * FROM {featureTable} WHERE id = :id")
-    suspend fun select(id: String): {Feature}Entity?
-
-    @Upsert
-    suspend fun upsert(entity: {Feature}Entity)
-}
-```
-
-Правила:
-- Используй `@get:Query` с `val` для Room Flow-аксессоров без параметров.
-- Используй `fun`, когда у Flow-запроса есть параметры.
-- Размещай все обычные методы `fun` перед любыми методами `suspend fun`.
-- Используй `@Upsert` вместо отдельных `@Insert` / `@Update`.
-- Помечай методы, возвращающие типы Pojo, аннотацией `@Transaction`.
-- Используй `select`, возвращающий nullable `{Feature}Entity?`, когда строка может отсутствовать;
-  добавляй non-null `selectNotNull`, возвращающий `{Feature}Entity`, только когда в проекте уже
-  есть вызывающий код, точно знающий, что строка существует.
-
----
-
-## {Feature}Entity.kt
-
-```kotlin
-package {package}.persistence.database.entity
-
-import androidx.room.Entity
-
-@Entity(tableName = "{featureTable}", primaryKeys = ["id"])
-data class {Feature}Entity(
-    val id: String,
-    val name: String
-) {
-    companion object {
-        val Empty = {Feature}Entity(id = "", name = "")
-    }
-}
-```
-
-Правила:
-- При изменении таблиц или entity базы данных Room увеличивай `AppDatabase.DATABASE_VERSION`.
-- Держи каждую модель в отдельном файле.
-
----
-
-## Модели сети
-
-```kotlin
-@Serializable
-data class {Feature}Request(
-    @SerialName("id") val id: String
-)
-
-@Serializable
-data class {Feature}Response(
-    @SerialName("id") val id: String,
-    @SerialName("name") val name: String
-)
-```
-
-Правила:
-- Имена классов моделей запросов заканчиваются на `Request`.
-- Имена классов моделей ответов заканчиваются на `Response`.
-- Каждая модель запроса и ответа аннотирована `@Serializable`.
-- Каждое поле запроса и ответа имеет `@SerialName`.
-- Каждая API-модель, аннотированная `@Serializable` и `@SerialName`, находится в отдельном файле.
+# Составной поток данных
+
+Собери только те части data/domain-потока, которые нужны пользовательскому сценарию. Этот skill
+координирует специализированные skills и не дублирует их шаблоны.
+
+## Сначала определи границы
+
+1. Изучи аналогичные потоки и существующие типы в целевом проекте.
+2. Зафиксируй источник истины: ответ текущей операции, Room или другой уже существующий store.
+3. Определи, что запускает обновление: UI, realtime-событие или WorkManager.
+4. Отметь уже реализованные части и не пересоздавай их.
+5. Выбери минимальный поток из таблицы ниже. Если сценарий гибридный, объедини только необходимые
+   строки.
+
+| Сценарий                     | Подключаемые skills                                                                                                                                | Результат                                                                                                    |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
+| Ktor-only                    | `create-ktor-endpoint`, затем обязательный `create-usecase`                                                                                        | Ответ используется конкретной domain-операцией без искусственного Room-кэша                                  |
+| Room-only                    | `create-room-storage`, затем `create-usecase`; `create-domain-mapper` только при реальной границе моделей                                          | Чтение/запись локального источника без сетевого слоя                                                         |
+| Ktor → mapper → Room         | `create-ktor-endpoint`, `create-domain-mapper`, `create-room-storage`, `create-usecase`                                                            | Load-use case получает API-модель, маппит и атомарно обновляет Room; UI наблюдает Room отдельным FlowUseCase |
+| realtime → reload            | `create-signalr-channel`, затем `create-usecase`; добавь Ktor/mapper/Room skills только для отсутствующих частей reload-потока                     | Realtime-событие служит сигналом обновления, а не вторым источником состояния                                |
+| WorkManager → network → Room | `create-workmanager-task`, `create-ktor-endpoint`, `create-domain-mapper`, `create-room-storage`, `create-usecase` только для отсутствующих частей | Worker вызывает переиспользуемую business-операцию; network/Room-логику не дублирует                         |
+
+Перед реализацией загрузи каждый выбранный skill и следуй его границам. Порядок в таблице описывает
+зависимости, но не требует пересоздавать уже готовые нижние слои.
+
+## Инварианты композиции
+
+- Не добавляй Repository или Interactor, если целевой проект связывает конкретные зависимости через
+  `UseCase` / `FlowUseCase`.
+- Не создавай Room, mapper, request/response или фоновую задачу «для полноты». У каждого слоя должен
+  быть вызывающий сценарий.
+- При Room как источнике истины разделяй обновление и наблюдение: одноразовый load use case пишет в
+  Room, отдельный `FlowUseCase` возвращает DAO Flow.
+- Realtime handler и Worker инициируют use case. Они не копируют HTTP-вызовы, маппинг и SQL-запись
+  внутрь инфраструктурного класса.
+- Композиционный use case разворачивает результат другого use case через `.getOrThrow()`.
+- Используй транзакцию Room для согласованного набора связанных изменений, а не для одиночного
+  вызова DAO.
+- Следуй структуре, именованию и уже выбранным библиотекам целевого проекта. Reference-проект
+  показывает поведение, но не является шаблоном для механической замены package name.
+
+## Завершение
+
+Проверь, что созданные части образуют один вызываемый вертикальный поток, зарегистрированы в
+существующих database/network/realtime/worker точках расширения и не оставили неиспользуемых
+моделей. Запусти релевантные тесты и сборку затронутых модулей. Экран подключай отдельно через
+`create-feature-scaffold-screen`.

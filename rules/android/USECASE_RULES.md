@@ -41,9 +41,10 @@
   (`import package.SomeUseCase.PaymentData`) и используй только короткое имя везде, включая
   generic-сигнатуру: `FlowUseCase<Params, PaymentData>`; не используй квалифицированную форму
   `SomeUseCase.PaymentData`.
-- `FlowUseCase` должен оборачивать один flow-метод DAO; если разным фильтрам нужны разные
-  flow-методы DAO, создавай отдельные классы `FlowUseCase` вместо ветвления между вызовами DAO
-  внутри одного use case.
+- Обычный `FlowUseCase`, наблюдающий Room, должен оборачивать один flow-метод DAO; если разным
+  фильтрам нужны разные flow-методы DAO, создавай отдельные классы вместо ветвления внутри одного
+  use case. Paging-`FlowUseCase` может строить `Pager(...).flow` из `PagingSource` и опционального
+  `RemoteMediator`; не применяй к нему ограничение одного DAO Flow.
 - Новые use case — это конкретные классы с `@Inject constructor`, и обычно им не нужны модули Hilt
   `@Binds`.
 - Константы, относящиеся к логике конкретного use case (лимиты, ключи, таймауты, пути и т. п.),

@@ -142,9 +142,11 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 - `MVI_STATE_RULES` — Правила Model в MVI
 - `NAVIGATION_RULES` — Правила навигации
 - `NETWORK_RULES` — Правила сети
+- `REALTIME_RULES` — Правила realtime-соединений
 - `RESOURCE_RULES` — Правила ресурсов
 - `ROOM_RULES` — Правила Room
 - `USECASE_RULES` — Правила UseCase
+- `WORKMANAGER_RULES` — Правила WorkManager
 
 **compose**
 - `BOTTOM_SHEET_RULES` — Правила Bottom Sheet
@@ -183,9 +185,18 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 (совпадает с именем директории) и `description` (когда использовать скилл, характерные фразы
 пользователя и какой соседний скилл выбрать вместо него в похожем сценарии).
 
+- `create-data-layer` — Собирает составной поток данных/domain из атомарных скиллов.
+- `create-datastore-preference` — Создаёт типизированную настройку Preferences DataStore.
+- `create-domain-mapper` — Создаёт KTX-маппер между network, Room и domain-моделями.
 - `create-feature-alert-dialog` — Создаёт Compose-диалог проекта.
 - `create-feature-bottom-sheet` — Создаёт Compose bottom sheet проекта.
-- `create-data-layer` — Создаёт или расширяет поток данных/domain проекта для фичи.
 - `create-feature-scaffold-screen` — Создаёт MVI-экран фичи проекта.
+- `create-ktor-endpoint` — Создаёт Ktor endpoint и transport-модели.
+- `create-notification-flow` — Создаёт поток локальных или push-уведомлений Android.
+- `create-offline-outbox` — Создаёт durable offline-очередь мутаций через Room, WorkManager и Ktor.
+- `create-paging-flow` — Создаёт Paging 3 pipeline для Room, network или RemoteMediator.
+- `create-room-storage` — Создаёт законченную единицу Room-хранилища.
 - `create-shared-component` — Создаёт переиспользуемый общий UI-компонент.
+- `create-signalr-channel` — Создаёт SignalR realtime-канал и подключает его к session lifecycle.
 - `create-usecase` — Создаёт один `UseCase` или `FlowUseCase` в `shared/domain/usecase`.
+- `create-workmanager-task` — Создаёт WorkManager worker и use case планирования/отмены.

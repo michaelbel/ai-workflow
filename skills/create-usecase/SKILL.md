@@ -3,10 +3,9 @@ name: create-usecase
 description: >-
   Use when пользователь просит добавить один `UseCase` или `FlowUseCase` в
   `shared/domain/usecase` — одну suspend-операцию или один наблюдаемый Flow — или говорит "add a use
-  case", "new UseCase", "new FlowUseCase". Предполагает, что DAO/entity/network модели, от которых
-  он зависит, уже существуют. Не используй, если DAO, entity, модели request/response и мапперы для
-  фичи ещё не существуют; используй вместо этого create-data-layer, чтобы построить весь поток
-  целиком, включая его use case'ы.
+  case", "new UseCase", "new FlowUseCase". Предполагает, что требуемые endpoint, DAO/entity и
+  мапперы уже существуют. Не используй для их создания, Worker/realtime lifecycle или ViewModel;
+  выбери соответствующий атомарный skill либо create-data-layer для составного потока.
 metadata:
   author: michaelbel
 ---
@@ -14,6 +13,13 @@ metadata:
 # Новый UseCase
 
 Создаёт один `UseCase` или `FlowUseCase` в `shared/domain/usecase`.
+
+## Граница ответственности
+
+Этот skill оформляет одну business-операцию или один наблюдаемый поток и их `Result`/dispatcher
+семантику. Он не создаёт endpoint, request/response, Room entity/DAO, mapper, Worker, realtime
+connection или Screen. Для reload по realtime и фоновой синхронизации use case содержит
+переиспользуемую business-логику, а realtime data source или Worker только инициирует его.
 
 ## Выбор базового класса
 
@@ -43,7 +49,7 @@ metadata:
 ```kotlin
 @file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 
-class LoadThingUseCase @Inject constructor(
+class ThingsDetailsUseCase @Inject constructor(
     private val networkService: NetworkService,
     private val thingDao: ThingDao,
     dispatchers: SharedDispatchers
@@ -52,24 +58,32 @@ class LoadThingUseCase @Inject constructor(
     override suspend fun execute(thingId: ThingId) {
         handleResponse(
             request = {
-                val request = ThingRequest(thingId)
-                networkService.loadThing(request)
+                val request = ThingsDetailsRequest(thingId)
+                networkService.thingsDetails(request)
             },
             onSuccess = { data ->
                 thingDao.upsert(data.entity)
             },
-            onFailure = { error -> throw ThingException(error.message) }
+            onFailure = { error -> throw ThingsDetailsException(error.message) }
         )
     }
+
+    data class ThingsDetailsException(
+        override val message: String
+    ): AppNetworkException(message)
 }
 ```
+
+Замени `AppNetworkException` на базовое сетевое исключение целевого проекта. Имя use case и
+вложенного исключения выводи из endpoint path или имени метода `NetworkService`, а не из intent
+экрана.
 
 ## Шаблон Flow
 
 ```kotlin
 @file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 
-class ThingFlowUseCase @Inject constructor(
+class ThingEntityFlowUseCase @Inject constructor(
     private val thingDao: ThingDao,
     dispatchers: SharedDispatchers
 ): FlowUseCase<ThingId, ThingEntity>(dispatchers.io) {
@@ -87,28 +101,41 @@ class ThingFlowUseCase @Inject constructor(
 ```kotlin
 @file:Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 
-class LoadThingUseCase @Inject constructor(
+class ThingsDetailsUseCase @Inject constructor(
     private val networkService: NetworkService,
     dispatchers: SharedDispatchers
 ): UseCase<ThingId, ThingEntity>(dispatchers.io) {
 
     override suspend fun execute(thingId: ThingId): ThingEntity {
         val data = handleResponseResult {
-            val request = ThingRequest(thingId)
-            networkService.loadThing(request)
-        }.getOrThrow()
+            val request = ThingsDetailsRequest(thingId)
+            networkService.thingsDetails(request)
+        }.getOrElse { throwable ->
+            if (throwable is CancellationException) throw throwable
+            throw ThingsDetailsException(throwable.message.orEmpty())
+        }
 
         return data.entity
     }
+
+    data class ThingsDetailsException(
+        override val message: String
+    ): AppNetworkException(message)
 }
 ```
+
+Здесь преобразование ошибки в endpoint-specific exception является содержательной классификацией,
+а не повторным оборачиванием того же `Result`. Всегда пробрасывай `CancellationException` без
+преобразования.
 
 ## Обязательное поведение
 
 - `UseCase.execute` возвращает сырой `R`, а не `Result<R>`.
 - Выбрасывай domain-специфичные исключения при ошибках; позволяй базовому `UseCase` конвертировать
   их в `Result.failure`.
-- Используй `handleResponseResult(...).getOrThrow()`, когда сетевой ответ потребляется как значение.
+- Используй `handleResponseResult(...).getOrThrow()`, когда generic exception достаточно; для
+  endpoint-specific exception используй `getOrElse`, пробрось `CancellationException` и выбрось
+  конкретный тип.
 - Вызывай другие use case через `.getOrThrow()`.
 - Вызывай одноразовые use case из ViewModel через `.getOrThrow()` внутри `launch { ... }`.
 - Не добавляй `withContext` или `flowOn`; базовые классы сами обрабатывают диспетчеры.

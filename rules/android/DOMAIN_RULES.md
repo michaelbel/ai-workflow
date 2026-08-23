@@ -4,8 +4,9 @@
   `shared/domain/usecase`.
 - Зависимости Room, Ktor, DataStore и бизнес-логики внедряются напрямую в конструктор use case.
 - Сетевые ответы в use case обрабатываются через `handleResponse` или
-  `handleResponseResult(...).getOrThrow()`; логика маппинга находится в
-  `shared/domain/mapper/*Ktx.kt`.
+  `handleResponseResult(...).getOrThrow()`. Когда generic network failure нужно классифицировать как
+  endpoint-specific exception, используй `getOrElse`, пробрось `CancellationException` и выбрось
+  конкретное исключение; логика маппинга находится в `shared/domain/mapper/*Ktx.kt`.
 - Функции-расширения мапперов Response→Entity должны называться `entity`, например
   `fun ItemResponse.entity(...): ItemEntity`.
 - Функции-расширения мапперов список Response→список Entity должны называться `entities`, например

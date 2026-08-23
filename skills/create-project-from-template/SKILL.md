@@ -66,8 +66,8 @@ IDE или build outputs.
 7. Скопируй выбранный asset этого skill в `<project>/.idea/icon.svg`:
    `assets/icons/android.svg`, `assets/icons/compose.svg` или `assets/icons/jetpack.svg`. В git из
    `.idea` должен попадать только `icon.svg`.
-8. Получи через `ai-workflow` MCP актуальные `github/GITHUB_REPO_RULES` и
-   `github/GITHUB_README_RULES`, затем приведи tracked repository files к ним. Не добавляй
+8. Получи через `ai-workflow` MCP актуальные `github-repo` и
+   `github-readme`, затем приведи tracked repository files к ним. Не добавляй
    placeholder-текст, выдуманный cover или неподтверждённые ссылки.
 9. Просканируй экспортированный из шаблона набор текстовых файлов на старые project name, display
    name, package и GitHub repo slug; до первого staging не полагайся на пустой `git ls-files` нового

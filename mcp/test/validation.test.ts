@@ -26,13 +26,21 @@ test("validateSkillName rejects uppercase and whitespace", () => {
   assert.throws(() => validateSkillName("new screen"), WorkflowError);
 });
 
-test("validateRuleName accepts '<category>/<RULE_NAME>'", () => {
-  assert.equal(validateRuleName("android/MVI_RULES"), "android/MVI_RULES");
-  assert.equal(validateRuleName("github/GITHUB_README_RULES"), "github/GITHUB_README_RULES");
+test("validateRuleName accepts lowercase kebab-case rule basenames", () => {
+  assert.equal(validateRuleName("mvi"), "mvi");
+  assert.equal(validateRuleName("github-readme"), "github-readme");
 });
 
 test("validateRuleName rejects path traversal and malformed names", () => {
-  for (const attempt of ["../../etc/passwd", "android/../MVI_RULES", "android/mvi_rules", "MVI_RULES", "android/MVI_RULES/extra"]) {
+  for (const attempt of [
+    "../../etc/passwd",
+    "android/../mvi",
+    "mvi_rules",
+    "android/mvi",
+    "mvi.md",
+    "MVI_RULES",
+    "MVI-RULES",
+  ]) {
     assert.throws(() => validateRuleName(attempt), WorkflowError);
   }
 });

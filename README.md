@@ -64,7 +64,7 @@ Claude Code-хуков (например, напоминание про `git sta
 | Инструмент  | Описание                                                                |
 |-------------|--------------------------------------------------------------------------|
 | `list`      | Список всех доступных имён правил и скиллов (с описаниями скиллов)       |
-| `get_rule`  | Получить содержимое правила по имени вида `android/MVI_RULES`            |
+| `get_rule`  | Получить содержимое правила по имени вида `mvi`                    |
 | `get_skill` | Получить инструкции скилла по имени вида `create-feature-scaffold-screen`            |
 
 Каждый вызов инструмента возвращает и человекочитаемый `content` (Markdown), и `structuredContent`
@@ -77,8 +77,8 @@ get_skill -> { name: string, description: string, content: string, source: { kin
 ```
 
 Имена скиллов — простые kebab-case имена директорий, например `create-feature-scaffold-screen`, а не путь к
-файлу (`create-feature-scaffold-screen/SKILL`). Имена правил — вида `<категория>/<ИМЯ_ПРАВИЛА>`, например
-`android/MVI_RULES`.
+файлу (`create-feature-scaffold-screen/SKILL`). Имена правил — простые имена файлов без расширения и
+категории, например `mvi`.
 
 При ошибке инструмент возвращает `isError: true` с телом
 `{ code, message, retryable, details? }`, где `code` — один из фиксированных кодов: `INVALID_NAME`,
@@ -129,55 +129,43 @@ CI (`.github/workflows/ci.yml`) запускает этот же набор на
 
 ## Правила
 
-Хранятся в `rules/`. `git`, `github`, `project` подключены через `@`-импорты в `CLAUDE.md` — это
-процессные правила, нужные в каждой сессии этого репозитория. `kotlin`, `compose`, `kmp`, `android`
-— продукт, который репозиторий поставляет в другие проекты; в `CLAUDE.md` они не преинклюднуты и
-читаются по требованию через MCP `list`/`get_rule`.
+Все файлы правил лежат непосредственно в `rules/`, без промежуточных директорий. Процессные правила
+Git, GitHub и проекта подключены через `@`-импорты в `CLAUDE.md`. Правила Kotlin, Compose, KMP и
+Android — продукт, который репозиторий поставляет в другие проекты; они читаются по требованию через
+MCP `list`/`get_rule`.
 
-**android**
-- `ARCHITECTURE_RULES` — Правила архитектуры
-- `DOMAIN_RULES` — Правила Domain
-- `MVI_ERROR_HANDLING_RULES` — Правила обработки ошибок в MVI
-- `MVI_RULES` — Правила MVI
-- `MVI_STATE_RULES` — Правила Model в MVI
-- `NAVIGATION_RULES` — Правила навигации
-- `NETWORK_RULES` — Правила сети
-- `REALTIME_RULES` — Правила realtime-соединений
-- `RESOURCE_RULES` — Правила ресурсов
-- `ROOM_RULES` — Правила Room
-- `USECASE_RULES` — Правила UseCase
-- `WORKMANAGER_RULES` — Правила WorkManager
-
-**compose**
-- `BOTTOM_SHEET_RULES` — Правила Bottom Sheet
-- `COMPOSE_COLOR_RULES` — Правила цвета Compose
-- `COMPOSE_CONSTRAINTLAYOUT_RULES` — Правила ConstraintLayout
-- `COMPOSE_RULES` — Правила Compose
-- `COMPOSE_SCREEN_RULES` — Правила Compose-экранов
-- `COMPOSE_SPACING_RULES` — Правила отступов и размеров Compose
-- `DIALOG_RULES` — Правила Dialog
-- `LAZYLIST_RULES` — Правила LazyList
-- `PREVIEW_RULES` — Правила Preview
-- `SCAFFOLD_RULES` — Правила Scaffold
-- `SHIMMER_RULES` — Правила Shimmer / Loading Placeholder
-- `TYPOGRAPHY_RULES` — Правила типографики
-
-**git**
-- `GIT_RULES` — Правила Git
-
-**github**
-- `GITHUB_README_RULES` — Правила GitHub README
-- `GITHUB_REPO_RULES` — Правила структуры репозитория
-
-**kmp**
-- `KMP_RULES` — Правила KMP
-
-**kotlin**
-- `KOTLIN_RULES` — Правила Kotlin
-
-**project**
-- `FILESYSTEM_RULES` — Правила проекта
-- `WORKFLOW_RULES` — Правила рабочего процесса
+- `architecture` — Правила архитектуры
+- `bottom-sheet` — Правила Bottom Sheet
+- `compose-color` — Правила цвета Compose
+- `compose-constraintlayout` — Правила ConstraintLayout
+- `compose` — Правила Compose
+- `compose-screen` — Правила Compose-экранов
+- `compose-spacing` — Правила отступов и размеров Compose
+- `dialog` — Правила Dialog
+- `domain` — Правила Domain
+- `filesystem` — Правила проекта
+- `github-readme` — Правила GitHub README
+- `github-repo` — Правила структуры репозитория
+- `git` — Правила Git
+- `kmp` — Правила KMP
+- `kotlin` — Правила Kotlin
+- `lazylist` — Правила LazyList
+- `mvi-error-handling` — Правила обработки ошибок в MVI
+- `mvi` — Правила MVI
+- `mvi-state` — Правила Model в MVI
+- `navigation` — Правила навигации
+- `network` — Правила сети
+- `preview` — Правила Preview
+- `realtime` — Правила realtime-соединений
+- `resource` — Правила ресурсов
+- `room` — Правила Room
+- `scaffold` — Правила Scaffold
+- `shimmer` — Правила Shimmer / Loading Placeholder
+- `textfield` — Правила TextField
+- `typography` — Правила типографики
+- `usecase` — Правила UseCase
+- `workmanager` — Правила WorkManager
+- `workflow` — Правила рабочего процесса
 
 ## Скиллы
 

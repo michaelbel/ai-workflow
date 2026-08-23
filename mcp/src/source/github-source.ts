@@ -25,7 +25,7 @@ export class GithubSource implements WorkflowSource {
   async listRules(): Promise<string[]> {
     const tree = await this.client.listTree(this.ref);
     return tree
-      .filter((item) => item.type === "blob" && item.path.startsWith("rules/") && item.path.endsWith(".md"))
+      .filter((item) => item.type === "blob" && /^rules\/[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(item.path))
       .map((item) => item.path.replace(/^rules\//, "").replace(/\.md$/, ""))
       .sort();
   }

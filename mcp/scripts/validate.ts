@@ -1,7 +1,7 @@
 /**
  * `npm run validate` — repo-wide static checks. Prints one line per failure with the offending
- * file and reason, and exits non-zero if anything fails. See docs/plans/ai-workflow-hardening for
- * the rationale behind each check.
+ * file and reason, and exits non-zero if anything fails. Each check enforces a current repository
+ * contract or prevents a previously fixed regression.
  */
 import { existsSync, lstatSync, readFileSync, readdirSync, readlinkSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
@@ -75,7 +75,22 @@ for (const dir of skillDirs) {
   }
 }
 
-// ─── 2. AGENTS.md @rules/... imports all resolve ──────────────────────────────────────────────
+// ─── 2. Rules are flat and use lowercase kebab-case public identifiers ───────────────────────
+
+const rulesDir = join(repoRoot, "rules");
+const ruleNamePattern = /^[a-z0-9]+(?:-[a-z0-9]+)*\.md$/;
+const ruleEntries = readdirSync(rulesDir, { withFileTypes: true });
+
+for (const entry of ruleEntries) {
+  const rulePath = join(rulesDir, entry.name);
+  if (entry.isDirectory()) {
+    fail(rulePath, "rules must be stored directly in rules/, without intermediate directories");
+  } else if (!ruleNamePattern.test(entry.name)) {
+    fail(rulePath, "rule filename must be lowercase kebab-case and end in .md");
+  }
+}
+
+// ─── 3. AGENTS.md @rules/... imports all resolve ──────────────────────────────────────────────
 
 const agentsMdPath = join(repoRoot, "AGENTS.md");
 const agentsMd = readText(agentsMdPath);
@@ -93,7 +108,7 @@ if (!foundAnyImport) {
   fail(agentsMdPath, "no '@rules/...' imports found — expected at least one");
 }
 
-// ─── 3. CLAUDE.md / GEMINI.md are symlinks to AGENTS.md ───────────────────────────────────────
+// ─── 4. CLAUDE.md / GEMINI.md are symlinks to AGENTS.md ───────────────────────────────────────
 
 for (const linkName of ["CLAUDE.md", "GEMINI.md"]) {
   const linkPath = join(repoRoot, linkName);
@@ -107,7 +122,7 @@ for (const linkName of ["CLAUDE.md", "GEMINI.md"]) {
   }
 }
 
-// ─── 4. package.json version has a single source of truth (no hardcoded literal in server code) ──
+// ─── 5. package.json version has a single source of truth (no hardcoded literal in server code) ──
 
 const packageJsonPath = join(mcpDir, "package.json");
 const packageJson = JSON.parse(readText(packageJsonPath)) as { version: string };
@@ -121,7 +136,7 @@ for (const relativeSrc of ["src/server.ts", "src/index.ts"]) {
   }
 }
 
-// ─── 5. No execSync / run_skill left in mcp/src ───────────────────────────────────────────────
+// ─── 6. No execSync / run_skill left in mcp/src ───────────────────────────────────────────────
 
 function listFilesRecursive(dir: string): string[] {
   const results: string[] = [];
@@ -150,41 +165,41 @@ for (const file of listFilesRecursive(srcDir)) {
   }
 }
 
-// ─── 6. Rule/skill drift regressions (see docs/plans/ai-workflow-hardening/plan.md) ────────────
+// ─── 7. Rule/skill drift regressions ─────────────────────────────────────────────────────────
 
 const newScreenSkill = readText(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"));
 if (newScreenSkill.includes("viewModelScope")) {
-  fail(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"), "regression: 'viewModelScope' reintroduced (MVI_RULES forbids ViewModel helper coroutine scopes)");
+  fail(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"), "regression: 'viewModelScope' reintroduced (mvi forbids ViewModel helper coroutine scopes)");
 }
 if (newScreenSkill.includes("private fun loadData")) {
-  fail(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"), "regression: private ViewModel helper function reintroduced (MVI_RULES only allows dispatch/catch)");
+  fail(join(skillsDir, "create-feature-scaffold-screen", "SKILL.md"), "regression: private ViewModel helper function reintroduced (mvi only allows dispatch/catch)");
 }
 
 const newDataLayerSkill = readText(join(skillsDir, "create-data-layer", "SKILL.md"));
 if (newDataLayerSkill.includes("@PrimaryKey")) {
-  fail(join(skillsDir, "create-data-layer", "SKILL.md"), "regression: '@PrimaryKey' reintroduced (ROOM_RULES requires @Entity(primaryKeys = [...]))");
+  fail(join(skillsDir, "create-data-layer", "SKILL.md"), "regression: '@PrimaryKey' reintroduced (room requires @Entity(primaryKeys = [...]))");
 }
 if (/database\.withTransaction \{\s*\n\s*\{feature\}Dao\.upsert/.test(newDataLayerSkill)) {
-  fail(join(skillsDir, "create-data-layer", "SKILL.md"), "regression: single DAO call wrapped in withTransaction again (ROOM_RULES forbids this)");
+  fail(join(skillsDir, "create-data-layer", "SKILL.md"), "regression: single DAO call wrapped in withTransaction again (room forbids this)");
 }
 if (/suspend fun select\(id: String\): \{Feature\}Entity\s*$/m.test(newDataLayerSkill)) {
-  fail(join(skillsDir, "create-data-layer", "SKILL.md"), "regression: 'select' returns non-null again (ROOM_RULES naming convention reserves 'select' for the nullable form)");
+  fail(join(skillsDir, "create-data-layer", "SKILL.md"), "regression: 'select' returns non-null again (room naming convention reserves 'select' for the nullable form)");
 }
 
 const newAlertDialogSkill = readText(join(skillsDir, "create-feature-alert-dialog", "SKILL.md"));
 if (/\)\s*=\s*when\s*\{/.test(newAlertDialogSkill)) {
-  fail(join(skillsDir, "create-feature-alert-dialog", "SKILL.md"), "regression: expression-body function reintroduced (KOTLIN_RULES requires block bodies with explicit return)");
+  fail(join(skillsDir, "create-feature-alert-dialog", "SKILL.md"), "regression: expression-body function reintroduced (kotlin requires block bodies with explicit return)");
 }
 
 const newBottomSheetSkill = readText(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"));
 if (/\}\n\s*\n\s*item \{/.test(newBottomSheetSkill)) {
-  fail(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"), "regression: blank line reintroduced between adjacent item {} blocks (LAZYLIST_RULES forbids this)");
+  fail(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"), "regression: blank line reintroduced between adjacent item {} blocks (lazylist forbids this)");
 }
 if (newBottomSheetSkill.includes("height(0.dp)")) {
   fail(join(skillsDir, "create-feature-bottom-sheet", "SKILL.md"), "regression: zero-height Spacer reintroduced");
 }
 
-// ─── 7. README's tool table matches the tools actually registered in server.ts ────────────────
+// ─── 8. README's tool table matches the tools actually registered in server.ts ────────────────
 
 const readmePath = join(repoRoot, "README.md");
 const readmeText = readText(readmePath);

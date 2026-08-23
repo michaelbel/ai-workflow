@@ -44,7 +44,8 @@ test("list returns structuredContent matching content, with the real rule/skill 
   const result = await client.callTool({ name: "list", arguments: {} });
   assert.equal(result.isError, undefined);
   const structured = result.structuredContent as { rules: string[]; skills: Array<{ name: string; description: string }>; source: { kind: string; ref: string } };
-  assert.ok(structured.rules.includes("android/MVI_RULES"));
+  assert.ok(structured.rules.includes("mvi"));
+  assert.ok(!structured.rules.some((name) => name.includes("/")));
   assert.ok(structured.skills.some((skill) => skill.name === "create-feature-scaffold-screen"));
   assert.equal(structured.source.kind, "bundled");
   assert.ok(!structured.skills.some((skill) => skill.name.includes("/SKILL")));
@@ -71,12 +72,12 @@ test("get_skill accepts the deprecated 'create-feature-scaffold-screen/SKILL' al
   assert.deepEqual(deprecated.structuredContent, canonical.structuredContent);
 });
 
-test("get_rule('android/MVI_RULES') reads the rule content", async () => {
+test("get_rule('mvi') reads the rule content", async () => {
   const { client } = await connectedClient();
-  const result = await client.callTool({ name: "get_rule", arguments: { name: "android/MVI_RULES" } });
+  const result = await client.callTool({ name: "get_rule", arguments: { name: "mvi" } });
   assert.equal(result.isError, undefined);
   const structured = result.structuredContent as { name: string; content: string };
-  assert.equal(structured.name, "android/MVI_RULES");
+  assert.equal(structured.name, "mvi");
   assert.ok(structured.content.includes("dispatch"));
 });
 
@@ -109,9 +110,18 @@ test("get_rule rejects path traversal with INVALID_NAME", async () => {
 
 test("get_rule returns NOT_FOUND for an unknown but validly-shaped rule name", async () => {
   const { client } = await connectedClient();
-  const result = await client.callTool({ name: "get_rule", arguments: { name: "android/DOES_NOT_EXIST" } });
+  const result = await client.callTool({ name: "get_rule", arguments: { name: "does-not-exist" } });
   assert.equal(result.isError, true);
   const text = (result.content as Array<{ type: string; text: string }>)[0].text;
   const payload = JSON.parse(text);
   assert.equal(payload.code, "NOT_FOUND");
+});
+
+test("get_rule rejects deprecated uppercase rule names with INVALID_NAME", async () => {
+  const { client } = await connectedClient();
+  const result = await client.callTool({ name: "get_rule", arguments: { name: "MVI_RULES" } });
+  assert.equal(result.isError, true);
+  const text = (result.content as Array<{ type: string; text: string }>)[0].text;
+  const payload = JSON.parse(text);
+  assert.equal(payload.code, "INVALID_NAME");
 });

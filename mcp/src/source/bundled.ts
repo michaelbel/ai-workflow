@@ -15,23 +15,6 @@ function assetsDir(): string {
   return join(moduleDir, "..", "..", "assets");
 }
 
-function listMarkdownFilesRecursive(dir: string, baseDir: string): string[] {
-  const results: string[] = [];
-  for (const entry of readdirSync(dir)) {
-    const fullPath = join(dir, entry);
-    const stat = statSync(fullPath);
-    if (stat.isDirectory()) {
-      results.push(...listMarkdownFilesRecursive(fullPath, baseDir));
-      continue;
-    }
-    if (entry.endsWith(".md")) {
-      const relative = fullPath.slice(baseDir.length + 1).replace(/\\/g, "/");
-      results.push(relative);
-    }
-  }
-  return results;
-}
-
 /**
  * Default WorkflowSource: reads the bundled npm-packaged snapshot from `mcp/assets`. Performs no
  * network access whatsoever.
@@ -51,8 +34,9 @@ export class BundledSource implements WorkflowSource {
   }
 
   async listRules(): Promise<string[]> {
-    return listMarkdownFilesRecursive(this.rulesDir, this.rulesDir)
-      .map((relative) => relative.replace(/\.md$/, ""))
+    return readdirSync(this.rulesDir, { withFileTypes: true })
+      .filter((entry) => entry.isFile() && /^[a-z0-9]+(?:-[a-z0-9]+)*\.md$/.test(entry.name))
+      .map((entry) => entry.name.replace(/\.md$/, ""))
       .sort();
   }
 

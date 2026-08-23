@@ -7,8 +7,8 @@ import { getServerName, getServerVersion } from "./version.js";
 
 const SERVER_INSTRUCTIONS = [
   "Use this server as the source of truth for ai-workflow rules and skills.",
-  "Before any git commit, call get_rule with name 'git/GIT_RULES' and apply the returned rules.",
-  "Before deleting files, call get_rule with name 'project/FILESYSTEM_RULES' and apply the returned rules.",
+  "Before any git commit, call get_rule with name 'git' and apply the returned rules.",
+  "Before deleting files, call get_rule with name 'filesystem' and apply the returned rules.",
 ].join("\n");
 
 const sourceOutputShape = {
@@ -91,9 +91,9 @@ export function createServer(options: CreateServerOptions = {}): McpServer {
     "get_rule",
     {
       title: "Get rule content",
-      description: "Get the content of a rule. Use a name from the `list` tool, e.g. 'android/MVI_RULES'.",
+      description: "Get the content of a rule. Use a name from the `list` tool, e.g. 'mvi'.",
       inputSchema: {
-        name: z.string().describe("Rule name in '<category>/<RULE_NAME>' form, e.g. 'android/MVI_RULES'"),
+        name: z.string().describe("Lowercase kebab-case rule name without the '.md' suffix, e.g. 'mvi-error-handling'"),
       },
       outputSchema: {
         name: z.string(),

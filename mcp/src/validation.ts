@@ -10,11 +10,11 @@ const DEPRECATED_SKILL_SUFFIX = "/SKILL";
 const SKILL_NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 /**
- * Rule name: `<category>/<RULE_NAME>`, e.g. `android/MVI_RULES`. Exactly one `/` is allowed by
- * construction (neither side of the pattern can contain `/`), so traversal sequences like
- * `../../etc/passwd` cannot match.
+ * Rule name: the lowercase kebab-case basename without `.md`, e.g. `mvi-error-handling`.
+ * Slashes, dots, backslashes, underscores and uppercase letters cannot match, so path traversal
+ * is impossible.
  */
-const RULE_NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*\/[A-Z0-9]+(?:_[A-Z0-9]+)*$/;
+const RULE_NAME_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 /**
  * Validates a skill name from an MCP caller. Accepts the deprecated `<name>/SKILL` alias (stripped
@@ -39,7 +39,7 @@ export function validateRuleName(rawName: string): string {
   if (!RULE_NAME_PATTERN.test(rawName)) {
     throw new WorkflowError(
       "INVALID_NAME",
-      `Invalid rule name '${rawName}'. Expected '<category>/<RULE_NAME>', e.g. 'android/MVI_RULES'.`
+      `Invalid rule name '${rawName}'. Expected a lowercase kebab-case rule name, e.g. 'mvi-error-handling'.`
     );
   }
 

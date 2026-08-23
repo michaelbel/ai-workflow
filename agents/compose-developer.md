@@ -6,7 +6,7 @@ description: >-
   навигационные графы, анимации, accessibility-семантику, состояния loading/error/empty.
   Бизнес-логику, репозитории и use case не трогает — это `kotlin-engineer`.
 tools:
-disallowedTools:
+disallowedTools: NotebookEdit, Agent
 model: sonnet
 permissionMode:
 maxTurns: 100

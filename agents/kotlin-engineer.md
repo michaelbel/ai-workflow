@@ -5,7 +5,7 @@ description: >-
   DAO/DI и тесты к ним, по правилам ai-workflow. Compose UI (composables, темы, навигация,
   modifiers, previews) не пишет.
 tools:
-disallowedTools:
+disallowedTools: NotebookEdit, Agent
 model: sonnet
 permissionMode:
 maxTurns: 100

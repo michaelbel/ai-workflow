@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "ai-workflow": {
-      "command": "npx",
-      "args": ["-y", "@michaelbel/ai-workflow-mcp"]
-    }
-  }
-}

@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "ai-workflow",
-      "source": "./integrations/claude-code",
+      "source": "./",
       "description": "ai-workflow MCP server + hooks (Claude Code)"
     }
   ]

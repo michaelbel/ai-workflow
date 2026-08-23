@@ -48,16 +48,22 @@ args = ["-y", "@michaelbel/ai-workflow-mcp"]
 gemini extensions install https://github.com/michaelbel/ai-workflow
 ```
 
-**Claude Code + hooks** — плагин `integrations/claude-code/` подключает MCP-сервер и набор
-Claude Code-хуков (например, напоминание про `git stash` перед переключением веток) одной
-командой:
+**Claude Code** — корень репозитория одновременно является корнем плагина. Плагин подключает
+MCP-сервер, нативные `skills/` и `agents/`, а также Claude Code hooks одной командой:
 
 ```
 /plugin marketplace add michaelbel/ai-workflow
 /plugin install ai-workflow@ai-workflow
 ```
 
-Подробности — в `integrations/claude-code/README.md`.
+Для локальной разработки плагин можно подключить напрямую из рабочей копии:
+
+```bash
+claude --plugin-dir .
+```
+
+Hook `stash-reminder.sh` срабатывает перед `git checkout`/`git switch` и предупреждает о
+незакоммиченных изменениях.
 
 ### Инструменты
 

@@ -71,8 +71,20 @@ Hooks:
   `--force-with-lease`).
 - `secret-read-guard.sh` блокирует Bash-команды, читающие или пересылающие секретные пути
   (`.env`, `secrets/`, `~/.ssh`, `~/.aws`, приватные ключи и сертификаты).
+- `dependency-bump-commit-guard.sh` блокирует `git commit`, который бампает версии сразу
+  нескольких зависимостей за раз (`rules/git.md` требует один коммит на одно обновление).
+- `agents-frontmatter-guard.sh` после правки `agents/*.md`/`.claude/agents/*.md` проверяет
+  `model:` из допустимого набора, отсутствие `effort:` у `haiku` и существование скиллов
+  из `skills:`.
+- `worktree-merge-back-reminder.sh` напоминает после закрытия worktree перенести изменения
+  как незакоммиченные и перепроверить их в основной директории, не коммитя автоматически.
+- `tool-audit-log.sh` пишет JSONL-лог каждого вызова инструмента в
+  `~/.claude/ai-workflow/audit/` (с ротацией по дням) для последующего разбора/compliance.
 - `git-state-summary.sh` печатает в начале сессии текущую ветку, worktree'ы и
   незакоммиченные изменения.
+- `tag-version-guard.sh` и `typecheck-on-edit.sh` — dev-tooling именно для разработки этого
+  репозитория (сверяют тег `mcp-vX.Y.Z` с `mcp/package.json` и гоняют `tsc --noEmit` по
+  `mcp/src`); в остальных проектах, где стоит плагин, молча ничего не делают.
 
 ### Инструменты
 

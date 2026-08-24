@@ -140,10 +140,10 @@ Add `@Throws` to every Kotlin function that throws checked exceptions and is cal
 
 Java wildcard types map to Kotlin's variance annotations:
 
-| Java | Kotlin | Description |
-|------|--------|-------------|
-| `? extends T` | `out T` | Covariance (producer) |
-| `? super T` | `in T` | Contravariance (consumer) |
+| Java            | Kotlin       | Description                 |
+| --------------- | ------------ | --------------------------- |
+| `? extends T`   | `out T`      | Covariance (producer)       |
+| `? super T`     | `in T`       | Contravariance (consumer)   |
 | Raw type `List` | `List<Any?>` | Add explicit type parameter |
 
 ```java
@@ -288,17 +288,17 @@ view.addListener(object : ViewListener {
 
 Java arrays map to Kotlin types as follows:
 
-| Java | Kotlin | Notes |
-|------|--------|-------|
-| `String[]` | `Array<String>` | Reference type arrays |
-| `int[]` | `IntArray` | Primitive array (not `Array<Int>`) |
-| `long[]` | `LongArray` | Primitive array |
-| `double[]` | `DoubleArray` | Primitive array |
-| `boolean[]` | `BooleanArray` | Primitive array |
-| `Object[]` | `Array<Any?>` | |
-| `new int[10]` | `IntArray(10)` | Array creation |
-| `new String[10]` | `arrayOfNulls<String>(10)` | Nullable element array |
-| `String... args` | `vararg args: String` | Varargs parameter |
+| Java             | Kotlin                     | Notes                              |
+| ---------------- | -------------------------- | ---------------------------------- |
+| `String[]`       | `Array<String>`            | Reference type arrays              |
+| `int[]`          | `IntArray`                 | Primitive array (not `Array<Int>`) |
+| `long[]`         | `LongArray`                | Primitive array                    |
+| `double[]`       | `DoubleArray`              | Primitive array                    |
+| `boolean[]`      | `BooleanArray`             | Primitive array                    |
+| `Object[]`       | `Array<Any?>`              |                                    |
+| `new int[10]`    | `IntArray(10)`             | Array creation                     |
+| `new String[10]` | `arrayOfNulls<String>(10)` | Nullable element array             |
+| `String... args` | `vararg args: String`      | Varargs parameter                  |
 
 Using `Array<Int>` instead of `IntArray` causes boxing overhead — always use the specialized primitive array types.
 

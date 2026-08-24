@@ -49,21 +49,21 @@ This skill provides guidelines and patterns to secure Android components (Activi
 
 Evaluate the security features of different intent delivery methods:
 
-| Intent Delivery Method | Scope | Recommended Use Case |
-|---|---|---|
-| Explicit Intent (Internal) | App Private | Launching internal activities/services |
-| Implicit Intent | System Wide | Launching system camera, dialer, or sharing |
+| Intent Delivery Method                                | Scope       | Recommended Use Case                                                                                                                            |
+| ----------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Explicit Intent (Internal)                            | App Private | Launching internal activities/services                                                                                                          |
+| Implicit Intent                                       | System Wide | Launching system camera, dialer, or sharing                                                                                                     |
 | Local Broadcasts (LocalBroadcastManager) (DEPRECATED) | App Private | Internal asynchronous event routing. **Deprecated**: Use in-app observers like Kotlin Flows/SharedFlow, LiveData, or reactive patterns instead. |
-| System Broadcasts | System Wide | Receiving system events (NFC, Bluetooth) |
+| System Broadcasts                                     | System Wide | Receiving system events (NFC, Bluetooth)                                                                                                        |
 
 ### 2. PendingIntent mutability flag options
 
 Evaluate the security implications of PendingIntent mutability flags:
 
-| Flag Name | Mutability | Recommended Use Case |
-|---|---|---|
-| `PendingIntent.FLAG_IMMUTABLE` | Immutable | Default for almost all PendingIntents, such as alarms and notifications |
-| `PendingIntent.FLAG_MUTABLE` | Mutable | Inline notifications replies, slice actions (requires explicit target intent) |
+| Flag Name                      | Mutability | Recommended Use Case                                                          |
+| ------------------------------ | ---------- | ----------------------------------------------------------------------------- |
+| `PendingIntent.FLAG_IMMUTABLE` | Immutable  | Default for almost all PendingIntents, such as alarms and notifications       |
+| `PendingIntent.FLAG_MUTABLE`   | Mutable    | Inline notifications replies, slice actions (requires explicit target intent) |
 
 ### 3. Intent handling and redirection logic
 

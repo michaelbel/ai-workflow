@@ -43,7 +43,7 @@ are in use. Load ONLY the matching framework reference files to keep context foc
 ### Framework Detection Table
 
 | Import prefix                                                     | Framework guide                                        |
-|-------------------------------------------------------------------|--------------------------------------------------------|
+| ----------------------------------------------------------------- | ------------------------------------------------------ |
 | `org.springframework.*`                                           | [SPRING.md](references/frameworks/SPRING.md)           |
 | `lombok.*`                                                        | [LOMBOK.md](references/frameworks/LOMBOK.md)           |
 | `javax.persistence.*`, `jakarta.persistence.*`, `org.hibernate.*` | [HIBERNATE.md](references/frameworks/HIBERNATE.md)     |

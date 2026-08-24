@@ -13,23 +13,23 @@ the `mockito-kotlin` helper library.
 
 ### 1. MockK conversion table
 
-| Mockito | MockK |
-|---|---|
-| `Mockito.mock(Foo.class)` | `mockk<Foo>()` |
-| `@Mock Foo foo` | `@MockK lateinit var foo: Foo` (with `@ExtendWith(MockKExtension::class)`) |
-| `when(foo.bar()).thenReturn(x)` | `every { foo.bar() } returns x` |
-| `when(foo.bar()).thenThrow(e)` | `every { foo.bar() } throws e` |
-| `when(foo.bar()).thenAnswer { }` | `every { foo.bar() } answers { }` |
-| `doNothing().when(foo).bar()` | `justRun { foo.bar() }` |
-| `verify(foo).bar()` | `verify { foo.bar() }` |
-| `verify(foo, times(2)).bar()` | `verify(exactly = 2) { foo.bar() }` |
-| `verify(foo, never()).bar()` | `verify(exactly = 0) { foo.bar() }` |
-| `ArgumentCaptor<T>` | `slot<T>()` and `capture(slot)` |
-| `any()` | `any()` |
-| `eq(x)` | `eq(x)` (often not needed — MockK matches exact values by default) |
-| `Mockito.spy(obj)` | `spyk(obj)` |
-| `@InjectMocks` | No direct equivalent — use constructor injection |
-| `verifyNoMoreInteractions(foo)` | `confirmVerified(foo)` |
+| Mockito                          | MockK                                                                      |
+| -------------------------------- | -------------------------------------------------------------------------- |
+| `Mockito.mock(Foo.class)`        | `mockk<Foo>()`                                                             |
+| `@Mock Foo foo`                  | `@MockK lateinit var foo: Foo` (with `@ExtendWith(MockKExtension::class)`) |
+| `when(foo.bar()).thenReturn(x)`  | `every { foo.bar() } returns x`                                            |
+| `when(foo.bar()).thenThrow(e)`   | `every { foo.bar() } throws e`                                             |
+| `when(foo.bar()).thenAnswer { }` | `every { foo.bar() } answers { }`                                          |
+| `doNothing().when(foo).bar()`    | `justRun { foo.bar() }`                                                    |
+| `verify(foo).bar()`              | `verify { foo.bar() }`                                                     |
+| `verify(foo, times(2)).bar()`    | `verify(exactly = 2) { foo.bar() }`                                        |
+| `verify(foo, never()).bar()`     | `verify(exactly = 0) { foo.bar() }`                                        |
+| `ArgumentCaptor<T>`              | `slot<T>()` and `capture(slot)`                                            |
+| `any()`                          | `any()`                                                                    |
+| `eq(x)`                          | `eq(x)` (often not needed — MockK matches exact values by default)         |
+| `Mockito.spy(obj)`               | `spyk(obj)`                                                                |
+| `@InjectMocks`                   | No direct equivalent — use constructor injection                           |
+| `verifyNoMoreInteractions(foo)`  | `confirmVerified(foo)`                                                     |
 
 ### 2. Coroutine support in MockK
 

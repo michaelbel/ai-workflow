@@ -1,5 +1,5 @@
 ---
-name: "gh-project-manager"
+name: "github-project-manager"
 description: >-
   Оператор трекера GitHub (Issues + Projects v2): заводит и оформляет задачи, назначает
   исполнителей, выставляет связи (sub-issue, blocked-by, эпик), декомпозирует крупное, двигает

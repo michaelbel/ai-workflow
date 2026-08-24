@@ -1,5 +1,5 @@
 ---
-name: "compose-developer"
+name: "compose-builder"
 description: >-
   Пишет UI-код на Jetpack Compose и Compose Multiplatform по макету, спецификации или брифу
   миграции: экраны, composable-компоненты, previews, кастомные Modifier, темы и токены,

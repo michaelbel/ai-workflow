@@ -4,7 +4,7 @@ description: >-
   Ревью диффа на проглоченные ошибки и подавление сбоев: пустой и слишком широкий перехват, ошибка
   без лога и без обратной связи, необъявленный fallback, возврат default вместо ошибки, retry без
   уведомления. Судит только обработку ошибок — общую корректность и безопасность закрывают
-  code-reviewer и security-expert. Код не правит.
+  code-reviewer и security-auditor. Код не правит.
 tools:
 disallowedTools: Edit, Write, NotebookEdit, Agent
 model: sonnet

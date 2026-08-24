@@ -1,5 +1,5 @@
 ---
-name: "docs-writer"
+name: "tech-writer"
 description: >-
   Пишет и обновляет публичную пользовательскую документацию репозитория: README, руководства,
   install/setup-гайды, гайды по CLI и инструментам, tutorials, how-to, CONTRIBUTING, разделы

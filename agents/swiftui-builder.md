@@ -1,5 +1,5 @@
 ---
-name: "swiftui-developer"
+name: "swiftui-builder"
 description: >-
   Пишет SwiftUI UI-код по макету, спецификации или брифу миграции для iOS, macOS и watchOS: экраны,
   views, previews, кастомные ViewModifier, темы и токены, навигацию (NavigationStack, TabView,

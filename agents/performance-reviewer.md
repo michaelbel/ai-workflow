@@ -1,5 +1,5 @@
 ---
-name: "performance-expert"
+name: "performance-reviewer"
 description: >-
   Ревью кода и планов на производительность и расход ресурсов: N+1 и лишние запросы, отсутствующая
   пагинация, блокировка UI-потока и неверные dispatcher, утечки coroutine и удерживаемые ссылки,

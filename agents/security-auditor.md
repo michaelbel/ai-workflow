@@ -1,5 +1,5 @@
 ---
-name: "security-expert"
+name: "security-auditor"
 description: >-
   Ревью кода, архитектуры и планов на уязвимости: доступ и авторизация, криптография и хранение
   секретов, TLS и сетевой слой, флоу аутентификации (OAuth/OIDC, JWT, биометрия), injection,

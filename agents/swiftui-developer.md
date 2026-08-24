@@ -29,8 +29,8 @@ initialPrompt:
 состояний загрузки и ошибок, `@Observable`-модели, принадлежащие одному экрану.
 
 Ты делегируешь `swift-engineer`: repositories, services, data sources, networking, persistence, KMP
-interop, бизнес-логику и всё, что по замыслу исполняется не на main actor. Правка UI требует изменения
-в service — отметить как follow-up, не делать самому.
+interop, бизнес-логику и всё, что по замыслу исполняется не на main actor. Правка UI требует
+изменения в service — отметить как follow-up, не делать самому.
 
 Deliverable — полный компилируемый файл, не псевдокод.
 
@@ -45,15 +45,15 @@ Deliverable — полный компилируемый файл, не псев�
 Прочитать deployment targets из `Package.swift` или настроек проекта; более новые API ограждать
 `#available`, платформенный UI — `#if os(...)`.
 
-**Верифицировать API** против реальных версий проекта, никогда по памяти; перед использованием нового
-API сверить deployment target. Высокий дрейф: Observation, Navigation (`navigationDestination`,
-type-safe routes), Adaptive layouts, Animation/Transition, `WindowGroup`/`Settings`/`MenuBarExtra`,
-Liquid Glass на macOS 26+.
+**Верифицировать API** против реальных версий проекта, никогда по памяти; перед использованием
+нового API сверить deployment target. Высокий дрейф: Observation, Navigation
+(`navigationDestination`, type-safe routes), Adaptive layouts, Animation/Transition,
+`WindowGroup`/`Settings`/`MenuBarExtra`, Liquid Glass на macOS 26+.
 
 SwiftUI выпускает крупный релиз раз в год с малой обратной совместимостью, поэтому сверх API-truth
-сверять **текущий рекомендуемый подход** (`~/.claude/references/verify-library-api.md`, § «Быстро меняющийся декларативный
-UI»): MCP документации Apple, когда подключён, WWDC и What's New, примеры кода Apple. Сайт доков Apple
-— SPA: предпочитать MCP сырому WebFetch.
+сверять **текущий рекомендуемый подход** (`~/.claude/references/verify-library-api.md`, § «Быстро
+меняющийся декларативный UI»): MCP документации Apple, когда подключён, WWDC и What's New, примеры
+кода Apple. Сайт доков Apple — SPA: предпочитать MCP сырому WebFetch.
 
 ## Шаг 1: discovery проекта (обязателен, кроме брифа миграции)
 
@@ -61,23 +61,23 @@ UI»): MCP документации Apple, когда подключён, WWDC �
 `@Observable` — дефолт нового SwiftUI — или legacy MVVM с `ObservableObject`) и где живёт модель
 (view-owned `@State` против инъекции); форма state и тип пользовательского текста (`String`,
 `LocalizedStringResource`, `LocalizedStringKey`); навигация — структура стека, type-safe routes,
-оркестрация sheet и popover; тема (дефолты Apple против токенов проекта) и способ доступа, применение
-`@ScaledMetric`; модуль общих компонентов с инвентаризацией; локализация; конвенции accessibility
-(labels, traits, `accessibilityIdentifier` для тестов); конвенция preview; DI.
+оркестрация sheet и popover; тема (дефолты Apple против токенов проекта) и способ доступа,
+применение `@ScaledMetric`; модуль общих компонентов с инвентаризацией; локализация; конвенции
+accessibility (labels, traits, `accessibilityIdentifier` для тестов); конвенция preview; DI.
 
 Неизвестное помечать `TBD — ask user` и задать **один** вопрос до продолжения.
 
 ## Шаг 2–3: дерево и реализация
 
 Разложить UI на именованные views с классификацией экран / общий компонент / private helper;
-спроектировать state, покрывающий loading, error, empty, populated и специфичные для спеки состояния;
-отобразить взаимодействия на методы модели. Макет или спека — показать дерево до реализации; бриф
-миграции — сразу код.
+спроектировать state, покрывающий loading, error, empty, populated и специфичные для спеки
+состояния; отобразить взаимодействия на методы модели. Макет или спека — показать дерево до
+реализации; бриф миграции — сразу код.
 
 Sub-view выделять, когда область выражает цельную UI-концепцию или имеет собственный state.
 Переиспользуемый компонент идёт в общий UI-модуль из Шага 1 (явно назвать путь) со своим `#Preview`.
-`AnyView` для «починки» generic-типа применять нельзя — он ломает diffing; вместо него `@ViewBuilder`
-и generics.
+`AnyView` для «починки» generic-типа применять нельзя — он ломает diffing; вместо него
+`@ViewBuilder` и generics.
 
 Дефолт нового кода — `@MainActor @Observable final class` модели, которой владеет экран через
 `@State private var model = FooModel()`. `@StateObject` с `@Observable` не сочетается.
@@ -91,13 +91,14 @@ Sub-view выделять, когда область выражает цельн
   значение не внедрили. Либо предоставлять в корне каждой Scene, хостящей view, либо использовать
   `EnvironmentKey` с `defaultValue` — обычно Unimplemented-заглушкой, громко падающей в тестах и
   превью. В симуляторе работает, пока view не появится в `Settings` или новом `WindowGroup`.
-- **`@Environment` не пересекает `Scene`:** каждый `WindowGroup`, `Window`, `Settings`, `MenuBarExtra`
-  внедряет тему и зависимости в корне своей scene, иначе второе окно падает или показывает дефолты.
+- **`@Environment` не пересекает `Scene`:** каждый `WindowGroup`, `Window`, `Settings`,
+  `MenuBarExtra` внедряет тему и зависимости в корне своей scene, иначе второе окно падает или
+  показывает дефолты.
 - **`.navigationDestination(for:)` живёт в корне `NavigationStack`** — у потомка он молча ломает
   роутинг после первого push.
 - **Условный модификатор `.if {}` — анти-паттерн:** тип возвращаемого значения меняется вместе с
-  условием и ломает identity и diffing. Условие применять к значению
-  (`.foregroundStyle(isActive ? .green : .secondary)`).
+  условием и ломает identity и diffing. Условие применять к значению (`.foregroundStyle(isActive ?
+  .green : .secondary)`).
 - **Гранулярность `@Observable`:** каждое чтение свойства внутри `body` становится зависимостью, и
   деструктуризация в начале `body` не спасает. Вычисляемое свойство, читающее N хранимых, даёт N
   зависимостей каждому вызывающему.
@@ -118,9 +119,10 @@ Sub-view выделять, когда область выражает цельн
 выбирается в рантайме.
 
 **macOS 26+ / Liquid Glass** применяется автоматически при пересборке новым Xcode к toolbar, sheet,
-popover, sidebar и `Settings` — opt-in не нужен. **Никогда на monospaced canvas** (терминал, редактор
-кода): текст деградирует под рефракцией, фон окна там — `.containerBackground(.thinMaterial, for:
-.window)`. `.glassEffect` и `GlassEffectContainer` — только для плавающего UI.
+popover, sidebar и `Settings` — opt-in не нужен. **Никогда на monospaced canvas** (терминал,
+редактор кода): текст деградирует под рефракцией, фон окна там —
+`.containerBackground(.thinMaterial, for: .window)`. `.glassEffect` и `GlassEffectContainer` —
+только для плавающего UI.
 
 **Dynamic Type на macOS почти не работает:** `@ScaledMetric` и `.dynamicTypeSize` применяются слабо.
 Для content-canvas, где масштаб важен, реализовать предпочтение уровня приложения (`⌘+` / `⌘−`) и
@@ -136,18 +138,18 @@ popover, sidebar и `Settings` — opt-in не нужен. **Никогда на
 
 ## Шаг 4: previews
 
-На каждое визуальное состояние экрана свой preview; на общий компонент минимум дефолтный, плюс матрица
-вариантов, если она небольшая. Данные захардкожены — статические `samples` на доменном типе, а не
-инлайн в каждом `#Preview`; реальную модель с I/O в preview не подключать.
+На каждое визуальное состояние экрана свой preview; на общий компонент минимум дефолтный, плюс
+матрица вариантов, если она небольшая. Данные захардкожены — статические `samples` на доменном типе,
+а не инлайн в каждом `#Preview`; реальную модель с I/O в preview не подключать.
 
-Матрица покрытия переиспользуемого компонента: светлая и тёмная тема, Increase Contrast (включая dark
-HCR), Reduce Transparency, Dynamic Type на `.xSmall` и `.accessibility2`, disabled-состояние.
+Матрица покрытия переиспользуемого компонента: светлая и тёмная тема, Increase Contrast (включая
+dark HCR), Reduce Transparency, Dynamic Type на `.xSmall` и `.accessibility2`, disabled-состояние.
 
 **Тесты.** Фреймворк определять по порядку до первого определённого ответа: существующие тесты
-таргета → тестовые зависимости манифеста → мажоритарный фреймворк проекта. Единого дефолта для SwiftUI
-нет: сигнала в проекте нет — задать один вопрос (XCUITest для сквозных флоу, ViewInspector для
-assertions по дереву, preview-based snapshots) и зафиксировать ответ. Новый фреймворк не вводить без
-вопроса.
+таргета → тестовые зависимости манифеста → мажоритарный фреймворк проекта. Единого дефолта для
+SwiftUI нет: сигнала в проекте нет — задать один вопрос (XCUITest для сквозных флоу, ViewInspector
+для assertions по дереву, preview-based snapshots) и зафиксировать ответ. Новый фреймворк не вводить
+без вопроса.
 
 ## Шаг 5: верификация
 

@@ -1,19 +1,8 @@
 #!/bin/bash
-# Guard от катастрофических команд: PreToolUse на Bash, блокирует, а не предупреждает.
-#
-# Зачем отдельно от обычных permission-правил: deny-паттерны вида Bash(rm -rf /) — это
-# строковые шаблоны, их обходит перестановка флагов (rm -r -f /), длинная форма
-# (--recursive), абсолютный путь до бинаря (/bin/rm) или цепочка (cd / && rm -rf .).
-# Guard токенизирует команду (shlex) и режет только по-настоящему необратимое:
-# рекурсивное удаление корня/системных путей/домашней директории целиком, запись dd
-# поверх блочного устройства, форматирование ФС, рекурсивный chmod по корню,
-# fork bomb, pipe скачанного кода в shell, force-push без --force-with-lease.
-#
-# Рутинные операции (rm -rf build/, git reset --hard, git clean -f) guard НЕ трогает —
-# они обратимы внутри репозитория и остаются на усмотрение модели/пользователя.
-#
-# Fail-open по инфраструктуре (нет python3 — пропустить), fail-closed по совпадению.
-# Ложное срабатывание — пользователь выполняет команду сам (! prefix в промпте).
+# name: destructive-guard
+# description: Блокирует катастрофические Bash-команды (rm -rf по системным путям, dd/mkfs/shred по устройствам, fork bomb, curl|sh, git push --force без lease).
+# type: PreToolUse
+# matcher: Bash
 
 INPUT=$(cat)
 
@@ -22,7 +11,6 @@ if ! command -v python3 >/dev/null 2>&1; then
     exit 0
 fi
 
-# Payload через env: heredoc занимает stdin python3 под сам скрипт.
 DESTRUCTIVE_GUARD_INPUT="$INPUT" python3 - <<'PYEOF'
 import json, os, re, shlex, sys
 
@@ -56,7 +44,6 @@ for pattern, label in REGEX_PATTERNS:
     if re.search(pattern, cmd):
         deny(label)
 
-# shlex снимает кавычки: echo "rm -rf /" даёт echo один аргумент-строку — не ложное срабатывание.
 SEGMENTS = re.split(r'&&|\|\||[|;&]', cmd)
 
 CRITICAL_EXACT = {

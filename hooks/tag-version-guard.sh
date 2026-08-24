@@ -1,11 +1,8 @@
 #!/bin/bash
-# Tag/version consistency guard: PreToolUse на Bash, ловит создание/push тега вида
-# mcp-vX.Y.Z и сверяет его с версией в mcp/package.json — той же проверкой, которую
-# потом всё равно делает publish-workflow, но до того, как тег уже пошёл в CI.
-#
-# Считает только явные имена тегов (`git tag mcp-vX.Y.Z`, `git push origin mcp-vX.Y.Z` /
-# `refs/tags/mcp-vX.Y.Z`); `git push --tags` без явного имени пропускает — не наша
-# задача угадывать, какой из локальных тегов имелся в виду.
+# name: tag-version-guard
+# description: Блокирует создание/push тега mcp-vX.Y.Z, не совпадающего с версией в mcp/package.json.
+# type: PreToolUse
+# matcher: Bash
 
 INPUT=$(cat)
 

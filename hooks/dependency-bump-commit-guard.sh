@@ -1,15 +1,8 @@
 #!/bin/bash
-# Dependency-bump commit guard: PreToolUse на Bash, ловит `git commit`, который бампает
-# версии сразу нескольких зависимостей за один раз.
-#
-# rules/git.md требует один коммит на одно обновление зависимости, в формате
-# `Bump <dependency> from <old> to <new>` — даже если несколько зависимостей лежат
-# в одном файле. Guard смотрит staged-diff манифестов (package.json, version-каталоги
-# Gradle, gradle.properties, Cargo.toml, pyproject.toml, requirements.txt, go.mod) и
-# считает, сколько разных ключей поменяли версию. Больше одного — блок.
-#
-# Эвристика по regex, не полноценный парсер каждого формата — намеренно, чтобы не
-# тащить зависимости. Ложное срабатывание — пользователь коммитит сам (! prefix).
+# name: dependency-bump-commit-guard
+# description: Блокирует git commit, который бампает версии сразу нескольких зависимостей за раз.
+# type: PreToolUse
+# matcher: Bash
 
 INPUT=$(cat)
 
@@ -41,7 +34,6 @@ import re, sys
 
 diff = sys.stdin.read()
 
-# key = value-подобная строка с версией: "name": "1.2.3", name = "1.2.3", name=1.2.3
 PATTERN = re.compile(
     r"^([+-])\s*[\"\x27]?([A-Za-z0-9_.@/-]+)[\"\x27]?\s*[:=]\s*[\"\x27]?[\^~]?"
     r"(\d+(?:\.\d+){1,3}[\w.-]*)[\"\x27]?\s*,?\s*$"

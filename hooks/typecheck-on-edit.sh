@@ -1,10 +1,8 @@
 #!/bin/bash
-# Typecheck-on-edit: PostToolUse на Edit|Write, гоняет tsc --noEmit сразу после правки
-# файла в mcp/src или mcp/scripts — короче цикл обратной связи, чем ждать npm run check.
-#
-# mcp/ не использует форматтер/линтер (только tsc), поэтому единственная быстрая
-# автоматическая проверка здесь — типы. Fail-open, если зависимости не установлены
-# (нет mcp/node_modules) или файл не относится к mcp/{src,scripts}.
+# name: typecheck-on-edit
+# description: Гоняет tsc --noEmit сразу после правки файла в mcp/src или mcp/scripts.
+# type: PostToolUse
+# matcher: Edit|Write
 
 INPUT=$(cat)
 

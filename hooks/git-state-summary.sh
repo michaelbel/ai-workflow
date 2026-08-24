@@ -1,6 +1,8 @@
 #!/bin/bash
-# SessionStart: печатает состояние git-репозитория в начало сессии, чтобы не тратить
-# первые несколько tool call'ов на `git status`/`git branch`/`git worktree list`.
+# name: git-state-summary
+# description: Печатает в начале сессии текущую ветку, worktree'ы и незакоммиченные изменения.
+# type: SessionStart
+# matcher: —
 
 git rev-parse --is-inside-work-tree >/dev/null 2>&1 || exit 0
 

@@ -1,17 +1,12 @@
 #!/bin/bash
-# Worktree merge-back reminder: PostToolUse на ExitWorktree.
-#
-# rules/workflow.md: после завершения фонового агента в изолированном worktree его
-# изменения переносятся в основную рабочую директорию как незакоммиченные, БЕЗ
-# автоматического коммита, и перепроверяются (validate/test/build) уже там перед тем,
-# как предлагать коммит. Это легко забыть посреди сессии — хук просто напоминает
-# в момент, когда worktree реально закрывается.
+# name: worktree-merge-back-reminder
+# description: Напоминает после закрытия worktree перенести изменения как незакоммиченные и перепроверить их в основной директории.
+# type: PostToolUse
+# matcher: ExitWorktree
 
 echo "WORKTREE-MERGE-BACK: worktree закрыт. Перед коммитом — rules/workflow.md:" >&2
 echo "  1) перенеси изменения из worktree в основную директорию как uncommitted" >&2
 echo "  2) НЕ коммить автоматически" >&2
 echo "  3) перепрогони validate/test/build уже в основной директории" >&2
 
-# exit 2 (не 0) — иначе на PostToolUse это напоминание останется только в скрытом
-# транскрипте и не дойдёт до модели как action item.
 exit 2

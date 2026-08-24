@@ -1,14 +1,8 @@
 #!/bin/bash
-# Agent frontmatter guard: PostToolUse на Edit|Write, проверяет YAML frontmatter
-# только что записанного файла субагента (agents/*.md или .claude/agents/*.md).
-#
-# Ловит то же, что claude-config-engineer держит в своей таблице верификаторов вручную:
-# `model:` из допустимого набора, у haiku не задан `effort:` (его назначение — ошибка),
-# `skills:` ссылается только на реально существующие директории в skills/.
-#
-# PostToolUse не может отменить уже применённую правку — exit 2 просто возвращает
-# находки в транскрипт, чтобы модель сама исправила файл, который только что написала.
-# Fail-open по инфраструктуре и по путям, которые не удаётся уверенно проверить.
+# name: agents-frontmatter-guard
+# description: После правки agents/*.md проверяет допустимость model:, отсутствие effort: у haiku и существование скиллов из skills:.
+# type: PostToolUse
+# matcher: Edit|Write
 
 INPUT=$(cat)
 
@@ -37,10 +31,8 @@ except OSError:
 
 m = re.match(r'^---\n(.*?\n)---\n', text, re.S)
 if not m:
-    sys.exit(0)  # нет frontmatter — не наша забота
+    sys.exit(0)
 
-# Минимальный построчный парсер: строка "key: value" в колонке 0 открывает поле,
-# последующие отступленные строки (в т.ч. ">-"-блоки) доклеиваются к тому же полю.
 fields = {}
 current = None
 for line in m.group(1).split("\n"):
@@ -74,7 +66,7 @@ if skills_raw:
         known = {n for n in os.listdir(existing_dir) if os.path.isdir(os.path.join(existing_dir, n))}
         for name in [s.strip() for s in skills_raw.split(",") if s.strip()]:
             if ":" in name:
-                continue  # plugin-qualified имя ("plugin:skill") — не наша директория
+                continue
             if name not in known:
                 problems.append("skills: '%s' не найден в %s" % (name, existing_dir))
 

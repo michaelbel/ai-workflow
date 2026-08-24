@@ -1,14 +1,14 @@
 {
   "name": "ai-workflow",
   "version": "1.0.0",
-  "description": "AI Workflow MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Kimi Code.",
+  "description": "Cuckcoder MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Kimi Code.",
   "author": {
     "name": "Michael Bel",
     "email": "michaelbel24865@gmail.com",
     "url": "https://github.com/michaelbel"
   },
-  "homepage": "https://github.com/michaelbel/ai-workflow",
-  "repository": "https://github.com/michaelbel/ai-workflow",
+  "homepage": "https://github.com/michaelbel/cuckcoder",
+  "repository": "https://github.com/michaelbel/cuckcoder",
   "keywords": [
     "ai-workflow",
     "kimi",
@@ -22,7 +22,7 @@
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "AI Workflow",
+    "displayName": "Cuckcoder",
     "shortDescription": "Rules and skills for Kotlin/Android/Compose development from Kimi Code.",
     "longDescription": "Use the ai-workflow MCP server and skills library to pull project rules (git, Kotlin, Compose, Android architecture, navigation, Room, networking) and task skills (new screen, new use case, migrations, testing, Google Play billing, and more) into Kimi Code on demand.",
     "developerName": "Michael Bel",
@@ -31,6 +31,6 @@
       "Skills",
       "MCP"
     ],
-    "websiteURL": "https://github.com/michaelbel/ai-workflow"
+    "websiteURL": "https://github.com/michaelbel/cuckcoder"
   }
 }

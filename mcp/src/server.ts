@@ -6,7 +6,7 @@ import { validateRuleName, validateSkillName } from "./validation.js";
 import { getServerName, getServerVersion } from "./version.js";
 
 const SERVER_INSTRUCTIONS = [
-  "Use this server as the source of truth for ai-workflow rules and skills.",
+  "Use this server as the source of truth for Cuckcoder rules and skills.",
   "Before any git commit, call get_rule with name 'git' and apply the returned rules.",
   "Before deleting files, call get_rule with name 'filesystem' and apply the returned rules.",
 ].join("\n");
@@ -47,7 +47,7 @@ export function createServer(options: CreateServerOptions = {}): McpServer {
     "list",
     {
       title: "List rules and skills",
-      description: "List all available rule names and skill names/descriptions in the ai-workflow repository.",
+      description: "List all available rule names and skill names/descriptions in the Cuckcoder repository.",
       inputSchema: {},
       outputSchema: {
         rules: z.array(z.string()),

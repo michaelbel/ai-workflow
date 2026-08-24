@@ -1,8 +1,8 @@
 {
   "name": "ai-workflow",
-  "displayName": "AI Workflow",
+  "displayName": "Cuckcoder",
   "version": "1.0.0",
-  "description": "AI Workflow MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Cursor.",
+  "description": "Cuckcoder MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Cursor.",
   "author": {
     "name": "Michael Bel",
     "email": "michaelbel24865@gmail.com",
@@ -20,6 +20,6 @@
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
-  "homepage": "https://github.com/michaelbel/ai-workflow",
-  "repository": "https://github.com/michaelbel/ai-workflow"
+  "homepage": "https://github.com/michaelbel/cuckcoder",
+  "repository": "https://github.com/michaelbel/cuckcoder"
 }

@@ -4,7 +4,7 @@ import { GithubClient } from "./github.js";
 import type { SkillContent, SkillSummary, SourceInfo, WorkflowSource } from "./types.js";
 
 const OWNER = "michaelbel";
-const REPO = "ai-workflow";
+const REPO = "cuckcoder";
 
 /**
  * Optional remote WorkflowSource: reads rules/skills straight from GitHub at a pinned,

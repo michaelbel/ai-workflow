@@ -1,7 +1,7 @@
 {
   "name": "@michaelbel/ai-workflow-mcp",
   "version": "1.6.10",
-  "description": "MCP server for ai-workflow rules and skills",
+  "description": "MCP server for Cuckcoder rules and skills",
   "type": "module",
   "main": "dist/index.js",
   "bin": {

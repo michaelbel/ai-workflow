@@ -1,12 +1,12 @@
 {
   "name": "ai-workflow",
-  "displayName": "AI Workflow",
-  "description": "Connects the ai-workflow MCP server (rules/skills for AI agents) and installs the ai-workflow hook set alongside it.",
+  "displayName": "Cuckcoder",
+  "description": "Connects the Cuckcoder MCP server (rules/skills for AI agents) and installs its hook set alongside it.",
   "author": {
     "name": "Michael Bel",
     "email": "michaelbel24865@gmail.com"
   },
-  "homepage": "https://github.com/michaelbel/ai-workflow",
-  "repository": "https://github.com/michaelbel/ai-workflow",
+  "homepage": "https://github.com/michaelbel/cuckcoder",
+  "repository": "https://github.com/michaelbel/cuckcoder",
   "mcpServers": "./.mcp.json"
 }

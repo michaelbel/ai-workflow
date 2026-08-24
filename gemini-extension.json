@@ -1,6 +1,6 @@
 {
   "name": "ai-workflow",
-  "description": "AI Workflow MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Gemini CLI.",
+  "description": "Cuckcoder MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Gemini CLI.",
   "version": "1.0.0",
   "contextFileName": "GEMINI.md",
   "mcpServers": {

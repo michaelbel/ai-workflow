@@ -1,7 +1,7 @@
-AI Workflow
+Cuckcoder
 =
 
-[![last-commit](https://img.shields.io/github/last-commit/michaelbel/ai-workflow?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/ai-workflow/commits)
+[![last-commit](https://img.shields.io/github/last-commit/michaelbel/cuckcoder?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/cuckcoder/commits)
 [![npm](https://img.shields.io/npm/v/@michaelbel/ai-workflow-mcp?style=for-the-badge&logo=npm&labelColor=3F464F)](https://www.npmjs.com/package/@michaelbel/ai-workflow-mcp)
 
 Общий репозиторий с правилами, скиллами и MCP-сервером для AI-агентов.
@@ -22,7 +22,7 @@ claude mcp add --global ai-workflow npx -- -y @michaelbel/ai-workflow-mcp
 **Codex** — плагином:
 
 ```bash
-codex plugin marketplace add michaelbel/ai-workflow
+codex plugin marketplace add michaelbel/cuckcoder
 codex plugin add ai-workflow@ai-workflow
 ```
 
@@ -39,20 +39,20 @@ args = ["-y", "@michaelbel/ai-workflow-mcp"]
 **Kimi Code** — плагином:
 
 ```
-/plugins install https://github.com/michaelbel/ai-workflow
+/plugins install https://github.com/michaelbel/cuckcoder
 ```
 
 **Gemini CLI** — расширением:
 
 ```bash
-gemini extensions install https://github.com/michaelbel/ai-workflow
+gemini extensions install https://github.com/michaelbel/cuckcoder
 ```
 
 **Claude Code** — корень репозитория одновременно является корнем плагина. Плагин подключает
 MCP-сервер, нативные `skills/` и `agents/`, а также Claude Code hooks одной командой:
 
 ```
-/plugin marketplace add michaelbel/ai-workflow
+/plugin marketplace add michaelbel/cuckcoder
 /plugin install ai-workflow@ai-workflow
 ```
 

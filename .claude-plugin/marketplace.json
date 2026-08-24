@@ -9,7 +9,7 @@
     {
       "name": "ai-workflow",
       "source": "./",
-      "description": "ai-workflow MCP server + hooks (Claude Code)"
+      "description": "Cuckcoder MCP server + hooks (Claude Code)"
     }
   ]
 }

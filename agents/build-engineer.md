@@ -13,8 +13,7 @@ permissionMode:
 maxTurns: 35
 skills: google-r8-analyzer
 mcpServers:
-hooks:
-memory:
+memory: project
 background:
 effort: medium
 isolation:

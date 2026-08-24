@@ -12,8 +12,7 @@ permissionMode:
 maxTurns: 35
 skills: github-repo-settings
 mcpServers:
-hooks:
-memory:
+memory: project
 background:
 effort: medium
 isolation:

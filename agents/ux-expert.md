@@ -12,8 +12,7 @@ permissionMode:
 maxTurns: 25
 skills: google-adaptive, google-android-navigation-3
 mcpServers:
-hooks:
-memory:
+memory: project
 background:
 effort: high
 isolation:

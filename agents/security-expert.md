@@ -12,8 +12,7 @@ permissionMode:
 maxTurns: 30
 skills: google-android-intent-security, google-play-policy-insights
 mcpServers:
-hooks:
-memory:
+memory: project
 background:
 effort: high
 isolation:

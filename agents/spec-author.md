@@ -13,8 +13,7 @@ permissionMode:
 maxTurns: 40
 skills:
 mcpServers:
-hooks:
-memory:
+memory: project
 background:
 effort: high
 isolation:

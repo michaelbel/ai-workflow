@@ -13,9 +13,8 @@ permissionMode:
 maxTurns:
 skills: google-android-cli
 mcpServers:
-hooks:
-memory:
-background:
+memory: local
+background: true
 effort: medium
 isolation:
 color: yellow

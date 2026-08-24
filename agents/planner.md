@@ -14,12 +14,11 @@ permissionMode:
 maxTurns: 40
 skills:
 mcpServers:
-hooks:
 memory:
 background:
 effort: high
 isolation:
-color:
+color: blue
 initialPrompt:
 ---
 

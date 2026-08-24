@@ -13,9 +13,8 @@ permissionMode:
 maxTurns: 30
 skills:
 mcpServers:
-hooks:
-memory:
-background:
+memory: project
+background: true
 effort: low
 isolation:
 color: cyan

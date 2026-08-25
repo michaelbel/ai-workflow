@@ -14,7 +14,7 @@ workflow-пайплайны, guardrail-хуки и MCP-сервер для ра�
 | Что                       | Где лежит     | Сколько | Что даёт                                                        |
 | ------------------------- | ------------- | ------- | ---------------------------------------------------------------- |
 | [Правила](#правила)       | `rules/`      | 32      | Соглашения проекта по Git, GitHub, Kotlin, Compose, KMP, Android |
-| [Скиллы](#скиллы)         | `skills/`     | 26      | Пошаговые инструкции для конкретных задач реализации             |
+| [Скиллы](#скиллы)         | `skills/`     | 17      | Пошаговые инструкции для конкретных задач реализации             |
 | [Агенты](#агенты)         | `agents/`     | 19      | Саб-агенты с отдельной ролью, зоной ответственности и tools      |
 | [Workflows](#workflows)   | `workflows/`  | 8       | Многошаговые агентные пайплайны (sweeps) поверх саб-агентов       |
 | [Hooks](#hooks)           | `hooks/`      | 10      | Guardrails и напоминания, встроенные в цикл вызова инструментов  |
@@ -323,27 +323,10 @@ MCP `list`/`get_rule`.
 - `create-workmanager-task` — Создаёт WorkManager worker и use case планирования/отмены.
 - `github-repo-settings` — Пошагово применяет и проверяет стандартные настройки GitHub-репозитория.
 
-Плюс скиллы, вендоренные как есть от их авторов (поле `metadata.author` в frontmatter каждого
-файла):
-
-- `google-adaptive` *(Google LLC)* — Адаптирует UI под разные форм-факторы Android через Compose
-  MediaQuery, Navigation3 Scenes и адаптивные Grid/FlexBox-раскладки.
-- `google-android-camerax` *(Google LLC)* — Руководство по камере на Android через CameraX,
-  `Camera2Interop`, интеграции с ML Kit и Media3.
-- `google-android-cli` *(Google LLC)* — Использование CLI `android`: создание проектов, запуск на
-  устройствах, управление AVD и SDK.
-- `google-android-intent-security` *(Google LLC)* — Практики безопасности Android Intent: защита
-  компонентов манифеста и обработчиков входящих Intent от Intent Redirection.
-- `google-android-navigation-3` *(Google LLC)* — Установка и миграция на Jetpack Navigation 3:
-  deep links, множественные back stack, scenes, условная навигация.
-- `google-android-styles` *(Google LLC)* — Интеграция Compose Styles API: темизация компонентов,
-  `Modifier.styleable`, миграция с хардкода на Style-атрибуты.
-- `google-play-policy-insights` *(Google LLC)* — Аудит приложения на соответствие политикам Google
-  Play (permissions, data safety, user account).
-- `google-r8-analyzer` *(Google LLC)* — Анализ build-файлов и R8 keep-правил на избыточность и
-  слишком широкие правила.
-- `kotlin-tooling-java-to-kotlin` *(JetBrains)* — Конвертация Java-кода в идиоматичный Kotlin с
-  учётом Spring, Lombok, Hilt, JUnit и других фреймворков.
+Официальные скиллы Google/Android (адаптивный UI, CameraX, CLI `android`, Intent security,
+Navigation 3, Styles API, Play policy insights, R8-анализ и др.) не вендорятся в этот репозиторий —
+подключены как официальный плагин-маркетплейс `android-skills` (`android/skills`), см.
+`settings.json`.
 
 ## Разработка
 

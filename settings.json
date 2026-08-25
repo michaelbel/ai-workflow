@@ -51,7 +51,6 @@
       "mcp__ai-workflow__*"
     ],
     "ask": [
-      "Bash(git commit *)",
       "Bash(git reset --hard*)",
       "Bash(git clean*)",
       "Bash(git checkout .)",

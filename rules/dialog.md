@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Dialog
 
 - Используй `AlertDialog`, когда в диалоге есть кнопки действий; используй `BasicAlertDialog`, когда

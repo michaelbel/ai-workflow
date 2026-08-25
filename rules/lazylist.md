@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила LazyList
 
 - Передавай `innerPadding` из `Scaffold` в `contentPadding`, а не как `Modifier.padding`; комбинируй

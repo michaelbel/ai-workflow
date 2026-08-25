@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила TextField
 
 - Для `TextField`, являющихся полями поиска, храни значение как `TextFieldValue`, а не как `String`,

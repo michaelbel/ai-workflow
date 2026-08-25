@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "tui": "fullscreen",
+  "language": "russian",
+  "model": "sonnet",
+  "respectGitignore": true,
+  "cleanupPeriodDays": 30,
+  "preferredNotifChannel": "kitty",
+  "skipDangerousModePermissionPrompt": true,
+  "env": {
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false",
+    "CLAUDE_CODE_PLUGIN_PREFER_HTTPS": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "WebFetch",
+      "WebSearch",
+      "NotebookEdit",
+      "Task",
+      "Agent",
+      "Skill",
+      "Artifact",
+      "AskUserQuestion",
+      "ScheduleWakeup",
+      "ReportFindings",
+      "SendMessage",
+      "ListAgents",
+      "EnterPlanMode",
+      "ExitPlanMode",
+      "EnterWorktree",
+      "ExitWorktree",
+      "CronCreate",
+      "CronDelete",
+      "CronList",
+      "DesignSync",
+      "Monitor",
+      "PushNotification",
+      "RemoteTrigger",
+      "TaskOutput",
+      "TaskStop",
+      "EndConversation",
+      "mcp__ai-workflow__*"
+    ],
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(git checkout .)",
+      "Bash(git checkout -- .)",
+      "Bash(git restore .)",
+      "Bash(git restore -- .)",
+      "Bash(git stash drop*)",
+      "Bash(git stash clear)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(npm publish*)",
+      "Bash(yarn publish*)",
+      "Bash(pnpm publish*)",
+      "Bash(docker push*)",
+      "Bash(pod trunk push*)",
+      "Bash(firebase deploy*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(~/.aws/**)",
+      "Read(~/.ssh/**)",
+      "Read(~/.gnupg/**)",
+      "Read(~/.kube/**)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/*.cert)",
+      "Read(**/*.p12)",
+      "Read(**/*.pfx)",
+      "Read(~/.claude/.credentials.json)",
+      "Edit(./.env)",
+      "Edit(./.env.*)",
+      "Edit(./secrets/**)",
+      "Edit(~/.ssh/**)",
+      "Edit(~/.aws/**)",
+      "Edit(~/.gnupg/**)",
+      "Edit(~/.kube/**)",
+      "Edit(~/.claude/.credentials.json)",
+      "Edit(**/*.pem)",
+      "Edit(**/*.key)",
+      "Edit(**/*.cert)",
+      "Edit(**/*.p12)",
+      "Edit(**/*.pfx)",
+      "Bash(sudo:*)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)",
+      "Bash(gh repo delete:*)",
+      "Bash(gh auth logout:*)",
+      "Bash(gh auth token:*)",
+      "Bash(gh ssh-key delete:*)",
+      "Bash(gh gpg-key delete:*)"
+    ],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/auto-pull.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify-done.sh"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "permission_prompt|agent_needs_input|idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify-stuck.sh"
+          }
+        ]
+      }
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "ai-workflow": {
+      "source": {
+        "source": "directory",
+        "path": "/Users/mihailbelyj/Projects/cuckcoder"
+      }
+    },
+    "Kotlin": {
+      "source": {
+        "source": "github",
+        "repo": "Kotlin/kotlin-agent-skills"
+      }
+    },
+    "claude-in-mobile": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/AlexGladkov/claude-in-mobile.git"
+      }
+    },
+    "context-mode": {
+      "source": {
+        "source": "github",
+        "repo": "mksglu/context-mode"
+      },
+      "autoUpdate": true
+    },
+    "android-skills": {
+      "source": {
+        "source": "github",
+        "repo": "android/skills"
+      }
+    },
+    "firebase": {
+      "source": {
+        "source": "github",
+        "repo": "firebase/agent-skills"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "ai-workflow@ai-workflow": true,
+    "kotlin-agent-skills@Kotlin": true,
+    "mcp-devices@claude-in-mobile": true,
+    "context-mode@context-mode": true,
+    "android-skills@android-skills": true,
+    "firebase@firebase": true
+  }
+}

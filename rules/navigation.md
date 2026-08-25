@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила навигации
 
 - Каждый маршрут экрана — это `@Serializable data class` или `@Serializable data object`,

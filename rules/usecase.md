@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила UseCase
 
 - Размещай операции Room, Ktor, DataStore и бизнес-операции в конкретных классах `UseCase` /

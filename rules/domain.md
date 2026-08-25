@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Domain
 
 - Операции domain-слоя находятся в конкретных классах `UseCase` и `FlowUseCase` в

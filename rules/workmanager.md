@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила WorkManager
 
 - Реализуй фоновую задачу как тонкий `CoroutineWorker`: worker читает и проверяет входные данные,

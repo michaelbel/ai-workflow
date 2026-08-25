@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила KMP
 
 - При обновлении версии приложения обновляй её во всех таргетах: `androidApp/build.gradle.kts`

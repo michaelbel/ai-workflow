@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Compose-экранов
 
 - Публичный `{Feature}Screen(viewModel = hiltViewModel())` собирает state, создаёт

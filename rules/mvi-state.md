@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Model в MVI
 
 - Для данных, поддерживаемых Room, храни и передавай класс `Entity` из Room напрямую в классах

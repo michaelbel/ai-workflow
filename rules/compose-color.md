@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила цвета Compose
 
 - Используй цвета через `MaterialTheme.colorScheme`; не используй сырые константы `Color` для

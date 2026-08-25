@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Room
 
 - В интерфейсах DAO размещай все обычные методы `fun` перед любыми методами `suspend fun`.

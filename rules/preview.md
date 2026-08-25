@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Preview
 
 - Всегда аннотируй previews через `@PreviewWrapper(ThemeWrapper::class)`.

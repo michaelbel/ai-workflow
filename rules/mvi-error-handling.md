@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила обработки ошибок в MVI
 
 - Импортируй вложенные исключения use case напрямую в ViewModel, например

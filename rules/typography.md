@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила типографики
 
 - Всегда устанавливай стиль текста через аргумент `style` в `Text` или `SharedFixedText`; никогда

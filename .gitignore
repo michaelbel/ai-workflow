@@ -1,3 +1,70 @@
-.claude
-.idea
+# Deny all by default — этот репозиторий одновременно ~/.claude, whitelist защищает
+# локальное состояние (сессии, кэши, credentials) от случайного попадания в коммит.
+*
+
+# === CONFIGURATION ===
+!.gitignore
+!README.md
+!AGENTS.md
+!CLAUDE.md
+!GEMINI.md
+!settings.json
+!setup.sh
+
+# === CI / SECURITY ===
+!.github/
+!.github/**
+
+# === RULES ===
+!rules/
+!rules/**
+
+# === HOOKS ===
+!hooks/
+!hooks/**
+
+# === AGENTS ===
+!agents/
+!agents/**
+!.agents/
+!.agents/**
+
+# === SKILLS ===
+!skills/
+!skills/**
+
+# === WORKFLOWS ===
+!workflows/
+!workflows/**
+
+# === MCP SERVER (source only — dist/node_modules/assets stay build artifacts) ===
+!mcp/
+!mcp/.gitignore
+!mcp/package.json
+!mcp/package-lock.json
+!mcp/tsconfig.json
+!mcp/src/
+!mcp/src/**
+!mcp/test/
+!mcp/test/**
+!mcp/scripts/
+!mcp/scripts/**
+
+# === PLUGIN MANIFESTS (other clients) ===
+!.claude-plugin/
+!.claude-plugin/**
+!.codex-plugin/
+!.codex-plugin/**
+!.cursor-plugin/
+!.cursor-plugin/**
+!.kimi-plugin/
+!.kimi-plugin/**
+!.mcp.json
+!gemini-extension.json
+
+# === .idea (icon only) ===
 !.idea/icon.svg
+
+# === FORCE EXCLUDE (даже под разрешёнными путями) ===
+*.local.json
+.DS_Store

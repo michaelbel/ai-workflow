@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила realtime-соединений
 
 - Создавай отдельный `RealtimeDataSource` для каждого hub/канала предметной области. Общие

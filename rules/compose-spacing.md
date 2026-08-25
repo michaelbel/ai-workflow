@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила отступов и размеров Compose
 
 - Для `padding(...)` и `PaddingValues(...)` упорядочивай именованные параметры согласно сигнатуре

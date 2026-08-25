@@ -86,6 +86,28 @@ gemini extensions install https://github.com/michaelbel/cuckcoder
 `npx -y @michaelbel/ai-workflow-mcp` как MCP-сервер в конфиге клиента (аналогично блоку
 `mcp_servers.ai-workflow` для Codex выше).
 
+### Глобальные настройки на Mac
+
+Корень репозитория одновременно служит вторым чекаутом `~/.claude`: `rules/`, `agents/`, `skills/`,
+`hooks/` и `settings.json` подхватываются Claude Code нативно на любой машине без установки плагина.
+Продуктовые Kotlin/Compose/KMP/Android правила из `rules/` при этом не заливают контекст в каждом
+проекте — они помечены `paths:`-фронтматтером и автозагружаются только в Android/Gradle-проектах;
+процессные правила (`git`, `github-readme`, `github-repo`, `filesystem`, `workflow`) без `paths:`
+применяются на этой машине везде.
+
+Бутстрап существующего `~/.claude`:
+
+```bash
+bash setup.sh
+```
+
+Скрипт бэкапит текущий `~/.claude`, инициализирует git и сбрасывает на `origin/main`; локальное
+состояние (сессии, кэши, credentials) не в whitelist `.gitignore` и не трогается. Дальше правки в
+`~/Projects/cuckcoder` и в `~/.claude` синхронизируются в обе стороны через `csync`
+(`hooks/sync-settings.sh`: commit → rebase на `origin/main` → push), а `SessionStart` в `~/.claude`
+подтягивает изменения автоматически (`hooks/auto-pull.sh`, только pull, никогда не коммитит и не
+пушит).
+
 ## Как пользоваться
 
 - **Правила и скиллы** — агент сам вызывает MCP-инструменты `list`/`get_rule`/`get_skill`, когда

@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила ConstraintLayout
 
 - В блоке `constrainAs` упорядочивай присваивания ограничений так: `width`, `height`, `start`,

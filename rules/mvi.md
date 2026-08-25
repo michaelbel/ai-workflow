@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила MVI
 
 - Экраны фич находятся в `features/{feature}` и разбиты на `{Feature}Screen.kt`,

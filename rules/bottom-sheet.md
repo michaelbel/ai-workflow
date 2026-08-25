@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Bottom Sheet
 
 - Пакеты bottom sheet фич в `features` используют постфикс `_sheet`, например

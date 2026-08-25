@@ -1,3 +1,11 @@
+---
+paths:
+  - "**/*.gradle.kts"
+  - "**/*.gradle"
+  - "**/AndroidManifest.xml"
+  - "**/*.kt"
+---
+
 # Правила Scaffold
 
 - Snackbar для обычных сообщений размещай внутри `snackbarHost` в `Scaffold`; snackbar, которые

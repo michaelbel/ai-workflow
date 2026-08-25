@@ -102,11 +102,12 @@ bash setup.sh
 ```
 
 Скрипт бэкапит текущий `~/.claude`, инициализирует git и сбрасывает на `origin/main`; локальное
-состояние (сессии, кэши, credentials) не в whitelist `.gitignore` и не трогается. Дальше правки в
-`~/Projects/cuckcoder` и в `~/.claude` синхронизируются в обе стороны через `csync`
-(`hooks/sync-settings.sh`: commit → rebase на `origin/main` → push), а `SessionStart` в `~/.claude`
-подтягивает изменения автоматически (`hooks/auto-pull.sh`, только pull, никогда не коммитит и не
-пушит).
+состояние (сессии, кэши, credentials) не в whitelist `.gitignore` и не трогается. Дальше синк
+полностью автоматический: `post-commit`-хук в `~/Projects/cuckcoder` пушит каждый коммит в `main`
+сразу после его создания, а `SessionStart` в `~/.claude` на каждый новый сеанс Claude Code
+запускает `csync` (`hooks/sync-settings.sh`: commit → rebase на `origin/main` → push) — он же
+доступен вручную как алиас `csync`. Конфликт при rebase останавливает синк громко, с сообщением
+об ошибке, а не молча.
 
 ## Как пользоваться
 

@@ -1,17 +1,26 @@
 #!/bin/bash
 # csync — двусторонняя синхронизация ~/.claude с origin/main. Usage: csync
+# Также запускается как SessionStart-хук на каждый новый сеанс Claude Code.
 #
 # Модель: правки идут прямо в main. csync коммитит локальные изменения, ребейзит на
 # origin/main и пушит. Грязный или ahead main — нормальное рабочее состояние, не авария.
 
-set -euo pipefail
+set -uo pipefail
+
+REPO="$HOME/.claude"
+
+# Репозиторий ещё не адаптирован через setup.sh (SessionStart на новой машине) — тихо выходим.
+[ -d "$REPO" ] || exit 0
+git -C "$REPO" rev-parse --git-dir >/dev/null 2>&1 || exit 0
+git -C "$REPO" remote get-url origin >/dev/null 2>&1 || exit 0
+
+set -e
 
 LOCK="/tmp/.claude-sync.lock"
 exec 9>"$LOCK"
 perl -e 'use Fcntl qw(:flock); open(F, ">&=9"); flock(F, LOCK_EX|LOCK_NB) or die' 2>/dev/null \
   || { echo "Another csync is running."; exit 1; }
 
-REPO="$HOME/.claude"
 cd "$REPO"
 
 # Подчистить зависшее состояние rebase от прошлого сбоя.

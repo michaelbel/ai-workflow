@@ -112,7 +112,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "$HOME/.claude/hooks/auto-pull.sh"
+            "command": "$HOME/.claude/hooks/sync-settings.sh"
           }
         ]
       },

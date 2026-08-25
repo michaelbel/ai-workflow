@@ -115,6 +115,14 @@
             "command": "$HOME/.claude/hooks/auto-pull.sh"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"/Users/mihailbelyj/.claude/hooks/context-mode-cache-heal.mjs\""
+          }
+        ]
       }
     ],
     "Stop": [

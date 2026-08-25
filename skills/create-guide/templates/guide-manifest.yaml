@@ -1,0 +1,67 @@
+schema_version: 1
+
+guide:
+  id: <topic-slug>
+  title: <Topic>
+  notion_title: Гайд по <Topic>. <Практический результат>
+  audience: middle_android_developer
+  language: ru
+  status: draft
+
+topic:
+  kind: android_api
+  api_status: <stable|alpha|experimental|platform>
+  primary_components:
+    - <Component>
+  related_components: []
+  artifact_coordinates: []
+  platform_api_level: null
+
+research:
+  researched_at: <YYYY-MM-DD>
+  primary_sources: []
+  androidx:
+    used: false
+    repository: https://github.com/androidx/androidx
+    ref: null
+    paths: []
+    usage: <reference|adapted|copied|null>
+
+repository:
+  owner: michaelbel
+  name: <Topic>
+  visibility: public
+  package: org.michaelbel.<topic>
+  template: https://github.com/michaelbel/MyApplication
+  template_ref: <commit-sha>
+  project_mode: <catalog|scenario|single>
+  default_branch: <branch>
+
+android:
+  min_sdk: <inherited-or-required-value>
+  compile_sdk: <inherited-value>
+  target_sdk: <inherited-value>
+  jdk: 21
+  ui: compose
+  architecture: minimal_for_topic
+
+scenarios:
+  - id: <scenario-id>
+    title: <Scenario title>
+    demonstrates:
+      - <API or behavior>
+
+notion:
+  data_source_name: POSTS
+  existing_page_policy: update_in_place
+  page_id: null
+  page_url: null
+
+validation:
+  required:
+    - :app:assembleDebug
+    - :app:lintDebug
+  optional: []
+
+decisions: []
+known_limitations: []

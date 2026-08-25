@@ -1,0 +1,60 @@
+schema_version: 1
+default_notion_data_source_name: POSTS
+count: 14
+
+guides:
+  - id: detekt
+    notion_title: Гайд по Detekt. Создать свои правила для статического анализа Kotlin-кода
+    repository: https://github.com/michaelbel/detekt-rules
+
+  - id: insets
+    notion_title: Гайд по Insets. Как обрабатывать отступы и вырезы
+    repository: https://github.com/michaelbel/Insets
+
+  - id: navigation-suite-scaffold
+    notion_title: Гайд по NavigationSuiteScaffold. Адаптивная верхнеуровневая навигация
+    repository: https://github.com/michaelbel/NavigationSuiteScaffold
+
+  - id: list-item
+    notion_title: Гайд по ListItem. Как проектировать экспрессивные списки
+    repository: https://github.com/michaelbel/ListItem
+
+  - id: agent-symlinks
+    notion_title: Гайд по Симлинкам для AGENTS.md, CLAUDE.md, GEMINI.md
+    repository: https://github.com/michaelbel/ai-workflow
+
+  - id: gemma4
+    notion_title: Гайд по Gemma4 в Android Studio. Запустить локального AI-ассистента
+    repository: null
+
+  - id: enum-bitmask
+    notion_title: Гайд по Kotlin Enum Bitmask. Как хранить набор флагов в Int
+    repository: https://github.com/michaelbel/EnumBitmask
+
+  - id: aliases
+    notion_title: Гайд по Aliases. Как менять иконку приложения в Android
+    repository: https://github.com/michaelbel/Aliases
+
+  - id: build-flavors
+    notion_title: Гайд по BuildFlavors. Как разделять Android-сборки под разные платформы
+    repository: https://github.com/michaelbel/BuildFlavors
+
+  - id: font-scale
+    notion_title: Гайд по FontScale. Как адаптировать UI к крупному тексту
+    repository: https://github.com/michaelbel/FontScale
+
+  - id: mvi
+    notion_title: Гайд по MVI. Архитектура управления состоянием
+    repository: https://github.com/michaelbel/MVI
+
+  - id: palette-colors
+    notion_title: Гайд по PaletteColors. Как извлекать цвета из изображений
+    repository: https://github.com/michaelbel/PaletteColors
+
+  - id: plurals
+    notion_title: Гайд по Plurals. Как склонять строки с числами в Android
+    repository: https://github.com/michaelbel/Plurals
+
+  - id: eye-dropper
+    notion_title: Гайд по EyeDropper. Как использовать системную пипетку в Android 17
+    repository: https://github.com/michaelbel/EyeDropper

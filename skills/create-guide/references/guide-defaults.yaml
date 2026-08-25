@@ -1,0 +1,51 @@
+schema_version: 1
+
+owner:
+  github: michaelbel
+  package_prefix: org.michaelbel
+
+language:
+  framework: ru
+  notion: ru
+  repository_readme: en
+  code: en
+
+integrations:
+  github_profile: https://github.com/michaelbel
+  android_template: https://github.com/michaelbel/MyApplication
+  shared_rules: https://github.com/michaelbel/ai-workflow
+  androidx_source: https://github.com/androidx/androidx
+  notion_data_source_name: POSTS
+  notion_existing_page_policy: update_in_place
+
+repository:
+  visibility: public
+  project_mode: auto
+  default_branch: inherit_template
+  naming: PascalCase
+  include_ci: true
+  include_codeowners: true
+  include_funding: true
+  include_ai_symlinks: true
+
+android:
+  ui: compose
+  build_scripts: kotlin_dsl
+  versions: inherit_template
+  jdk: 21
+  architecture: minimal_for_topic
+  dependency_injection: only_when_required
+  modules: single_by_default
+
+research:
+  require_primary_sources: true
+  require_exact_versions: true
+  require_androidx_ref: when_androidx_is_used
+  third_party_sources: supplementary_only
+
+validation:
+  required_gradle_tasks:
+    - :app:assembleDebug
+    - :app:lintDebug
+  unit_tests: when_present
+  require_cross_check: true

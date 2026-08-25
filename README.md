@@ -200,6 +200,8 @@ get_skill -> { name: string, description: string, content: string, source: { kin
 | `devops-expert`           | CI/CD, release workflows, деплой, секреты, мониторинг                         |
 | `explorer`                | Быстрая карта кодовой базы: определения, callers, потоки данных               |
 | `github-project-manager`  | GitHub Issues и Projects v2: read-only audit и явно запрошенные мутации       |
+| `guide-android-builder`   | Scaffold, реализация сценариев и Gradle-валидация Android-проекта для `create-guide` |
+| `guide-writer`            | Long-form страница-гайд в Notion по манифесту `create-guide`, отдельно от task databases |
 | `kotlin-engineer`         | Production Kotlin вне Compose UI: ViewModels, use case, persistence, DI       |
 | `mechanical-operator`     | Детерминированные пакетные изменения по полностью заданному рецепту           |
 | `notion-project-manager`  | Task databases в Notion: read-only audit и явно запрошенные мутации           |
@@ -312,6 +314,7 @@ MCP `list`/`get_rule`.
 - `create-feature-alert-dialog` — Создаёт Compose-диалог проекта.
 - `create-feature-bottom-sheet` — Создаёт Compose bottom sheet проекта.
 - `create-feature-scaffold-screen` — Создаёт MVI-экран фичи проекта.
+- `create-guide` — Создаёт связанный гайд: Android-проект + Notion-страница, по манифесту и research.
 - `create-ktor-endpoint` — Создаёт Ktor endpoint и transport-модели.
 - `create-notification-flow` — Создаёт поток локальных или push-уведомлений Android.
 - `create-offline-outbox` — Создаёт durable offline-очередь мутаций через Room, WorkManager и Ktor.

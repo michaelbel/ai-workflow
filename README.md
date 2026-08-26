@@ -7,7 +7,7 @@ Cuckcoder
 Cuckcoder — харнесс для AI coding-агентов: правила, скиллы, саб-агенты, агентные
 workflow-пайплайны, guardrail-хуки и MCP-сервер для разработки на Kotlin, Android, Compose и KMP.
 В Claude Code ставится одной командой как плагин; в любом другом клиенте с поддержкой MCP
-(Codex, Cursor, Gemini CLI, Kimi Code и т.д.) подключается как обычный MCP-сервер.
+(Codex, Cursor, Windsurf, Gemini CLI, Kimi Code и т.д.) подключается как обычный MCP-сервер.
 
 ## Из чего состоит харнесс
 
@@ -67,6 +67,23 @@ args = ["-y", "@michaelbel/ai-workflow-mcp"]
 ### Cursor
 
 Плагином (манифест `.cursor-plugin/`) либо через `.mcp.json` репозитория.
+
+### Windsurf
+
+Нативного формата плагинов/skills у Windsurf нет — доступ к правилам и скиллам идёт только через
+MCP-инструменты `list`/`get_rule`/`get_skill`. Добавьте сервер в `~/.codeium/windsurf/mcp_config.json`
+(создайте файл, если его нет; конфиг общий на все проекты и применяется без перезапуска редактора):
+
+```json
+{
+  "mcpServers": {
+    "ai-workflow": {
+      "command": "npx",
+      "args": ["-y", "@michaelbel/ai-workflow-mcp"]
+    }
+  }
+}
+```
 
 ### Kimi Code — плагином
 

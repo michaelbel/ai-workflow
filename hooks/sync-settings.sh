@@ -68,3 +68,10 @@ CODEX_CONFIG="$HOME/.codex/config.toml"
 if [ -f "$CODEX_CONFIG" ] && [ -f "$REPO/codex-config.toml" ]; then
   node "$REPO/hooks/sync-codex-config.mjs" "$REPO/codex-config.toml" "$CODEX_CONFIG" || echo "⚠ codex-config sync failed."
 fi
+
+# Обновляем список доверенных Codex-проектов из ~/Projects — тоже repo -> Mac, но источник не git,
+# а сканирование диска; в codex-config.toml (публичный, закоммиченный) эти пути не попадают.
+CODEX_PROJECTS_DIR="$HOME/Projects"
+if [ -d "$CODEX_PROJECTS_DIR" ] && [ -f "$CODEX_CONFIG" ]; then
+  node "$REPO/hooks/sync-codex-project-trust.mjs" "$CODEX_PROJECTS_DIR" "$CODEX_CONFIG" || echo "⚠ codex project-trust sync failed."
+fi

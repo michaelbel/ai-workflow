@@ -11,6 +11,9 @@
 !settings.json
 !setup.sh
 
+# === CODEX CONFIG (managed subset, merged one-way into ~/.codex/config.toml) ===
+!codex-config.toml
+
 # === CI / SECURITY ===
 !.github/
 !.github/**

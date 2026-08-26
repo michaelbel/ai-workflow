@@ -62,3 +62,9 @@ if [ "$AHEAD" -gt 0 ]; then
 else
   echo "Up to date."
 fi
+
+# Однонаправленно применяем managed codex-config.toml поверх ~/.codex/config.toml (repo -> Mac only).
+CODEX_CONFIG="$HOME/.codex/config.toml"
+if [ -f "$CODEX_CONFIG" ] && [ -f "$REPO/codex-config.toml" ]; then
+  node "$REPO/hooks/sync-codex-config.mjs" "$REPO/codex-config.toml" "$CODEX_CONFIG" || echo "⚠ codex-config sync failed."
+fi

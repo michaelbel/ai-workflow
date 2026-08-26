@@ -220,6 +220,70 @@ if (/\|\s*`run_skill`\s*\|/.test(readmeText)) {
   fail(readmePath, "README's tool table still lists the removed 'run_skill' tool");
 }
 
+// ─── 9. README's skill list and summary count match skills/ on disk ───────────────────────────
+
+const skillsSectionMatch = readmeText.match(/## Скиллы\n([\s\S]*?)\n## /);
+if (!skillsSectionMatch) {
+  fail(readmePath, "could not find a '## Скиллы' section followed by another '## ' heading");
+} else {
+  const skillsSection = skillsSectionMatch[1];
+  const listedSkills = [...skillsSection.matchAll(/^- `([a-z0-9-]+)` — /gm)].map((m) => m[1]);
+  const listedSet = new Set(listedSkills);
+  const diskSet = new Set(skillDirs);
+
+  for (const name of skillDirs) {
+    if (!listedSet.has(name)) {
+      fail(readmePath, `'## Скиллы' section does not list skill '${name}' (present in skills/)`);
+    }
+  }
+  for (const name of listedSkills) {
+    if (!diskSet.has(name)) {
+      fail(readmePath, `'## Скиллы' section lists '${name}' but no matching directory exists in skills/`);
+    }
+  }
+
+  const summaryRowMatch = readmeText.match(/\|\s*\[Скиллы\]\(#скиллы\)\s*\|\s*`skills\/`\s*\|\s*(\d+)\s*\|/);
+  if (!summaryRowMatch) {
+    fail(readmePath, "could not find the skills row in the harness summary table");
+  } else if (Number(summaryRowMatch[1]) !== skillDirs.length) {
+    fail(readmePath, `harness summary table says ${summaryRowMatch[1]} skills, but skills/ has ${skillDirs.length}`);
+  }
+}
+
+// ─── 10. README's agent table and summary count match agents/ on disk ─────────────────────────
+
+const agentsDir = join(repoRoot, "agents");
+const agentFiles = readdirSync(agentsDir).filter((entry) => entry.endsWith(".md"));
+const agentNames = agentFiles.map((entry) => entry.slice(0, -".md".length));
+
+const agentsSectionMatch = readmeText.match(/## Агенты\n([\s\S]*?)\n## /);
+if (!agentsSectionMatch) {
+  fail(readmePath, "could not find an '## Агенты' section followed by another '## ' heading");
+} else {
+  const agentsSection = agentsSectionMatch[1];
+  const listedAgents = [...agentsSection.matchAll(/^\|\s*`([a-z0-9-]+)`/gm)].map((m) => m[1]);
+  const listedSet = new Set(listedAgents);
+  const diskSet = new Set(agentNames);
+
+  for (const name of agentNames) {
+    if (!listedSet.has(name)) {
+      fail(readmePath, `'## Агенты' table does not list agent '${name}' (present in agents/)`);
+    }
+  }
+  for (const name of listedAgents) {
+    if (!diskSet.has(name)) {
+      fail(readmePath, `'## Агенты' table lists '${name}' but no matching file exists in agents/`);
+    }
+  }
+
+  const summaryRowMatch = readmeText.match(/\|\s*\[Агенты\]\(#агенты\)\s*\|\s*`agents\/`\s*\|\s*(\d+)\s*\|/);
+  if (!summaryRowMatch) {
+    fail(readmePath, "could not find the agents row in the harness summary table");
+  } else if (Number(summaryRowMatch[1]) !== agentNames.length) {
+    fail(readmePath, `harness summary table says ${summaryRowMatch[1]} agents, but agents/ has ${agentNames.length}`);
+  }
+}
+
 // ─── report ─────────────────────────────────────────────────────────────────────────────────
 
 if (failures.length > 0) {

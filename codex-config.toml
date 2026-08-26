@@ -31,3 +31,5 @@ plugins."spreadsheets@openai-primary-runtime".enabled = true
 plugins."presentations@openai-primary-runtime".enabled = true
 plugins."pdf@openai-primary-runtime".enabled = true
 plugins."template-creator@openai-primary-runtime".enabled = true
+
+projects."/Users/mihailbelyj/Projects/cuckcoder".trust_level = "trusted"

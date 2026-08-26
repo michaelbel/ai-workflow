@@ -1,11 +1,11 @@
 {
-  "name": "@michaelbel/ai-workflow-mcp",
+  "name": "@michaelbel/cuckcoder-mcp",
   "version": "1.6.10",
   "description": "MCP server for Cuckcoder rules and skills",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "ai-workflow-mcp": "dist/index.js"
+    "cuckcoder-mcp": "dist/index.js"
   },
   "scripts": {
     "copy-assets": "tsx scripts/copy-assets.ts",

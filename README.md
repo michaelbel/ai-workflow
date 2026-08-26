@@ -2,7 +2,7 @@ Cuckcoder
 =
 
 [![last-commit](https://img.shields.io/github/last-commit/michaelbel/cuckcoder?style=for-the-badge&logo=github&labelColor=3F464F)](https://github.com/michaelbel/cuckcoder/commits)
-[![npm](https://img.shields.io/npm/v/@michaelbel/ai-workflow-mcp?style=for-the-badge&logo=npm&labelColor=3F464F)](https://www.npmjs.com/package/@michaelbel/ai-workflow-mcp)
+[![npm](https://img.shields.io/npm/v/@michaelbel/cuckcoder-mcp?style=for-the-badge&logo=npm&labelColor=3F464F)](https://www.npmjs.com/package/@michaelbel/cuckcoder-mcp)
 
 Cuckcoder — харнесс для AI coding-агентов: правила, скиллы, саб-агенты, агентные
 workflow-пайплайны, guardrail-хуки и MCP-сервер для разработки на Kotlin, Android, Compose и KMP.
@@ -29,7 +29,7 @@ workflow-пайплайны, guardrail-хуки и MCP-сервер для ра�
 
 ```
 /plugin marketplace add michaelbel/cuckcoder
-/plugin install ai-workflow@ai-workflow
+/plugin install cuckcoder@cuckcoder
 ```
 
 Workflow-пайплайны из `workflows/` доступны сразу после установки плагина — отдельно
@@ -46,22 +46,22 @@ claude --plugin-dir .
 Если нужен только доступ к правилам и скиллам через MCP, без плагина целиком:
 
 ```bash
-claude mcp add --global ai-workflow npx -- -y @michaelbel/ai-workflow-mcp
+claude mcp add --global cuckcoder npx -- -y @michaelbel/cuckcoder-mcp
 ```
 
 ### Codex — плагином
 
 ```bash
 codex plugin marketplace add michaelbel/cuckcoder
-codex plugin add ai-workflow@ai-workflow
+codex plugin add cuckcoder@cuckcoder
 ```
 
 или вручную в `~/.codex/config.toml`:
 
 ```toml
-[mcp_servers.ai-workflow]
+[mcp_servers.cuckcoder]
 command = "npx"
-args = ["-y", "@michaelbel/ai-workflow-mcp"]
+args = ["-y", "@michaelbel/cuckcoder-mcp"]
 ```
 
 ### Cursor
@@ -77,9 +77,9 @@ MCP-инструменты `list`/`get_rule`/`get_skill`. Добавьте се�
 ```json
 {
   "mcpServers": {
-    "ai-workflow": {
+    "cuckcoder": {
       "command": "npx",
-      "args": ["-y", "@michaelbel/ai-workflow-mcp"]
+      "args": ["-y", "@michaelbel/cuckcoder-mcp"]
     }
   }
 }
@@ -100,8 +100,8 @@ gemini extensions install https://github.com/michaelbel/cuckcoder
 ### Любой другой MCP-клиент
 
 Сервер — обычный stdio MCP-сервер, не привязанный к Claude: подключите
-`npx -y @michaelbel/ai-workflow-mcp` как MCP-сервер в конфиге клиента (аналогично блоку
-`mcp_servers.ai-workflow` для Codex выше).
+`npx -y @michaelbel/cuckcoder-mcp` как MCP-сервер в конфиге клиента (аналогично блоку
+`mcp_servers.cuckcoder` для Codex выше).
 
 ### Глобальные настройки на Mac
 
@@ -139,7 +139,7 @@ bash setup.sh
 - **Workflows** — многошаговые агентные sweep-пайплайны (`workflows/*.js`), которые оркестрируют
   несколько саб-агентов параллельно и сводят результат в один отчёт или диф. После установки
   плагина каждый workflow доступен как namespaced slash-команда
-  `/ai-workflow:<имя-workflow> <аргументы>` (например, `/ai-workflow:full-review target:pr:123
+  `/cuckcoder:<имя-workflow> <аргументы>` (например, `/cuckcoder:full-review target:pr:123
   postComments:true`); директория `workflows/` подхватывается автоматически, отдельная регистрация
   не нужна. Свои аргументы каждого workflow — см. раздел [Workflows](#workflows).
 - **Hooks** — работают автоматически после установки плагина, вмешательство не требуется; что
@@ -235,7 +235,7 @@ get_skill -> { name: string, description: string, content: string, source: { kin
 файл описывает `meta.name`/`meta.description`, читает свои аргументы и параллельно запускает
 несколько агентов, сводя результат в один отчёт, план или диф. Директория `workflows/` при
 установленном плагине подхватывается автоматически; каждый workflow становится namespaced
-slash-командой `/ai-workflow:<имя-workflow> <аргументы>`.
+slash-командой `/cuckcoder:<имя-workflow> <аргументы>`.
 
 | Workflow                 | Аргументы                                | Что делает                                                                                |
 | ------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -251,7 +251,7 @@ slash-командой `/ai-workflow:<имя-workflow> <аргументы>`.
 Пример:
 
 ```
-/ai-workflow:full-review target:pr:123 postComments:true
+/cuckcoder:full-review target:pr:123 postComments:true
 ```
 
 ## Hooks
@@ -272,7 +272,7 @@ slash-командой `/ai-workflow:<имя-workflow> <аргументы>`.
 - `worktree-merge-back-reminder.sh` напоминает после закрытия worktree перенести изменения
   как незакоммиченные и перепроверить их в основной директории, не коммитя автоматически.
 - `tool-audit-log.sh` пишет JSONL-лог каждого вызова инструмента в
-  `~/.claude/ai-workflow/audit/` (с ротацией по дням) для последующего разбора/compliance.
+  `~/.claude/cuckcoder/audit/` (с ротацией по дням) для последующего разбора/compliance.
 - `git-state-summary.sh` печатает в начале сессии текущую ветку, worktree'ы и
   незакоммиченные изменения.
 - `tag-version-guard.sh` и `typecheck-on-edit.sh` — dev-tooling именно для разработки этого

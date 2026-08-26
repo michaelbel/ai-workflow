@@ -17,7 +17,7 @@ class ValidateGuideTest(unittest.TestCase):
                 path.write_text("\n", encoding="utf-8")
 
         (root / "AGENTS.md").write_text(
-            "Use ai-workflow. Read .guidekit/manifest.yaml and .guidekit/SOURCES.md.\n",
+            "Use cuckcoder. Read .guidekit/manifest.yaml and .guidekit/SOURCES.md.\n",
             encoding="utf-8",
         )
         (root / ".guidekit/manifest.yaml").write_text(

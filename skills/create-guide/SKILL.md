@@ -34,11 +34,11 @@ GitHub-репозитории и страницы в Notion, которая об
 2. прочитай [references/existing-guides.yaml](references/existing-guides.yaml) как каталог уже
    изданных гайдов — не создавай дубликат уже изданной темы, обнови существующий репозиторий и
    страницу вместо этого;
-3. загрузи актуальные Kotlin/Compose/Git/GitHub правила из `michaelbel/ai-workflow` через MCP
-   `ai-workflow`;
+3. загрузи актуальные Kotlin/Compose/Git/GitHub правила из `michaelbel/cuckcoder` через MCP
+   `cuckcoder`;
 4. изучи актуальную ветку `michaelbel/MyApplication` перед созданием Android-проекта.
 
-`ai-workflow` определяет общий Kotlin, Compose, Git и GitHub-стиль. Этот skill определяет процесс
+`cuckcoder` определяет общий Kotlin, Compose, Git и GitHub-стиль. Этот skill определяет процесс
 создания гайда. Если правила конфликтуют именно в вопросах исследования, структуры учебного
 проекта, публикации или валидации гайда, применяй этот skill.
 

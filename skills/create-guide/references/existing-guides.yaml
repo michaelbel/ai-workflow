@@ -21,7 +21,7 @@ guides:
 
   - id: agent-symlinks
     notion_title: Гайд по Симлинкам для AGENTS.md, CLAUDE.md, GEMINI.md
-    repository: https://github.com/michaelbel/ai-workflow
+    repository: https://github.com/michaelbel/cuckcoder
 
   - id: gemma4
     notion_title: Гайд по Gemma4 в Android Studio. Запустить локального AI-ассистента

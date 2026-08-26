@@ -48,7 +48,7 @@
       "TaskOutput",
       "TaskStop",
       "EndConversation",
-      "mcp__ai-workflow__*"
+      "mcp__cuckcoder__*"
     ],
     "ask": [
       "Bash(git reset --hard*)",
@@ -148,7 +148,7 @@
     ]
   },
   "extraKnownMarketplaces": {
-    "ai-workflow": {
+    "cuckcoder": {
       "source": {
         "source": "directory",
         "path": "/Users/mihailbelyj/Projects/cuckcoder"
@@ -187,7 +187,7 @@
     }
   },
   "enabledPlugins": {
-    "ai-workflow@ai-workflow": true,
+    "cuckcoder@cuckcoder": true,
     "kotlin-agent-skills@Kotlin": true,
     "mcp-devices@claude-in-mobile": true,
     "context-mode@context-mode": true,

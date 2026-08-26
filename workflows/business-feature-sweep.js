@@ -22,33 +22,33 @@ phase('Research')
 const lenses = [
   {
     role: 'architecture',
-    agentType: 'ai-workflow:architect-auditor',
+    agentType: 'cuckcoder:architect-auditor',
     focus:
       'как эта фича впишется в существующие границы модулей, слои и ' +
       'зависимости без нарушения инвариантов',
   },
   {
     role: 'ux',
-    agentType: 'ai-workflow:ux-reviewer',
+    agentType: 'cuckcoder:ux-reviewer',
     focus:
       'необходимые визуальные состояния (loading/empty/error/offline/populated), ' +
       'навигация, accessibility и консистентность с соседними экранами',
   },
   {
     role: 'security',
-    agentType: 'ai-workflow:security-auditor',
+    agentType: 'cuckcoder:security-auditor',
     focus: 'авторизация, валидация ввода, секреты и другие риски, которые вносит эта фича',
   },
   {
     role: 'business',
-    agentType: 'ai-workflow:business-analyst',
+    agentType: 'cuckcoder:business-analyst',
     focus:
       'scope, ожидаемые пользователи, критерии успеха и любая неоднозначность ' +
       'или пропущенные acceptance criteria в запросе',
   },
   {
     role: 'devops',
-    agentType: 'ai-workflow:devops-expert',
+    agentType: 'cuckcoder:devops-expert',
     focus: 'конфигурация, feature flags, окружения и вопросы rollout/релиза',
   },
 ]
@@ -118,7 +118,7 @@ const spec = await agent(
   {
     label: 'spec',
     phase: 'Spec',
-    agentType: 'ai-workflow:business-analyst',
+    agentType: 'cuckcoder:business-analyst',
     schema: {
       type: 'object',
       required: ['dod', 'dor', 'states', 'edgeCases'],
@@ -145,10 +145,10 @@ phase('Executing')
 const affectedLayers =
   plan.affectedLayers && plan.affectedLayers.length ? plan.affectedLayers : ['shared-kotlin']
 const layerAgents = {
-  'shared-kotlin': 'ai-workflow:kotlin-engineer',
-  'android-compose': 'ai-workflow:compose-builder',
-  'ios-swift': 'ai-workflow:swift-engineer',
-  'ios-swiftui': 'ai-workflow:swiftui-builder',
+  'shared-kotlin': 'cuckcoder:kotlin-engineer',
+  'android-compose': 'cuckcoder:compose-builder',
+  'ios-swift': 'cuckcoder:swift-engineer',
+  'ios-swiftui': 'cuckcoder:swiftui-builder',
 }
 
 const branchSlug = REQUEST.toLowerCase()
@@ -169,7 +169,7 @@ const execResults = await parallel(
       {
         label: `execute:${layer}`,
         phase: 'Executing',
-        agentType: layerAgents[layer] || 'ai-workflow:kotlin-engineer',
+        agentType: layerAgents[layer] || 'cuckcoder:kotlin-engineer',
         isolation: 'worktree',
         schema: {
           type: 'object',
@@ -195,7 +195,7 @@ const validation = await agent(
   {
     label: 'validate',
     phase: 'Validate',
-    agentType: 'ai-workflow:build-engineer',
+    agentType: 'cuckcoder:build-engineer',
     schema: {
       type: 'object',
       required: ['passed', 'buildPassed', 'dodChecked', 'details'],

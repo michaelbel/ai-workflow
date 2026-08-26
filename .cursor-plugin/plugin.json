@@ -1,5 +1,5 @@
 {
-  "name": "ai-workflow",
+  "name": "cuckcoder",
   "displayName": "Cuckcoder",
   "version": "1.0.0",
   "description": "Cuckcoder MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Cursor.",
@@ -9,7 +9,7 @@
     "url": "https://github.com/michaelbel"
   },
   "keywords": [
-    "ai-workflow",
+    "cuckcoder",
     "cursor",
     "skills",
     "mcp",

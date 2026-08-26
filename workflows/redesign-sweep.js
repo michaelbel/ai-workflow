@@ -22,14 +22,14 @@ phase('Design')
 const lenses = [
   {
     role: 'ux',
-    agentType: 'ai-workflow:ux-reviewer',
+    agentType: 'cuckcoder:ux-reviewer',
     focus:
       'текущие визуальные состояния (loading/empty/error/populated), навигация, ' +
       'accessibility, консистентность с соседними экранами и дизайн-системой',
   },
   {
     role: 'architecture',
-    agentType: 'ai-workflow:architect-auditor',
+    agentType: 'cuckcoder:architect-auditor',
     focus:
       'насколько сильно визуальный слой связан с бизнес-логикой и состоянием, ' +
       'чтобы визуальное изменение осталось изолированным',
@@ -91,8 +91,8 @@ phase('Implement')
 const platforms = brief.platforms && brief.platforms.length ? brief.platforms : ['android-compose']
 const targets = platforms.map((p) =>
   p === 'ios-swiftui'
-    ? { name: p, agentType: 'ai-workflow:swiftui-builder' }
-    : { name: p, agentType: 'ai-workflow:compose-builder' },
+    ? { name: p, agentType: 'cuckcoder:swiftui-builder' }
+    : { name: p, agentType: 'cuckcoder:compose-builder' },
 )
 
 const impls = await parallel(
@@ -135,7 +135,7 @@ const validation = await agent(
   {
     label: 'validate',
     phase: 'Validate',
-    agentType: 'ai-workflow:build-engineer',
+    agentType: 'cuckcoder:build-engineer',
     schema: {
       type: 'object',
       required: ['passed', 'details'],

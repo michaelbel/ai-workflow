@@ -1,8 +1,8 @@
 {
   "mcpServers": {
-    "ai-workflow": {
+    "cuckcoder": {
       "command": "npx",
-      "args": ["-y", "@michaelbel/ai-workflow-mcp"]
+      "args": ["-y", "@michaelbel/cuckcoder-mcp"]
     }
   }
 }

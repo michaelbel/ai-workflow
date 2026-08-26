@@ -1,5 +1,5 @@
 {
-  "name": "ai-workflow",
+  "name": "cuckcoder",
   "displayName": "Cuckcoder",
   "description": "Connects the Cuckcoder MCP server (rules/skills for AI agents) and installs its hook set alongside it.",
   "author": {

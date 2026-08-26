@@ -71,7 +71,7 @@ def validate(project: Path) -> list[str]:
     agents_path = project / "AGENTS.md"
     if agents_path.exists():
         agents = agents_path.read_text(encoding="utf-8")
-        for phrase in ("ai-workflow", ".guidekit/manifest.yaml", ".guidekit/SOURCES.md"):
+        for phrase in ("cuckcoder", ".guidekit/manifest.yaml", ".guidekit/SOURCES.md"):
             if phrase not in agents:
                 errors.append(f"AGENTS.md does not mention: {phrase}")
 

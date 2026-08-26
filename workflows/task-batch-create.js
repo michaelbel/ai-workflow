@@ -70,8 +70,8 @@ if (tasks.length === 0) {
 
 phase('Create')
 const agentType = PLATFORM === 'notion'
-  ? 'ai-workflow:notion-project-manager'
-  : 'ai-workflow:github-project-manager'
+  ? 'cuckcoder:notion-project-manager'
+  : 'cuckcoder:github-project-manager'
 
 const created = await pipeline(tasks, (task) =>
   agent(

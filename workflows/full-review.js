@@ -71,11 +71,11 @@ const FINDING_SCHEMA = {
 }
 
 const lenses = [
-  { dimension: 'correctness', agentType: 'ai-workflow:code-reviewer' },
-  { dimension: 'security', agentType: 'ai-workflow:security-auditor' },
-  { dimension: 'performance', agentType: 'ai-workflow:performance-reviewer' },
-  { dimension: 'architecture', agentType: 'ai-workflow:architect-auditor' },
-  { dimension: 'ux', agentType: 'ai-workflow:ux-reviewer' },
+  { dimension: 'correctness', agentType: 'cuckcoder:code-reviewer' },
+  { dimension: 'security', agentType: 'cuckcoder:security-auditor' },
+  { dimension: 'performance', agentType: 'cuckcoder:performance-reviewer' },
+  { dimension: 'architecture', agentType: 'cuckcoder:architect-auditor' },
+  { dimension: 'ux', agentType: 'cuckcoder:ux-reviewer' },
 ]
 
 const perDimension = await parallel(

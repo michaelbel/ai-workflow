@@ -13,7 +13,7 @@ language:
 integrations:
   github_profile: https://github.com/michaelbel
   android_template: https://github.com/michaelbel/MyApplication
-  shared_rules: https://github.com/michaelbel/ai-workflow
+  shared_rules: https://github.com/michaelbel/cuckcoder
   androidx_source: https://github.com/androidx/androidx
   notion_data_source_name: POSTS
   notion_existing_page_policy: update_in_place

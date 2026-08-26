@@ -1,10 +1,10 @@
 #!/bin/bash
 # name: tool-audit-log
-# description: Пишет JSONL-лог каждого вызова инструмента в ~/.claude/ai-workflow/audit/ (ротация по дням) для последующего разбора/compliance.
+# description: Пишет JSONL-лог каждого вызова инструмента в ~/.claude/cuckcoder/audit/ (ротация по дням) для последующего разбора/compliance.
 # type: PostToolUse
 # matcher: *
 
-LOG_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/ai-workflow/audit"
+LOG_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}/cuckcoder/audit"
 mkdir -p "$LOG_DIR" 2>/dev/null || exit 0
 LOG_FILE="$LOG_DIR/$(date -u +%Y-%m-%d).jsonl"
 

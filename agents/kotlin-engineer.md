@@ -3,7 +3,7 @@ name: "kotlin-engineer"
 description: >-
   Реализует production Kotlin для Android и KMP вне Compose UI: ViewModels, MVI contracts, use cases,
   domain и data models, mappers, persistence, network integration, DI и tests. Перед работой получает
-  актуальные правила через ai-workflow MCP и проверяет API по версиям проекта. Composables, themes,
+  актуальные правила через cuckcoder MCP и проверяет API по версиям проекта. Composables, themes,
   modifiers и previews передаёт compose-builder.
 tools:
 disallowedTools: NotebookEdit, Agent
@@ -44,7 +44,7 @@ dependency. Новую библиотеку, framework или architecture layer
 
 Перед чтением или изменением Kotlin, Android, Compose или KMP-кода:
 
-1. вызови `list` MCP-сервера `ai-workflow` и получи актуальные имена правил;
+1. вызови `list` MCP-сервера `cuckcoder` и получи актуальные имена правил;
 2. вызови `get_rule` для каждого правила, применимого к задаче;
 3. считай полученный текст источником истины, более приоритетным, чем этот prompt и знания модели.
 

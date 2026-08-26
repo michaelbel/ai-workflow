@@ -1,5 +1,5 @@
 {
-  "name": "ai-workflow",
+  "name": "cuckcoder",
   "version": "1.0.0",
   "description": "Cuckcoder MCP server + skills library: rules and skills for Kotlin/Android/Compose development, for Codex.",
   "author": {
@@ -10,7 +10,7 @@
   "homepage": "https://github.com/michaelbel/cuckcoder",
   "repository": "https://github.com/michaelbel/cuckcoder",
   "keywords": [
-    "ai-workflow",
+    "cuckcoder",
     "codex",
     "skills",
     "mcp",
@@ -24,7 +24,7 @@
   "interface": {
     "displayName": "Cuckcoder",
     "shortDescription": "Rules and skills for Kotlin/Android/Compose development from Codex.",
-    "longDescription": "Use the ai-workflow MCP server and skills library to pull project rules (git, Kotlin, Compose, Android architecture, navigation, Room, networking) and task skills (new screen, new use case, migrations, testing, Google Play billing, and more) into Codex on demand.",
+    "longDescription": "Use the cuckcoder MCP server and skills library to pull project rules (git, Kotlin, Compose, Android architecture, navigation, Room, networking) and task skills (new screen, new use case, migrations, testing, Google Play billing, and more) into Codex on demand.",
     "developerName": "Michael Bel",
     "category": "Developer Tools",
     "capabilities": [

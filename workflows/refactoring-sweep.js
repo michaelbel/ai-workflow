@@ -35,28 +35,28 @@ phase('Audit')
 const lenses = [
   {
     role: 'architecture',
-    agentType: 'ai-workflow:architect-auditor',
+    agentType: 'cuckcoder:architect-auditor',
     focus:
       'границы слоёв, направление зависимостей, связность, единственная ' +
       'ответственность, публичные контракты',
   },
   {
     role: 'simplification',
-    agentType: 'ai-workflow:code-refine',
+    agentType: 'cuckcoder:code-refine',
     focus:
       'мёртвый код, дублирование, лишняя вложенность или абстракция, ' +
       'переусложнённый control flow — только отчёт, не применяй пока',
   },
   {
     role: 'security',
-    agentType: 'ai-workflow:security-auditor',
+    agentType: 'cuckcoder:security-auditor',
     focus:
       'захардкоженные секреты, отсутствующая авторизация, небезопасная ' +
       'обработка ввода, небезопасные значения по умолчанию',
   },
   {
     role: 'performance',
-    agentType: 'ai-workflow:performance-reviewer',
+    agentType: 'cuckcoder:performance-reviewer',
     focus:
       'лишняя рекомпозиция, блокирующая main thread работа, N+1-запросы, ' +
       'неограниченный рост памяти',
@@ -131,10 +131,10 @@ const isSwift = (f) => /\.swift$/.test(f) && !isSwiftUI(f)
 const isKotlin = (f) => /\.kt(s)?$/.test(f) && !isCompose(f)
 
 const layers = [
-  { name: 'kotlin', agentType: 'ai-workflow:kotlin-engineer', match: isKotlin },
-  { name: 'compose', agentType: 'ai-workflow:compose-builder', match: isCompose },
-  { name: 'swift', agentType: 'ai-workflow:swift-engineer', match: isSwift },
-  { name: 'swiftui', agentType: 'ai-workflow:swiftui-builder', match: isSwiftUI },
+  { name: 'kotlin', agentType: 'cuckcoder:kotlin-engineer', match: isKotlin },
+  { name: 'compose', agentType: 'cuckcoder:compose-builder', match: isCompose },
+  { name: 'swift', agentType: 'cuckcoder:swift-engineer', match: isSwift },
+  { name: 'swiftui', agentType: 'cuckcoder:swiftui-builder', match: isSwiftUI },
 ]
   .map((layer) => ({
     ...layer,
@@ -181,7 +181,7 @@ const validation = await agent(
   {
     label: 'validate',
     phase: 'Validate',
-    agentType: 'ai-workflow:build-engineer',
+    agentType: 'cuckcoder:build-engineer',
     schema: {
       type: 'object',
       required: ['passed', 'details'],

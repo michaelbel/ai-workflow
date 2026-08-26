@@ -1,5 +1,5 @@
 {
-  "name": "ai-workflow",
+  "name": "cuckcoder",
   "owner": {
     "name": "Michael Bel",
     "email": "michaelbel24865@gmail.com",
@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "ai-workflow",
+      "name": "cuckcoder",
       "source": "./",
       "description": "Cuckcoder MCP server + hooks (Claude Code)"
     }

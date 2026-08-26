@@ -1,3 +1,5 @@
+# reedonly file; my sample config for codex
+
 model = "gpt-5.6-sol"
 model_reasoning_effort = "high"
 plan_mode_reasoning_effort = "high"
@@ -11,12 +13,12 @@ project_doc_fallback_filenames = [
     "README.md"
 ]
 
-[mcp_servers.ai-workflow]
+[mcp_servers.cuckcoder]
 command = "npx"
-args = ["-y", "@michaelbel/ai-workflow-mcp"]
-mcp_servers.ai-workflow.tools.list.approval_mode = "approve"
-mcp_servers.ai-workflow.tools.get_rule.approval_mode = "approve"
-mcp_servers.ai-workflow.tools.get_skill.approval_mode = "approve"
+args = ["-y", "@michaelbel/cuckcoder-mcp"]
+mcp_servers.cuckcoder.tools.list.approval_mode = "approve"
+mcp_servers.cuckcoder.tools.get_rule.approval_mode = "approve"
+mcp_servers.cuckcoder.tools.get_skill.approval_mode = "approve"
 
 plugins."computer-use@openai-bundled".enabled = true
 plugins."codex-app-tools@openai-bundled".enabled = true

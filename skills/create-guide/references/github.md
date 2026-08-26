@@ -28,7 +28,7 @@
 - `rules/github/GITHUB_README_RULES.md`;
 - `rules/git/GIT_RULES.md`
 
-из <https://github.com/michaelbel/ai-workflow>.
+из <https://github.com/michaelbel/cuckcoder>.
 
 GuideKit дополнительно требует:
 
@@ -48,7 +48,7 @@ GuideKit дополнительно требует:
 
 `AGENTS.md` должен требовать:
 
-1. правила `ai-workflow`;
+1. правила `cuckcoder`;
 2. чтение `.guidekit/manifest.yaml`;
 3. сохранение соответствия с Notion-страницей;
 4. обновление `.guidekit/SOURCES.md` и validation report при изменениях.
@@ -57,7 +57,7 @@ GuideKit дополнительно требует:
 
 README пишется на английском, если пользователь не указал иначе.
 
-После обязательных секций `ai-workflow` добавь:
+После обязательных секций `cuckcoder` добавь:
 
 - `## Samples` для `catalog`;
 - `## Scenario` для `scenario`;

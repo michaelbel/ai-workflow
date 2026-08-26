@@ -43,7 +43,7 @@ tests, если они требуются задачей.
 Используй источники в следующем порядке:
 
 1. явные требования пользователя и миграционный бриф;
-2. применимые правила `ai-workflow`, полученные через MCP `list` и `get_rule`;
+2. применимые правила `cuckcoder`, полученные через MCP `list` и `get_rule`;
 3. инструкции репозитория и существующие shared-компоненты;
 4. версии зависимостей и код текущего проекта;
 5. официальная документация и release notes для установленной версии.
@@ -91,7 +91,7 @@ toolchain проекта. Загруженные skills обязательны �
 disabled, selected и platform-specific состояния, если они применимы. Определи действия
 пользователя и одноразовые events.
 
-Следуй правилам проекта для screen contract. В текущем ai-workflow публичный `{Feature}Screen`
+Следуй правилам проекта для screen contract. В текущем cuckcoder публичный `{Feature}Screen`
 получает ViewModel, собирает state через `collectAsStateWithLifecycle()`, наблюдает events через
 `ObserveAsEvents` и передаёт отображение в приватный `{Feature}ScreenContent`.
 

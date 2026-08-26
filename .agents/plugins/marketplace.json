@@ -1,11 +1,11 @@
 {
-  "name": "ai-workflow",
+  "name": "cuckcoder",
   "interface": {
     "displayName": "Cuckcoder"
   },
   "plugins": [
     {
-      "name": "ai-workflow",
+      "name": "cuckcoder",
       "source": {
         "source": "local",
         "path": "./"

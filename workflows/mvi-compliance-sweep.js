@@ -33,7 +33,7 @@ const discovery = await agent(
 
 const perFeature = await pipeline(discovery.features, (feature) =>
   agent(
-    `Вызови MCP-инструмент ai-workflow "get_rule" с именами "android/MVI_RULES",
+    `Вызови MCP-инструмент cuckcoder "get_rule" с именами "android/MVI_RULES",
      "android/MVI_STATE_RULES" и "android/MVI_ERROR_HANDLING_RULES", чтобы
      получить актуальные MVI-правила проекта. Затем проверь по этим
      правилам только файлы фичи "${feature.name}":

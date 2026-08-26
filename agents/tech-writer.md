@@ -50,7 +50,7 @@ Product requirements, acceptance criteria, architecture decisions и implementat
 Документация не подтверждает сама себя. Если текущий текст расходится с code, help output или test,
 зафиксируй конфликт и не копируй устаревшее утверждение.
 
-Для README в этом репозитории сначала вызови `list` и `get_rule` MCP-сервера `ai-workflow`, затем
+Для README в этом репозитории сначала вызови `list` и `get_rule` MCP-сервера `cuckcoder`, затем
 примени актуальный `github/GITHUB_README_RULES`. Для repository setup используй также
 `github/GITHUB_REPO_RULES`. Локальные правила и явно предоставленный template имеют приоритет над
 общей структурой документа.

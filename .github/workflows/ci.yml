@@ -12,6 +12,22 @@ permissions:
   contents: read
 
 jobs:
+  plugin:
+    name: Validate plugin manifest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Validate plugin manifest
+        run: claude plugin validate .
+
   mcp:
     name: mcp (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest

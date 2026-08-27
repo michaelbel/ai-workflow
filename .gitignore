@@ -40,6 +40,10 @@
 !workflows/
 !workflows/**
 
+# === SCRIPTS (standalone installers / adapter generators for consumer projects) ===
+!scripts/
+!scripts/**
+
 # === MCP SERVER (source only — dist/node_modules/assets stay build artifacts) ===
 !mcp/
 !mcp/.gitignore

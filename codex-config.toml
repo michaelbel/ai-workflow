@@ -8,10 +8,7 @@ approval_policy = "on-request"
 approvals_reviewer = "guardian_subagent"
 sandbox_mode = "danger-full-access"
 service_tier = "fast"
-project_doc_fallback_filenames = [
-    "CLAUDE.md",
-    "README.md"
-]
+project_doc_fallback_filenames = ["CLAUDE.md", "README.md"]
 
 [mcp_servers.cuckcoder]
 command = "npx"

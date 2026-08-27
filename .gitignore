@@ -36,6 +36,10 @@
 !skills/
 !skills/**
 
+# === COMMANDS ===
+!commands/
+!commands/**
+
 # === WORKFLOWS ===
 !workflows/
 !workflows/**

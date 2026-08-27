@@ -31,18 +31,23 @@ lower camel case, а `{package}` на целевой пакет.
 
 Файлы:
 - `features/{feature}_sheet/{Feature}BottomSheet.kt`
-- `features/{feature}_sheet/intent/{Feature}SheetIntent.kt`
-- optional `features/{feature}_sheet/model/{Feature}SheetModel.kt`
+- `features/{feature}_sheet/intent/{Feature}Intent.kt`
+- optional `features/{feature}_sheet/model/{Feature}Model.kt`
 
-### {Feature}SheetIntent.kt
+MVI-типы sheet называются `{Feature}Intent` и `{Feature}Model` — без инфикса `Sheet`. Инфикс
+`Sheet` остаётся только в имени пакета (`{feature}_sheet`), в composable (`{Feature}BottomSheet`) и
+в идентификаторах на стороне вызывающего экрана (`is{Feature}SheetVisible`, `On{Feature}SheetIntent`,
+`{feature}SheetState`). Собственный `{Feature}ViewModel` у sheet не создаётся — см. Фазу 3.
+
+### {Feature}Intent.kt
 
 ```kotlin
 package {package}.features.{feature}_sheet.intent
 
 import {package}.shared.mvi.Intent
 
-sealed interface {Feature}SheetIntent: Intent {
-    data object DismissClick: {Feature}SheetIntent
+sealed interface {Feature}Intent: Intent {
+    data object DismissClick: {Feature}Intent
 }
 ```
 
@@ -51,14 +56,14 @@ sealed interface {Feature}SheetIntent: Intent {
 - Для остальных действий (клик по элементу, primary/secondary action и т. д.) добавляй свои
   `data object` / `data class` записи; `data object` всегда идёт перед `data class`.
 
-### {Feature}SheetModel.kt (только если есть данные)
+### {Feature}Model.kt (только если есть данные)
 
 ```kotlin
 package {package}.features.{feature}_sheet.model
 
 import {package}.shared.mvi.Model
 
-data class {Feature}SheetModel(
+data class {Feature}Model(
     val showPrimaryAction: Boolean = false
 ): Model
 ```
@@ -72,11 +77,11 @@ package {package}
 
 @Composable
 fun {Feature}BottomSheet(
-    state: {Feature}SheetModel,
-    dispatch: ({Feature}SheetIntent) -> Unit
+    state: {Feature}Model,
+    dispatch: ({Feature}Intent) -> Unit
 ) {
     SharedModalBottomSheet(
-        onDismissRequest = { dispatch({Feature}SheetIntent.DismissClick) }
+        onDismissRequest = { dispatch({Feature}Intent.DismissClick) }
     ) {
         SharedLazyColumn(
             modifier = Modifier.fillMaxWidth(),
@@ -93,21 +98,21 @@ fun {Feature}BottomSheet(
                 {Feature}Card(
                     state = {Feature}CardState(
                         model = state.item,
-                        onClick = { dispatch({Feature}SheetIntent.ItemClick) }
+                        onClick = { dispatch({Feature}Intent.ItemClick) }
                     )
                 )
             }
             if (state.showSecondaryAction) {
                 item {
                     {Feature}SecondaryButton(
-                        onClick = { dispatch({Feature}SheetIntent.SecondaryActionClick) }
+                        onClick = { dispatch({Feature}Intent.SecondaryActionClick) }
                     )
                 }
             }
             if (state.showPrimaryAction) {
                 item {
                     Button(
-                        onClick = { dispatch({Feature}SheetIntent.PrimaryActionClick) },
+                        onClick = { dispatch({Feature}Intent.PrimaryActionClick) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(56.dp),
@@ -130,7 +135,7 @@ fun {Feature}BottomSheet(
 @Preview
 @Composable
 private fun {Feature}BottomSheetPreview(
-    @PreviewParameter({Feature}SheetModelPreviewParameterProvider::class) state: {Feature}SheetModel
+    @PreviewParameter({Feature}ModelPreviewParameterProvider::class) state: {Feature}Model
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -142,8 +147,8 @@ private fun {Feature}BottomSheetPreview(
     }
 }
 
-private class {Feature}SheetModelPreviewParameterProvider: PreviewParameterProvider<{Feature}SheetModel> {
-    override val values: Sequence<{Feature}SheetModel>
+private class {Feature}ModelPreviewParameterProvider: PreviewParameterProvider<{Feature}Model> {
+    override val values: Sequence<{Feature}Model>
         get() {
             val item = {Feature}ItemModel(
                 id = "sample-id",
@@ -152,12 +157,12 @@ private class {Feature}SheetModelPreviewParameterProvider: PreviewParameterProvi
             )
 
             return sequenceOf(
-                {Feature}SheetModel(
+                {Feature}Model(
                     item = item,
                     showPrimaryAction = true,
                     showSecondaryAction = false
                 ),
-                {Feature}SheetModel(
+                {Feature}Model(
                     item = item,
                     showPrimaryAction = false,
                     showSecondaryAction = true
@@ -210,11 +215,11 @@ reduce { it.copy(is{Feature}SheetVisible = true) }
 ### 3. Обработка intent'ов sheet в ViewModel экрана
 
 Добавь в `{Screen}Intent` экрана один case `On{Feature}SheetIntent`, оборачивающий весь
-`{Feature}SheetIntent` целиком — отдельный case на каждый intent sheet не создавай:
+`{Feature}Intent` целиком — отдельный case на каждый intent sheet не создавай:
 
 ```kotlin
 sealed interface {Screen}Intent: Intent {
-    data class On{Feature}SheetIntent(val intent: {Feature}SheetIntent): {Screen}Intent
+    data class On{Feature}SheetIntent(val intent: {Feature}Intent): {Screen}Intent
 }
 ```
 
@@ -225,7 +230,7 @@ override fun dispatch(intent: {Screen}Intent) {
     when (intent) {
         is {Screen}Intent.On{Feature}SheetIntent -> {
             when (intent.intent) {
-                is {Feature}SheetIntent.DismissClick -> {
+                is {Feature}Intent.DismissClick -> {
                     reduce { it.copy(is{Feature}SheetVisible = false) }
                 }
             }
@@ -265,15 +270,15 @@ fun {Screen}Screen(
 
 Когда sheet принимает `state`, не храни отдельную копию его Model в экране — вычисляй её свойством
 `get()` из уже существующих данных экрана. Имя свойства оканчивается на `State`, а не на `Model`
-(сам тип остаётся `{Feature}SheetModel`):
+(сам тип остаётся `{Feature}Model`):
 
 ```kotlin
 data class {Screen}Model(
     val {feature}Item: {Feature}Item = {Feature}Item.Empty,
     val is{Feature}SheetVisible: Boolean = false
 ): Model {
-    val {feature}SheetState: {Feature}SheetModel
-        get() = {Feature}SheetModel(
+    val {feature}SheetState: {Feature}Model
+        get() = {Feature}Model(
             item = {feature}Item
         )
 }
@@ -291,8 +296,8 @@ if (state.is{Feature}SheetVisible) {
 Правила:
 - Sheet не хранит собственный ViewModel; видимостью управляет `Boolean`-поле
   `is{Feature}SheetVisible` в `Model` вызывающего экрана.
-- Экран оборачивает весь `{Feature}SheetIntent` в один case `On{Feature}SheetIntent(val intent:
-  {Feature}SheetIntent)` своего `{Screen}Intent`; отдельных case'ов на каждый intent sheet не
+- Экран оборачивает весь `{Feature}Intent` в один case `On{Feature}SheetIntent(val intent:
+  {Feature}Intent)` своего `{Screen}Intent`; отдельных case'ов на каждый intent sheet не
   создавай — разбирай их вложенным `when` внутри `dispatch` ViewModel.
 - Рендери sheet в первой, публичной функции экрана, сразу после вызова
   `{Screen}ScreenContent(...)`.

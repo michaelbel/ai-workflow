@@ -28,6 +28,8 @@ paths:
   ветку `dispatch` либо выноси их из ViewModel в соответствующий архитектурный слой.
 - `dispatch` — это `when` по всем веткам intent без `else`; состояние меняется только через
   `reduce { it.copy(...) }`.
+- Не именуй параметр лямбды `reduce`: пиши `reduce { it.copy(...) }`, а не
+  `reduce { state -> state.copy(...) }`.
 - Одноразовые действия используют `send({Feature}Event...)` из ViewModel и `ObserveAsEvents` на
   экране.
 - Типы `Intent`, `Model` и `Event` реализуют общие маркерные интерфейсы MVI проекта.

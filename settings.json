@@ -135,6 +135,28 @@
         ]
       }
     ],
+    "SubagentStart": [
+      { "matcher": "architect-auditor", "hooks": [ { "type": "command", "command": "echo '🏗️  [architect-auditor] архитектурный аудит...'" } ] },
+      { "matcher": "kotlin-engineer", "hooks": [ { "type": "command", "command": "echo '⚙️  [kotlin-engineer] реализация Kotlin...'" } ] },
+      { "matcher": "compose-builder", "hooks": [ { "type": "command", "command": "echo '🎨 [compose-builder] реализация Compose UI...'" } ] },
+      { "matcher": "swift-engineer", "hooks": [ { "type": "command", "command": "echo '🧩 [swift-engineer] реализация Swift...'" } ] },
+      { "matcher": "swiftui-builder", "hooks": [ { "type": "command", "command": "echo '🎨 [swiftui-builder] реализация SwiftUI...'" } ] },
+      { "matcher": "code-reviewer", "hooks": [ { "type": "command", "command": "echo '🔍 [code-reviewer] семантическое ревью...'" } ] },
+      { "matcher": "bug-hunter", "hooks": [ { "type": "command", "command": "echo '🐛 [bug-hunter] диагностика бага...'" } ] },
+      { "matcher": "security-auditor", "hooks": [ { "type": "command", "command": "echo '🔒 [security-auditor] security-аудит...'" } ] },
+      { "matcher": "performance-reviewer", "hooks": [ { "type": "command", "command": "echo '⚡ [performance-reviewer] аудит производительности...'" } ] }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '✅ саб-агент завершил задачу.'"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "matcher": "permission_prompt|agent_needs_input|idle_prompt",

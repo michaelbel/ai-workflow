@@ -1,7 +1,6 @@
 ---
 paths:
   - "**/*.gradle.kts"
-  - "**/*.gradle"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---

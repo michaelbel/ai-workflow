@@ -13,7 +13,7 @@ workflow-пайплайны, guardrail-хуки и MCP-сервер для ра�
 
 | Что                       | Где лежит     | Сколько | Что даёт                                                        |
 | ------------------------- | ------------- | ------- | ---------------------------------------------------------------- |
-| [Правила](#правила)       | `rules/`      | 32      | Соглашения проекта по Git, GitHub, Kotlin, Compose, KMP, Android |
+| [Правила](#правила)       | `rules/`      | 35      | Соглашения проекта по Git, GitHub, Kotlin, Compose, KMP, Android |
 | [Скиллы](#скиллы)         | `skills/`     | 19      | Пошаговые инструкции для конкретных задач реализации             |
 | [Агенты](#агенты)         | `agents/`     | 21      | Саб-агенты с отдельной ролью, зоной ответственности и tools      |
 | [Workflows](#workflows)   | `workflows/`  | 8       | Многошаговые агентные пайплайны (sweeps) поверх саб-агентов       |
@@ -286,37 +286,40 @@ Git, GitHub и проекта подключены через `@`-импорты
 Android — продукт, который репозиторий поставляет в другие проекты; они читаются по требованию через
 MCP `list`/`get_rule`.
 
+- `app-badging` — Правила App Badging (регресс-гард доступности на устройствах)
 - `architecture` — Правила архитектуры
-- `bottom-sheet` — Правила Bottom Sheet
+- `compose` — Правила Compose
+- `compose-bottom-sheet` — Правила Bottom Sheet
 - `compose-color` — Правила цвета Compose
 - `compose-constraintlayout` — Правила ConstraintLayout
-- `compose` — Правила Compose
+- `compose-dialog` — Правила Dialog
+- `compose-lazy` — Правила LazyList
+- `compose-loading` — Правила Shimmer / Loading Placeholder
+- `compose-preview` — Правила Preview
+- `compose-scaffold` — Правила Scaffold
 - `compose-screen` — Правила Compose-экранов
 - `compose-spacing` — Правила отступов и размеров Compose
-- `dialog` — Правила Dialog
+- `compose-textfield` — Правила TextField
+- `compose-typography` — Правила типографики
 - `domain` — Правила Domain
 - `filesystem` — Правила проекта
+- `git` — Правила Git
 - `github-readme` — Правила GitHub README
 - `github-repo` — Правила структуры репозитория
-- `git` — Правила Git
+- `jetpack-navigation` — Правила навигации
+- `jetpack-room` — Правила Room
+- `jetpack-work` — Правила WorkManager
 - `kmp` — Правила KMP
 - `kotlin` — Правила Kotlin
-- `lazylist` — Правила LazyList
-- `mvi-error-handling` — Правила обработки ошибок в MVI
+- `kotlin-coroutines` — Правила корутин (scope, dispatchers, форматирование запуска)
 - `mvi` — Правила MVI
+- `mvi-error-handling` — Правила обработки ошибок в MVI
 - `mvi-state` — Правила Model в MVI
-- `navigation` — Правила навигации
 - `network` — Правила сети
-- `preview` — Правила Preview
 - `realtime` — Правила realtime-соединений
 - `resource` — Правила ресурсов
-- `room` — Правила Room
-- `scaffold` — Правила Scaffold
-- `shimmer` — Правила Shimmer / Loading Placeholder
-- `textfield` — Правила TextField
-- `typography` — Правила типографики
+- `security` — Правила безопасности (OWASP MASVS / Mobile Top 10, сжато)
 - `usecase` — Правила UseCase
-- `workmanager` — Правила WorkManager
 - `workflow` — Правила рабочего процесса
 
 ## Скиллы

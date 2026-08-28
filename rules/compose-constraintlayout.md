@@ -1,11 +1,12 @@
 ---
+description: >-
+  Порядок ограничений в constrainAs (width, height, start, top, end, bottom) и размеры через API
+  Dimension вместо внешних modifier
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила ConstraintLayout
 
 - В блоке `constrainAs` упорядочивай присваивания ограничений так: `width`, `height`, `start`,
   `top`, `end`, `bottom`.

@@ -1,9 +1,10 @@
 ---
+description: >-
+  Порядок методов DAO (fun перед suspend fun), рост DATABASE_VERSION, алфавитный порядок entity и
+  DAO, primaryKeys в @Entity, withTransaction на уровне use case
 paths:
   - "**/*.kt"
 ---
-
-# Правила Room
 
 - В интерфейсах DAO размещай все обычные методы `fun` перед любыми методами `suspend fun`.
 - При изменении таблиц или entity базы данных Room всегда увеличивай `AppDatabase.DATABASE_VERSION`.

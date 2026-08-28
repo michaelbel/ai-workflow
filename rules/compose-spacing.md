@@ -1,11 +1,12 @@
 ---
+description: >-
+  Порядок именованных параметров padding и PaddingValues по сигнатуре метода, пропуск аргументов
+  равных 0.dp
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила отступов и размеров Compose
 
 - Для `padding(...)` и `PaddingValues(...)` упорядочивай именованные параметры согласно сигнатуре
   метода: `start`, `top`, `end`, `bottom`; либо при использовании сокращённой формы — `horizontal`,

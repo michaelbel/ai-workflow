@@ -1,4 +1,8 @@
-# Правила GitHub README
+---
+description: >-
+  Фиксированная структура README: бейдж last-commit, описание в два предложения, скриншот, раздел
+  Technologies с shields.io for-the-badge бейджами
+---
 
 Каждый README следует этой фиксированной структуре в этом порядке:
 

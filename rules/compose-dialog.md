@@ -1,11 +1,12 @@
 ---
+description: >-
+  Выбор AlertDialog vs BasicAlertDialog по наличию кнопок действий, слоты icon/title/text,
+  оформление кнопок подтверждения и отмены
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила Dialog
 
 - Используй `AlertDialog`, когда в диалоге есть кнопки действий; используй `BasicAlertDialog`, когда
   кнопок действий нет.

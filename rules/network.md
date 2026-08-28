@@ -1,9 +1,10 @@
 ---
+description: >-
+  Имена моделей на Request и Response, @Serializable и @SerialName на каждом поле, имена сетевых use
+  case по пути запроса в PascalCase плюс UseCase
 paths:
   - "**/*.kt"
 ---
-
-# Правила сети
 
 - Имена классов моделей запросов должны заканчиваться на `Request`.
 - Имена классов моделей ответов должны заканчиваться на `Response`.

@@ -1,11 +1,12 @@
 ---
+description: >-
+  Синхронное обновление версии приложения во всех таргетах: androidApp, desktopApp, iosAppCompose и
+  iosApp Version.xcconfig
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила KMP
 
 - При обновлении версии приложения обновляй её во всех таргетах: `androidApp/build.gradle.kts`
   (`versionName`), `desktopApp/build.gradle.kts` (`desktopVersionName`),

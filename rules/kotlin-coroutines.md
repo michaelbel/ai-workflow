@@ -1,10 +1,11 @@
 ---
+description: >-
+  Запрет GlobalScope, инъекция CoroutineDispatcher в конструктор вместо хардкода, обёртка тела ветки
+  when в фигурные скобки перед launch
 paths:
   - "**/*.gradle.kts"
   - "**/*.kt"
 ---
-
-# Правила корутин
 
 - Не используй `GlobalScope`; запускай корутины только в scope с определённым жизненным циклом
   (переданный `CoroutineScope`, scope MVI-стора).

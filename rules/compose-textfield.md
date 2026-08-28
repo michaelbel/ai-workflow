@@ -1,9 +1,8 @@
 ---
+description: Поля поиска хранят TextFieldValue с явно заданным selection в конце текста, а не String
 paths:
   - "**/*.kt"
 ---
-
-# Правила TextField
 
 - Для `TextField`, являющихся полями поиска, храни значение как `TextFieldValue`, а не как `String`,
   и всегда явно устанавливай `selection`, чтобы курсор находился в конце текста, а не в начале:

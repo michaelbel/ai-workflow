@@ -1,11 +1,12 @@
 ---
+description: >-
+  Разделение публичного {Feature}Screen и приватного {Feature}ScreenContent, сбор state и событий в
+  публичном, отсутствие бизнес-логики в Content
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила Compose-экранов
 
 - Публичный `{Feature}Screen(viewModel = hiltViewModel())` собирает state, создаёт
   remembered-хелперы событий, наблюдает события и делегирует UI приватному `{Feature}ScreenContent`.

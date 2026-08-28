@@ -1,9 +1,10 @@
 ---
+description: >-
+  Стиль текста только через аргумент style, база MaterialTheme.typography с .copy, визуальные поля
+  внутри style а не отдельными аргументами Text
 paths:
   - "**/*.kt"
 ---
-
-# Правила типографики
 
 - Всегда устанавливай стиль текста через аргумент `style` в `Text` или `SharedFixedText`; никогда
   не используй отдельные аргументы `fontSize`, `fontWeight` или `color`.

@@ -1,9 +1,10 @@
 ---
+description: >-
+  Preview через @PreviewWrapper(ThemeWrapper::class), вызов приватного *Content, одна функция
+  preview с PreviewParameterProvider на все значимые состояния
 paths:
   - "**/*.kt"
 ---
-
-# Правила Preview
 
 - Всегда аннотируй previews через `@PreviewWrapper(ThemeWrapper::class)`.
 - Preview должны вызывать приватный composable `*Content`, а не публичный composable `*Screen`,

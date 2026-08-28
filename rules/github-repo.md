@@ -1,4 +1,8 @@
-# Правила структуры репозитория
+---
+description: >-
+  Обязательная структура GitHub-репозитория: FUNDING.yml, CODEOWNERS, .idea/icon.svg, whitelist
+  .gitignore, AGENTS.md с симлинками CLAUDE.md и GEMINI.md
+---
 
 Каждый GitHub-репозиторий должен следовать этой структуре.
 

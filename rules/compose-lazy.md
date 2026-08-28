@@ -1,9 +1,10 @@
 ---
+description: >-
+  contentPadding из Scaffold через оператор +, Arrangement.spacedBy вместо Spacer между элементами,
+  завершающий Spacer только в конце списка
 paths:
   - "**/*.kt"
 ---
-
-# Правила LazyList
 
 - Передавай `innerPadding` из `Scaffold` в `contentPadding`, а не как `Modifier.padding`; комбинируй
   с дополнительными отступами через оператор `+`:

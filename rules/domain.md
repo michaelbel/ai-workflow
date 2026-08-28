@@ -1,11 +1,12 @@
 ---
+description: >-
+  Domain-операции в классах UseCase и FlowUseCase в shared/domain/usecase, инъекция
+  Room/Ktor/DataStore в конструктор, обработка ответов через handleResponse
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила Domain
 
 - Операции domain-слоя находятся в конкретных классах `UseCase` и `FlowUseCase` в
   `shared/domain/usecase`.

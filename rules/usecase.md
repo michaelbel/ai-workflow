@@ -1,9 +1,10 @@
 ---
+description: >-
+  Операции Room/Ktor/DataStore и бизнес-логика в классах UseCase и FlowUseCase в
+  shared/domain/usecase без слоёв Repository или Interactor, конструкторная инъекция
 paths:
   - "**/*.kt"
 ---
-
-# Правила UseCase
 
 - Размещай операции Room, Ktor, DataStore и бизнес-операции в конкретных классах `UseCase` /
   `FlowUseCase` в `shared/domain/usecase`; не создавай слои Repository или Interactor для новой

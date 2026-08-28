@@ -1,9 +1,10 @@
 ---
+description: >-
+  Импорт вложенных исключений use case во ViewModel, порядок catch от специфичных сетевых к общим,
+  сброс Job запроса и SnackbarErrorMessage
 paths:
   - "**/*.kt"
 ---
-
-# Правила обработки ошибок в MVI
 
 - Импортируй вложенные исключения use case напрямую в ViewModel, например
   `import shared.domain.usecase.ItemsDetailsUseCase.ItemsDetailsException`.

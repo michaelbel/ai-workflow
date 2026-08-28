@@ -1,9 +1,10 @@
 ---
+description: >-
+  Раскладка features/{feature} на Screen/ViewModel/Model/Intent/Event/Route, @HiltViewModel с
+  конструкторной инъекцией, обязательные MVI-классы для каждого экрана
 paths:
   - "**/*.kt"
 ---
-
-# Правила MVI
 
 - Экраны фич находятся в `features/{feature}` и разбиты на `{Feature}Screen.kt`,
   `{Feature}ViewModel.kt`, `model/{Feature}Model.kt`, `intent/{Feature}Intent.kt`, опционально

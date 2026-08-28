@@ -1,11 +1,12 @@
 ---
+description: >-
+  Bottom sheet фичи с постфиксом _sheet, rememberModalBottomSheetState(skipPartiallyExpanded =
+  true), sheetState.hide() перед intent, preview в Box с fillMaxSize
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила Bottom Sheet
 
 - Пакеты bottom sheet фич в `features` используют постфикс `_sheet`, например
   `features/profile_sheet`.

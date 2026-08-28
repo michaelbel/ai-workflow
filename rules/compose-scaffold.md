@@ -1,9 +1,10 @@
 ---
+description: >-
+  Размещение обычного и ошибочного snackbar внутри и вне Scaffold, SnackbarMessage vs
+  SnackbarErrorMessage, раздельные SnackbarHostState
 paths:
   - "**/*.kt"
 ---
-
-# Правила Scaffold
 
 - Snackbar для обычных сообщений размещай внутри `snackbarHost` в `Scaffold`; snackbar, которые
   должны появляться над статус-баром (верхние баннеры ошибок), размещай вне `Scaffold` в

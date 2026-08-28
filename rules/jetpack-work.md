@@ -1,9 +1,10 @@
 ---
+description: >-
+  Тонкий CoroutineWorker вызывающий бизнес-UseCase через getOrThrow, планирование и отмена в
+  отдельных UseCase, constraints, unique work и retry policy
 paths:
   - "**/*.kt"
 ---
-
-# Правила WorkManager
 
 - Реализуй фоновую задачу как тонкий `CoroutineWorker`: worker читает и проверяет входные данные,
   вызывает существующий бизнес-`UseCase` через `.getOrThrow()` и преобразует итог в

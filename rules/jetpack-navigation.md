@@ -1,9 +1,10 @@
 ---
+description: >-
+  Маршруты как @Serializable data class или data object реализующие NavKey в
+  features/{feature}/navigation, аргументы через savedStateHandle.toRoute
 paths:
   - "**/*.kt"
 ---
-
-# Правила навигации
 
 - Каждый маршрут экрана — это `@Serializable data class` или `@Serializable data object`,
   реализующий `NavKey`.

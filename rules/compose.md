@@ -1,11 +1,12 @@
 ---
+description: >-
+  Обязательный preview для каждого composable, modifier первым опциональным параметром,
+  {Component}State при более чем одном поле данных или callback
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила Compose
 
 - При создании composable-функции всегда создавай для неё preview.
 - Параметр `modifier` должен быть первым опциональным параметром в сигнатуре composable-функции.

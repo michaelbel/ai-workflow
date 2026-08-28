@@ -1,9 +1,10 @@
 ---
+description: >-
+  Skeleton-загрузка через Modifier.placeholder с PlaceholderHighlight.shimmer, Spacer vs Box для
+  placeholder, visible привязан к state.isLoading
 paths:
   - "**/*.kt"
 ---
-
-# Правила Shimmer / Loading Placeholder
 
 - Используй
   `Modifier.placeholder(visible = ..., highlight = PlaceholderHighlight.shimmer(), color = MaterialTheme.colorScheme.surfaceContainerHigh, shape = RoundedCornerShape(...))`

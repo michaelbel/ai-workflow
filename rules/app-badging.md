@@ -1,10 +1,11 @@
 ---
+description: >-
+  Регресс-гард доступности устройств: aapt2 dump badging в golden-файл app/badging, обязательный
+  check<Variant>Badging в CI, необязательное железо через android:required=false
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
 ---
-
-# Правила App Badging (регресс-гард доступности на устройствах)
 
 `aapt2 dump badging` по собранному APK показывает эффективный набор `uses-feature` /
 `uses-permission` / `uses-sdk` — то, из-за чего Google Play скрывает приложение на планшетах,

@@ -71,9 +71,33 @@ rule_body() {
     ' "$1"
 }
 
-# первая строка-заголовок правила ("# Правила X" → "Правила X")
-rule_title() {
-    awk '/^# / { sub(/^# /, ""); print; exit }' "$1"
+# значение поля `description:` из frontmatter правила; поддерживает как одну строку
+# (`description: текст` / `description: "текст"`), так и folded-скаляр
+# (`description: >-` с продолжением на строках с отступом в 2 пробела).
+rule_description() {
+    awk '
+        BEGIN { infm = 0; grab = 0 }
+        NR == 1 && $0 == "---" { infm = 1; next }
+        infm && $0 == "---" { exit }
+        infm && /^description:[[:space:]]*[>|]-?[[:space:]]*$/ { grab = 1; next }
+        infm && grab && /^  / {
+            line = $0
+            sub(/^  /, "", line)
+            out = (out == "" ? line : out " " line)
+            next
+        }
+        infm && grab && /^[^ ]/ { grab = 0 }
+        infm && !grab && /^description:[[:space:]]/ {
+            line = $0
+            sub(/^description:[[:space:]]*/, "", line)
+            if (line ~ /^".*"$/) {
+                line = substr(line, 2, length(line) - 2)
+                gsub(/\\"/, "\"", line)
+            }
+            out = line
+        }
+        END { print out }
+    ' "$1"
 }
 
 echo "Генерация .cursor/rules/ из rules/ ..."
@@ -81,11 +105,11 @@ PROCESS_RULES=()
 for rule_file in "$RULES_DIR"/*.md; do
     name="$(basename "$rule_file" .md)"
     globs="$(rule_globs "$rule_file")"
-    title="$(rule_title "$rule_file")"
-    [[ -z "$title" ]] && title="Правило $name"
+    desc="$(rule_description "$rule_file")"
+    [[ -z "$desc" ]] && desc="Правило $name"
     body="$(rule_body "$rule_file")"
 
-    fm="---"$'\n'"description: ${title} (cuckcoder)"
+    fm="---"$'\n'"description: ${desc} (cuckcoder)"
     if [[ -n "$globs" ]]; then
         fm+=$'\n'"globs: ${globs}"$'\n'"alwaysApply: false"
     else

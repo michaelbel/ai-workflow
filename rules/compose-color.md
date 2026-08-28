@@ -1,11 +1,12 @@
 ---
+description: >-
+  Цвета только через MaterialTheme.colorScheme, новые цвета в Colors UI kit по HTML-имени hex, цвета
+  TopAppBar через TopAppBarDefaults
 paths:
   - "**/*.gradle.kts"
   - "**/AndroidManifest.xml"
   - "**/*.kt"
 ---
-
-# Правила цвета Compose
 
 - Используй цвета через `MaterialTheme.colorScheme`; не используй сырые константы `Color` для
   тематических цветов внутри компонентов.

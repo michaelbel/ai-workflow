@@ -1,8 +1,6 @@
 # Repository Guidelines
 
 @rules/git.md
-@rules/github-readme.md
-@rules/github-repo.md
 @rules/filesystem.md
 @rules/workflow.md
 

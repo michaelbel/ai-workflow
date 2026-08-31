@@ -177,7 +177,8 @@
     "claude-in-mobile": {
       "source": {
         "source": "git",
-        "url": "https://github.com/AlexGladkov/claude-in-mobile.git"
+        "url": "https://github.com/AlexGladkov/claude-in-mobile.git",
+        "ref": "v4.1.0"
       }
     },
     "context-mode": {

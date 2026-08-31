@@ -1,9 +1,10 @@
 #!/bin/bash
-# csync — двусторонняя синхронизация ~/.claude с origin/main. Usage: csync
-# Также запускается как SessionStart-хук на каждый новый сеанс Claude Code.
+# csync — синхронизация ~/.claude с origin/main. Usage: csync
+# Запускается из post-commit хука в ~/Projects/cuckcoder после каждого коммита в main;
+# также доступен вручную как алиас csync.
 #
-# Модель: правки идут прямо в main. csync коммитит локальные изменения, ребейзит на
-# origin/main и пушит. Грязный или ahead main — нормальное рабочее состояние, не авария.
+# Модель: правки идут прямо в main и коммитятся вручную. csync ребейзит локальные
+# коммиты на origin/main и пушит. Незакоммиченное дерево синк пропускает, не трогая его.
 
 set -uo pipefail
 
@@ -38,10 +39,10 @@ fi
 # Fetch — сетевой сбой громкий, не тихий.
 git fetch --quiet origin || { echo "Fetch failed (network?)."; exit 1; }
 
-# Коммитим локальную работу, если есть.
+# csync больше не делает авто-коммитов: незакоммиченную работу коммить вручную.
 if ! git diff --quiet || ! git diff --cached --quiet || [ -n "$(git ls-files --others --exclude-standard)" ]; then
-  git add -A
-  git commit --quiet -m "sync $(date '+%Y-%m-%d %H:%M')" || true
+  echo "Uncommitted changes in $REPO — commit them, then rerun. Nothing synced."
+  exit 0
 fi
 
 # Ребейз на origin/main. Конфликт останавливает громко — это решение, а не деталь синхронизации.

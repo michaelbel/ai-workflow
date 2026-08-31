@@ -28,6 +28,12 @@ paths:
   другими правилами, например `*ScreenContent`.
 - Используй обёртку компонента `Shared*` проекта вместо прямого компонента фреймворка, когда такая
   обёртка существует в проекте.
+- Не используй `Surface` в простых компонентах вроде карточек, плашек и контейнеров с фоном и
+  скруглением. Задавай форму и фон напрямую на `Modifier` контейнера (`Box`, `Column`, `Row`) через
+  `clip(RoundedCornerShape(...))` и `background(...)`, а внутренние отступы — через `padding(...)`.
+  `Surface` допустим только там, где реально нужны его возможности: интерактивные поверхности с
+  `onClick`, `selected` или `enabled`, tonal/shadow elevation, camera preview и подобные
+  нетривиальные случаи.
 - В composable используй `val resources = LocalResources.current`; не используй
   `val resources = LocalContext.current.resources`.
 - Вызовы composable с именованными аргументами всегда форматируй многострочно: имя composable,

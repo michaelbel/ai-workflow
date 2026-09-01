@@ -1,18 +1,10 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "tui": "fullscreen",
   "language": "russian",
   "model": "sonnet",
-  "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
-  "autoMemoryEnabled": true,
-  "respectGitignore": true,
-  "cleanupPeriodDays": 30,
-  "preferredNotifChannel": "kitty",
   "skipDangerousModePermissionPrompt": true,
   "env": {
-    "ENABLE_CLAUDEAI_MCP_SERVERS": "false",
-    "CLAUDE_CODE_PLUGIN_PREFER_HTTPS": "1"
+    "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
   },
   "permissions": {
     "allow": [
@@ -104,7 +96,7 @@
       "Bash(gh ssh-key delete:*)",
       "Bash(gh gpg-key delete:*)"
     ],
-    "defaultMode": "bypassPermissions"
+    "defaultMode": "auto"
   },
   "hooks": {
     "SessionStart": [

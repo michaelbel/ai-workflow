@@ -107,7 +107,9 @@ gemini extensions install https://github.com/michaelbel/cuckcoder
 ### Глобальные настройки на Mac
 
 Корень репозитория одновременно служит вторым чекаутом `~/.claude`: `rules/`, `agents/`, `skills/`,
-`hooks/` и `settings.json` подхватываются Claude Code нативно на любой машине без установки плагина.
+`hooks/`, `settings.json` и `loop.md` подхватываются Claude Code нативно на любой машине без
+установки плагина. `loop.md` задаёт, что делает `/loop` без промпта — maintenance-цикл: продолжить
+незавершённую работу, проверить PR текущей ветки, иначе поискать баги и упрощения.
 Продуктовые Kotlin/Compose/KMP/Android правила из `rules/` при этом не заливают контекст в каждом
 проекте — они помечены `paths:`-фронтматтером и автозагружаются только в Android/Gradle-проектах;
 процессные правила (`git`, `github-readme`, `github-repo`, `filesystem`, `workflow`) без `paths:`

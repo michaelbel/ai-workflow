@@ -24,6 +24,11 @@ perl -e 'use Fcntl qw(:flock); open(F, ">&=9"); flock(F, LOCK_EX|LOCK_NB) or die
 
 cd "$REPO"
 
+# settings.json переписывается самим Claude Code в рантайме (плагины, модель, уведомления) —
+# он не участвует в синке: skip-worktree прячет локальные правки от git status/diff, чтобы они
+# не блокировали синк остального репозитория и не перетирались при rebase.
+git update-index --skip-worktree -- settings.json 2>/dev/null || true
+
 # Подчистить зависшее состояние rebase от прошлого сбоя.
 if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
   git rebase --abort 2>/dev/null || true

@@ -9,6 +9,10 @@ set -euo pipefail
 REPO="https://github.com/michaelbel/cuckcoder.git"
 CLAUDE_DIR="$HOME/.claude"
 
+skip_settings() {
+  git -C "$CLAUDE_DIR" update-index --skip-worktree -- settings.json 2>/dev/null || true
+}
+
 add_csync_alias() {
   local rc=""
   case "${SHELL:-}" in
@@ -40,6 +44,7 @@ if [ -d "$CLAUDE_DIR/.git" ]; then
     echo "main diverged from origin — setup does not rebase. Run csync to deliver local work."
     exit 1
   fi
+  skip_settings
   add_csync_alias
   echo "Done."
   exit 0
@@ -49,6 +54,7 @@ fi
 if [ ! -d "$CLAUDE_DIR" ]; then
   echo "Cloning into ~/.claude ..."
   git clone "$REPO" "$CLAUDE_DIR"
+  skip_settings
   add_csync_alias
   echo "Done. Run 'claude' to start."
   exit 0
@@ -83,6 +89,7 @@ for f in settings.local.json .credentials.json mcp-needs-auth-cache.json; do
   [ -f "$BACKUP_DIR/$f" ] && cp "$BACKUP_DIR/$f" "$CLAUDE_DIR/"
 done
 
+skip_settings
 add_csync_alias
 echo ""
 echo "Done. Backup at: $BACKUP_DIR"

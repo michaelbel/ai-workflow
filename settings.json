@@ -1,8 +1,4 @@
 {
-  "tui": "fullscreen",
-  "language": "russian",
-  "model": "sonnet",
-  "skipDangerousModePermissionPrompt": true,
   "env": {
     "ENABLE_CLAUDEAI_MCP_SERVERS": "false"
   },
@@ -42,24 +38,6 @@
       "EndConversation",
       "mcp__cuckcoder__*"
     ],
-    "ask": [
-      "Bash(git reset --hard*)",
-      "Bash(git clean*)",
-      "Bash(git checkout .)",
-      "Bash(git checkout -- .)",
-      "Bash(git restore .)",
-      "Bash(git restore -- .)",
-      "Bash(git stash drop*)",
-      "Bash(git stash clear)",
-      "Bash(ssh:*)",
-      "Bash(scp:*)",
-      "Bash(npm publish*)",
-      "Bash(yarn publish*)",
-      "Bash(pnpm publish*)",
-      "Bash(docker push*)",
-      "Bash(pod trunk push*)",
-      "Bash(firebase deploy*)"
-    ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
@@ -96,8 +74,27 @@
       "Bash(gh ssh-key delete:*)",
       "Bash(gh gpg-key delete:*)"
     ],
+    "ask": [
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(git checkout .)",
+      "Bash(git checkout -- .)",
+      "Bash(git restore .)",
+      "Bash(git restore -- .)",
+      "Bash(git stash drop*)",
+      "Bash(git stash clear)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(npm publish*)",
+      "Bash(yarn publish*)",
+      "Bash(pnpm publish*)",
+      "Bash(docker push*)",
+      "Bash(pod trunk push*)",
+      "Bash(firebase deploy*)"
+    ],
     "defaultMode": "auto"
   },
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -120,15 +117,87 @@
       }
     ],
     "SubagentStart": [
-      { "matcher": "architect-auditor", "hooks": [ { "type": "command", "command": "echo '🏗️  [architect-auditor] архитектурный аудит...'" } ] },
-      { "matcher": "kotlin-engineer", "hooks": [ { "type": "command", "command": "echo '⚙️  [kotlin-engineer] реализация Kotlin...'" } ] },
-      { "matcher": "compose-builder", "hooks": [ { "type": "command", "command": "echo '🎨 [compose-builder] реализация Compose UI...'" } ] },
-      { "matcher": "swift-engineer", "hooks": [ { "type": "command", "command": "echo '🧩 [swift-engineer] реализация Swift...'" } ] },
-      { "matcher": "swiftui-builder", "hooks": [ { "type": "command", "command": "echo '🎨 [swiftui-builder] реализация SwiftUI...'" } ] },
-      { "matcher": "code-reviewer", "hooks": [ { "type": "command", "command": "echo '🔍 [code-reviewer] семантическое ревью...'" } ] },
-      { "matcher": "bug-hunter", "hooks": [ { "type": "command", "command": "echo '🐛 [bug-hunter] диагностика бага...'" } ] },
-      { "matcher": "security-auditor", "hooks": [ { "type": "command", "command": "echo '🔒 [security-auditor] security-аудит...'" } ] },
-      { "matcher": "performance-reviewer", "hooks": [ { "type": "command", "command": "echo '⚡ [performance-reviewer] аудит производительности...'" } ] }
+      {
+        "matcher": "architect-auditor",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🏗️  [architect-auditor] архитектурный аудит...'"
+          }
+        ]
+      },
+      {
+        "matcher": "kotlin-engineer",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '⚙️  [kotlin-engineer] реализация Kotlin...'"
+          }
+        ]
+      },
+      {
+        "matcher": "compose-builder",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🎨 [compose-builder] реализация Compose UI...'"
+          }
+        ]
+      },
+      {
+        "matcher": "swift-engineer",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🧩 [swift-engineer] реализация Swift...'"
+          }
+        ]
+      },
+      {
+        "matcher": "swiftui-builder",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🎨 [swiftui-builder] реализация SwiftUI...'"
+          }
+        ]
+      },
+      {
+        "matcher": "code-reviewer",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🔍 [code-reviewer] семантическое ревью...'"
+          }
+        ]
+      },
+      {
+        "matcher": "bug-hunter",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🐛 [bug-hunter] диагностика бага...'"
+          }
+        ]
+      },
+      {
+        "matcher": "security-auditor",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🔒 [security-auditor] security-аудит...'"
+          }
+        ]
+      },
+      {
+        "matcher": "performance-reviewer",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '⚡ [performance-reviewer] аудит производительности...'"
+          }
+        ]
+      }
     ],
     "SubagentStop": [
       {
@@ -152,6 +221,14 @@
         ]
       }
     ]
+  },
+  "enabledPlugins": {
+    "cuckcoder@cuckcoder": true,
+    "kotlin-agent-skills@Kotlin": true,
+    "mcp-devices@claude-in-mobile": true,
+    "context-mode@context-mode": true,
+    "android-skills@android-skills": true,
+    "firebase@firebase": true
   },
   "extraKnownMarketplaces": {
     "cuckcoder": {
@@ -193,12 +270,9 @@
       }
     }
   },
-  "enabledPlugins": {
-    "cuckcoder@cuckcoder": true,
-    "kotlin-agent-skills@Kotlin": true,
-    "mcp-devices@claude-in-mobile": true,
-    "context-mode@context-mode": true,
-    "android-skills@android-skills": true,
-    "firebase@firebase": true
-  }
+  "language": "russian",
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "agentPushNotifEnabled": true,
+  "feedbackDrafts": "off"
 }
